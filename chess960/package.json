@@ -1,31 +1,35 @@
 {
-  "name": "chess960",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
-  },
+  "name": "chess-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/T-mclennan/Chess-960.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/T-mclennan/Chess-960/issues"
+  },
+  "homepage": "https://github.com/T-mclennan/Chess-960#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^3.6.0",
+    "config": "^3.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }
