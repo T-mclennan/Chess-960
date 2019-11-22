@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
 import Chessboard from "chessboardjsx";
+import boardGeneration from './boardGeneration'
 
 class HumanVsHuman extends Component {
   static propTypes = { children: PropTypes.func };
 
   state = {
-    fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/NRBQKBNR w KQkq - 0 1",
+    fen: '',
     // square styles for active drop square
     dropSquareStyle: {},
     // custom square styles
@@ -21,7 +22,10 @@ class HumanVsHuman extends Component {
   };
 
   componentDidMount() {
-    this.game = new Chess(this.state.fen);
+    const board = new boardGeneration()
+    const fen = board.generateBoard()
+    this.setState({fen})
+    this.game = new Chess(fen);
 
   }
 

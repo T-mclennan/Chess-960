@@ -16,9 +16,9 @@ class GameWindow extends Component {
 
   render() {
 
-    const board = new boardGeneration()
-    const fen = board.generateBoard()
-    console.log("pre-pass fen is: "+fen)
+    // const board = new boardGeneration()
+    // const fen = board.generateBoard()
+    // console.log("pre-pass fen is: "+fen)
     var socket = io("http://localhost:5000");
     // var game = Chess(this.state.gameFen);
 
@@ -37,7 +37,7 @@ class GameWindow extends Component {
             }}
         /> */}
         
-        <ChessGame startFen={fen}/>
+        <ChessGame/>
       </div>
     )
   }
