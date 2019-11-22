@@ -106,7 +106,7 @@ class HumanVsHuman extends Component {
       dropSquareStyle:
         square === "e4" || square === "d4" || square === "e5" || square === "d5"
           ? { backgroundColor: "cornFlowerBlue" }
-          : { boxShadow: "inset 0 0 1px 4px rgb(255, 255, 0)" }
+          : { boxShadow: "inset 0 0 1px 4px #00d0ff" }
     });
   };
 
@@ -171,8 +171,10 @@ export default function ChessGame() {
         }) => (
           <Chessboard
             id="humanVsHuman"
-            width={320}
+            width={500}
             position={position}
+            lightSquareStyle={{backgroundColor: '#f2eaec'}}
+            darkSquareStyle={{backgroundColor: '#0E6BA8'}}
             onDrop={onDrop}
             onMouseOverSquare={onMouseOverSquare}
             onMouseOutSquare={onMouseOutSquare}
@@ -197,15 +199,15 @@ const squareStyling = ({ pieceSquare, history }) => {
   const targetSquare = history.length && history[history.length - 1].to;
 
   return {
-    [pieceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+    [pieceSquare]: { backgroundColor: "#00d0ff, 0.5" },
     ...(history.length && {
       [sourceSquare]: {
-        backgroundColor: "rgba(255, 255, 0, 0.4)"
+        backgroundColor: "#00d0ff, 0.5"
       }
     }),
     ...(history.length && {
       [targetSquare]: {
-        backgroundColor: "rgba(255, 255, 0, 0.4)"
+        backgroundColor: "#00d0ff, 0.5"
       }
     })
   };
