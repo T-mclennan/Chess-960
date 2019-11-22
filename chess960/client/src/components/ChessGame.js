@@ -44,7 +44,7 @@ class HumanVsHuman extends Component {
           ...a,
           ...{
             [c]: {
-              background: "radial-gradient(circle, #fffc00 6%, transparent 5%)",
+              background: "radial-gradient(circle, #ff8c69 6%, transparent 5%)",
               borderRadius: "10%"
             }
           },
@@ -199,15 +199,16 @@ const squareStyling = ({ pieceSquare, history }) => {
   const targetSquare = history.length && history[history.length - 1].to;
 
   return {
-    [pieceSquare]: { backgroundColor: "#00d0ff, 0.5" },
+    // #00d0ff
+    [pieceSquare]: { backgroundColor: "", },
     ...(history.length && {
       [sourceSquare]: {
-        backgroundColor: "#00d0ff, 0.5"
+        backgroundColor: "",
       }
     }),
     ...(history.length && {
       [targetSquare]: {
-        backgroundColor: "#00d0ff, 0.5"
+        backgroundColor: ""
       }
     })
   };
