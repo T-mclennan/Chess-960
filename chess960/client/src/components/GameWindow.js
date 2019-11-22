@@ -1,39 +1,44 @@
 import React, { Component } from 'react'
-import Chessboard from 'chessboardjsx'
-import Chess from 'chess.js'
+// import Chessboard from 'chessboardjsx'
+// import Chess from 'chess.js'
 import io from 'socket.io-client'
+import ChessGame from './ChessGame';
+import boardGeneration from './boardGeneration'
+const board = new boardGeneration()
 
 class GameWindow extends Component {
 
   state = { 
             color: 'white',
-            gameFen: "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R" 
+            gameFen: board.generateBoard(),
           };
+
 
   render() {
 
-    componentDidMount() {    
-      socket.on('move', data => {
-        this.setState({ data })
-        game.move(data);
-      })
-    }
+    const board = new boardGeneration()
+    const fen = board.generateBoard()
+    console.log("pre-pass fen is: "+fen)
+    var socket = io("http://localhost:5000");
+    // var game = Chess(this.state.gameFen);
 
-    var socket = io();
-    var game = Chess();
-
+    // console.log(game.fen())
     return (
-      <container className="centered" style={containerStyle}>
-        <Chessboard 
-            position={this.state.gameFen}
+      
+      <div className="centered" style={containerStyle}>
+        {/* <Chessboard 
+            position='start'
             orientation={this.state.color}
             onDrop={(source, target) => {
               let move = game.move({from: source, to: target});
+              console.log(move);
               if (game.move({from: source, to: target}) === null)  return 'snapback';
               else socket.emit('move', move);
             }}
-        />
-      </container>
+        /> */}
+        
+        <ChessGame startFen={fen}/>
+      </div>
     )
   }
 }
