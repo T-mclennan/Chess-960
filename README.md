@@ -1,9 +1,8 @@
 # Chess-960
 
 # This application is a modest attempt at builiding a chess application, styled after a varient developed by Bobby Fischer. 
-# This project was chosen to provide more experience with the MERN stack, socket.io, authentication, and deplyoment on Heroku. 
-
-
+ 
+ It was chosen to provide more experience with the MERN stack, socket.io, authentication, and deplyoment on Heroku. 
 
  Chess 960 is a variation of Fischer random, where the back row of pieces is randomized to encourage improvised play.
  However, because true randomization would lead to many board positions that are far out of balance, the board is 
