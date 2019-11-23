@@ -2,16 +2,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser'); 
 const path = require('path');
-
+const http = require('http');
+const socket = require('socket.io')
 const port = process.env.PORT || 5000;
 const app = express();
 
 var cors = require('cors')
 app.use(cors())
 
-const socket = require('socket.io')
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+
+// start the server
+const server = http.createServer(app)
+
+// initialize a new instance of socket.io by passing the HTTP server object
+const io = socket(server)
+
+// const socket = require('socket.io')
+// const http = require('http').createServer(app);
+// const io = require('socket.io')(http);
 
 // Bodyparser Middleware
 app.use(bodyParser.json());
@@ -77,4 +85,4 @@ io.on('move', function (msg) {
 // app.use('/api/auth', require('./routes/api/auth'));
 
 
-http.listen(port, () => console.log(`Server started on port ${port}`));
+server.listen(port, () => console.log(`Server started on port ${port}`));
