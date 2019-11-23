@@ -22,10 +22,7 @@ class HumanVsHuman extends Component {
     //Current Board Position:
     fen: '',
     //id's of current players:
-    playerId: {
-        white: '',
-        black: ''
-    },
+    playerId: '',
     //Number of current players:
     players: '',
     //Color of player;
@@ -56,8 +53,8 @@ class HumanVsHuman extends Component {
     this.connect()
 
     socket.on('player', (msg) => {
-      this.setState({color: msg.color, players: msg.players}) 
-      console.log("Player color: "+ this.state.color)
+      this.setState({color: msg.color, players: msg.players, playerId: msg.playerId}) 
+      console.log("Player color: "+ this.state.color+ "  player id: " + this.state.playerId)
   
       if( this.state.players === 2){
           this.setState({play: false})
@@ -95,7 +92,7 @@ class HumanVsHuman extends Component {
     //     button.remove();
         socket.emit('joined', this.state.gameId);
     // }
-}
+  }
 
   // keep clicked square style and remove hint squares
   removeHighlightSquare = () => {
