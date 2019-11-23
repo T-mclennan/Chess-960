@@ -3,23 +3,48 @@ import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
 import Chessboard from "chessboardjsx";
 import boardGeneration from './boardGeneration'
-import io from 'socket.io-client'
+import io from 'socket.io-client';
+
+const port = process.env.PORT || "http://127.0.0.1:5000";
+const socket = io(port);
+
+//tell socket.io to never give up :)
+socket.on('error', function(){
+  socket.socket.reconnect();
+});
+
 
 class HumanVsHuman extends Component {
   static propTypes = { children: PropTypes.func };
 
   state = {
+
+    //Current Board Position:
     fen: '',
-    // square styles for active drop square
+    //id's of current players:
+    playerId: {
+        white: '',
+        black: ''
+    },
+    //Number of current players:
+    players: '',
+    //Color of player;
+    color: '',
+    // Current game:
+    gameId: 5,
+    // Currently playing?
+    play: true,
+    // square styles for active drop square:
     dropSquareStyle: {},
-    // custom square styles
+    // custom square styles:
     squareStyles: {},
-    // square with the currently clicked piece
+    // square with the currently clicked piece:
     pieceSquare: "",
-    // currently clicked square
+    // currently clicked square:
     square: "",
-    // array of past game moves
-    history: []
+    // array of past game moves:
+    history: [],
+
   };
 
   componentDidMount() {
@@ -28,7 +53,49 @@ class HumanVsHuman extends Component {
     this.setState({fen})
     this.game = new Chess(fen);
 
+    this.connect()
+
+    socket.on('player', (msg) => {
+      this.setState({color: msg.color, players: msg.players}) 
+      console.log("Player color: "+ this.state.color)
+  
+      if( this.state.players === 2){
+          this.setState({play: false})
+          socket.emit('play', msg.gameId);
+          console.log("Game in Progress") 
+      }
+      else
+          console.log('"Waiting for Second player"')
+    });
+
+    socket.on('move', function (msg) {
+      if (msg.game === this.state.gameId) {
+          this.setState(this.game.fen())
+          this.game.move(msg.move);
+          board.position(this.game.fen());
+          console.log("moved")
+      }
+    });
+
+    socket.on('play', function (msg) {
+      if (msg === this.state.gameId) {
+          this.setState({play: false})
+          console.log('game in progress')
+      }
+    });
+     
+     
   }
+
+  connect = () => {
+    // roomId = room.value;
+    // if (roomId !== "" && parseInt(roomId) <= 100) {
+    //     room.remove();
+    //     roomNumber.innerHTML = "Room Number " + roomId;
+    //     button.remove();
+        socket.emit('joined', this.state.gameId);
+    // }
+}
 
   // keep clicked square style and remove hint squares
   removeHighlightSquare = () => {
@@ -125,6 +192,9 @@ class HumanVsHuman extends Component {
 
     // illegal move
     if (move === null) return;
+      else {
+        socket.emit('move', { move: move, board: this.game.fen(), room: this.state.roomId });
+      }
 
     this.setState({
       fen: this.game.fen(),
@@ -139,8 +209,7 @@ class HumanVsHuman extends Component {
     });
 
   render() {
-
-    var socket = io("http://localhost:5000");
+  
     const { fen, dropSquareStyle, squareStyles } = this.state;
 
     return this.props.children({

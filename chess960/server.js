@@ -3,23 +3,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser'); 
 const path = require('path');
 const http = require('http');
-const socket = require('socket.io')
 const port = process.env.PORT || 5000;
 const app = express();
-
-var cors = require('cors')
-app.use(cors())
-
 
 // start the server
 const server = http.createServer(app)
 
 // initialize a new instance of socket.io by passing the HTTP server object
-const io = socket(server)
-
-// const socket = require('socket.io')
-// const http = require('http').createServer(app);
-// const io = require('socket.io')(http);
+var io = require('socket.io').listen(server);
 
 // Bodyparser Middleware
 app.use(bodyParser.json());
@@ -35,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-//TODO: Add database. In the meantime this creates and keeps track of players in the game;
+//   TODO: Add database. In the meantime this creates and keeps track of players in the game;
 var players;
 
 // create an array of 100 games and initialize them
@@ -44,27 +35,55 @@ for (let i = 0; i < 100; i++) {
    games[i] = {players: 0 , pid: [0 , 0]};
 }
 
-
 io.on('connection', function (socket) {
-
-  // just assign a random number to every player that has connected
-  // the numbers have no significance so it
-  // doesn't matter if 2 people get the same number
+  // console.log(players);
+  var color;
   var playerId =  Math.floor((Math.random() * 100) + 1)
-  console.log(playerId + ' connected');
- 
-  // if a user disconnects just print their playerID
-  socket.on('disconnect', function () {
-    console.log(playerId + ' disconnected');
-  });
- });
+  
 
-// The client side emits a 'move' event when a valid move has been made.
-io.on('move', function (msg) {
-  // pass on the move event to the other clients
-  console.log('move given')
-  socket.broadcast.emit('move', msg);
- });
+  console.log(playerId + ' connected');
+
+  socket.on('joined', function (gameId) {
+      // games[roomId] = {}
+      if (games[gameId].players < 2) {
+          games[gameId].players++;
+          games[gameId].pid[games[gameId].players - 1] = playerId;
+      }
+      else{
+          socket.emit('full', gameId)
+          return;
+      }
+      
+      console.log(games[gameId]);
+      players = games[gameId].players
+      console.log('players number is: '+ players)
+      
+      if (players % 2 == 0) color = 'black';
+      else color = 'white';
+
+      socket.emit('player', { playerId, players, color, gameId })
+      // players--;
+
+  });
+
+  socket.on('move', function (msg) {
+      socket.broadcast.emit('move', msg);
+      console.log('move' + msg);
+  });
+
+  socket.on('play', function (msg) {
+      socket.broadcast.emit('play', msg);
+      console.log("ready game #" + msg);
+  });
+
+  socket.on('disconnect', function () {
+      for (let i = 0; i < 100; i++) {
+          if (games[i].pid[0] == playerId || games[i].pid[1] == playerId)
+              games[i].players--;
+      }
+      console.log(playerId + ' disconnected');
+  }); 
+});
 
 
 // DB Config
