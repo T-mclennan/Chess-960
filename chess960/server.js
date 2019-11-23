@@ -9,6 +9,7 @@ const app = express();
 var cors = require('cors')
 app.use(cors())
 
+const socket = require('socket.io')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
@@ -26,11 +27,29 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+//TODO: Add database. In the meantime this creates and keeps track of players in the game;
+var players;
 
-io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
-});
+// create an array of 100 games and initialize them
+var games = Array(100);
+for (let i = 0; i < 100; i++) {
+   games[i] = {players: 0 , pid: [0 , 0]};
+}
+
+
+io.on('connection', function (socket) {
+
+  // just assign a random number to every player that has connected
+  // the numbers have no significance so it
+  // doesn't matter if 2 people get the same number
+  var playerId =  Math.floor((Math.random() * 100) + 1)
+  console.log(playerId + ' connected');
+ 
+  // if a user disconnects just print their playerID
+  socket.on('disconnect', function () {
+    console.log(playerId + ' disconnected');
+  });
+ });
 
 // The client side emits a 'move' event when a valid move has been made.
 io.on('move', function (msg) {

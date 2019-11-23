@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
 import Chessboard from "chessboardjsx";
 import boardGeneration from './boardGeneration'
+import io from 'socket.io-client'
 
 class HumanVsHuman extends Component {
   static propTypes = { children: PropTypes.func };
@@ -44,8 +45,8 @@ class HumanVsHuman extends Component {
           ...a,
           ...{
             [c]: {
-              background: "radial-gradient(circle, #ff8c69 6%, transparent 5%)",
-              borderRadius: "10%"
+              background: "radial-gradient(circle, #ff8c69 7%, transparent 5%)",
+              borderRadius: "15%"
             }
           },
           ...squareStyling({
@@ -102,12 +103,12 @@ class HumanVsHuman extends Component {
 
   // central squares get diff dropSquareStyles
   onDragOverSquare = square => {
-    this.setState({
-      dropSquareStyle:
-        square === "e4" || square === "d4" || square === "e5" || square === "d5"
-          ? { backgroundColor: "cornFlowerBlue" }
-          : { boxShadow: "inset 0 0 1px 4px #00d0ff" }
-    });
+    // this.setState({
+    //   dropSquareStyle:
+    //     square === "e4" || square === "d4" || square === "e5" || square === "d5"
+    //       ? { backgroundColor: "cornFlowerBlue" }
+    //       : { boxShadow: "inset 0 0 1px 4px #00d0ff" }
+    // });
   };
 
   onSquareClick = square => {
@@ -138,6 +139,8 @@ class HumanVsHuman extends Component {
     });
 
   render() {
+
+    var socket = io("http://localhost:5000");
     const { fen, dropSquareStyle, squareStyles } = this.state;
 
     return this.props.children({

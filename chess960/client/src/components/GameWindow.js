@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
-// import Chessboard from 'chessboardjsx'
-// import Chess from 'chess.js'
 import io from 'socket.io-client'
 import ChessGame from './ChessGame';
-import boardGeneration from './boardGeneration'
-const board = new boardGeneration()
 
 class GameWindow extends Component {
-
-  state = { 
-            color: 'white',
-            gameFen: board.generateBoard(),
-          };
 
 
   render() {
@@ -19,10 +10,9 @@ class GameWindow extends Component {
     // const board = new boardGeneration()
     // const fen = board.generateBoard()
     // console.log("pre-pass fen is: "+fen)
-    var socket = io("http://localhost:5000");
+
     // var game = Chess(this.state.gameFen);
 
-    // console.log(game.fen())
     return (
       
       <div className="centered" style={containerStyle}>

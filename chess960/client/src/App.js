@@ -9,9 +9,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="container">
+        <div className="container" 
+        style={{backgroundColor: '#505255', height: '100vh'}}
+        >
           <Header/>
-          <GameWindow />
+          <GameWindow style={{marginBottom: '15px'}}/>
         </div>
       </div>
     </Router>
