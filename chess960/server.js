@@ -76,6 +76,10 @@ io.on('connection', function (socket) {
       console.log("ready game #" + msg);
   });
 
+  socket.on('user-reconnected', function (userId) {
+    console.log(userId + ' just reconnected');
+  });
+
   socket.on('disconnect', function () {
       for (let i = 0; i < 100; i++) {
           if (games[i].pid[0] == playerId || games[i].pid[1] == playerId)

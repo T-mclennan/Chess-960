@@ -22,11 +22,11 @@ class HumanVsHuman extends Component {
     //Current Board Position:
     fen: '',
     //id's of current players:
-    playerId: '',
+    playerId: '0',
     //Number of current players:
-    players: '',
+    players: '0',
     //Color of player;
-    color: '',
+    color: 'blue',
     // Current game:
     gameId: 5,
     // Currently playing?
@@ -59,7 +59,7 @@ class HumanVsHuman extends Component {
       if( this.state.players === 2){
           this.setState({play: false})
           socket.emit('play', msg.gameId);
-          console.log("Game in Progress") 
+          console.log("Game in Progress: "+ this.state.gameId) 
       }
       else
           console.log('"Waiting for Second player"')
@@ -75,10 +75,18 @@ class HumanVsHuman extends Component {
     });
 
     socket.on('play', function (msg) {
+      console.log('msg is: '+msg)
+      console.log('this.game.ID: '+ this.state.gameId)  
       if (msg === this.state.gameId) {
           this.setState({play: false})
           console.log('game in progress')
       }
+    });
+
+    socket.on('reconnect', function (sock) {
+      console.log('you have been reconnected');
+      // where username is a global variable for the client
+      sock.emit('user-reconnected', this.state.userID);
     });
      
      
