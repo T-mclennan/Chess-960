@@ -26,7 +26,7 @@ class HumanVsHuman extends Component {
     //Current Board Position:
     fen: '',
     //Username:
-    username: 'husky',
+    username: '',
     //Number of current players:
     players: '0',
     //Color of player;
