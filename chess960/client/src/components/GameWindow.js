@@ -1,32 +1,32 @@
 import React, { Component } from 'react'
-import io from 'socket.io-client'
 import ChessGame from './ChessGame';
-import PlayerModal from './PlayerModal';
+import NameInputForm from './NameInputForm'
 
 class GameWindow extends Component {
 
-  state = {
-    playerName: ''
+  constructor(props) {
+    super(props);
+
+    this.state = {
+       playerName: null
+    };
   }
 
   addName = (name) => {
-    this.setState({playerName: name})
-  }
+    this.setState({playerName: name}, () => {
+      console.log("name is: " + name + "playerName is: " + this.state.playerName)
+    })}
 
   render() {
-
-
-    // const board = new boardGeneration()
-    // const fen = board.generateBoard()
-    // console.log("pre-pass fen is: "+fen)
-
-    // var game = Chess(this.state.gameFen);
 
     return (
       
       <div className="centered" style={containerStyle}>
-        <PlayerModal addName={this.addName}/>
-        <ChessGame user={this.playerName}/>
+        {
+          !this.state.playerName ?  
+            <NameInputForm setUsername={this.addName}/> : 
+            <ChessGame user={this.state.playerName}/>
+        }
       </div>
     )
   }

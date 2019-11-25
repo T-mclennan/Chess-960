@@ -9,8 +9,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="container" 
-        style={{backgroundColor: '#505255', height: '100vh'}}
+        <div className="Wrapper" 
+        style={appStyle}
         >
           <Header/>
           <GameWindow style={{marginBottom: '15px'}}/>
@@ -18,6 +18,17 @@ function App() {
       </div>
     </Router>
   );
+}
+
+const appStyle = {
+  // backgroundColor: '#505255',
+  height: '100vh',
+  background: '#0F2027',
+  /* fallback for old browsers */
+  background: '-webkit-linear-gradient(45deg, #0F2027 , #203A43,#2C5364)',
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: 'linear-gradient(45deg,  #203A43, #0F2027,#2C5364)',
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 export default App;

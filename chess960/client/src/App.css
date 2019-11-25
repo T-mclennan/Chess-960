@@ -54,8 +54,8 @@ a {
 }
 
 .centered {
-  height: 100h; /* Magic here */
+  height: 100h; 
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} 

@@ -15,14 +15,18 @@ socket.on('error', function(){
 
 
 class HumanVsHuman extends Component {
-  static propTypes = { children: PropTypes.func };
+  // static propTypes = { children: PropTypes.func };
 
-  state = {
+  constructor(props) {
+    // super(...arguments)
+    super(props)  
+
+  this.state = {
 
     //Current Board Position:
     fen: '',
-    //id's of current players:
-    playerId: '0',
+    //Username:
+    username: 'husky',
     //Number of current players:
     players: '0',
     //Color of player;
@@ -43,11 +47,16 @@ class HumanVsHuman extends Component {
     history: [],
 
   };
+}
 
   componentDidMount() {
     const board = new boardGeneration()
     const fen = board.generateBoard()
     this.setState({fen})
+    this.setState({username: this.props.user}, () =>{
+      console.log('props: ' + this.props.user)
+      console.log('player: ' + this.state.username)
+    })
     this.game = new Chess(fen);
 
     this.connect()
@@ -258,6 +267,7 @@ export default function ChessGame() {
             boardStyle={{
               borderRadius: "5px",
               boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`
+              
             }}
             squareStyles={squareStyles}
             dropSquareStyle={dropSquareStyle}
