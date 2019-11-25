@@ -6,7 +6,7 @@ import boardGeneration from './boardGeneration'
 import io from 'socket.io-client';
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
-const socket = io(port);
+const socket = io();
 
 //tell socket.io to never give up :)
 socket.on('error', function(){
@@ -83,21 +83,21 @@ class HumanVsHuman extends Component {
       }
     });
 
-    socket.on('play', function (msg) {
-      console.log('msg is: '+msg)
-      console.log('this.game.ID: '+ this.state.gameId)  
-      if (msg === this.state.gameId) {
-          this.setState({play: false})
-          console.log('game in progress')
-      }
-    });
+      socket.on('play', function (msg) {
+        console.log('msg is: '+msg)
+        console.log('this.game.ID: '+ this.state.gameId)  
+        if (msg === this.state.gameId) {
+            this.setState({play: false})
+            console.log('game in progress')
+        }
+      });
 
-    socket.on('reconnect', function (sock) {
-      console.log('you have been reconnected');
-      // where username is a global variable for the client
-      sock.emit('user-reconnected', this.state.userID);
-    });
-     
+      socket.on('reconnect', function (sock) {
+        console.log('you have been reconnected');
+        // where username is a global variable for the client
+        sock.emit('user-reconnected', this.state.userID);
+      });
+      
      
   }
 
