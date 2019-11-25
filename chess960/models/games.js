@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
-const PlayerSchema = new Schema({
+const GameSchema = new Schema({
 
     fen: {
         type: String,
@@ -28,7 +28,7 @@ const PlayerSchema = new Schema({
         required: false
     },
 
-    isPlaying: {
+    needsPlayer: {
         type: Boolean,
         required: true,
         default: false
@@ -36,4 +36,4 @@ const PlayerSchema = new Schema({
 
 })
 
-module.exports =  Player = mongoose.model('players', PlayerSchema)
+module.exports =  Player = mongoose.model('Games', GameSchema)

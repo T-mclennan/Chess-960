@@ -9,9 +9,6 @@ const app = express();
 // start the server
 const server = http.createServer(app)
 
-// initialize a new instance of socket.io by passing the HTTP server object
-var io = require('socket.io').listen(server);
-
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
@@ -34,6 +31,13 @@ var games = Array(100);
 for (let i = 0; i < 100; i++) {
    games[i] = {players: 0 , pid: [0 , 0]};
 }
+
+//--------------------------------------------------------
+//                 Socket.io:
+//--------------------------------------------------------
+
+// initialize a new instance of socket.io by passing the HTTP server object
+var io = require('socket.io').listen(server);
 
 io.on('connection', function (socket) {
   // console.log(players);
@@ -90,22 +94,25 @@ io.on('connection', function (socket) {
 });
 
 
-// DB Config
-// const db = config.get('mongoURI');
+//--------------------------------------------------------
+//                 MognoDB and Routes:
+//--------------------------------------------------------
+//DB Config: 
+const db = require('./config/keys.js').mongoURI;
 
 // // Connect to Mongo
-// mongoose
-//   .connect(db, { 
-//     useNewUrlParser: true,
-//     useCreateIndex: true
-//   }) // Adding new mongo url parser
-//   .then(() => console.log('MongoDB Connected...'))
-//   .catch(err => console.log(err));
+mongoose
+  .connect(db, { 
+    useNewUrlParser: true,
+    useCreateIndex: true
+  }) // Adding new mongo url parser
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
 
 // Use Routes
-// app.use('/api/items', require('./routes/api/items'));
-// app.use('/api/users', require('./routes/api/users'));
-// app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/players', require('./routes/api/players'));
+app.use('/api/games', require('./routes/api/games'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 
 server.listen(port, () => console.log(`Server started on port ${port}`));

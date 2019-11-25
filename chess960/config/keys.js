@@ -1,4 +1,3 @@
 module.exports = {
-    playerURI: 'mongodb+srv://Tristan:mongodbpass@cluster0-5qw53.mongodb.net/?retryWrites=true&w=majority',
-    gameURI: 'mongodb+srv://Tristan:mongodbpass@cluster0-5qw53.mongodb.net/?retryWrites=true&w=majority'
+    mongoURI: 'mongodb+srv://Tristan:mongodbpass@cluster0-5qw53.mongodb.net/Chess960?retryWrites=true&w=majority'
 }
