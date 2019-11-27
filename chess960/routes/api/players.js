@@ -10,6 +10,7 @@ const Player = require('../../models/Players');
 router.get('/', (req, res) => {
     Player.find()
       .then(players => res.json(players))
+      .catch(e => {console.log(e)})
 });
 
 
@@ -18,9 +19,11 @@ router.get('/', (req, res) => {
 //@access public
 router.post('/', (req, res) => {
     const newPlayer = new Player({
-        name: req.body.name
+        username: req.body.username
     });
-    newPlayer.save().then(player => res.json(player));
+    newPlayer.save()
+    .then(player => res.json(player))
+    .catch(e => console.log(e));
 }); 
 
 //@route  Delete api/player/:id
