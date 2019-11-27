@@ -1,22 +1,15 @@
 const express = require('express')
 const router = express.Router();
+
+//Player Model:
 const Players = require('../../models/Players');
 
 //@route  GET api/player
-//@desc   Get all items
+//@desc   Get all players
 //@access public
 router.get('/player', (req, res) => {
     Players.find()
-      .then(items => res.json(items))
-});
-
-//@route  GET api/getAllPlayers
-//@desc   Get all items
-//@access public
-router.get('/getAllPlayers', (req, res) => {
-  Players.find()
-    .sort({_id})
-    .then(items => res.json(items))
+      .then(players => res.json(players))
 });
 
 
@@ -24,7 +17,7 @@ router.get('/getAllPlayers', (req, res) => {
 //@desc   Create an item
 //@access public
 router.post('/', (req, res) => {
-    const newPlayer = new Item({
+    const newPlayer = new Player({
         name: req.body.name
     });
     newPlayer.save().then(player => res.json(player));

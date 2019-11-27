@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router();
+
+//Game Model for database:
 const Game = require('../../models/Games');
 
 //@route  GET api/games
