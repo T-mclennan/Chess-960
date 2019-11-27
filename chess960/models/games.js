@@ -13,12 +13,12 @@ const GameSchema = new Schema({
         default: Date.now
     },
 
-    whitePlayer: {
+    white: {
         type: String,
         required: true
     },
 
-    blackPlayer: {
+    black: {
         type: String,
         required: false
     },

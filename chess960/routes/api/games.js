@@ -1,32 +1,36 @@
 const express = require('express')
 const router = express.Router();
-const Item = require('../../models/Games');
+const Game = require('../../models/Games');
 
-//@route  GET api/items
-//@desc   Get all items
+//@route  GET api/games
+//@desc   Get all games
 //@access public
 router.get('/', (req, res) => {
-    Item.find()
-      .sort({date: -1})
-      .then(items => res.json(items))
+    Game.find()
+      .sort()
+      .then(game => res.json(game))
 });
 
-//@route  POST api/items
-//@desc   Create an item
+//@route  POST api/games
+//@desc   Create a game
 //@access public
 router.post('/', (req, res) => {
-    const newItem = new Item({
-        name: req.body.name
+    const newGame = new Game({
+        fen: req.body.fen,
+        white: req.body.white,
+        black: req.body.black,
+        history: req.body.history,
+        needsPlayer: req.body.needsPlayer,
     });
-    newItem.save().then(item => res.json(item));
+    newGame.save().then(game => res.json(game));
 }); 
 
-//@route  Delete api/items/:id
-//@desc   Delete an item
+//@route  Delete api/games/:id
+//@desc   Delete an game
 //@access public
 router.delete('/:id', (req, res) => {
-    Item.findById(req.params.id)
-      .then(item => item.remove().then(() => res.json({success: true})))
+    Game.findById(req.params.id)
+      .then(game => game.remove().then(() => res.json({success: true})))
       .catch(err => res.status(404).json({success: false}));
 }); 
 
