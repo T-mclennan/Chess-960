@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router();
 
 //Player Model:
-const Players = require('../../models/Players');
+const Player = require('../../models/Players');
 
 //@route  GET api/player
 //@desc   Get all players
 //@access public
-router.get('/player', (req, res) => {
-    Players.find()
+router.get('/', (req, res) => {
+    Player.find()
       .then(players => res.json(players))
 });
 

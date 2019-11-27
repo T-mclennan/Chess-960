@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const users = require('./routes/api/players');
-// const currentGames = require('./routes/api/games');
+const currentGames = require('./routes/api/games');
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 //routes:
 app.use('/api/players', users)
-// app.use('routes/api/games', currentGames)
+app.use('/api/games', currentGames)
 
 const port = process.env.PORT || 5000;
 
@@ -115,11 +115,6 @@ mongoose
   }) // Adding new mongo url parser
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
-
-// Use Routes
-// app.use('/api/players', require('./routes/api/players'));
-// app.use('/api/games', require('./routes/api/games'));
-// app.use('/api/auth', require('./routes/api/auth'));
 
 
 server.listen(port, () => console.log(`Server started on port ${port}`));
