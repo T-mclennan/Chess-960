@@ -5,7 +5,7 @@ const Game = require('../../models/Games');
 //@route  GET api/games
 //@desc   Get all games
 //@access public
-router.get('/', (req, res) => {
+router.get('/games', (req, res) => {
     Game.find()
       .sort()
       .then(game => res.json(game))
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 //@route  POST api/games
 //@desc   Create a game
 //@access public
-router.post('/', (req, res) => {
+router.post('/games', (req, res) => {
     const newGame = new Game({
         fen: req.body.fen,
         white: req.body.white,
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 //@route  Delete api/games/:id
 //@desc   Delete an game
 //@access public
-router.delete('/:id', (req, res) => {
+router.delete('/games:id', (req, res) => {
     Game.findById(req.params.id)
       .then(game => game.remove().then(() => res.json({success: true})))
       .catch(err => res.status(404).json({success: false}));
