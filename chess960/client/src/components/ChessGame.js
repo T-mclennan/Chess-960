@@ -15,10 +15,10 @@ socket.on('error', function(){
 
 
 class HumanVsHuman extends Component {
-  // static propTypes = { children: PropTypes.func };
+  static propTypes = { children: PropTypes.func };
 
   constructor(props) {
-    // super(...arguments)
+  //   super(...arguments)
     super(props)  
 
   this.state = {
@@ -53,10 +53,10 @@ class HumanVsHuman extends Component {
     const board = new boardGeneration()
     const fen = board.generateBoard()
     this.setState({fen})
-    this.setState({username: this.props.user}, () =>{
-      console.log('props: ' + this.props.user)
+    this.setState({username: this.props.user}, () => {
       console.log('player: ' + this.state.username)
     })
+
     this.game = new Chess(fen);
 
     this.connect()
@@ -75,6 +75,7 @@ class HumanVsHuman extends Component {
     });
 
     socket.on('move', function (msg) {
+      console.log('move made')
       if (msg.game === this.state.gameId) {
           this.setState(this.game.fen())
           this.game.move(msg.move);
@@ -240,10 +241,10 @@ class HumanVsHuman extends Component {
   }
 }
 
-export default function ChessGame() {
+export default function ChessGame(username) {
   return (
     <div>
-      <HumanVsHuman>
+      <HumanVsHuman user ={username}>
         {({
           position,
           onDrop,

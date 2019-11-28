@@ -8,7 +8,7 @@ class GameWindow extends Component {
     super(props);
 
     this.state = {
-       playerName: null
+       playerName: ''
     };
   }
 
@@ -22,10 +22,13 @@ class GameWindow extends Component {
     return (
       
       <div className="centered" style={containerStyle}>
+                    {/* <ChessGame user={this.state.playerName}/> */}
         {
           !this.state.playerName ?  
-            <NameInputForm setUsername={this.addName}/> : 
-            <ChessGame user={this.state.playerName}/>
+            <NameInputForm setUsername={this.addName}/> :
+            <div> 
+            {ChessGame(this.state.playerName)}
+            </div>
         }
       </div>
     )
