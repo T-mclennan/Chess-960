@@ -26,9 +26,7 @@ class GameWindow extends Component {
         {
           !this.state.playerName ?  
             <NameInputForm setUsername={this.addName}/> :
-            <div> 
-            {ChessGame(this.state.playerName)}
-            </div>
+            <div>{ChessGame(this.state.playerName)}</div>
         }
       </div>
     )

@@ -5,6 +5,7 @@ const path = require('path');
 const http = require('http');
 const users = require('./routes/api/players');
 const currentGames = require('./routes/api/games');
+const board = require('./client/src/components/boardGeneration');
 
 const app = express();
 
@@ -36,7 +37,7 @@ var players;
 // create an array of 100 games and initialize them
 var games = Array(100);
 for (let i = 0; i < 100; i++) {
-   games[i] = {players: 0 , pid: [0 , 0]};
+   games[i] = {players: 0 , names: ["" , ""], fen:""};
 }
 
 //--------------------------------------------------------
@@ -49,19 +50,25 @@ var io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
   // console.log(players);
   var color;
-  var playerId =  Math.floor((Math.random() * 100) + 1)
-  
+  // var playerId =  Math.floor((Math.random() * 100) + 1)
 
-  console.log(playerId + ' connected');
+  socket.on('joined', function (data) {
+      gameId = data.gameId
+      username = data.username
 
-  socket.on('joined', function (gameId) {
-      // games[roomId] = {}
+      // console.log('Username: '+data.username)
+      console.log(data.username + ' connected');
+      if (games[gameId].players === 0) {
+        // const board = new boardGeneration()
+        games[gameId].fen = board.generateBoard()
+      }
+
       if (games[gameId].players < 2) {
           games[gameId].players++;
-          games[gameId].pid[games[gameId].players - 1] = playerId;
+          games[gameId].names[games[gameId].players - 1] = username;
       }
       else{
-          socket.emit('full', gameId)
+          socket.emit('game full', gameId)
           return;
       }
       
@@ -71,8 +78,9 @@ io.on('connection', function (socket) {
       
       if (players % 2 == 0) color = 'black';
       else color = 'white';
+      const fen = games[gameId].fen
 
-      socket.emit('player', { playerId, players, color, gameId })
+      socket.emit('player', { username, players, color, gameId, fen})
       // players--;
 
   });
@@ -93,10 +101,10 @@ io.on('connection', function (socket) {
 
   socket.on('disconnect', function () {
       for (let i = 0; i < 100; i++) {
-          if (games[i].pid[0] == playerId || games[i].pid[1] == playerId)
+          if (games[i].names[0] == username || games[i].names[1] == username)
               games[i].players--;
       }
-      console.log(playerId + ' disconnected');
+      console.log(username + ' disconnected');
   }); 
 });
 

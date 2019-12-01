@@ -14,12 +14,15 @@ router.get('/', (req, res) => {
 });
 
 
-//@route  POST api/items
+//@route  POST api/player
 //@desc   Create an item
 //@access public
 router.post('/', (req, res) => {
     const newPlayer = new Player({
-        username: req.body.username
+        username: req.body.username,
+        password: req.body.password,
+        rating: req.body.rating,
+
     });
     newPlayer.save()
     .then(player => res.json(player))
@@ -35,3 +38,12 @@ router.delete('/:id', (req, res) => {
       .catch(err => res.status(404).json({success: false}));
 }); 
 module.exports = router;   
+
+
+//TODO: Add the following routes:
+
+/*
+/  api/player/updateRating: update the rating of the current player
+/
+/
+*/

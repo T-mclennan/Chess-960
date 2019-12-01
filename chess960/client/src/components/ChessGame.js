@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
 import Chessboard from "chessboardjsx";
-import boardGeneration from './boardGeneration'
 import io from 'socket.io-client';
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
@@ -45,24 +44,32 @@ class HumanVsHuman extends Component {
     square: "",
     // array of past game moves:
     history: [],
+    //turn:
+    turn: "white"
 
   };
 }
 
   componentDidMount() {
-    const board = new boardGeneration()
-    const fen = board.generateBoard()
-    this.setState({fen})
+
+    console.log('Children: ' + this.props.children)
+    // const board = new boardGeneration()
+    // const fen = board.generateBoard()
     this.setState({username: this.props.user}, () => {
       console.log('player: ' + this.state.username)
     })
 
-    this.game = new Chess(fen);
 
+
+    //Request initial board state from server through websocket connection
     this.connect()
+    // .then(() => {
+    //   this.game = new Chess(this.state.fen);
+    // })
+    // .catch(e => console.log(e)) 
 
     socket.on('player', (msg) => {
-      this.setState({color: msg.color, players: msg.players, playerId: msg.playerId}) 
+      this.setState({color: msg.color, players: msg.players, playerId: msg.playerId, fen: msg.fen}) 
       console.log("Player color: "+ this.state.color+ "  player id: " + this.state.playerId)
   
       if( this.state.players === 2){
@@ -79,13 +86,14 @@ class HumanVsHuman extends Component {
       if (msg.game === this.state.gameId) {
           this.setState(this.game.fen())
           this.game.move(msg.move);
-          board.position(this.game.fen());
+          // board.position(this.game.fen());
           console.log("moved")
       }
     });
 
       socket.on('play', function (msg) {
         console.log('msg is: '+msg)
+        console.log('name:' + this.state.username)
         console.log('this.game.ID: '+ this.state.gameId)  
         if (msg === this.state.gameId) {
             this.setState({play: false})
@@ -96,19 +104,15 @@ class HumanVsHuman extends Component {
       socket.on('reconnect', function (sock) {
         console.log('you have been reconnected');
         // where username is a global variable for the client
-        sock.emit('user-reconnected', this.state.username);
+        sock.emit('user-reconnected', this.props.username);
       });
       
      
   }
 
   connect = () => {
-    // roomId = room.value;
-    // if (roomId !== "" && parseInt(roomId) <= 100) {
-    //     room.remove();
-    //     roomNumber.innerHTML = "Room Number " + roomId;
-    //     button.remove();
-        socket.emit('joined', this.state.gameId);
+      console.log('connect function, username is: '+this.props.user)
+      socket.emit('joined', {gameId: this.state.gameId, username: this.props.user});
     // }
   }
 
@@ -208,7 +212,7 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
       else {
-        socket.emit('move', { move: move, board: this.game.fen(), room: this.state.roomId });
+        socket.emit('move', { move: move, board: this.game.fen(), room: this.state.gameId });
       }
 
     this.setState({

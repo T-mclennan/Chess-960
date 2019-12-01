@@ -36,4 +36,12 @@ router.delete('/:id', (req, res) => {
       .catch(err => res.status(404).json({success: false}));
 }); 
 
+//TODO: the following routes will be added:
+
+/*  api/games/getOpenGames: retrieves the ID of all games that are open
+/   api/games/addPlayerToGame: updates the game to include the added player
+/   api/games/updateFen: updates the fen string + history to reflect the new gamestate
+/   api/games/getGamesByPlayer: retrieves each game the current player is in
+*/
+
 module.exports = router;   
