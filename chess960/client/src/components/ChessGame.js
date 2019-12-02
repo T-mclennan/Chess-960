@@ -6,34 +6,36 @@ import io from 'socket.io-client';
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port);
+let logic = new Chess();
 
 //tell socket.io to never give up :)
-socket.on('error', function(){
-  socket.socket.reconnect();
-});
-
+// socket.on('error', function(){
+//   socket.socket.reconnect();
+// });
 
 class HumanVsHuman extends Component {
   static propTypes = { children: PropTypes.func };
 
   constructor(props) {
-  //   super(...arguments)
     super(props)  
 
   this.state = {
-
-    //Current Board Position:
+    
+    //Game Objects contain information of the current state and players:
     fen: '',
-    //Username:
-    username: '',
-    //Number of current players:
-    players: '0',
-    //Color of player;
-    color: 'blue',
-    // Current game:
-    gameId: 5,
-    // Currently playing?
-    play: true,
+    whiteName: '',
+    whiteID: '',
+    blackName: '',
+    blackID: '',
+    started: false,
+    turn: "white",
+    history: [],
+    
+
+    //Player attributes:
+    myColor: '',
+    myUsername: '',
+
     // square styles for active drop square:
     dropSquareStyle: {},
     // custom square styles:
@@ -42,79 +44,75 @@ class HumanVsHuman extends Component {
     pieceSquare: "",
     // currently clicked square:
     square: "",
-    // array of past game moves:
-    history: [],
-    //turn:
-    turn: "white"
 
   };
 }
 
+
+
   componentDidMount() {
 
     console.log('Children: ' + this.props.children)
-    // const board = new boardGeneration()
-    // const fen = board.generateBoard()
     this.setState({username: this.props.user}, () => {
-      console.log('player: ' + this.state.username)
+      console.log('player: ' + this.state.myUsername)
     })
 
 
 
     //Request initial board state from server through websocket connection
-    this.connect()
+    // this.connect()
     // .then(() => {
-    //   this.game = new Chess(this.state.fen);
+      // this.logic.load(this.state.fen);
     // })
     // .catch(e => console.log(e)) 
 
-    socket.on('player', (msg) => {
-      this.setState({color: msg.color, players: msg.players, playerId: msg.playerId, fen: msg.fen}) 
-      console.log("Player color: "+ this.state.color+ "  player id: " + this.state.playerId)
+    // socket.on('player', (msg) => {
+    //   this.setState({color: msg.color, players: msg.players, playerId: msg.playerId, fen: msg.fen}) 
+    //   console.log("Player color: "+ this.state.color+ "  player id: " + this.state.playerId)
   
-      if( this.state.players === 2){
-          this.setState({play: false})
-          socket.emit('play', msg.gameId);
-          console.log("Game in Progress: "+ this.state.gameId) 
-      }
-      else
-          console.log('"Waiting for Second player"')
-    });
+    //   if( this.state.players === 2){
+    //       this.setState({play: false})
+    //       socket.emit('play', msg.gameId);
+    //       console.log("Game in Progress: "+ this.state.gameId) 
+    //   }
+    //   else
+    //       console.log('"Waiting for Second player"')
+    // });
 
-    socket.on('move', function (msg) {
-      console.log('move made')
-      if (msg.game === this.state.gameId) {
-          this.setState(this.game.fen())
-          this.game.move(msg.move);
-          // board.position(this.game.fen());
-          console.log("moved")
-      }
-    });
+    // socket.on('move', function (msg) {
+    //   console.log('move made')
+    //   if (msg.game === this.state.gameId) {
+    //       this.setState(this.game.fen())
+    //       this.game.move(msg.move);
+    //       // board.position(this.game.fen());
+    //       console.log("moved")
+    //   }
+    // });
 
-      socket.on('play', function (msg) {
-        console.log('msg is: '+msg)
-        console.log('name:' + this.state.username)
-        console.log('this.game.ID: '+ this.state.gameId)  
-        if (msg === this.state.gameId) {
-            this.setState({play: false})
-            console.log('game in progress')
-        }
-      });
+      // socket.on('play', function (msg) {
+      //   console.log('msg is: '+msg)
+      //   console.log('name:' + this.state.username)
+      //   console.log('this.game.ID: '+ this.state.gameId)  
+      //   if (msg === this.state.gameId) {
+      //       this.setState({play: false})
+      //       console.log('game in progress')
+      //   }
+      // });
 
-      socket.on('reconnect', function (sock) {
-        console.log('you have been reconnected');
-        // where username is a global variable for the client
-        sock.emit('user-reconnected', this.props.username);
-      });
+      // socket.on('reconnect', function (sock) {
+      //   console.log('you have been reconnected');
+      //   // where username is a global variable for the client
+      //   sock.emit('user-reconnected', this.props.username);
+      // });
       
-     
+      this.logic.load(this.state.game.fen);
   }
 
-  connect = () => {
-      console.log('connect function, username is: '+this.props.user)
-      socket.emit('joined', {gameId: this.state.gameId, username: this.props.user});
-    // }
-  }
+  // connect = () => {
+  //     console.log('connect function, username is: '+this.props.user)
+  //     socket.emit('joined', {gameId: this.state.gameId, username: this.props.user});
+  //   // }
+  // }
 
   // keep clicked square style and remove hint squares
   removeHighlightSquare = () => {
@@ -151,7 +149,7 @@ class HumanVsHuman extends Component {
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
-    let move = this.game.move({
+    let move = this.logic.move({
       from: sourceSquare,
       to: targetSquare,
       promotion: "q" // always promote to a queen for example simplicity
@@ -159,17 +157,17 @@ class HumanVsHuman extends Component {
 
     // illegal move
     if (move === null) return;
-    console.log(this.game.fen())
+    console.log(this.logic.fen())
     this.setState(({ history, pieceSquare }) => ({
-      fen: this.game.fen(),
-      history: this.game.history({ verbose: true }),
+      fen: this.logic.fen(),
+      history: this.logic.history({ verbose: true }),
       squareStyles: squareStyling({ pieceSquare, history })
     }));
   };
 
   onMouseOverSquare = square => {
     // get list of possible moves for this square
-    let moves = this.game.moves({
+    let moves = this.logic.moves({
       square: square,
       verbose: true
     });

@@ -22,7 +22,8 @@ router.post('/', (req, res) => {
         white: req.body.white,
         black: req.body.black,
         history: req.body.history,
-        needsPlayer: req.body.needsPlayer,
+        needsPlayer: req.body.started,
+        turn: req.body.turn
     });
     newGame.save().then(game => res.json(game));
 }); 

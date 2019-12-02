@@ -20,8 +20,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const newPlayer = new Player({
         username: req.body.username,
-        password: req.body.password,
+        // password: req.body.password,
         rating: req.body.rating,
+        curentGames: req.body.currentGames
 
     });
     newPlayer.save()

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ChessGame from './ChessGame';
 import NameInputForm from './NameInputForm'
+import axios from 'axios'
 
 class GameWindow extends Component {
 

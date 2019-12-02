@@ -49,63 +49,63 @@ var io = require('socket.io').listen(server);
 
 io.on('connection', function (socket) {
   // console.log(players);
-  var color;
-  // var playerId =  Math.floor((Math.random() * 100) + 1)
+  // var color;
+  // // var playerId =  Math.floor((Math.random() * 100) + 1)
 
-  socket.on('joined', function (data) {
-      gameId = data.gameId
-      username = data.username
+  // socket.on('joined', function (data) {
+  //     gameId = data.gameId
+  //     username = data.username
 
-      // console.log('Username: '+data.username)
-      console.log(data.username + ' connected');
-      if (games[gameId].players === 0) {
-        // const board = new boardGeneration()
-        games[gameId].fen = board.generateBoard()
-      }
+  //     // console.log('Username: '+data.username)
+  //     console.log(data.username + ' connected');
+  //     if (games[gameId].players === 0) {
+  //       // const board = new boardGeneration()
+  //       games[gameId].fen = board.generateBoard()
+  //     }
 
-      if (games[gameId].players < 2) {
-          games[gameId].players++;
-          games[gameId].names[games[gameId].players - 1] = username;
-      }
-      else{
-          socket.emit('game full', gameId)
-          return;
-      }
+  //     if (games[gameId].players < 2) {
+  //         games[gameId].players++;
+  //         games[gameId].names[games[gameId].players - 1] = username;
+  //     }
+  //     else{
+  //         socket.emit('game full', gameId)
+  //         return;
+  //     }
       
-      console.log(games[gameId]);
-      players = games[gameId].players
-      console.log('players number is: '+ players)
+  //     console.log(games[gameId]);
+  //     players = games[gameId].players
+  //     console.log('players number is: '+ players)
       
-      if (players % 2 == 0) color = 'black';
-      else color = 'white';
-      const fen = games[gameId].fen
+  //     if (players % 2 == 0) color = 'black';
+  //     else color = 'white';
+  //     const fen = games[gameId].fen
 
-      socket.emit('player', { username, players, color, gameId, fen})
-      // players--;
+  //     socket.emit('player', { username, players, color, gameId, fen})
+  //     // players--;
 
-  });
+  // });
 
-  socket.on('move', function (msg) {
-      socket.broadcast.emit('move', msg);
-      console.log('move' + msg);
-  });
+  // socket.on('move', function (msg) {
+  //     socket.broadcast.emit('move', msg);
+  //     console.log('move' + msg);
+  // });
 
-  socket.on('play', function (msg) {
-      socket.broadcast.emit('play', msg);
-      console.log("ready game #" + msg);
-  });
+  // socket.on('play', function (msg) {
+  //     socket.broadcast.emit('play', msg);
+  //     console.log("ready game #" + msg);
+  // });
 
-  socket.on('user-reconnected', function (userId) {
-    console.log(userId + ' just reconnected');
-  });
+  // socket.on('user-reconnected', function (userId) {
+  //   console.log(userId + ' just reconnected');
+  // });
 
-  socket.on('disconnect', function () {
-      for (let i = 0; i < 100; i++) {
-          if (games[i].names[0] == username || games[i].names[1] == username)
-              games[i].players--;
-      }
-      console.log(username + ' disconnected');
-  }); 
+  // socket.on('disconnect', function () {
+  //     for (let i = 0; i < 100; i++) {
+  //         if (games[i].names[0] == username || games[i].names[1] == username)
+  //             games[i].players--;
+  //     }
+  //     console.log(username + ' disconnected');
+  // }); 
 });
 
 

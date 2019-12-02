@@ -32,6 +32,11 @@ const GameSchema = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+
+    turn: {
+        type: String,
+        required: true
     }
 
 })
