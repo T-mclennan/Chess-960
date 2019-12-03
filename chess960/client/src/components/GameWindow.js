@@ -23,7 +23,6 @@ class GameWindow extends Component {
     return (
       
       <div className="centered" style={containerStyle}>
-                    {/* <ChessGame user={this.state.playerName}/> */}
         {
           !this.state.playerName ?  
             <NameInputForm setUsername={this.addName}/> :
@@ -38,4 +37,14 @@ const containerStyle = {
   margin: '1.1rem',
 }
 
-export default GameWindow
+GameWindow.propTypes = {
+  addPlayer: PropTypes.func.isRequired,
+  updateGame: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  game: state.game,
+  player: state.player
+})
+
+export default connect(mapStateToProps, {addPlayer, updateGame})(GameWindow);

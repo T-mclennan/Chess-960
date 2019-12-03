@@ -6,3 +6,6 @@ export default combineReducers({
   player: playerReducer,
   game: gameReducer
 });
+
+
+

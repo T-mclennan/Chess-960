@@ -1,32 +1,41 @@
-import {GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING} from '../actions/types'
+import {GET_GAME,
+        UPDATE_GAME,
+        ADD_MOVE,
+        START_GAME,
+        DELETE_GAME} from '../actions/gameTypes'
 
 const initialState = {
-  items: [],
-  loading: false
+  white: '',
+  black: '',
+  fen: '',
+  needsPlayer: 'true',
+  history: [],
+  turn: 'white'
 }
+
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case GET_ITEMS:
+    case GET_GAME:
       return {
         ...state,
         items: action.payload,
         loading: false
       };
 
-    case DELETE_ITEM:
+    case DELETE_GAME:
       return {
         ...state,
         items: state.items.filter(item => item._id !== action.payload)
       };
 
-    case ADD_ITEM:
+    case UPDATE_GAME:
       return {
         ...state,
         items: [action.payload, ...state.items]
       }
 
-    case ITEMS_LOADING:
+    case START_GAME:
       return {
         ...state,
         loading: true

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
 import Chessboard from "chessboardjsx";
 import io from 'socket.io-client';
-
+import {connect} from 'react-redux'
+import {GET_GAME, DELETE_GAME} from '../actions/gameActions'
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port);
 let logic = new Chess();
@@ -14,7 +15,12 @@ let logic = new Chess();
 // });
 
 class HumanVsHuman extends Component {
-  static propTypes = { children: PropTypes.func };
+  static propTypes = {
+    children: PropTypes.func,
+    getGame: PropTypes.func,
+    game: PropTypes.object
+
+  };
 
   constructor(props) {
     super(props)  
@@ -52,6 +58,7 @@ class HumanVsHuman extends Component {
 
   componentDidMount() {
 
+    this.props.getGame();
     console.log('Children: ' + this.props.children)
     this.setState({username: this.props.user}, () => {
       console.log('player: ' + this.state.myUsername)
@@ -241,7 +248,13 @@ class HumanVsHuman extends Component {
       onSquareRightClick: this.onSquareRightClick
     });
   }
-}
+} // END HumanVSHuman
+
+const mapStateToProps = (state) => ({
+   game: state.game
+})
+
+export default connect(mapStateToProps, {GET_GAME} )(HumanVsHuman)
 
 export default function ChessGame(username) {
   return (
