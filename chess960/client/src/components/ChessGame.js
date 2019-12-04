@@ -241,9 +241,10 @@ class HumanVsHuman extends Component {
 
   render() {
   
-    const { fen, dropSquareStyle, squareStyles } = this.state;
+    const { fen, color, dropSquareStyle, squareStyles } = this.state;
 
     return this.props.children({
+      orientation: color,
       squareStyles,
       position: fen,
       onMouseOverSquare: this.onMouseOverSquare,
@@ -270,7 +271,8 @@ export default function ChessGame(username,userGameID,userColor,gameFen) {
           dropSquareStyle,
           onDragOverSquare,
           onSquareClick,
-          onSquareRightClick
+          onSquareRightClick,
+          orientation,
         }) => (
           <Chessboard
             id="humanVsHuman"
@@ -291,6 +293,7 @@ export default function ChessGame(username,userGameID,userColor,gameFen) {
             onDragOverSquare={onDragOverSquare}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
+            orientation={orientation}
           />
         )}
       </HumanVsHuman>
