@@ -76,10 +76,12 @@ class HumanVsHuman extends Component {
     });
 
     socket.on('moveMade', (data) => {
-      console.log('move made by opponent')
-      if (data.gameID === this.state.gameId) {
-          this.logic.move(data.move);
-          this.setState(this.logic.fen())
+      console.log('move made')
+      console.log(data)
+      if (data.gameID === this.state.gameID) {
+          console.log('move made by opponent')
+          this.logic.move(data.newMove);
+          this.setState({fen: this.logic.fen()})
       }
     });
 
@@ -160,9 +162,6 @@ class HumanVsHuman extends Component {
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
-    // 
-        //UNDO THIS LOGIC
-    
     let move = this.logic.move({
       from: sourceSquare,
       to: targetSquare,
@@ -172,6 +171,7 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
     console.log(this.logic.fen())
+    socket.emit('move', {newMove: move, gameID: this.state.gameID });
     this.setState(({ history, pieceSquare }) => ({
       fen: this.logic.fen(),
       history: this.logic.history({ verbose: true }),
