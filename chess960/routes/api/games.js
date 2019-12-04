@@ -47,7 +47,7 @@ router.post('/findGameForPlayer', (req, res) => {
                     res.json({gameID: game._id, color: "black", fen: game.fen})
                 })
                 .catch(e => console.log(e))
-          } else {
+           } else {
 
             const newGame = new Game({
                 fen: board.generateBoard(),
@@ -60,6 +60,21 @@ router.post('/findGameForPlayer', (req, res) => {
       })
       .catch(err => res.status(404).json({success: false}));
 }); 
+
+//@route  POST api/games/findAnOpenGame
+//@desc   Returns an open game if available, otherwise creates and returns new game:
+//@access public
+router.post('/updateGame', (req, res) => {
+  Game.updateOne(
+    {"_id" : req.body._id}, 
+    {$set: {"fen": req.body.fen, "history": req.body.history, "turn": req.body.turn}})
+  .then(updatedGame => {
+      console.log('updated game: '+ updatedGame)
+      // console.log('added '+game.black+ ' to '+game._id)
+      res.json('update of '+req.body._id+ ' successful')
+  })
+  .catch(e => console.log(e))
+}
 
 //@route  POST api/games
 //@desc   Create a game

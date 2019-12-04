@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import ChessGame from './ChessGame';
 import NameInputForm from './NameInputForm'
-import io from 'socket.io-client';
 import axios from 'axios'
 
 
 /*  TODO: document GameWindow component
-//  parts to add: 
-//      get player  api call: returns: player object 
-//      get game    api call: returns: color, gameID -> adds game to player gameList
-//      get color
-// 
+//  
 */
 class GameWindow extends Component {
 
@@ -22,7 +17,6 @@ class GameWindow extends Component {
        gameID: '',
        color: '',
        fen: ''
-
     };
   }
 
@@ -64,15 +58,4 @@ const containerStyle = {
   margin: '1.1rem',
 }
 
-// GameWindow.propTypes = {
-//   addPlayer: PropTypes.func.isRequired,
-//   updateGame: PropTypes.object.isRequired
-// }
-
-// const mapStateToProps = (state) => ({
-//   game: state.game,
-//   player: state.player
-// })
-
-// export default connect(mapStateToProps, {addPlayer, updateGame})(GameWindow);
 export default GameWindow;
