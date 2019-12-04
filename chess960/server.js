@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 //--------------------------------------------------------
 
 // initialize a new instance of socket.io by passing the HTTP server object
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {pingTimeout: 30000});
 
 io.on('connection', function (socket) {
 
@@ -46,25 +46,16 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('newPlayer', data)
   });
 
-  // socket.on('move', function (msg) {
-  //     socket.broadcast.emit('move', msg);
-  //     console.log('move' + msg);
-  // });
-
-  // socket.on('play', function (msg) {
-  //     socket.broadcast.emit('play', msg);
-  //     console.log("ready game #" + msg);
-  // });
+  socket.on('move', (data) => {
+      socket.broadcast.emit('moveMade', data);
+      console.log('move made');
+  });
 
   // socket.on('user-reconnected', function (userId) {
   //   console.log(userId + ' just reconnected');
   // });
 
   // socket.on('disconnect', function () {
-  //     for (let i = 0; i < 100; i++) {
-  //         if (games[i].names[0] == username || games[i].names[1] == username)
-  //             games[i].players--;
-  //     }
   //     console.log(username + ' disconnected');
   // }); 
 });

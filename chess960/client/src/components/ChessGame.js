@@ -7,7 +7,7 @@ import Axios from "axios";
 // import {connect} from 'react-redux'
 // import {GET_GAME} from '../actions/gameActions'
 const port = process.env.PORT || "http://127.0.0.1:5000";
-const socket = io(port);
+const socket = io(port, {pingTimeout: 30000});
 
 
 
@@ -73,37 +73,15 @@ class HumanVsHuman extends Component {
           started: data.started
         }) 
       }
-
-    //   console.log("Player color: "+ this.state.color+ "  player id: " + this.state.playerId)
-  
-    //   if( this.state.players === 2){
-    //       this.setState({play: false})
-    //       socket.emit('play', msg.gameId);
-    //       console.log("Game in Progress: "+ this.state.gameId) 
-    //   }
-    //   else
-    //       console.log('"Waiting for Second player"')
     });
 
-    // socket.on('move', function (msg) {
-    //   console.log('move made')
-    //   if (msg.game === this.state.gameId) {
-    //       this.setState(this.game.fen())
-    //       this.game.move(msg.move);
-    //       // board.position(this.game.fen());
-    //       console.log("moved")
-    //   }
-    // });
-
-      // socket.on('play', function (msg) {
-      //   console.log('msg is: '+msg)
-      //   console.log('name:' + this.state.username)
-      //   console.log('this.game.ID: '+ this.state.gameId)  
-      //   if (msg === this.state.gameId) {
-      //       this.setState({play: false})
-      //       console.log('game in progress')
-      //   }
-      // });
+    socket.on('moveMade', (data) => {
+      console.log('move made by opponent')
+      if (data.gameID === this.state.gameId) {
+          this.logic.move(data.move);
+          this.setState(this.logic.fen())
+      }
+    });
 
       // socket.on('reconnect', function (sock) {
       //   console.log('you have been reconnected');
@@ -246,11 +224,11 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
       else {
-        // socket.emit('move', { move: move, board: this.game.fen(), room: this.state.gameId });
+        socket.emit('move', { move: move, fen: this.logic.fen(), gameID: this.state.gameID });
       }
 
     this.setState({
-      fen: this.game.fen(),
+      fen: this.logic.fen(),
       history: this.game.history({ verbose: true }),
       pieceSquare: ""
     });
