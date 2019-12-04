@@ -23,10 +23,9 @@ class GameWindow extends Component {
 
   //Adds name and fetches new game:
   addName = (name) => {
-    console.log(name)
+    // console.log(name)
     axios.post('/api/games/findGameForPlayer', {username : name})
     .then((response) => {
-      console.log(response)
       this.setState(
         {playerName: name, 
          gameID: response.data.gameID, 
@@ -36,8 +35,6 @@ class GameWindow extends Component {
     })
     .catch(e => console.log(e));
   }
-
-
 
   render() {
 
