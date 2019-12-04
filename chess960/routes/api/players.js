@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 //Player Model:
-const Player = require('../../models/Players');
+const Player = require('../../models/players');
 
 //@route  GET api/player
 //@desc   Get all players
