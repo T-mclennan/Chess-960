@@ -5,7 +5,6 @@ const path = require('path');
 const http = require('http');
 const users = require('./routes/api/players');
 const currentGames = require('./routes/api/games');
-// const board = require('./client/src/components/boardGeneration');
 
 const app = express();
 
