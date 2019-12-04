@@ -13,9 +13,30 @@ router.get('/', (req, res) => {
       .catch(e => {console.log(e)})
 });
 
+//@route  GET api/player/checkUsername
+//@desc   If the user exists, return it from database, otherwise create and return it.
+//@access public
+router.get('/checkUsername', (req, res) => {
+  Player.findOne({'username': req.body.username})
+    .then(player => {
+      if (player)
+        res.json(player)
+      else {
+        const newPlayer = new Player({
+          username: req.body.username,
+          // password: req.body.password,
+      });
+      newPlayer.save()
+      .then(player => res.json(player))
+      .catch(e => console.log(e));
+      }
+    })
+    .catch(e => {console.log(e)})
+});
+
 
 //@route  POST api/player
-//@desc   Create an item
+//@desc   Add a player to the database
 //@access public
 router.post('/', (req, res) => {
     const newPlayer = new Player({

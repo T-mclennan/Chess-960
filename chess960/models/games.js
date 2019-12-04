@@ -5,7 +5,7 @@ const GameSchema = new Schema({
 
     fen: {
         type: String,
-        required: true
+        default: ""
     },
 
     dateCreated: {
@@ -20,7 +20,7 @@ const GameSchema = new Schema({
 
     black: {
         type: String,
-        required: false
+        default: ""
     },
 
     history: {
@@ -30,13 +30,12 @@ const GameSchema = new Schema({
 
     needsPlayer: {
         type: Boolean,
-        required: true,
-        default: false
+        default: true
     },
 
     turn: {
         type: String,
-        required: true
+        default: "white"
     }
 
 })

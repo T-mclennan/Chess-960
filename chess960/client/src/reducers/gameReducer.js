@@ -1,8 +1,7 @@
 import {GET_GAME,
         UPDATE_GAME,
         ADD_MOVE,
-        START_GAME,
-        DELETE_GAME} from '../actions/gameTypes'
+        START_GAME} from '../actions/gameTypes'
 
 const initialState = {
   white: '',
@@ -23,23 +22,23 @@ export default function(state = initialState, action) {
         loading: false
       };
 
-    case DELETE_GAME:
-      return {
-        ...state,
-        items: state.items.filter(item => item._id !== action.payload)
-      };
-
     case UPDATE_GAME:
       return {
         ...state,
         items: [action.payload, ...state.items]
-      }
+      };
 
     case START_GAME:
       return {
         ...state,
         loading: true
-      }
+      };
+
+    case ADD_MOVE:
+      return {
+        ...state,
+        loading: true
+      };
 
     default:
       return state;

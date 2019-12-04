@@ -1,4 +1,4 @@
-import {UPDATE_PLAYER} from '../actions/types'
+import {UPDATE_PLAYER} from '../actions/playerTypes'
 
 const initialState = {
   playerName: '',

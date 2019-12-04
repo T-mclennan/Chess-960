@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
 import Chessboard from "chessboardjsx";
 import io from 'socket.io-client';
-import {connect} from 'react-redux'
-import {GET_GAME, DELETE_GAME} from '../actions/gameActions'
+import Axios from "axios";
+// import {connect} from 'react-redux'
+// import {GET_GAME} from '../actions/gameActions'
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port);
-let logic = new Chess();
+
+
 
 //tell socket.io to never give up :)
 // socket.on('error', function(){
@@ -28,7 +30,7 @@ class HumanVsHuman extends Component {
   this.state = {
     
     //Game Objects contain information of the current state and players:
-    fen: '',
+    fen: this.props.fen,
     whiteName: '',
     whiteID: '',
     blackName: '',
@@ -36,11 +38,12 @@ class HumanVsHuman extends Component {
     started: false,
     turn: "white",
     history: [],
+    gameID: this.props.gameID,
     
 
     //Player attributes:
-    myColor: '',
-    myUsername: '',
+    color: this.props.color,
+    username: this.props.name,
 
     // square styles for active drop square:
     dropSquareStyle: {},
@@ -58,18 +61,19 @@ class HumanVsHuman extends Component {
 
   componentDidMount() {
 
-    this.props.getGame();
-    console.log('Children: ' + this.props.children)
-    this.setState({username: this.props.user}, () => {
-      console.log('player: ' + this.state.myUsername)
-    })
+    console.log(this.props)
+ 
+    this.logic = new Chess();
+    this.fetchGameDetails()
+
+
 
 
 
     //Request initial board state from server through websocket connection
     // this.connect()
     // .then(() => {
-      // this.logic.load(this.state.fen);
+    //   this.logic.load(this.state.fen);
     // })
     // .catch(e => console.log(e)) 
 
@@ -112,14 +116,37 @@ class HumanVsHuman extends Component {
       //   sock.emit('user-reconnected', this.props.username);
       // });
       
-      this.logic.load(this.state.game.fen);
+      this.logic.load(this.state.fen);
   }
 
-  // connect = () => {
-  //     console.log('connect function, username is: '+this.props.user)
-  //     socket.emit('joined', {gameId: this.state.gameId, username: this.props.user});
-  //   // }
+  connect = () => {
+      console.log('connect function, username is: '+this.props.user)
+      // socket.emit('joined', {gameId: this.state.gameId, username: this.props.user});
+    }
   // }
+
+  fetchGameDetails = () => {
+    Axios.get(`/api/games/${this.props.gameID}`)
+     .then((game) => {
+       console.log('FETCHED game: '+game.data.fen)
+       this.setState(
+         {
+          //  username: this.props.name, 
+          color: this.props.color, 
+          // gameID: this.props.gameID,
+          history: game.data.history,
+          fen: game.data.fen,
+          started: !game.data.needsPlayer,
+          whiteName: game.data.white,
+          blackName: game.data.black,
+         }, () => {
+        console.log(this.state)
+        this.logic.load(this.state.fen);
+      })
+        // console.log(game)
+     })
+     .catch(e => console.log(e));
+  }
 
   // keep clicked square style and remove hint squares
   removeHighlightSquare = () => {
@@ -156,6 +183,9 @@ class HumanVsHuman extends Component {
 
   onDrop = ({ sourceSquare, targetSquare }) => {
     // see if the move is legal
+    // 
+        //UNDO THIS LOGIC
+    
     let move = this.logic.move({
       from: sourceSquare,
       to: targetSquare,
@@ -217,7 +247,7 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
       else {
-        socket.emit('move', { move: move, board: this.game.fen(), room: this.state.gameId });
+        // socket.emit('move', { move: move, board: this.game.fen(), room: this.state.gameId });
       }
 
     this.setState({
@@ -250,16 +280,10 @@ class HumanVsHuman extends Component {
   }
 } // END HumanVSHuman
 
-const mapStateToProps = (state) => ({
-   game: state.game
-})
-
-export default connect(mapStateToProps, {GET_GAME} )(HumanVsHuman)
-
-export default function ChessGame(username) {
+export default function ChessGame(username,userGameID,userColor,gameFen) {
   return (
     <div>
-      <HumanVsHuman user ={username}>
+      <HumanVsHuman name={username} gameID={userGameID} color={userColor} fen={gameFen}>
         {({
           position,
           onDrop,
