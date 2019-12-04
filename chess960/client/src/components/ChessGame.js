@@ -134,6 +134,13 @@ class HumanVsHuman extends Component {
     }));
   };
 
+  //Changes the turn color:
+  changeTurn = () => {
+    if (this.state.turn === "white") {
+      this.setState({turn: "black"})
+    } else {this.setState({turn: "white"})}
+  }
+
   // show possible moves
   highlightSquare = (sourceSquare, squaresToHighlight) => {
     const highlightStyles = [sourceSquare, ...squaresToHighlight].reduce(
