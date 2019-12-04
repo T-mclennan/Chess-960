@@ -4,7 +4,7 @@ const board = require('../../client/src/components/boardGeneration');
 const router = express.Router();
 
 //Game Model for database:
-const Game = require('../../models/Games');
+const Game = require('../../models/games');
 
 //@route  GET api/games
 //@desc   Get all games
