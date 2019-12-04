@@ -33,22 +33,20 @@ router.post('/findGameForPlayer', (req, res) => {
     console.log(req.body)
     Game.findOne({"needsPlayer" : true})
       .then((game) => {
+        //if a game is open, assign player to it as black and return the game:
           if (game) {
-            //   console.log(game);
-              game.black = req.body.username;
-              game.needsPlayer = false;
-            //   console.log('before update: '+game);
-              Game.updateOne(
-                  {"_id" : game._id}, 
-                  {$set: {"needsPlayer": false, "black": game.black}})
-                .then(updatedGame => {
-                    // console.log('updated game: '+ updatedGame)
-                    // console.log('added '+game.black+ ' to '+game._id)
-                    res.json({gameID: game._id, color: "black", fen: game.fen})
-                })
-                .catch(e => console.log(e))
+            game.black = req.body.username;
+            game.needsPlayer = false;
+            Game.updateOne(
+              {"_id" : game._id}, 
+              {$set: {"needsPlayer": false, "black": game.black}})
+              .then(() => {
+                res.json({gameID: game._id, color: "black", fen: game.fen})
+              })
+              .catch(e => console.log(e))
            } else {
 
+            //Else generate and return a new game:
             const newGame = new Game({
                 fen: board.generateBoard(),
                 white: req.body.username,
@@ -74,7 +72,7 @@ router.post('/updateGame', (req, res) => {
       res.json('update of '+req.body._id+ ' successful')
   })
   .catch(e => console.log(e))
-}
+})
 
 //@route  POST api/games
 //@desc   Create a game

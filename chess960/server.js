@@ -31,15 +31,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-//   TODO: Add database. In the meantime this creates and keeps track of players in the game;
-var players;
-
-// create an array of 100 games and initialize them
-var games = Array(100);
-for (let i = 0; i < 100; i++) {
-   games[i] = {players: 0 , names: ["" , ""], fen:""};
-}
-
 //--------------------------------------------------------
 //                 Socket.io:
 //--------------------------------------------------------
@@ -48,42 +39,12 @@ for (let i = 0; i < 100; i++) {
 var io = require('socket.io').listen(server);
 
 io.on('connection', function (socket) {
-  // console.log(players);
-  // var color;
-  // // var playerId =  Math.floor((Math.random() * 100) + 1)
 
-  // socket.on('joined', function (data) {
-  //     gameId = data.gameId
-  //     username = data.username
-
-  //     // console.log('Username: '+data.username)
-  //     console.log(data.username + ' connected');
-  //     if (games[gameId].players === 0) {
-  //       // const board = new boardGeneration()
-  //       games[gameId].fen = board.generateBoard()
-  //     }
-
-  //     if (games[gameId].players < 2) {
-  //         games[gameId].players++;
-  //         games[gameId].names[games[gameId].players - 1] = username;
-  //     }
-  //     else{
-  //         socket.emit('game full', gameId)
-  //         return;
-  //     }
-      
-  //     console.log(games[gameId]);
-  //     players = games[gameId].players
-  //     console.log('players number is: '+ players)
-      
-  //     if (players % 2 == 0) color = 'black';
-  //     else color = 'white';
-  //     const fen = games[gameId].fen
-
-  //     socket.emit('player', { username, players, color, gameId, fen})
-  //     // players--;
-
-  // });
+  socket.on('joined', (data) => {
+    console.log(data)
+    console.log('player joined game: '+data.gameID)
+    socket.broadcast.emit('newPlayer', data)
+  });
 
   // socket.on('move', function (msg) {
   //     socket.broadcast.emit('move', msg);

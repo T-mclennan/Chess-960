@@ -11,10 +11,10 @@ const socket = io(port);
 
 
 
-//tell socket.io to never give up :)
-// socket.on('error', function(){
-//   socket.socket.reconnect();
-// });
+// tell socket.io to never give up :)s
+socket.on('error', function(){
+  socket.socket.reconnect();
+});
 
 class HumanVsHuman extends Component {
   static propTypes = {
@@ -60,25 +60,20 @@ class HumanVsHuman extends Component {
 
 
   componentDidMount() {
-
-    console.log(this.props)
  
     this.logic = new Chess();
     this.fetchGameDetails()
+    // .then(() => ).catch((e) => console.log(e))
 
+    socket.on('newPlayer', (data) => {
+      if (this.state.gameID === data.gameID) {
+        this.setState({
+          whiteName: data.whiteName,
+          blackName: data.blackName,
+          started: data.started
+        }) 
+      }
 
-
-
-
-    //Request initial board state from server through websocket connection
-    // this.connect()
-    // .then(() => {
-    //   this.logic.load(this.state.fen);
-    // })
-    // .catch(e => console.log(e)) 
-
-    // socket.on('player', (msg) => {
-    //   this.setState({color: msg.color, players: msg.players, playerId: msg.playerId, fen: msg.fen}) 
     //   console.log("Player color: "+ this.state.color+ "  player id: " + this.state.playerId)
   
     //   if( this.state.players === 2){
@@ -88,7 +83,7 @@ class HumanVsHuman extends Component {
     //   }
     //   else
     //       console.log('"Waiting for Second player"')
-    // });
+    });
 
     // socket.on('move', function (msg) {
     //   console.log('move made')
@@ -119,9 +114,14 @@ class HumanVsHuman extends Component {
       this.logic.load(this.state.fen);
   }
 
-  connect = () => {
-      console.log('connect function, username is: '+this.props.user)
-      // socket.emit('joined', {gameId: this.state.gameId, username: this.props.user});
+  joinGame = () => {
+      //TODO: Save game in players profile:
+      socket.emit('joined', 
+         {gameID: this.state.gameID, 
+          whiteName: this.state.whiteName,
+          blackName: this.state.blackName,
+          started: this.state.started
+      });
     }
   // }
 
@@ -131,9 +131,8 @@ class HumanVsHuman extends Component {
        console.log('FETCHED game: '+game.data.fen)
        this.setState(
          {
-          //  username: this.props.name, 
           color: this.props.color, 
-          // gameID: this.props.gameID,
+          gameID: this.props.gameID,
           history: game.data.history,
           fen: game.data.fen,
           started: !game.data.needsPlayer,
@@ -144,7 +143,7 @@ class HumanVsHuman extends Component {
         this.logic.load(this.state.fen);
       })
         // console.log(game)
-     })
+     }).then(() => this.joinGame())
      .catch(e => console.log(e));
   }
 
