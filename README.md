@@ -1,6 +1,6 @@
 # Chess-960
 
-# This application is a modest attempt at builiding a chess application, styled after a varient developed by Bobby Fischer. 
+# This is a random chess, with 960 possible opening board states. 
  
  It was chosen to provide more experience with the MERN stack, socket.io, authentication, and deplyoment on Heroku. 
 
