@@ -6,9 +6,12 @@ const http = require('http');
 const users = require('./routes/api/players');
 const currentGames = require('./routes/api/games');
 
-const app = express();
 
-// start the server
+//--------------------------------------------------------
+//                 Server / Routes:
+//--------------------------------------------------------
+
+const app = express();
 const server = http.createServer(app)
 
 // Bodyparser Middleware
@@ -54,9 +57,9 @@ io.on('connection', function (socket) {
   //   console.log(userId + ' just reconnected');
   // });
 
-  // socket.on('disconnect', function () {
-  //     console.log(username + ' disconnected');
-  // }); 
+  socket.on('disconnect', function () {
+      socket.disconnect()
+  }); 
 });
 
 

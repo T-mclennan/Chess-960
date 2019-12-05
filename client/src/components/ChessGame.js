@@ -4,6 +4,7 @@ import  Chess  from "chess.js";
 import Chessboard from "chessboardjsx";
 import io from 'socket.io-client';
 import Axios from "axios";
+import PlayerDetails from "./PlayerDetails";
 // import {connect} from 'react-redux'
 // import {GET_GAME} from '../actions/gameActions'
 const port = process.env.PORT || "http://127.0.0.1:5000";
@@ -282,7 +283,8 @@ export default function ChessGame(username,userGameID,userColor,gameFen) {
           whiteName,
           blackName,
         }) => (
-
+          <div style={{display: "flex"}}>
+             <PlayerDetails name={whiteName} color={"white"}/>
           <Chessboard
             id="humanVsHuman"
             width={500}
@@ -305,6 +307,8 @@ export default function ChessGame(username,userGameID,userColor,gameFen) {
             onSquareRightClick={onSquareRightClick}
             orientation={orientation}
           />
+          <PlayerDetails name={blackName} color={"black"}/>
+          </div>
         )}
       </HumanVsHuman>
     </div>
