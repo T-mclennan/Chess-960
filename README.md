@@ -1,6 +1,6 @@
 # Chess-960
 
-# This is a random chess, with 960 possible opening board states. 
+# A random twist on the classic game. 
  
  It was chosen to provide more experience with the MERN stack, socket.io, authentication, and deplyoment on Heroku. 
 
