@@ -1,6 +1,6 @@
 # Chess-960
 
-# This application is a modest attempt at builiding a chess application, styled after a varient developed by Bobby Fischer. 
+# A random twist on the classic game. 
  
  It was chosen to provide more experience with the MERN stack, socket.io, authentication, and deplyoment on Heroku. 
 
@@ -20,5 +20,5 @@ and then broadcast to our server with socket.io so it can be relayed to the othe
 snapback is sent to the board. 
 
 I aim to build out the application to include a game lobby, account options, token usage and more. 
-MongoDB will be used for storage so that a player can leave and rejoin a game as they see fit. 
+MongoDB is used for storage so that a player can leave and rejoin a game as they see fit. 
 From the lobby players can start a new game or browse / join a pending game. 
