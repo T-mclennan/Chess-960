@@ -20,5 +20,5 @@ and then broadcast to our server with socket.io so it can be relayed to the othe
 snapback is sent to the board. 
 
 I aim to build out the application to include a game lobby, account options, token usage and more. 
-MongoDB will be used for storage so that a player can leave and rejoin a game as they see fit. 
+MongoDB will is used for storage so that a player can leave and rejoin a game as they see fit. 
 From the lobby players can start a new game or browse / join a pending game. 
