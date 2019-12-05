@@ -12,9 +12,9 @@ const socket = io(port, {pingTimeout: 30000});
 
 
 // tell socket.io to never give up :)s
-socket.on('error', function(){
-  socket.socket.reconnect();
-});
+// socket.on('error', function(){
+//   socket.socket.reconnect();
+// });
 
 class HumanVsHuman extends Component {
   static propTypes = {
@@ -245,7 +245,7 @@ class HumanVsHuman extends Component {
 
   render() {
   
-    const { fen, color, dropSquareStyle, squareStyles, turn} = this.state;
+    const { fen, color, dropSquareStyle, squareStyles, turn, whiteName, blackName} = this.state;
 
     return this.props.children({
       draggable: (turn === color && this.state.started === true),
@@ -279,7 +279,10 @@ export default function ChessGame(username,userGameID,userColor,gameFen) {
           onSquareClick,
           onSquareRightClick,
           orientation,
+          whiteName,
+          blackName,
         }) => (
+
           <Chessboard
             id="humanVsHuman"
             width={500}

@@ -16,6 +16,8 @@ a {
 
 .container {
   padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
 }
 
 .btn {
@@ -58,4 +60,5 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 } 
