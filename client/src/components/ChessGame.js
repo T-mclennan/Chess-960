@@ -109,6 +109,7 @@ class HumanVsHuman extends Component {
           blackName: game.data.black,
          }, () => {
         this.logic.load(this.state.fen);
+        console.log(this.state)
       })
         // console.log(game)
      }).then(() => this.joinGame())
@@ -212,7 +213,7 @@ class HumanVsHuman extends Component {
       pieceSquare: square
     }));
 
-    let move = this.game.move({
+    let move = this.logic.move({
       from: this.state.pieceSquare,
       to: square,
       promotion: "q" // always promote to a queen for example simplicity
@@ -226,7 +227,7 @@ class HumanVsHuman extends Component {
 
     this.setState({
       fen: this.logic.fen(),
-      history: this.game.history({ verbose: true }),
+      history: this.logic.history({ verbose: true }),
       pieceSquare: ""
     });
     this.changeTurn();

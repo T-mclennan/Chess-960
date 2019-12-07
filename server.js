@@ -67,7 +67,8 @@ const db = require('./config/keys.js').mongoURI;
 mongoose
   .connect(db, { 
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useUnifiedTopology: true
   }) // Adding new mongo url parser
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
@@ -76,6 +77,6 @@ mongoose
 // OAUTH:
 //  http://localhost:5000/auth/google/callback
 //
-passport.use(new GoogleStrategy());
+// passport.use(new GoogleStrategy());
 
 server.listen(port, () => console.log(`Server started on port ${port}`));
