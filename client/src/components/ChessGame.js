@@ -10,13 +10,6 @@ import PlayerDetails from "./PlayerDetails";
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port, {pingTimeout: 30000});
 
-
-
-// tell socket.io to never give up :)s
-// socket.on('error', function(){
-//   socket.socket.reconnect();
-// });
-
 class HumanVsHuman extends Component {
   static propTypes = {
     children: PropTypes.func,

@@ -5,6 +5,8 @@ const path = require('path');
 const http = require('http');
 const users = require('./routes/api/players');
 const currentGames = require('./routes/api/games');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 //--------------------------------------------------------
@@ -39,11 +41,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // initialize a new instance of socket.io by passing the HTTP server object
 var io = require('socket.io').listen(server, {pingTimeout: 30000});
-
 io.on('connection', function (socket) {
 
   socket.on('joined', (data) => {
-    console.log(data)
     console.log('player joined game: '+data.gameID)
     socket.broadcast.emit('newPlayer', data)
   });
@@ -52,10 +52,6 @@ io.on('connection', function (socket) {
       socket.broadcast.emit('moveMade', data);
       console.log('move made');
   });
-
-  // socket.on('user-reconnected', function (userId) {
-  //   console.log(userId + ' just reconnected');
-  // });
 
   socket.on('disconnect', function () {
       socket.disconnect()
@@ -66,10 +62,8 @@ io.on('connection', function (socket) {
 //--------------------------------------------------------
 //                 MognoDB Config:
 //--------------------------------------------------------
-//DB Config: 
-const db = require('./config/keys.js').mongoURI;
 
-// // Connect to Mongo
+const db = require('./config/keys.js').mongoURI;
 mongoose
   .connect(db, { 
     useNewUrlParser: true,
@@ -78,5 +72,10 @@ mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+
+// OAUTH:
+//  http://localhost:5000/auth/google/callback
+//
+passport.use(new GoogleStrategy());
 
 server.listen(port, () => console.log(`Server started on port ${port}`));
