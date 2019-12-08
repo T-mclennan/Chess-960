@@ -15,15 +15,19 @@ export class PlayerDetails extends Component {
     }
   }
 
+
   render() {
+    
+    console.log(this.props.name);
+    
     return (
-      <div>
+      <div >
         {
          this.props.color === "white" ? 
           <img src={whitePawn}/> :
           <img src={blackPawn}/> 
         }
-        {this.props.name}
+        <header style={{color: "white"}}>{this.props.name}</header>
       </div>
     )
   }

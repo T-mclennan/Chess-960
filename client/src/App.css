@@ -18,6 +18,36 @@ a {
   padding: 0 1rem;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+.playerDetails {
+  margin: 2rem;
+  width: 40rem;
+  text-align: center;
+  border: 1px;
+  border-color: whitesmoke
+}
+
+.playerContent {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8rem
+}
+
+.leftItem {
+
+  order: 1; /* default is 0 */
+}
+
+.midItem {
+
+  order: 2; /* default is 0 */
+}
+
+.rightItem {
+
+  order: 3; /* default is 0 */
 }
 
 .btn {

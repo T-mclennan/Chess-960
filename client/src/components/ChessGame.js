@@ -258,6 +258,8 @@ class HumanVsHuman extends Component {
   }
 } // END HumanVSHuman
 
+// export default connect()
+
 export default function ChessGame(username,userGameID,userColor,gameFen) {
   return (
     <div>

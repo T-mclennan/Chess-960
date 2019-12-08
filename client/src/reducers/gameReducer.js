@@ -1,15 +1,22 @@
 import {GET_GAME,
         UPDATE_GAME,
         ADD_MOVE,
-        START_GAME} from '../actions/gameTypes'
+        START_GAME,
+        CHANGE_TURN,
+        JOIN_GAME,
+        INITIALIZE_GAME} from '../actions/gameTypes'
 
 const initialState = {
-  white: '',
-  black: '',
-  fen: '',
-  needsPlayer: 'true',
-  history: [],
-  turn: 'white'
+  game:{
+    white: '',
+    black: '',
+    fen: '',
+    started: '',
+    history: [],
+    turn: 'white',
+    gameID: '',
+  },
+  color: ''
 }
 
 
@@ -19,7 +26,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: action.payload,
-        loading: false
+      };
+
+    case JOIN_GAME:
+      return {
+        ...state,
+        items: [action.payload, ...state.items]
       };
 
     case UPDATE_GAME:
@@ -31,13 +43,21 @@ export default function(state = initialState, action) {
     case START_GAME:
       return {
         ...state,
-        loading: true
       };
 
     case ADD_MOVE:
       return {
         ...state,
-        loading: true
+      };
+    
+    case CHANGE_TURN:
+      return {
+        ...state,
+      };
+
+    case INITIALIZE_GAME:
+      return {
+        ...state,
       };
 
     default:

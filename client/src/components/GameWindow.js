@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import ChessGame from './ChessGame';
 import NameInputForm from './NameInputForm'
+import {connect} from 'react-redux';
+import {updatePlayer} from '../actions/playerActions'
+import {updateGame} from '../actions/gameActions'
 import axios from 'axios'
 
 
@@ -55,4 +58,10 @@ const containerStyle = {
   margin: '1.1rem',
 }
 
-export default GameWindow;
+const mapStateToProps = (state) => ({
+   name: state.username,
+   color: state.color
+
+})
+
+export default connect(mapStateToProps, {updatePlayer, updateGame})(GameWindow);

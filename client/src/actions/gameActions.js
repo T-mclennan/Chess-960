@@ -10,3 +10,9 @@ export const getGames = () => {
     type: GET_GAME
   };
 }
+
+export const updateGame = () => {
+  return {
+    type: UPDATE_GAME
+  };
+}
