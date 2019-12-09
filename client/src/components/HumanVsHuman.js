@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import  Chess  from "chess.js"; 
-import Chessboard from "chessboardjsx";
 import io from 'socket.io-client';
 import Axios from "axios";
-import PlayerDetails from "./PlayerDetails";
 import {connect} from 'react-redux'
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
@@ -14,7 +12,6 @@ class HumanVsHuman extends Component {
     static propTypes = {
       children: PropTypes.func,
       getGame: PropTypes.func,
-      game: PropTypes.object
   
     };
   
@@ -74,12 +71,6 @@ class HumanVsHuman extends Component {
             console.log(this.state)
         }
       });
-  
-        // socket.on('reconnect', function (sock) {
-        //   console.log('you have been reconnected');
-        //   // where username is a global variable for the client
-        //   sock.emit('user-reconnected', this.props.username);
-        // });
         
         this.logic.load(this.state.fen);
     }
@@ -87,9 +78,9 @@ class HumanVsHuman extends Component {
     joinGame = () => {
         //TODO: Save game in players profile:
         socket.emit('joined', 
-           {gameID: this.state.gameID, 
-            whiteName: this.state.whiteName,
-            blackName: this.state.blackName,
+           {gameID: this.props.gameID, 
+            whiteName: this.props.white,
+            blackName: this.props.black,
             started: this.state.started
         });
       }
@@ -280,7 +271,28 @@ class HumanVsHuman extends Component {
   } // END HumanVSHuman
 
   const mapStateToProps = state => ({
-    // item: state.item
+
+        //game props:
+        // fen: state.gameReducer.fen,
+        // whiteName: state.gameReducer.white,
+        // blackName: state.gameReducer.black,
+        // started: state.gameReducer.started,
+        // turn: state.gameReducer.turn,
+        // history: state.gameReducer.history,
+        // gameID: state.gameReducer.gameID,
+
+        //player props:
+        // color: state.gameReducer.color,
+        // username: state.playerReducer.playerName,
+        // rating: state.playerReducer.rating,
+        // playerID: state.playerReducer.playerID
+
+        player: state.player,
+        game: state.game
+
+        // name, gameID, color, fen
+
+
   });
 
   export default connect(mapStateToProps, {})(HumanVsHuman);
