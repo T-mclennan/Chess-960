@@ -18,12 +18,9 @@ export const updateGame = () => {
   };
 }
 
-export const initializeGame = ({color, ID}) => {
+export const initializeGame = (game) => {
   return {
     type: INITIALIZE_GAME,
-    payload: {
-      color: color,
-      ID: ID,
-    }
+    payload: game
   };
 }

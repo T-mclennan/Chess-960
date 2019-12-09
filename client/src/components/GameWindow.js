@@ -32,17 +32,23 @@ class GameWindow extends Component {
       // console.log(player)
       axios.post('/api/games/findGameForPlayer', {username: name})
       .then((response) => {
-        this.setState(
-          {playerName: name, 
-           gameID: response.data.gameID, 
-           color: response.data.color, 
-           fen: response.data.fen
-          })
+        // this.setState(
+        //   {playerName: name, 
+        //    gameID: response.data.gameID, 
+        //    color: response.data.color, 
+        //    fen: response.data.fen
+        //   })
         console.log(response)
-        const payload = {color: response.data.color, ID: response.data.gameID}
+        console.log(response.data.gameID)
+        const payload = {color: response.data.color, ID: response.data.gameID, fen: response.data.fen}
         console.log('fen: '+response.data.fen)
         this.props.initializeGame(payload);
-        this.props.updatePlayer({username: name, ID: player._id, games: player.currentGames, rating: player.rating})
+        const userload = 
+           {username: name, 
+            ID: player.data._id, 
+            games: player.data.currentGames, 
+            rating: player.data.rating};
+        this.props.updatePlayer(userload)
       })
     })
     .catch(e => console.log(e));

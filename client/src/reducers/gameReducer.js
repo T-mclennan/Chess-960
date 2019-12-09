@@ -13,8 +13,9 @@ const initialState = {
     started: '',
     history: [],
     turn: 'white',
-    gameID: '',
-    color: ''
+    color: '',
+    gameID: '5',
+
 }
 
 
@@ -57,8 +58,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         color: action.payload.color,
-        gameID: action.payload.gameID,
-        
+        gameID: action.payload.ID,
+        fen: action.payload.fen,
       };
 
     default:
