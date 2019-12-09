@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 //@route  GET api/player/checkUsername
 //@desc   If the user exists, return it from database, otherwise create and return it.
 //@access public
-router.get('/checkUsername', (req, res) => {
+router.post('/checkUsername', (req, res) => {
   Player.findOne({'username': req.body.username})
     .then(player => {
       if (player)

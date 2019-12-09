@@ -46,7 +46,6 @@ class NameInputForm extends Component {
                     />
                     <Button
                       outline color="info"
-                      // color=""
                       style={buttonStyle}
                       block
                     ><h5 style={{marginTop: '0.3rem', fontWeight: 'bold' }}>Play Chess!</h5></Button>

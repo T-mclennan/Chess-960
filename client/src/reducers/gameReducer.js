@@ -7,7 +7,6 @@ import {GET_GAME,
         INITIALIZE_GAME} from '../actions/gameTypes'
 
 const initialState = {
-  game:{
     white: '',
     black: '',
     fen: '',
@@ -15,8 +14,7 @@ const initialState = {
     history: [],
     turn: 'white',
     gameID: '',
-  },
-  color: ''
+    color: ''
 }
 
 
@@ -58,6 +56,9 @@ export default function(state = initialState, action) {
     case INITIALIZE_GAME:
       return {
         ...state,
+        color: action.payload.color,
+        gameID: action.payload.gameID,
+        
       };
 
     default:

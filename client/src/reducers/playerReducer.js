@@ -2,7 +2,9 @@ import {UPDATE_PLAYER, SET_USERNAME} from '../actions/playerTypes'
 
 const initialState = {
   playerName: '',
-  playerID: ''
+  playerID: '',
+  rating: '',
+  currentGames: []
 }
 
 export default function(state = initialState, action) {
@@ -12,6 +14,8 @@ export default function(state = initialState, action) {
         ...state,
         playerName: action.payload.username,
         playerID: action.payload.ID,
+        rating: action.payload.rating,
+        currentGames: action.payload.games
       };
 
     case SET_USERNAME:
