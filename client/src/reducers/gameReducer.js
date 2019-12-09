@@ -10,7 +10,7 @@ const initialState = {
     white: '',
     black: '',
     fen: '',
-    started: '',
+    started: false,
     history: [],
     turn: 'white',
     color: '',

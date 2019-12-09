@@ -279,4 +279,8 @@ class HumanVsHuman extends Component {
     }
   } // END HumanVSHuman
 
-  export default connect(mapStateToProps, {updatePlayer, initializeGame})(HumanVsHuman);
+  const mapStateToProps = state => ({
+    // item: state.item
+  });
+
+  export default connect(mapStateToProps, {})(HumanVsHuman);
