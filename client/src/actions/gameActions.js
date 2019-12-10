@@ -3,7 +3,8 @@ import {CREATE_GAME,
         UPDATE_GAME,
         START_GAME,
         GET_GAME,
-        FIND_GAME,
+        LOAD_GAME,
+        JOIN_GAME,
         INITIALIZE_GAME} from './gameTypes'
 
 export const getGame = () => {
@@ -21,6 +22,13 @@ export const updateGame = () => {
 export const initializeGame = (game) => {
   return {
     type: INITIALIZE_GAME,
+    payload: game
+  };
+}
+
+export const loadGame = (game) => {
+  return {
+    type: LOAD_GAME,
     payload: game
   };
 }
