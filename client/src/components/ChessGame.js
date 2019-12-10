@@ -9,7 +9,7 @@ export default function ChessGame(username,userGameID,userColor,gameFen) {
   return (
     <div>
       <HumanVsHuman 
-      name={username} gameID={userGameID} color={userColor} fen={gameFen}
+      // name={username} gameID={userGameID} color={userColor} fen={gameFen}
       >
         {({
           draggable,

@@ -159,7 +159,7 @@ class HumanVsHuman extends Component {
       // illegal move
       if (move === null) return;
       console.log(this.logic.fen())
-      socket.emit('move', {newMove: move, gameID: this.state.gameID });
+      socket.emit('move', {newMove: move, gameID: this.props.gameID });
       this.setState(({ history, pieceSquare }) => ({
         fen: this.logic.fen(),
         history: this.logic.history({ verbose: true }),
