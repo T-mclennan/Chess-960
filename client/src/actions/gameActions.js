@@ -5,7 +5,10 @@ import {CREATE_GAME,
         GET_GAME,
         LOAD_GAME,
         JOIN_GAME,
-        INITIALIZE_GAME} from './gameTypes'
+        MAKE_MOVE,
+        INITIALIZE_GAME,
+        UPDATE_PLAYERS,
+        CHANGE_TURN} from './gameTypes'
 
 export const getGame = () => {
   return {
@@ -30,5 +33,25 @@ export const loadGame = (game) => {
   return {
     type: LOAD_GAME,
     payload: game
+  };
+}
+
+export const updatePlayers = (game) => {
+  return {
+    type: UPDATE_PLAYERS,
+    payload: game
+  };
+}
+
+export const makeMove = (game) => {
+  return {
+    type: MAKE_MOVE,
+    payload: game
+  };
+}
+
+export const changeTurn = () => {
+  return {
+    type: CHANGE_TURN,
   };
 }

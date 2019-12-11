@@ -50,6 +50,8 @@ export default function(state = initialState, action) {
     case MAKE_MOVE:
       return {
         ...state,
+        fen: action.payload.fen,
+        history:action.payload.history
       };
     
     case CHANGE_TURN:
@@ -71,6 +73,14 @@ export default function(state = initialState, action) {
         color: action.payload.color,
         gameID: action.payload.ID,
         fen: action.payload.fen,
+      };
+
+    case UPDATE_PLAYERS:
+      return {
+        ...state,
+        white: action.payload.white,
+        black: action.payload.black,
+        started: action.payload.started,
       };
 
     default:

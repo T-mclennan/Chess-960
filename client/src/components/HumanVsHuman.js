@@ -4,6 +4,7 @@ import  Chess  from "chess.js";
 import io from 'socket.io-client';
 import Axios from "axios";
 import {connect} from 'react-redux'
+import {loadGame, updatePlayers, makeMove, changeTurn} from '../actions/gameActions'
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port, {pingTimeout: 30000});
@@ -270,9 +271,9 @@ class HumanVsHuman extends Component {
     }
   } // END HumanVSHuman
 
-  const mapStateToProps = state => ({
+//   const mapStateToProps = state => ({
 
-        //game props:
+        // //game props:
         // fen: state.gameReducer.fen,
         // whiteName: state.gameReducer.white,
         // blackName: state.gameReducer.black,
@@ -281,18 +282,35 @@ class HumanVsHuman extends Component {
         // history: state.gameReducer.history,
         // gameID: state.gameReducer.gameID,
 
-        //player props:
+        // //player props:
         // color: state.gameReducer.color,
         // username: state.playerReducer.playerName,
         // rating: state.playerReducer.rating,
         // playerID: state.playerReducer.playerID
 
-        player: state.player,
-        game: state.game
+        // player: state.player,
+        // game: state.game
 
-        // name, gameID, color, fen
+        // //name, gameID, color, fen
 
+//   });
 
-  });
+//   ShoppingList.propTypes = {
+//     getItems: PropTypes.func.isRequired,
+//     black: PropTypes.string.isRequired
+//   }
+  
+  const mapStateToProps = (state) => ({
+    black: state.black,
+    white: state.white,
+    started: state.started,
+    name: state.username,
+    color: state.color,
+    gameID: state.gameID,
+    fen: state.fen,
+    history: state.history,
 
-  export default connect(mapStateToProps, {})(HumanVsHuman);
+ 
+  })
+
+  export default connect(mapStateToProps, { loadGame, updatePlayers, makeMove, changeTurn })(HumanVsHuman);
