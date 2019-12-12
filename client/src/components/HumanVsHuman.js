@@ -22,13 +22,13 @@ class HumanVsHuman extends Component {
     this.state = {
       
       //Game Objects contain information of the current state and players:
-      fen: this.props.fen,
+      fen: '',
       whiteName: '',
       blackName: '',
       started: false,
       turn: "white",
       history: [],
-      gameID: this.props.gameID,
+      gameID: '',
       
       //Player attributes:
       color: this.props.color,
@@ -51,6 +51,7 @@ class HumanVsHuman extends Component {
     componentDidMount() {
    
       this.logic = new Chess();
+      console.log(this.props.gameID)
       this.fetchGameDetails()
   
       socket.on('newPlayer', (data) => {
@@ -88,7 +89,10 @@ class HumanVsHuman extends Component {
     // }
   
     fetchGameDetails = () => {
+        console.log('game ID: ')
+        console.log(this.props.gameID)
       Axios.get(`/api/games/${this.props.gameID}`)
+      
        .then((game) => {
          this.setState(
            {
@@ -214,7 +218,7 @@ class HumanVsHuman extends Component {
       // illegal move
       if (move === null) return;
         else {
-          socket.emit('move', { move: move, fen: this.logic.fen(), gameID: this.state.gameID });
+          socket.emit('move', { move: move, fen: this.logic.fen(), gameID: this.props.gameID });
         }
   
       this.setState({
@@ -301,16 +305,14 @@ class HumanVsHuman extends Component {
 //   }
   
   const mapStateToProps = (state) => ({
-    black: state.black,
-    white: state.white,
-    started: state.started,
-    name: state.username,
-    color: state.color,
-    gameID: state.gameID,
-    fen: state.fen,
-    history: state.history,
-
- 
+    black: state.game.black,
+    white: state.game.white,
+    started: state.game.started,
+    name: state.player.playerName,
+    color: state.game.color,
+    gameID: state.game.gameID,
+    fen: state.game.fen,
+    history: state.game.history,
   })
 
   export default connect(mapStateToProps, { loadGame, updatePlayers, makeMove, changeTurn })(HumanVsHuman);

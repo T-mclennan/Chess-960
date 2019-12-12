@@ -32,16 +32,10 @@ class GameWindow extends Component {
       // console.log(player)
       axios.post('/api/games/findGameForPlayer', {username: name})
       .then((response) => {
-        this.setState(
-          {playerName: name, 
-           gameID: response.data.gameID, 
-           color: response.data.color, 
-           fen: response.data.fen
-          })
-        console.log(response)
-        console.log(response.data.gameID)
+        // console.log(response)
+        // console.log(response.data.gameID)
         const payload = {color: response.data.color, ID: response.data.gameID, fen: response.data.fen}
-        console.log('fen: '+response.data.fen)
+        // console.log('fen: '+response.data.fen)
         this.props.initializeGame(payload);
         const userload = 
            {username: name, 
@@ -49,6 +43,13 @@ class GameWindow extends Component {
             games: player.data.currentGames, 
             rating: player.data.rating};
         this.props.updatePlayer(userload)
+
+        this.setState(
+          {playerName: name, 
+          //  gameID: response.data.gameID, 
+          //  color: response.data.color, 
+          //  fen: response.data.fen
+          })
       })
     })
     .catch(e => console.log(e));
@@ -74,8 +75,8 @@ const containerStyle = {
 }
 
 const mapStateToProps = (state) => ({
-   name: state.username,
-   color: state.color
+   name: state.player.playerName,
+   color: state.game.color
 
 })
 
