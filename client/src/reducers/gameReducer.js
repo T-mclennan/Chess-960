@@ -26,20 +26,25 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case GET_GAME:
       return {
-        ...state,
-        items: action.payload,
+        ...state
       };
 
     case JOIN_GAME:
       return {
-        ...state,
-        items: [action.payload, ...state.items]
+        //TODO
       };
 
     case UPDATE_GAME:
       return {
         ...state,
-        items: [action.payload, ...state.items]
+        white: action.payload.white,
+        black: action.payload.black,
+        fen: action.payload.fen,
+        started: action.payload.started,
+        history: action.payload.history,
+        turn: action.payload.turn,
+        color: action.payload.color,
+        gameID: action.payload.gameID,
       };
 
     case START_GAME:
@@ -57,6 +62,7 @@ export default function(state = initialState, action) {
     case CHANGE_TURN:
       return {
         ...state,
+        
       };
 
     case INITIALIZE_GAME:
@@ -70,9 +76,14 @@ export default function(state = initialState, action) {
     case LOAD_GAME:
       return {
         ...state,
-        color: action.payload.color,
-        gameID: action.payload.ID,
+        white: action.payload.white,
+        black: action.payload.black,
         fen: action.payload.fen,
+        started: action.payload.started,
+        history: action.payload.history,
+        turn: action.payload.turn,
+        color: action.payload.color,
+        gameID: action.payload.gameID,
       };
 
     case UPDATE_PLAYERS:

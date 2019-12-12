@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {CREATE_GAME,
         DELETE_GAME,
         UPDATE_GAME,
@@ -29,12 +30,19 @@ export const initializeGame = (game) => {
   };
 }
 
-export const loadGame = (game) => {
-  return {
-    type: LOAD_GAME,
-    payload: game
-  };
+export const loadGame = (ID) => dispatch => {
+  axios.get(`/api/games/${ID}`)
+  .then((res) => {
+    dispatch({
+      type: LOAD_GAME,
+      payload: res.data
+    })
+  console.log(res.data)
+  })
+  .catch(e => console.log(e));
 }
+
+
 
 export const updatePlayers = (game) => {
   return {

@@ -88,30 +88,30 @@ class HumanVsHuman extends Component {
       }
     // }
   
-    fetchGameDetails = () => {
-        console.log('game ID: ')
-        console.log(this.props.gameID)
-      Axios.get(`/api/games/${this.props.gameID}`)
+    // fetchGameDetails = () => {
+    //     console.log('game ID: ')
+    //     console.log(this.props.gameID)
+    //   Axios.get(`/api/games/${this.props.gameID}`)
       
-       .then((game) => {
-         this.setState(
-           {
-            color: this.props.color, 
-            gameID: this.props.gameID,
-            history: game.data.history,
-            fen: game.data.fen,
-            started: !game.data.needsPlayer,
-            whiteName: game.data.white,
-            blackName: game.data.black,
-           }, () => {
-          this.logic.load(this.state.fen);
-          console.log(this.state)
-        })
-          // console.log(game)
-       }).then(() => this.joinGame())
-         .then(()=> console.log(this.state))
-       .catch(e => console.log(e));
-    }
+    //    .then((game) => {
+    //      this.setState(
+    //        {
+    //         color: this.props.color, 
+    //         gameID: this.props.gameID,
+    //         history: game.data.history,
+    //         fen: game.data.fen,
+    //         started: !game.data.needsPlayer,
+    //         whiteName: game.data.white,
+    //         blackName: game.data.black,
+    //        }, () => {
+    //       this.logic.load(this.state.fen);
+    //       console.log(this.state)
+    //     })
+    //       // console.log(game)
+    //    }).then(() => this.joinGame())
+    //      .then(()=> console.log(this.state))
+    //    .catch(e => console.log(e));
+    // }
   
     // keep clicked square style and remove hint squares
     removeHighlightSquare = () => {

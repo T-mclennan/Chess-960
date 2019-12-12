@@ -5,7 +5,9 @@ import HumanVsHuman from "./HumanVsHuman";
 import {connect} from 'react-redux';
 
 
-export default function ChessGame(username,userGameID,userColor,gameFen) {
+export default function ChessGame(
+  // username,userGameID,userColor,gameFen       
+  ) {
   return (
     <div>
       <HumanVsHuman 
