@@ -33,7 +33,7 @@ router.post('/findGameForPlayer', (req, res) => {
     console.log(req.body)
     Game.findOne({"started" : false})
       .then((game) => {
-        //if a game is open, assign player to it as black and return the game:
+        //if a game is open, assign the player to as black and return the game:
           if (game) {
             game.black = req.body.username;
             game.started = true;
@@ -45,14 +45,12 @@ router.post('/findGameForPlayer', (req, res) => {
               })
               .catch(e => console.log(e))
            } else {
-
-            //Else generate and return a new game:
+            //Else generate and return a new game with player as white:
             const newGame = new Game({
                 fen: board.generateBoard(),
                 white: req.body.username,
                 started: false,
             });
-            console.log('made new game: '+newGame);
             newGame.save().then(game => res.json({gameID: game._id, color:"white", fen: game.fen}));
           }
       })

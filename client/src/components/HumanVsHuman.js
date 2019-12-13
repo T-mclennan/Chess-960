@@ -246,10 +246,11 @@ class HumanVsHuman extends Component {
 
     render() {
     
-      const { fen, color, dropSquareStyle, squareStyles, turn, whiteName, blackName} = this.state;
-  
+      const { dropSquareStyle, squareStyles} = this.state;
+      const { fen, color, turn, whiteName, blackName} = this.props;
+
       return this.props.children({
-        draggable: (turn === color && this.state.started === true),
+        draggable: (turn === color && this.props.started === true),
         orientation: color,
         squareStyles,
         position: fen,
@@ -263,30 +264,6 @@ class HumanVsHuman extends Component {
       });
     }
   } // END HumanVSHuman
-
-//   const mapStateToProps = state => ({
-
-        // //game props:
-        // fen: state.gameReducer.fen,
-        // whiteName: state.gameReducer.white,
-        // blackName: state.gameReducer.black,
-        // started: state.gameReducer.started,
-        // turn: state.gameReducer.turn,
-        // history: state.gameReducer.history,
-        // gameID: state.gameReducer.gameID,
-
-        // //player props:
-        // color: state.gameReducer.color,
-        // username: state.playerReducer.playerName,
-        // rating: state.playerReducer.rating,
-        // playerID: state.playerReducer.playerID
-
-        // player: state.player,
-        // game: state.game
-
-        // //name, gameID, color, fen
-
-//   });
 
 //   ShoppingList.propTypes = {
 //     getItems: PropTypes.func.isRequired,
