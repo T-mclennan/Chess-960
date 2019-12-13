@@ -19,32 +19,19 @@ class HumanVsHuman extends Component {
     constructor(props) {
       super(props)  
   
-    this.state = {
-      
-      //Game Objects contain information of the current state and players:
-      // fen: '',
-      // whiteName: '',
-      // blackName: '',
-      // started: false,
-      // turn: "white",
-      history: [],
-      // gameID: '',
-      
-      // //Player attributes:
-      // color: this.props.color,
-      // username: this.props.name,
-  
-      // square styles for active drop square:
-      dropSquareStyle: {},
-      // custom square styles:
-      squareStyles: {},
-      // square with the currently clicked piece:
-      pieceSquare: "",
-      // currently clicked square:
-      square: "",
-  
-    };
-  }
+      this.state = {
+
+        history: [],
+        // square styles for active drop square:
+        dropSquareStyle: {},
+        // custom square styles:
+        squareStyles: {},
+        // square with the currently clicked piece:
+        pieceSquare: "",
+        // currently clicked square:
+        square: "",
+      };
+    }
   
   
   
@@ -68,13 +55,14 @@ class HumanVsHuman extends Component {
         if (data.gameID === this.props.gameID) {
             console.log('move made by opponent')
             this.logic.move(data.newMove);
-            this.props.makeMove({fen: this.logic.fen(), history: this.state.history})
-            this.changeTurn()
+            this.props.makeMove({
+              fen: this.logic.fen(),
+              history: this.logic.history({ verbose: true }),
+            })
+            this.props.changeTurn()
             console.log(this.state)
         }
       });
-        
-        // this.logic.load(this.props.fen);
     }
   
  //TODO: Save game in players profile:
@@ -85,17 +73,14 @@ class HumanVsHuman extends Component {
             blackName: this.props.black,
             started: this.props.started
         });
+        // this.props.addGameToProfile(this.props.gameID)
       }
   
     // loadGame : fetches the specified game, updates values in the redux store, 
     //            sets the game logic to reflect the board state. 
     loadGame = () => {
-      console.log('game ID is:')
-      console.log(this.props.gameID)
       Axios.get(`/api/games/${this.props.gameID}`)
        .then((res) => {
-         console.log('game:')
-         console.log(res.data)
          this.props.updateGame(res.data)})
        .then(() => this.logic.load(this.props.fen))
        .then(() => this.joinGame())
@@ -108,13 +93,6 @@ class HumanVsHuman extends Component {
         squareStyles: this.squareStyling({ pieceSquare, history })
       }));
     };
-  
-    //Changes the turn color:
-    changeTurn = () => {
-      if (this.state.turn === "white") {
-        this.setState({turn: "black"})
-      } else {this.setState({turn: "white"})}
-    }
   
     // show possible moves
     highlightSquare = (sourceSquare, squaresToHighlight) => {
@@ -155,11 +133,13 @@ class HumanVsHuman extends Component {
       console.log(this.logic.fen())
       socket.emit('move', {newMove: move, gameID: this.props.gameID });
       this.setState(({ history, pieceSquare }) => ({
-        fen: this.logic.fen(),
-        history: this.logic.history({ verbose: true }),
         squareStyles: this.squareStyling({ pieceSquare, history })
       }));
-      this.changeTurn();
+      this.props.makeMove({
+        fen: this.logic.fen(),
+        history: this.logic.history({ verbose: true }),
+      })
+      this.props.changeTurn();
     };
   
     onMouseOverSquare = square => {
@@ -211,11 +191,15 @@ class HumanVsHuman extends Component {
         }
   
       this.setState({
-        fen: this.logic.fen(),
-        history: this.logic.history({ verbose: true }),
+        // fen: this.logic.fen(),
+        // history: this.logic.history({ verbose: true }),
         pieceSquare: ""
       });
-      this.changeTurn();
+      this.props.makeMove({
+        fen: this.logic.fen(),
+        history: this.logic.history({ verbose: true }),
+      })
+      this.props.changeTurn();
     };
   
     onSquareRightClick = square =>
@@ -247,10 +231,10 @@ class HumanVsHuman extends Component {
     render() {
     
       const { dropSquareStyle, squareStyles} = this.state;
-      const { fen, color, turn, whiteName, blackName} = this.props;
+      const { fen, color, turn, started, whiteName, blackName} = this.props;
 
       return this.props.children({
-        draggable: (turn === color && this.props.started === true),
+        draggable: (turn === color && started === true),
         orientation: color,
         squareStyles,
         position: fen,
@@ -263,15 +247,15 @@ class HumanVsHuman extends Component {
         onSquareRightClick: this.onSquareRightClick
       });
     }
-  } // END HumanVSHuman
+  } 
 
-//   ShoppingList.propTypes = {
+//   HumanVSHuman.propTypes = {
 //     getItems: PropTypes.func.isRequired,
 //     black: PropTypes.string.isRequired
 //   }
   
   const mapStateToProps = (state) => (
-        // const {black, white,} = state.game;
+    // const {black, white} = state.game;
   {
     black: state.game.black,
     white: state.game.white,
@@ -281,6 +265,7 @@ class HumanVsHuman extends Component {
     gameID: state.game.gameID,
     fen: state.game.fen,
     history: state.game.history,
+    turn: state.game.turn,
   })
 
   export default connect(mapStateToProps, { updateGame, updatePlayers, makeMove, changeTurn })(HumanVsHuman);

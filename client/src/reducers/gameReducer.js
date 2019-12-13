@@ -59,9 +59,12 @@ export default function(state = initialState, action) {
       };
     
     case CHANGE_TURN:
+      let current = state.turn
+      if (current === 'white') { current = 'black'}
+      else {current = 'white'}
       return {
         ...state,
-        
+        turn: current
       };
 
     case INITIALIZE_GAME:
