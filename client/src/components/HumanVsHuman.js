@@ -65,7 +65,7 @@ class HumanVsHuman extends Component {
       });
     }
   
- //TODO: Save game in players profile:
+   //TODO: Save game in players profile:
     joinGame = () => {
         socket.emit('joined', 
            {gameID: this.props.gameID, 
@@ -249,10 +249,21 @@ class HumanVsHuman extends Component {
     }
   } 
 
-//   HumanVSHuman.propTypes = {
-//     getItems: PropTypes.func.isRequired,
-//     black: PropTypes.string.isRequired
-//   }
+  //Setting Prop Types for the Game component:
+  HumanVsHuman.propTypes = {
+    updateGame: PropTypes.func.isRequired,
+    updatePlayers: PropTypes.func.isRequired,
+    makeMove: PropTypes.func.isRequired,
+    changeTurn: PropTypes.func.isRequired,
+    black: PropTypes.string.isRequired,
+    white: PropTypes.string.isRequired,
+    started: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    fen: PropTypes.string.isRequired,
+    turn: PropTypes.string.isRequired,
+    gameID: PropTypes.string.isRequired,
+    history: PropTypes.array.isRequired,
+  }
   
   const mapStateToProps = (state) => (
     // const {black, white} = state.game;
