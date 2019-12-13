@@ -4,7 +4,7 @@ import  Chess  from "chess.js";
 import io from 'socket.io-client';
 import Axios from "axios";
 import {connect} from 'react-redux'
-import {loadGame, updatePlayers, makeMove, changeTurn} from '../actions/gameActions'
+import {updateGame, updatePlayers, makeMove, changeTurn} from '../actions/gameActions'
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port, {pingTimeout: 30000});
@@ -52,7 +52,7 @@ class HumanVsHuman extends Component {
    
       this.logic = new Chess();
       console.log(this.props.gameID)
-      this.fetchGameDetails()
+      this.loadGame()
   
       socket.on('newPlayer', (data) => {
         if (this.state.gameID === data.gameID) {
@@ -77,41 +77,30 @@ class HumanVsHuman extends Component {
         this.logic.load(this.state.fen);
     }
   
+ //TODO: Save game in players profile:
     joinGame = () => {
-        //TODO: Save game in players profile:
         socket.emit('joined', 
            {gameID: this.props.gameID, 
             whiteName: this.props.white,
             blackName: this.props.black,
-            started: this.state.started
+            started: this.props.started
         });
       }
-    // }
   
-    // fetchGameDetails = () => {
-    //     console.log('game ID: ')
-    //     console.log(this.props.gameID)
-    //   Axios.get(`/api/games/${this.props.gameID}`)
-      
-    //    .then((game) => {
-    //      this.setState(
-    //        {
-    //         color: this.props.color, 
-    //         gameID: this.props.gameID,
-    //         history: game.data.history,
-    //         fen: game.data.fen,
-    //         started: !game.data.needsPlayer,
-    //         whiteName: game.data.white,
-    //         blackName: game.data.black,
-    //        }, () => {
-    //       this.logic.load(this.state.fen);
-    //       console.log(this.state)
-    //     })
-    //       // console.log(game)
-    //    }).then(() => this.joinGame())
-    //      .then(()=> console.log(this.state))
-    //    .catch(e => console.log(e));
-    // }
+    // loadGame : fetches the specified game, updates values in the redux store, 
+    //            sets the game logic to reflect the board state. 
+    loadGame = () => {
+      console.log('game ID is:')
+      console.log(this.props.gameID)
+      Axios.get(`/api/games/${this.props.gameID}`)
+       .then((res) => {
+         console.log('game:')
+         console.log(res.data)
+         this.props.updateGame(res.data)})
+       .then(() => this.logic.load(this.props.fen))
+       .then(() => this.joinGame())
+       .catch(e => console.log(e));
+    }
   
     // keep clicked square style and remove hint squares
     removeHighlightSquare = () => {
@@ -315,4 +304,4 @@ class HumanVsHuman extends Component {
     history: state.game.history,
   })
 
-  export default connect(mapStateToProps, { loadGame, updatePlayers, makeMove, changeTurn })(HumanVsHuman);
+  export default connect(mapStateToProps, { updateGame, updatePlayers, makeMove, changeTurn })(HumanVsHuman);

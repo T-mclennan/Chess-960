@@ -31,15 +31,15 @@ router.get('/:id', (req, res) => {
 //@access public
 router.post('/findGameForPlayer', (req, res) => {
     console.log(req.body)
-    Game.findOne({"needsPlayer" : true})
+    Game.findOne({"started" : false})
       .then((game) => {
         //if a game is open, assign player to it as black and return the game:
           if (game) {
             game.black = req.body.username;
-            game.needsPlayer = false;
+            game.started = true;
             Game.updateOne(
               {"_id" : game._id}, 
-              {$set: {"needsPlayer": false, "black": game.black}})
+              {$set: {"started": true, "black": game.black}})
               .then(() => {
                 res.json({gameID: game._id, color: "black", fen: game.fen})
               })
@@ -50,7 +50,7 @@ router.post('/findGameForPlayer', (req, res) => {
             const newGame = new Game({
                 fen: board.generateBoard(),
                 white: req.body.username,
-                needsPlayer: true,
+                started: false,
             });
             console.log('made new game: '+newGame);
             newGame.save().then(game => res.json({gameID: game._id, color:"white", fen: game.fen}));
@@ -83,7 +83,7 @@ router.post('/', (req, res) => {
         white: req.body.white,
         black: '',
         history: req.body.history,
-        needsPlayer: req.body.started,
+        started: req.body.started,
         turn: req.body.turn
     });
     newGame.save().then(game => res.json(game));

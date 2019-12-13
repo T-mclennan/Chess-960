@@ -43,8 +43,7 @@ export default function(state = initialState, action) {
         started: action.payload.started,
         history: action.payload.history,
         turn: action.payload.turn,
-        color: action.payload.color,
-        gameID: action.payload.gameID,
+        gameID: action.payload._id,
       };
 
     case START_GAME:
@@ -83,7 +82,7 @@ export default function(state = initialState, action) {
         history: action.payload.history,
         turn: action.payload.turn,
         color: action.payload.color,
-        gameID: action.payload.gameID,
+        gameID: action.payload._id,
       };
 
     case UPDATE_PLAYERS:

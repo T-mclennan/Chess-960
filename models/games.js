@@ -28,9 +28,9 @@ const GameSchema = new Schema({
         required: false
     },
 
-    needsPlayer: {
+    started: {
         type: Boolean,
-        default: true
+        default: false
     },
 
     turn: {

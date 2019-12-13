@@ -17,30 +17,31 @@ export const getGame = () => {
   };
 }
 
-export const updateGame = () => {
+export const updateGame = (game) => {
   return {
-    type: UPDATE_GAME
-  };
-}
-
-export const initializeGame = (game) => {
-  return {
-    type: INITIALIZE_GAME,
+    type: UPDATE_GAME,
     payload: game
   };
 }
 
-export const loadGame = (ID) => dispatch => {
-  axios.get(`/api/games/${ID}`)
-  .then((res) => {
-    dispatch({
-      type: LOAD_GAME,
-      payload: res.data
-    })
-  console.log(res.data)
-  })
-  .catch(e => console.log(e));
+export const initializeGame = (partialGame) => {
+  return {
+    type: INITIALIZE_GAME,
+    payload: partialGame
+  };
 }
+
+// export const loadGame = (game) => dispatch => {
+//   axios.get(`/api/games/${ID}`)
+//   .then((res) => {
+//     dispatch({
+//       type: LOAD_GAME,
+//       payload: game
+//     })
+//   console.log(res.data)
+//   })
+//   .catch(e => console.log(e));
+// }
 
 
 
