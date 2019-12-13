@@ -1,12 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser'); 
 const path = require('path');
 const http = require('http');
 const users = require('./routes/api/players');
 const currentGames = require('./routes/api/games');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 //--------------------------------------------------------
@@ -17,7 +14,7 @@ const app = express();
 const server = http.createServer(app)
 
 // Bodyparser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //routes:
 app.use('/api/players', users)

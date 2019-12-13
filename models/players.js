@@ -7,6 +7,12 @@ const PlayerSchema = new Schema({
         type: String,
         required: true
     },
+     
+    email: {
+        type: String,
+        required: false,
+        unique: true 
+    },
 
     currentGames: {
         type: Array,

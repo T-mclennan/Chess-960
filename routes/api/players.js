@@ -1,5 +1,6 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 //Player Model:
 const Player = require('../../models/players');
@@ -11,6 +12,48 @@ router.get('/', (req, res) => {
     Player.find()
       .then(players => res.json(players))
       .catch(e => {console.log(e)})
+});
+
+//@route  POST api/player
+//@desc   Register User
+//@access public
+router.post('/', (req, res) => {
+  const { username, email, password} = req.body;
+
+  //simple validation:
+  if (!username || !email || !password) {
+    return res.status(400).json({msg: 'Please enter all fields'}); 
+  }
+
+  //check for existing user:
+  Player.findOne({email})
+   .then(player => {
+     if (player) return res.status(400).json({msg: 'User already exists'});
+   })
+
+   const newPlayer = new Player({
+     username, email, password,
+     rating: 1600,
+
+   });
+
+   //create salt and hash:
+   bcrypt.genSalt(10, (err, salt) => {
+     bcrypt.hash(newPlayer.password, salt, (err, hash) => {
+       if (err) throw err;
+       newPlayer.password = hash;
+       newPlayer.save()
+         .then(player => {
+           res.json({
+             player: {
+               id: player.id,
+               username: player.name,
+               email: player.email,
+             }
+           })
+         })
+     })
+   })
 });
 
 //@route  GET api/player/checkUsername
