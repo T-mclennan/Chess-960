@@ -22,17 +22,17 @@ class HumanVsHuman extends Component {
     this.state = {
       
       //Game Objects contain information of the current state and players:
-      fen: '',
-      whiteName: '',
-      blackName: '',
-      started: false,
-      turn: "white",
+      // fen: '',
+      // whiteName: '',
+      // blackName: '',
+      // started: false,
+      // turn: "white",
       history: [],
-      gameID: '',
+      // gameID: '',
       
-      //Player attributes:
-      color: this.props.color,
-      username: this.props.name,
+      // //Player attributes:
+      // color: this.props.color,
+      // username: this.props.name,
   
       // square styles for active drop square:
       dropSquareStyle: {},
@@ -55,26 +55,26 @@ class HumanVsHuman extends Component {
       this.loadGame()
   
       socket.on('newPlayer', (data) => {
-        if (this.state.gameID === data.gameID) {
-          this.setState({
-            whiteName: data.whiteName,
-            blackName: data.blackName,
+        if (data.gameID === this.props.gameID) {
+          this.props.updatePlayers({
+            white: data.whiteName,
+            black: data.blackName,
             started: data.started
           }) 
         }
       });
   
       socket.on('moveMade', (data) => {
-        if (data.gameID === this.state.gameID) {
+        if (data.gameID === this.props.gameID) {
             console.log('move made by opponent')
             this.logic.move(data.newMove);
-            this.setState({fen: this.logic.fen()})
+            this.props.makeMove({fen: this.logic.fen(), history: this.state.history})
             this.changeTurn()
             console.log(this.state)
         }
       });
         
-        this.logic.load(this.state.fen);
+        // this.logic.load(this.props.fen);
     }
   
  //TODO: Save game in players profile:
@@ -270,7 +270,9 @@ class HumanVsHuman extends Component {
 //     black: PropTypes.string.isRequired
 //   }
   
-  const mapStateToProps = (state) => ({
+  const mapStateToProps = (state) => (
+        // const {black, white,} = state.game;
+  {
     black: state.game.black,
     white: state.game.white,
     started: state.game.started,

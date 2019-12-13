@@ -45,10 +45,10 @@ export const initializeGame = (partialGame) => {
 
 
 
-export const updatePlayers = (game) => {
+export const updatePlayers = (playerInfo) => {
   return {
     type: UPDATE_PLAYERS,
-    payload: game
+    payload: playerInfo
   };
 }
 
