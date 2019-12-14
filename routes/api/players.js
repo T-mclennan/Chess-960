@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const keys = require('../../config/keys');
+const jwt = require('jsonwebtoken');
 
 //Player Model:
 const Player = require('../../models/players');
@@ -44,13 +46,22 @@ router.post('/', (req, res) => {
        newPlayer.password = hash;
        newPlayer.save()
          .then(player => {
-           res.json({
-             player: {
-               id: player.id,
-               username: player.name,
-               email: player.email,
+           jwt.sign(
+             {id: player.id},
+             keys.jwtSecret,
+             {expiresIn: 36000},
+             (err, token) => {
+               if (err) throw err;
+               res.json({
+                 token,
+                 player: {
+                   id: player.id,
+                   username: player.name,
+                   email: player.email, 
+                }
+              })
              }
-           })
+           )
          })
      })
    })
