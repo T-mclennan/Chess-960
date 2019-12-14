@@ -1,54 +1,52 @@
-// const express = require('express');
-// const router = express.Router();
-// const bcrypt = require('bcryptjs');
-// const config = require('config');
-// const jwt = require('jsonwebtoken');
-// const auth = require('../../middleware/auth');
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const keys = require('../../config/keys');
+const jwt = require('jsonwebtoken');
 
-
-// // User Model
-// const User = require('../../models/User');
+//Player Model:
+const Player = require('../../models/players');
 
 // // @route   POST api/auth
-// // @desc    Auth user
+// // @desc    Auth player 
 // // @access  Public
-// router.post('/', (req, res) => {
-//   const { email, password } = req.body;
+router.post('/', (req, res) => {
+  const { email, password } = req.body;
 
 //   // Simple validation
-//   if(!email || !password) {
-//     return res.status(400).json({ msg: 'Please enter all fields' });
-//   }
+  if(!email || !password) {
+    return res.status(400).json({ msg: 'Please enter all fields' });
+  }
 
-//   // Check for existing user
-//   User.findOne({ email })
-//     .then(user => {
-//       if(!user) return res.status(400).json({ msg: 'User Does not exist' });
+//   // Check for existing player
+  Player.findOne({ email })
+    .then(player => {
+      if(!player) return res.status(400).json({ msg: 'Player does not exist' });
 
 //       // Validate password
-//       bcrypt.compare(password, user.password)
-//         .then(isMatch => {
-//           if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
+      bcrypt.compare(password, player.password)
+        .then(isMatch => {
+          if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
-//           jwt.sign(
-//             { id: user.id },
-//             config.get('jwtSecret'),
-//             { expiresIn: 3600 },
-//             (err, token) => {
-//               if(err) throw err;
-//               res.json({
-//                 token,
-//                 user: {
-//                   id: user.id,
-//                   name: user.name,
-//                   email: user.email
-//                 }
-//               });
-//             }
-//           )
-//         })
-//     })
-// });
+          jwt.sign(
+            { id: player.id },
+            keys.jwtSecret,
+            { expiresIn: 36000 },
+            (err, token) => {
+              if(err) throw err;
+              res.json({
+                token,
+                player: {
+                  id: player.id,
+                  name: player.name, 
+                  email: player.email
+                }
+              });
+            }
+          )
+        })
+    })
+});
 
 // // @route   GET api/auth/user
 // // @desc    Get user data
@@ -59,4 +57,4 @@
 //     .then(user => res.json(user));
 // });
 
-// module.exports = router;
+module.exports = router;

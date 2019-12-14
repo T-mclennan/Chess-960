@@ -2,8 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const http = require('http');
-const users = require('./routes/api/players');
-const currentGames = require('./routes/api/games');
 
 
 //--------------------------------------------------------
@@ -17,8 +15,9 @@ const server = http.createServer(app)
 app.use(express.json());
 
 //routes:
-app.use('/api/players', users)
-app.use('/api/games', currentGames)
+app.use('/api/players', require('./routes/api/players'))
+app.use('/api/games', require('./routes/api/games'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 const port = process.env.PORT || 5000;
 
