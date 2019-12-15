@@ -1,5 +1,6 @@
 const express = require('express')
 const board = require('../../client/src/components/boardGeneration');
+const auth = require('../../middleware/auth')
 
 const router = express.Router();
 
@@ -28,8 +29,8 @@ router.get('/:id', (req, res) => {
 
 //@route  POST api/games/findAnOpenGame
 //@desc   Returns an open game if available, otherwise creates and returns new game:
-//@access public
-router.post('/findGameForPlayer', (req, res) => {
+//@access private
+router.post('/findGameForPlayer', auth, (req, res) => {
     console.log(req.body)
     Game.findOne({"started" : false})
       .then((game) => {
@@ -59,8 +60,8 @@ router.post('/findGameForPlayer', (req, res) => {
 
 //@route  POST api/games/findAnOpenGame
 //@desc   Returns an open game if available, otherwise creates and returns new game:
-//@access public
-router.post('/updateGame', (req, res) => {
+//@access private
+router.post('/updateGame', auth, (req, res) => {
   Game.updateOne(
     {"_id" : req.body._id}, 
     {$set: {"fen": req.body.fen, "history": req.body.history, "turn": req.body.turn}})
@@ -74,8 +75,8 @@ router.post('/updateGame', (req, res) => {
 
 //@route  POST api/games
 //@desc   Create a game
-//@access public
-router.post('/', (req, res) => {
+//@access private
+router.post('/', auth, (req, res) => {
     const newGame = new Game({
         fen: '',
         white: req.body.white,
@@ -89,19 +90,11 @@ router.post('/', (req, res) => {
 
 //@route  Delete api/games/:id
 //@desc   Delete an game
-//@access public
-router.delete('/:id', (req, res) => {
+//@access private
+router.delete('/:id', auth, (req, res) => {
     Game.findById(req.params.id)
       .then(game => game.remove().then(() => res.json({success: true})))
-      .catch(err => res.status(404).json({success: false}));
+      .catch(err => res.status(404).json({msg: err}));
 }); 
-
-//TODO: the following routes will be added:
-
-/*  api/games/getOpenGames: retrieves the ID of all games that are open
-/   api/games/addPlayerToGame: updates the game to include the added player
-/   api/games/updateFen: updates the fen string + history to reflect the new gamestate
-/   api/games/getGamesByPlayer: retrieves each game the current player is in
-*/
 
 module.exports = router;   

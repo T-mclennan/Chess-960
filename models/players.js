@@ -11,7 +11,7 @@ const PlayerSchema = new Schema({
     email: {
         type: String,
         required: false,
-        unique: true 
+        // unique: true 
     },
 
     currentGames: {

@@ -4,6 +4,11 @@ const bcrypt = require('bcryptjs');
 const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 
+
+//TODO: ADD auth middleware
+//
+//
+
 //Player Model:
 const Player = require('../../models/players');
 
@@ -12,6 +17,7 @@ const Player = require('../../models/players');
 //@access public
 router.get('/', (req, res) => {
     Player.find()
+      .select('-password')
       .then(players => res.json(players))
       .catch(e => {console.log(e)})
 });
@@ -72,13 +78,15 @@ router.post('/', (req, res) => {
 //@access public
 router.post('/checkUsername', (req, res) => {
   Player.findOne({'username': req.body.username})
+   .select('-password')
     .then(player => {
       if (player)
         res.json(player)
       else {
         const newPlayer = new Player({
           username: req.body.username,
-          // password: req.body.password,
+          password: '',
+          email: '',
       });
       newPlayer.save()
       .then(player => res.json(player))
@@ -110,6 +118,7 @@ router.post('/', (req, res) => {
 //@access public
 router.delete('/:id', (req, res) => {
     Player.findById(req.params.id)
+      .select('-password')
       .then(player => player.remove().then(() => res.json({success: true})))
       .catch(err => res.status(404).json({success: false}));
 }); 
