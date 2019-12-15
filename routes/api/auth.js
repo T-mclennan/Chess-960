@@ -49,13 +49,13 @@ router.post('/', (req, res) => {
     })
 });
 
-// // @route   GET api/auth/user
+// // @route   GET api/auth/player
 // // @desc    Get user data
 // // @access  Private
-// router.get('/user', auth, (req, res) => {
-//   User.findById(req.user.id)
-//     .select('-password')
-//     .then(user => res.json(user));
-// });
+router.get('/player', auth, (req, res) => {
+  Player.findById(req.player.id)
+    .select('-password')
+    .then(player => res.json(player));
+});
 
 module.exports = router;
