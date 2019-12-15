@@ -1,5 +1,5 @@
-export const USER_LOADING = "PLAYER_LOADING";
-export const USER_LOADED = "PLAYER_LOADED";
+export const PLAYER_LOADING = "PLAYER_LOADING";
+export const PLAYER_LOADED = "PLAYER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
