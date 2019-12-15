@@ -17,6 +17,24 @@ export const loadPlayer = () => (dispatch, getState) => {
   //User Loading:
   dispatch({ type: PLAYER_LOADING });
 
+  axios
+    .get("api/auth/player", tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: PLAYER_LOADED,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: AUTH_ERROR
+      });
+    });
+};
+
+// Setup config/headers and token:
+export const tokenConfig = getState => {
   //Get token from localStorage:
   const token = getState().auth.token;
 
@@ -31,19 +49,5 @@ export const loadPlayer = () => (dispatch, getState) => {
   if (token) {
     config.headers["x-auth-token"] = token;
   }
-
-  axios
-    .get("api/auth/player", config)
-    .then(res =>
-      dispatch({
-        type: PLAYER_LOADED,
-        payload: res.data
-      })
-    )
-    .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({
-        type: AUTH_ERROR
-      });
-    });
+  return config;
 };
