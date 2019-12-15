@@ -33,6 +33,9 @@ export const loadPlayer = () => (dispatch, getState) => {
     });
 };
 
+//Register User:
+export const register = ({ name, email, password }) => dispatch => {};
+
 // Setup config/headers and token:
 export const tokenConfig = getState => {
   //Get token from localStorage:
