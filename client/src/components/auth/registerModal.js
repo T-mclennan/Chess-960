@@ -19,7 +19,7 @@ import { clearErrors } from "../../actions/errorActions";
 class RegisterModal extends Component {
   state = {
     modal: false,
-    name: "",
+    username: "",
     email: "",
     password: "",
     msg: null
@@ -58,23 +58,23 @@ class RegisterModal extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.username]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { username, email, password } = this.state;
 
     //Create user object:
-    const newUser = {
-      name,
+    const newPlayer = {
+      username,
       email,
       password
     };
 
     //Attempt to register:
-    this.props.register(newUser);
+    this.props.register(newPlayer);
   };
 
   render() {
@@ -91,12 +91,12 @@ class RegisterModal extends Component {
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="name">Name</Label>
+                <Label for="username">Username</Label>
                 <Input
                   type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Name"
+                  name="username"
+                  id="username"
+                  placeholder="Username"
                   className="mb-3"
                   onChange={this.onChange}
                 />

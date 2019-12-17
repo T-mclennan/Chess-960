@@ -34,7 +34,7 @@ export const loadPlayer = () => (dispatch, getState) => {
 };
 
 //Register User:
-export const register = ({ name, email, password }) => dispatch => {
+export const register = ({ username, email, password }) => dispatch => {
   //Headers:
   const config = {
     headers: {
@@ -43,7 +43,7 @@ export const register = ({ name, email, password }) => dispatch => {
   };
 
   //Request body:
-  const body = JSON.stringify({ name, email, password });
+  const body = JSON.stringify({ username, email, password });
 
   axios
     .post("/api/players", body, config)
@@ -64,7 +64,7 @@ export const register = ({ name, email, password }) => dispatch => {
 };
 
 //Login User:
-export const login = ({ name, password }) => dispatch => {
+export const login = ({ username, password }) => dispatch => {
   //Headers:
   const config = {
     headers: {
@@ -73,7 +73,7 @@ export const login = ({ name, password }) => dispatch => {
   };
 
   //Request body:
-  const body = JSON.stringify({ name, password });
+  const body = JSON.stringify({ username, password });
 
   axios
     .post("/api/auth", body, config)
