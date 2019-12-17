@@ -44,7 +44,7 @@ class RegisterModal extends Component {
 
     //If authenticated, close modal:
     if (!this.state.modal) {
-      if (isAuthenticated) {
+      if (this.props.isAuthenticated) {
         this.toggle();
       }
     }

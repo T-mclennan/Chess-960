@@ -43,7 +43,7 @@ class LoginModal extends Component {
 
     //If authenticated, close modal:
     if (!this.state.modal) {
-      if (isAuthenticated) {
+      if (this.props.isAuthenticated) {
         this.toggle();
       }
     }
@@ -80,7 +80,7 @@ class LoginModal extends Component {
           Log In
         </NavLink>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Log In</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color={"danger"}>{this.state.msg}</Alert>

@@ -3,9 +3,15 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import GameWindow from "./components/GameWindow";
 import Header from "./components/layout/Header";
+import AppNavbar from "./components/layout/AppNavbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import { loadPlayer } from "./actions/authActions";
+
+const Dashboard = () => <h2>Dashboard</h2>;
+const PlayerBoard = () => <h2>PlayerBoard</h2>;
+const Landing = () => <h2>Landing</h2>;
+const About = () => <h2>About</h2>;
 
 class App extends Component {
   componentDidMount() {
@@ -18,7 +24,10 @@ class App extends Component {
         <Provider store={store}>
           <div className="App">
             <div className="Wrapper" style={appStyle}>
-              <Header />
+              <Route path="/" component={Landing} />
+              <Route path="/about" component={About} />
+              {/* <Header /> */}
+              <AppNavbar />
               <GameWindow style={{ marginBottom: "15px" }} />
             </div>
           </div>
