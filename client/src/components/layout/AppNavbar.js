@@ -9,7 +9,7 @@ import {
   NavItem,
   Container
 } from "reactstrap";
-import RegisterModal from "../auth/registerModal";
+import RegisterModal from "../auth/RegisterModal";
 import Logout from "../auth/Logout ";
 
 class AppNavbar extends Component {
