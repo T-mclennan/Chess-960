@@ -100,6 +100,16 @@ class RegisterContent extends Component {
                 onChange={this.onChange}
               />
 
+              {/* <Label for="password">Password</Label> */}
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                className="mb-3"
+                onChange={this.onChange}
+              />
+
               {/* <Label for="email">Email</Label> */}
               <Input
                 type="text"
@@ -110,15 +120,6 @@ class RegisterContent extends Component {
                 onChange={this.onChange}
               />
 
-              {/* <Label for="password">Password</Label> */}
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                className="mb-3"
-                onChange={this.onChange}
-              />
               <Button style={buttonStyle} block>
                 <h5>Register</h5>
               </Button>

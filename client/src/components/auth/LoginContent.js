@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/authActions";
+import { login, setContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 
 class LoginContent extends Component {
@@ -114,6 +114,12 @@ class LoginContent extends Component {
             </FormGroup>
           </Form>
         </CardBody>
+
+        {/* Todo: Add links for forgot password, Regester */}
+        {/* <CardBody>
+          <Button color="link">forgot password?</Button>
+          <Button color="link">Register Now!</Button>
+        </CardBody> */}
       </div>
     );
   }
@@ -152,4 +158,6 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(LoginContent);
+export default connect(mapStateToProps, { login, clearErrors, setContent })(
+  LoginContent
+);
