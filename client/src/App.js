@@ -26,7 +26,7 @@ class App extends Component {
             <AppNavbar />
             <div className="display">
               <Route exact path="/" component={Landing} />
-              <Route path="/about" component={About} />
+              <Route exact path="/about" component={About} />
               <Route exact path="/lobby" component={Lobby} />
             </div>
             {/* <div className="Wrapper" style={lobbyStyle}>

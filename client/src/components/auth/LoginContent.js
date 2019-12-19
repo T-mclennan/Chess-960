@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import { login, setContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 
@@ -59,7 +60,7 @@ class LoginContent extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.username]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
@@ -75,16 +76,20 @@ class LoginContent extends Component {
     this.props.login(player);
   };
 
+  renderRedirect = () => {
+    if (this.state.modal) {
+      return <Redirect to="/lobby" />;
+    }
+  };
+
   render() {
     return (
       <div>
+        {this.renderRedirect()}
         {/* <CardHeader style={headerStyle}>
           <h4>Log In</h4>
         </CardHeader> */}
         <CardBody>
-          {this.state.msg ? (
-            <Alert color={"danger"}>{this.state.msg}</Alert>
-          ) : null}
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
               {/* <Label for="name">Username</Label> */}
@@ -113,6 +118,9 @@ class LoginContent extends Component {
               </Button>
             </FormGroup>
           </Form>
+          {this.state.msg ? (
+            <Alert color={"danger"}>{this.state.msg}</Alert>
+          ) : null}
         </CardBody>
 
         {/* Todo: Add links for forgot password, Regester */}

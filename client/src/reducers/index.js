@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { routerReducer } from "react-router-redux";
 import playerReducer from "./playerReducer";
 import gameReducer from "./gameReducer";
 import errorReducer from "./errorReducer";
@@ -8,5 +9,6 @@ export default combineReducers({
   player: playerReducer,
   game: gameReducer,
   error: errorReducer,
-  auth: authReducer
+  auth: authReducer,
+  routing: routerReducer
 });

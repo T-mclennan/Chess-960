@@ -27,6 +27,7 @@ router.get("/", (req, res) => {
 //@desc   Register User
 //@access public
 router.post("/", (req, res) => {
+  console.log(req.body);
   const { username, email, password } = req.body;
 
   //simple validation:

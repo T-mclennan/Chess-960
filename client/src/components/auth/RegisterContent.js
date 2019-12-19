@@ -60,7 +60,7 @@ class RegisterContent extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.username]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
@@ -79,13 +79,16 @@ class RegisterContent extends Component {
     this.props.register(newPlayer);
   };
 
+  renderRedirect = () => {
+    // if (this.state.modal) {
+    //   return <Redirect to="/lobby" />;
+    // }
+  };
+
   render() {
     return (
       <div>
         <CardBody>
-          {this.state.msg ? (
-            <Alert color={"danger"}>{this.state.msg}</Alert>
-          ) : null}
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
               {/* <Label for="username">Username</Label> */}
@@ -125,6 +128,9 @@ class RegisterContent extends Component {
               </Button>
             </FormGroup>
           </Form>
+          {this.state.msg ? (
+            <Alert color={"danger"}>{this.state.msg}</Alert>
+          ) : null}
         </CardBody>
       </div>
     );

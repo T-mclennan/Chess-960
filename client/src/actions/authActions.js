@@ -1,5 +1,6 @@
 import axios from "axios";
 import { returnErrors } from "./errorActions";
+import { browserHistory } from "react-router";
 
 import {
   PLAYER_LOADED,
@@ -52,9 +53,10 @@ export const register = ({ username, email, password }) => dispatch => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
+      }).then(() => browserHistory.push("/lobby"))
     )
     .catch(err => {
+      console.log(err);
       dispatch(
         returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
       );
