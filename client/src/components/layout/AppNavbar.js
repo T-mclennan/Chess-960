@@ -50,7 +50,7 @@ class AppNavbar extends Component {
     const guestLinks = (
       <Fragment>
         <NavItem>
-          <RegisterModal />
+          <NavLink onClick={this.toggle}>Register</NavLink>
         </NavItem>
         <NavItem>
           <LoginModal />
@@ -60,7 +60,7 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar style={headerStyle} dark expand="sm" className="mb-5">
+        <Navbar style={navStyle} dark expand="sm" className="mb-5">
           <Container>
             <NavbarBrand href="/">
               <h2>
@@ -98,7 +98,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const headerStyle = {
+const navStyle = {
   color: "#fff",
   // textAlign: "center",
   padding: "10px",
@@ -110,4 +110,6 @@ const headerStyle = {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 };
 
-export default connect(mapStateToProps, null)(AppNavbar);
+export default connect(mapStateToProps, {
+  // setContent,
+})(AppNavbar);
