@@ -113,7 +113,7 @@ class RegisterModal extends Component {
 
                 <Label for="password">Password</Label>
                 <Input
-                  type="password "
+                  type="password"
                   name="password"
                   id="password"
                   placeholder="Password"

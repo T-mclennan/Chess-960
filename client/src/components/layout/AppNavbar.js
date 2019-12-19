@@ -14,6 +14,8 @@ import LoginModal from "../auth/LoginModal";
 import Logout from "../auth/Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee, faChessQueen } from "@fortawesome/free-solid-svg-icons";
 
 class AppNavbar extends Component {
   state = {
@@ -61,7 +63,18 @@ class AppNavbar extends Component {
         <Navbar style={headerStyle} dark expand="sm" className="mb-5">
           <Container>
             <NavbarBrand href="/">
-              <h4>Chess 960</h4>
+              <h2>
+                <FontAwesomeIcon
+                  icon={faChessQueen}
+                  style={{
+                    color: "white",
+                    borderColor: "red",
+                    borderWidth: "1px",
+                    marginRight: "0.5rem"
+                  }}
+                />
+                Chess 960
+              </h2>
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>

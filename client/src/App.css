@@ -26,27 +26,33 @@ a {
   width: 40rem;
   text-align: center;
   border: 1px;
-  border-color: whitesmoke
+  border-color: whitesmoke;
 }
 
 .playerContent {
   margin-left: auto;
   margin-right: auto;
-  width: 8rem
+  width: 8rem;
+}
+
+.display {
+  display: flex;
+  justify-content: center;
+}
+
+.authCard {
+  max-width: 45rem;
 }
 
 .leftItem {
-
   order: 1; /* default is 0 */
 }
 
 .midItem {
-
   order: 2; /* default is 0 */
 }
 
 .rightItem {
-
   order: 3; /* default is 0 */
 }
 
@@ -86,9 +92,9 @@ a {
 }
 
 .centered {
-  height: 100h; 
+  height: 100h;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-} 
+}
