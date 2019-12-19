@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faChessQueen } from "@fortawesome/free-solid-svg-icons";
+import "./css/Navbar.css";
 
 class AppNavbar extends Component {
   state = {
@@ -103,11 +104,7 @@ const navStyle = {
   // textAlign: "center",
   padding: "10px",
   background: "#152331",
-  /* fallback for old browsers */
-  // background: "-webkit-linear-gradient(45deg, #000000, #152331)",
-  /* Chrome 10-25, Safari 5.1-6 */
   background: "linear-gradient(45deg, #000000, #152331)"
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 };
 
 export default connect(mapStateToProps, {
