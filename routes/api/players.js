@@ -11,17 +11,19 @@ const jwt = require("jsonwebtoken");
 //Player Model:
 const Player = require("../../models/players");
 
+//REDUNDANT PLAYER API:
+
 //@route  GET api/player
 //@desc   Get all players
 //@access public
-router.get("/", (req, res) => {
-  Player.find()
-    .select("-password")
-    .then(players => res.json(players))
-    .catch(e => {
-      console.log(e);
-    });
-});
+// router.get("/", (req, res) => {
+//   Player.find()
+//     .select("-password")
+//     .then(players => res.json(players))
+//     .catch(e => {
+//       console.log(e);
+//     });
+// });
 
 //@route  POST api/player
 //@desc   Register User
@@ -102,18 +104,18 @@ router.post("/checkUsername", (req, res) => {
 //@route  POST api/player
 //@desc   Add a player to the database
 //@access public
-router.post("/", (req, res) => {
-  const newPlayer = new Player({
-    username: req.body.username,
-    // password: req.body.password,
-    rating: req.body.rating,
-    curentGames: req.body.currentGames
-  });
-  newPlayer
-    .save()
-    .then(player => res.json(player))
-    .catch(e => console.log(e));
-});
+// router.post("/", (req, res) => {
+//   const newPlayer = new Player({
+//     username: req.body.username,
+//     // password: req.body.password,
+//     rating: req.body.rating,
+//     curentGames: req.body.currentGames
+//   });
+//   newPlayer
+//     .save()
+//     .then(player => res.json(player))
+//     .catch(e => console.log(e));
+// });
 
 //@route  Delete api/player/:id
 //@desc   Delete a player

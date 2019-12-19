@@ -36,7 +36,10 @@ export const loadPlayer = () => (dispatch, getState) => {
 };
 
 //Register User:
-export const register = ({ username, email, password }) => dispatch => {
+export const register = newUser => dispatch => {
+  console.log("inside REGISTER:");
+  console.log(newUser);
+  console.log(newUser.password);
   //Headers:
   const config = {
     headers: {
@@ -45,17 +48,21 @@ export const register = ({ username, email, password }) => dispatch => {
   };
 
   //Request body:
-  const body = JSON.stringify({ username, email, password });
+  const body = JSON.stringify(newUser);
+  console.log("BODY:");
+  console.log(body);
 
   axios
     .post("/api/players", body, config)
-    .then(res =>
+    .then(res => {
+      console.log(res.data);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      }).then(() => browserHistory.push("/lobby"))
-    )
+      }).then(() => browserHistory.push("/lobby"));
+    })
     .catch(err => {
+      console.log("ERROR!");
       console.log(err);
       dispatch(
         returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")

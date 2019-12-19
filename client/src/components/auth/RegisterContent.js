@@ -20,7 +20,7 @@ import { clearErrors } from "../../actions/errorActions";
 
 class RegisterContent extends Component {
   state = {
-    modal: false,
+    redirect: false,
     username: "",
     email: "",
     password: "",
@@ -43,19 +43,12 @@ class RegisterContent extends Component {
         this.setState({ msg: null });
       }
     }
-
-    //If authenticated, close modal:
-    if (!this.state.modal) {
-      if (this.props.isAuthenticated) {
-        this.toggle();
-      }
-    }
   }
 
   toggle = () => {
     this.props.clearErrors();
     this.setState({
-      modal: !this.state.modal
+      redirect: !this.state.redirect
     });
   };
 

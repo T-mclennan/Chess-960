@@ -9,7 +9,7 @@ const auth = require("../../middleware/auth");
 const Player = require("../../models/players");
 
 // // @route   POST api/auth
-// // @desc    Auth player
+// // @desc    Authenticates a player
 // // @access  Public
 router.post("/", (req, res) => {
   const { email, password } = req.body;
