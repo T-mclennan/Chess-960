@@ -9,7 +9,8 @@ import {
   LOGOUT_SUCCESS,
   LOGIN_FAIL,
   REGISTER_FAIL,
-  REGISTER_SUCCESS
+  REGISTER_SUCCESS,
+  SET_CONTENT
 } from "./authTypes";
 
 // Check token and load user:
@@ -97,6 +98,14 @@ export const login = ({ username, password }) => dispatch => {
 export const logout = () => {
   return {
     type: LOGOUT_SUCCESS
+  };
+};
+
+//Set Content: Sets what content to show in the AuthCard:
+export const setContent = content => {
+  return {
+    type: SET_CONTENT,
+    payload: content
   };
 };
 

@@ -10,12 +10,13 @@ import {
   Container
 } from "reactstrap";
 import RegisterModal from "../auth/RegisterModal";
+import { setContent } from "../../actions/authActions";
 import LoginModal from "../auth/LoginModal";
 import Logout from "../auth/Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, faChessQueen } from "@fortawesome/free-solid-svg-icons";
+import { faChessQueen } from "@fortawesome/free-solid-svg-icons";
 import "./css/Navbar.css";
 
 class AppNavbar extends Component {
@@ -27,11 +28,14 @@ class AppNavbar extends Component {
     auth: PropTypes.object.isRequired
   };
 
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  setRegister = () => {
+    this.props.setContent("REGISTER");
   };
+
+  setLogin = () => {
+    this.props.setContent("LOGIN");
+  };
+
   //class of mb-5 is margin bottom 5, moves everything else down 5 below the navbar
   render() {
     const { isAuthenticated, player } = this.props.auth;
@@ -51,10 +55,10 @@ class AppNavbar extends Component {
     const guestLinks = (
       <Fragment>
         <NavItem>
-          <NavLink onClick={this.toggle}>Register</NavLink>
+          <NavLink onClick={this.setRegister}>Register</NavLink>
         </NavItem>
         <NavItem>
-          <LoginModal />
+          <NavLink onClick={this.setLogin}>Log In</NavLink>
         </NavItem>
       </Fragment>
     );
@@ -108,5 +112,5 @@ const navStyle = {
 };
 
 export default connect(mapStateToProps, {
-  // setContent,
+  setContent
 })(AppNavbar);

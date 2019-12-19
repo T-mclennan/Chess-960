@@ -10,7 +10,7 @@ class AuthWindow extends Component {
     contentType: "REGISTER"
   };
   render() {
-    const { contentType } = this.state;
+    const { contentType } = this.props;
     return (
       <Card body className="authCard" style={cardStyle}>
         {contentType === "LOGIN" && <LoginContent />}

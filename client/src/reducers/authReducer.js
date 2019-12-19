@@ -6,14 +6,16 @@ import {
   LOGOUT_SUCCESS,
   LOGIN_FAIL,
   REGISTER_FAIL,
-  REGISTER_SUCCESS
+  REGISTER_SUCCESS,
+  SET_CONTENT
 } from "../actions/authTypes";
 
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   isLoading: false,
-  player: null
+  player: null,
+  contentType: "LOGIN"
 };
 
 export default function(state = initialState, action) {
@@ -22,6 +24,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoading: true
+      };
+    case SET_CONTENT:
+      return {
+        ...state,
+        contentType: action.payload
       };
     case PLAYER_LOADED:
       return {
