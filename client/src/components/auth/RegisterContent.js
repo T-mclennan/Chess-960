@@ -34,16 +34,32 @@ class RegisterContent extends Component {
     clearErrors: PropTypes.func.isRequired
   };
 
+  componentDidMount() {
+    if (this.props.msg) {
+      console.log("inside mount");
+      this.fadeMessage();
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
       if (error.id === "REGISTER_FAIL") {
         this.setState({ msg: error.msg.msg });
+        this.fadeMessage();
       } else {
         this.setState({ msg: null });
       }
     }
   }
+
+  fadeMessage = () => {
+    console.log("in fade");
+    setTimeout(() => {
+      this.props.clearErrors();
+      // this.setState({ msg: "" });
+    }, 5000);
+  };
 
   toggle = () => {
     this.props.clearErrors();

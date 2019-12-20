@@ -41,6 +41,7 @@ class LoginContent extends Component {
     if (error !== prevProps.error) {
       if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.msg });
+        this.fadeMessage();
       } else {
         this.setState({ msg: null });
       }
@@ -53,6 +54,12 @@ class LoginContent extends Component {
       }
     }
   }
+
+  fadeMessage = () => {
+    setTimeout(() => {
+      this.props.clearErrors();
+    }, 8000);
+  };
 
   toggle = () => {
     this.props.clearErrors();
