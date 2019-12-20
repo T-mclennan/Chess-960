@@ -41,6 +41,7 @@ export const loadPlayer = () => (dispatch, getState) => {
 };
 
 //Register User:
+// export const register = ( {username, email, password} ) => dispatch => {
 export const register = newUser => dispatch => {
   //Headers:
   const config = {
@@ -56,10 +57,11 @@ export const register = newUser => dispatch => {
     .post("/api/players", body, config)
     .then(res => {
       console.log("api/players: post");
-      console.log(res.data.player);
+      console.log(res.data);
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data.player
+        payload: res.data
+        //payload: res.data.player
       });
     })
     .catch(err => {

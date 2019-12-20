@@ -25,10 +25,11 @@ const Player = require("../../models/players");
 //     });
 // });
 
-//@route  POST api/player
+//@route  POST api/players
 //@desc   Register User
 //@access public
 router.post("/", (req, res) => {
+  console.log("api/players: POST");
   console.log(req.body);
   const { username, email, password } = req.body;
 
@@ -61,6 +62,8 @@ router.post("/", (req, res) => {
           { expiresIn: 36000 },
           (err, token) => {
             if (err) throw err;
+            console.log("REGISTER TOKEN: ");
+            console.log(token);
             res.json({
               token,
               player: {
@@ -77,30 +80,30 @@ router.post("/", (req, res) => {
   });
 });
 
-//@route  GET api/player/checkUsername
+//@route  GET api/players/checkUsername
 //@desc   If the user exists, return it from database, otherwise create and return it.
 //@access public
-router.post("/checkUsername", (req, res) => {
-  Player.findOne({ username: req.body.username })
-    .select("-password")
-    .then(player => {
-      if (player) res.json(player);
-      else {
-        const newPlayer = new Player({
-          username: req.body.username,
-          password: "",
-          email: ""
-        });
-        newPlayer
-          .save()
-          .then(player => res.json(player))
-          .catch(e => console.log(e));
-      }
-    })
-    .catch(e => {
-      console.log(e);
-    });
-});
+// router.post("/checkUsername", (req, res) => {
+//   Player.findOne({ username: req.body.username })
+//     .select("-password")
+//     .then(player => {
+//       if (player) res.json(player);
+//       else {
+//         const newPlayer = new Player({
+//           username: req.body.username,
+//           password: "",
+//           email: ""
+//         });
+//         newPlayer
+//           .save()
+//           .then(player => res.json(player))
+//           .catch(e => console.log(e));
+//       }
+//     })
+//     .catch(e => {
+//       console.log(e);
+//     });
+// });
 
 //@route  POST api/player
 //@desc   Add a player to the database

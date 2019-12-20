@@ -18,6 +18,7 @@ import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { login, setContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import "../layout/css/AuthCard.css";
 
 class LoginContent extends Component {
   state = {
@@ -92,7 +93,10 @@ class LoginContent extends Component {
         </CardHeader> */}
         <CardBody>
           <Form onSubmit={this.onSubmit}>
-            <FormGroup>
+            <FormGroup
+              style={{ marginBottom: "0px" }}
+              // className="input_form"
+            >
               {/* <Label for="name">Username</Label> */}
               <Input
                 className="border border-info"

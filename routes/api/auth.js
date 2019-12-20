@@ -56,6 +56,7 @@ router.get("/player", auth, (req, res) => {
   Player.findById(req.player.id)
     .select("-password")
     .then(player => {
+      console.log("PLAYER:");
       console.log(player);
       res.json(player);
     });

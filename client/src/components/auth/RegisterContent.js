@@ -83,7 +83,7 @@ class RegisterContent extends Component {
       <div>
         <CardBody>
           <Form onSubmit={this.onSubmit}>
-            <FormGroup>
+            <FormGroup style={{ marginBottom: "0px" }}>
               {/* <Label for="username">Username</Label> */}
               <Input
                 className="border border-info"
