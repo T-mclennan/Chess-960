@@ -79,6 +79,10 @@ class RegisterContent extends Component {
   };
 
   render() {
+    //These allow for disappearing error messages:
+    // const [visible, setVisible] = useState(true);
+    // const onDismiss = () => setVisible(false);
+
     return (
       <div>
         <CardBody>
@@ -122,7 +126,17 @@ class RegisterContent extends Component {
             </FormGroup>
           </Form>
           {this.state.msg ? (
-            <Alert color={"danger"}>{this.state.msg}</Alert>
+            <Alert
+              style={{
+                marginTop: "1rem",
+                marginBottom: "0px",
+                fontSize: "1rem",
+                textAlign: "center"
+              }}
+              color={"danger"}
+            >
+              {this.state.msg}
+            </Alert>
           ) : null}
         </CardBody>
       </div>
@@ -140,11 +154,8 @@ const buttonStyle = {
 
   //metalic:
   background: "#0F2027",
-  /* fallback for old browsers */
   background: "-webkit-linear-gradient(45deg, #0F2027 , #203A43,#2C5364)",
-  /* Chrome 10-25, Safari 5.1-6 */
   background: "linear-gradient(45deg,  #203A43, #0F2027,#2C5364)",
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding: "0.5rem",
   marginTop: "1.5rem",
   fontSize: "1.3rem",
