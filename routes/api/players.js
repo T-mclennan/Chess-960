@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
   }
 
   //check for existing user:
-  Player.findOne({ email }).then(player => {
+  Player.findOne({ username }).then(player => {
     if (player) return res.status(400).json({ msg: "User already exists" });
   });
 
@@ -66,7 +66,8 @@ router.post("/", (req, res) => {
               player: {
                 id: player.id,
                 username: player.name,
-                email: player.email
+                email: player.email,
+                rating: player.rating
               }
             });
           }

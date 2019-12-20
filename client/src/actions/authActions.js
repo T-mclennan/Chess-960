@@ -13,6 +13,7 @@ import {
   REGISTER_SUCCESS,
   SET_CONTENT
 } from "./authTypes";
+import { updatePlayer } from "./playerActions";
 
 // Check token and load user:
 export const loadPlayer = () => (dispatch, getState) => {
@@ -21,12 +22,16 @@ export const loadPlayer = () => (dispatch, getState) => {
 
   axios
     .get("api/auth/player", tokenConfig(getState))
-    .then(res =>
+    .then(res => {
       dispatch({
         type: PLAYER_LOADED,
         payload: res.data
-      })
-    )
+      });
+      dispatch({
+        type: updatePlayer,
+        payload: res.data
+      });
+    })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
@@ -37,9 +42,6 @@ export const loadPlayer = () => (dispatch, getState) => {
 
 //Register User:
 export const register = newUser => dispatch => {
-  console.log("inside REGISTER:");
-  console.log(newUser);
-  console.log(newUser.password);
   //Headers:
   const config = {
     headers: {
@@ -49,17 +51,16 @@ export const register = newUser => dispatch => {
 
   //Request body:
   const body = JSON.stringify(newUser);
-  console.log("BODY:");
-  console.log(body);
 
   axios
     .post("/api/players", body, config)
     .then(res => {
-      console.log(res.data);
+      console.log("api/players: post");
+      console.log(res.data.player);
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data
-      }).then(() => browserHistory.push("/lobby"));
+        payload: res.data.player
+      });
     })
     .catch(err => {
       console.log("ERROR!");

@@ -51,9 +51,14 @@ router.post("/", (req, res) => {
 // // @desc    Get user data
 // // @access  Private
 router.get("/player", auth, (req, res) => {
+  console.log("api/auth/player: get");
+  console.log(req.player.id);
   Player.findById(req.player.id)
     .select("-password")
-    .then(player => res.json(player));
+    .then(player => {
+      console.log(player);
+      res.json(player);
+    });
 });
 
 module.exports = router;

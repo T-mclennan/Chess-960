@@ -13,6 +13,8 @@ function auth(req, res, next) {
     //verify token:
     const decoded = jwt.verify(token, keys.jwtSecret);
     //add user from payload:
+    console.log("INSIDE AUTH MIDDLEWARE:");
+    console.log(decoded);
     req.player = decoded;
     next();
   } catch (e) {
