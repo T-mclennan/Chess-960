@@ -54,11 +54,9 @@ class RegisterContent extends Component {
   }
 
   fadeMessage = () => {
-    console.log("in fade");
     setTimeout(() => {
       this.props.clearErrors();
-      // this.setState({ msg: "" });
-    }, 5000);
+    }, 8000);
   };
 
   toggle = () => {

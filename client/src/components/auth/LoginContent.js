@@ -47,11 +47,10 @@ class LoginContent extends Component {
       }
     }
 
-    //If authenticated, close modal:
-    if (!this.state.modal) {
-      if (this.props.isAuthenticated) {
-        this.toggle();
-      }
+    //If authenticated, redirect to lobby:
+    if (this.props.isAuthenticated) {
+      this.props.history.push("/path");
+      this.props.setContent("LOGIN");
     }
   }
 
@@ -61,12 +60,12 @@ class LoginContent extends Component {
     }, 8000);
   };
 
-  toggle = () => {
-    this.props.clearErrors();
-    this.setState({
-      modal: !this.state.modal
-    });
-  };
+  // toggle = () => {
+  //   this.props.clearErrors();
+  //   this.setState({
+  //     modal: !this.state.modal
+  //   });
+  // };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -85,19 +84,9 @@ class LoginContent extends Component {
     this.props.login(player);
   };
 
-  renderRedirect = () => {
-    if (this.state.modal) {
-      return <Redirect to="/lobby" />;
-    }
-  };
-
   render() {
     return (
       <div>
-        {this.renderRedirect()}
-        {/* <CardHeader style={headerStyle}>
-          <h4>Log In</h4>
-        </CardHeader> */}
         <CardBody>
           <Form onSubmit={this.onSubmit}>
             <FormGroup
