@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
+// import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import { Redirect } from "react-router";
 import About from "./components/pages/About";
 import Landing from "./components/layout/Landing";
 import Lobby from "./components/layout/Lobby";
 import Header from "./components/layout/Header";
 import AppNavbar from "./components/layout/AppNavbar";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import store from "./store";
+import history from "../src/history";
 import { loadPlayer } from "./actions/authActions";
+import "./App.css";
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const PlayerBoard = () => <h2>PlayerBoard</h2>;
@@ -20,8 +23,9 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Provider store={store}>
+      // <Router>
+      <Provider store={store}>
+        <Router history={history}>
           <div className="App">
             <AppNavbar />
             <div className="display">
@@ -35,8 +39,9 @@ class App extends Component {
               {<GameWindow style={{ marginBottom: "15px" }} /> }
             </div> */}
           </div>
-        </Provider>
-      </Router>
+        </Router>
+      </Provider>
+      // </Router>
     );
   }
 }

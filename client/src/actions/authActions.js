@@ -1,6 +1,6 @@
 import axios from "axios";
 import { returnErrors } from "./errorActions";
-import { browserHistory } from "react-router";
+import history from "../history";
 
 import {
   PLAYER_LOADED,
@@ -108,6 +108,7 @@ export const login = ({ username, password }) => dispatch => {
 
 //Logout User:
 export const logout = () => {
+  history.push("/");
   return {
     type: LOGOUT_SUCCESS
   };

@@ -15,8 +15,10 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { register } from "../../actions/authActions";
+import { Redirect } from "react-router";
+import { register, setContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import history from "../../history";
 
 class RegisterContent extends Component {
   state = {
@@ -31,7 +33,8 @@ class RegisterContent extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
+    setContent: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -50,6 +53,13 @@ class RegisterContent extends Component {
       } else {
         this.setState({ msg: null });
       }
+    }
+
+    //If authenticated, redirect to lobby:
+    if (this.props.isAuthenticated) {
+      console.log("is authenticated");
+      history.push("/lobby");
+      this.props.setContent("LOGIN");
     }
   }
 
@@ -93,9 +103,10 @@ class RegisterContent extends Component {
   };
 
   render() {
-    //These allow for disappearing error messages:
-    // const [visible, setVisible] = useState(true);
-    // const onDismiss = () => setVisible(false);
+    if (this.state.redirect) {
+      console.log("redirect to lobby");
+      return <Redirect to="/lobby" />;
+    }
 
     return (
       <div>
@@ -184,6 +195,6 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { register, clearErrors })(
+export default connect(mapStateToProps, { register, clearErrors, setContent })(
   RegisterContent
 );

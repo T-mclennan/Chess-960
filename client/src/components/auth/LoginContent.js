@@ -25,7 +25,8 @@ class LoginContent extends Component {
     modal: false,
     username: "",
     password: "",
-    msg: null
+    msg: null,
+    reidrect: false
   };
 
   static propTypes = {
@@ -49,8 +50,7 @@ class LoginContent extends Component {
 
     //If authenticated, redirect to lobby:
     if (this.props.isAuthenticated) {
-      this.props.history.push("/path");
-      this.props.setContent("LOGIN");
+      this.setState({ redirect: true });
     }
   }
 
@@ -85,6 +85,12 @@ class LoginContent extends Component {
   };
 
   render() {
+    //Conditionally redirects to lobby:
+    if (this.state.redirect) {
+      this.setState({ redirect: false });
+      return <Redirect to="/lobby" />;
+    }
+
     return (
       <div>
         <CardBody>
