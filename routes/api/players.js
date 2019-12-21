@@ -11,19 +11,18 @@ const jwt = require("jsonwebtoken");
 //Player Model:
 const Player = require("../../models/players");
 
-//REDUNDANT PLAYER API:
-
-//@route  GET api/player
-//@desc   Get all players
-//@access public
-// router.get("/", (req, res) => {
-//   Player.find()
-//     .select("-password")
-//     .then(players => res.json(players))
-//     .catch(e => {
-//       console.log(e);
-//     });
-// });
+// @route  GET api/player
+// @desc   Get a player by id:
+// @access private
+router.get("/", (req, res) => {
+  const { id } = req.body;
+  Player.findOne({ id })
+    .select("-password")
+    .then(player => res.json(player))
+    .catch(e => {
+      console.log(e);
+    });
+});
 
 //@route  POST api/players
 //@desc   Register User

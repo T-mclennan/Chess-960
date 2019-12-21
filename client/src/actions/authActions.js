@@ -13,13 +13,11 @@ import {
   REGISTER_SUCCESS,
   SET_CONTENT
 } from "./authTypes";
-import { updatePlayer } from "./playerActions";
+import { UPDATE_PLAYER } from "./playerTypes";
 
 // Check token and load user:
 export const loadPlayer = () => (dispatch, getState) => {
-  //User Loading:
   dispatch({ type: PLAYER_LOADING });
-
   axios
     .get("api/auth/player", tokenConfig(getState))
     .then(res => {
@@ -27,8 +25,10 @@ export const loadPlayer = () => (dispatch, getState) => {
         type: PLAYER_LOADED,
         payload: res.data
       });
+      console.log("UPDATE PLAYER WITH:");
+      console.log(res.data);
       dispatch({
-        type: updatePlayer,
+        type: UPDATE_PLAYER,
         payload: res.data
       });
     })

@@ -37,12 +37,11 @@ class RegisterContent extends Component {
     setContent: PropTypes.func.isRequired
   };
 
-  componentDidMount() {
-    if (this.props.msg) {
-      console.log("inside mount");
-      this.fadeMessage();
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.msg) {
+  //     this.fadeMessage();
+  //   }
+  // }
 
   componentDidUpdate(prevProps) {
     const { error } = this.props;

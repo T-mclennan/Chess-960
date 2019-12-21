@@ -55,10 +55,10 @@ router.get("/player", auth, (req, res) => {
   console.log(req.player.id);
   Player.findById(req.player.id)
     .select("-password")
-    .then(player => {
+    .then(data => {
       console.log("PLAYER:");
-      console.log(player);
-      res.json(player);
+      console.log(data);
+      res.json(data);
     });
 });
 

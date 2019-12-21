@@ -1,8 +1,12 @@
-import { UPDATE_PLAYER, SET_USERNAME } from "../actions/playerTypes";
+import {
+  UPDATE_PLAYER,
+  SET_USERNAME,
+  RETRIEVE_PLAYER
+} from "../actions/playerTypes";
 
 const initialState = {
-  userame: "",
-  id: "",
+  username: "",
+  _id: "",
   rating: "",
   currentGames: [],
   email: ""
@@ -10,7 +14,10 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case RETRIEVE_PLAYER:
     case UPDATE_PLAYER:
+      console.log("INSIDE REDUCER:");
+      console.log(action.paylod);
       return {
         ...state,
         // playerName: action.payload.username,
