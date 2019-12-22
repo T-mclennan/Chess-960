@@ -63,6 +63,7 @@ export const register = newUser => dispatch => {
         payload: res.data
         //payload: res.data.player
       });
+      dispatch(loadPlayer());
     })
     .catch(err => {
       console.log("ERROR!");
