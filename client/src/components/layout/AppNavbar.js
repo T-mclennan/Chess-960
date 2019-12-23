@@ -83,7 +83,9 @@ class AppNavbar extends Component {
       <div>
         <Navbar style={navStyle} dark expand="sm">
           <Container>
-            <NavbarBrand href="/">
+            <NavbarBrand
+              href={this.props.auth.isAuthenticated ? "/lobby" : "/"}
+            >
               <h2>
                 <FontAwesomeIcon
                   icon={faChessQueen}

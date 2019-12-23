@@ -53,13 +53,6 @@ class RegisterContent extends Component {
         this.setState({ msg: null });
       }
     }
-
-    //If authenticated, redirect to lobby:
-    if (this.props.isAuthenticated) {
-      console.log("is authenticated");
-      history.push("/lobby");
-      this.props.setContent("LOGIN");
-    }
   }
 
   fadeMessage = () => {
@@ -95,16 +88,12 @@ class RegisterContent extends Component {
     this.props.register(newPlayer);
   };
 
-  renderRedirect = () => {
-    // if (this.state.modal) {
-    //   return <Redirect to="/lobby" />;
-    // }
-  };
-
   render() {
-    if (this.state.redirect) {
-      console.log("redirect to lobby");
-      return <Redirect to="/lobby" />;
+    //If authenticated, redirect to lobby:
+    if (this.props.isAuthenticated) {
+      console.log("is authenticated");
+      history.push("/lobby");
+      this.props.setContent("LOGIN");
     }
 
     return (

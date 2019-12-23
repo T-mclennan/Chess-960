@@ -14,6 +14,7 @@ import { Redirect, Link } from "react-router-dom";
 import { login, setContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "../layout/css/AuthCard.css";
+import history from "../../history";
 
 class LoginContent extends Component {
   state = {
@@ -50,13 +51,6 @@ class LoginContent extends Component {
     }, 8000);
   };
 
-  // toggle = () => {
-  //   this.props.clearErrors();
-  //   this.setState({
-  //     modal: !this.state.modal
-  //   });
-  // };
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -75,6 +69,12 @@ class LoginContent extends Component {
   };
 
   render() {
+    //If authenticated, redirect to lobby:
+    if (this.props.isAuthenticated) {
+      console.log("is authenticated");
+      history.push("/lobby");
+    }
+
     return (
       <div>
         <CardBody>
