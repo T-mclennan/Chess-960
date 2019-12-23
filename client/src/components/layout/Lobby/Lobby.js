@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import GameWindow from "../GameWindow";
-import "./css/lobby.css";
+import "../css/lobby.css";
+import LeftSidebar from "./LeftSidebar";
+import MainDisplay from "./MainDisplay";
+import RightSidebar from "./RightSidebar";
 // import "../../../src/App.css";
 
 export class Lobby extends Component {
   render() {
     return (
       <div className="content">
-        <div className="leftsidebar"> </div>
-        <div className="main container"> </div>
-        <div className="rightsidebar"> </div>
+        <LeftSidebar />
+        <MainDisplay />
+        <RightSidebar />
       </div>
     );
   }

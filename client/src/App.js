@@ -4,7 +4,7 @@ import { Router, Route } from "react-router-dom";
 import { Redirect } from "react-router";
 import About from "./components/pages/About";
 import Landing from "./components/layout/Landing";
-import Lobby from "./components/layout/Lobby";
+import Lobby from "./components/layout/Lobby/Lobby";
 import Header from "./components/layout/Header";
 import AppNavbar from "./components/layout/AppNavbar";
 import { Provider, connect } from "react-redux";
@@ -26,7 +26,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <div className="App ">
-            <AppNavbar style={{ border: "1px solid #cccccc" }} />
+            <AppNavbar />
             <div className="display">
               <Route exact path="/" component={Landing} />
               <Route exact path="/about" component={About} />
