@@ -22,34 +22,19 @@ class App extends Component {
   }
 
   render() {
-    // let style = store.getState().auth.isAuthenticated
-    //   ? "insideApp"
-    //   : "outsideApp";
-
-    console.log("STORE!");
-    console.log(store.getState().auth.isAuthenticated);
     return (
-      // <Router>
       <Provider store={store}>
         <Router history={history}>
           <div className="App ">
-            <AppNavbar />
+            <AppNavbar style={{ border: "1px solid #cccccc" }} />
             <div className="display">
               <Route exact path="/" component={Landing} />
               <Route exact path="/about" component={About} />
               <Route exact path="/lobby" component={Lobby} />
-              {/* </div> */}
             </div>
-            {/* <div className="Wrapper" style={lobbyStyle}>
-
-               <Header /> 
-              {<GameWindow style={{ marginBottom: "15px" }} /> }
-            </div> */}
           </div>
         </Router>
       </Provider>
-      //{" "}
-      // </Router>
     );
   }
 }

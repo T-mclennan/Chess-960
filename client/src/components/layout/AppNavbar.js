@@ -126,7 +126,8 @@ const navStyle = {
   // textAlign: "center",
   padding: "10px",
   background: "#152331",
-  background: "linear-gradient(45deg, #000000, #152331)"
+  background: "linear-gradient(45deg, #000000, #152331)",
+  border: "1px solid #cccccc"
 };
 
 export default connect(mapStateToProps, {
