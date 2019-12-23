@@ -43,10 +43,10 @@ a {
   height: 100vh;
   background: url(../src/assets/images/background1.jpg) no-repeat center center
     fixed;
-  -webkit-background-size: contain;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
