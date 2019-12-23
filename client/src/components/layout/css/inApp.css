@@ -1,0 +1,9 @@
+body {
+  height: 100vh;
+  background: #0f2027;
+  background: -webkit-linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(45deg, #203a43, #0f2027, #2c5364);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

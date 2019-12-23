@@ -8,3 +8,14 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+/* .landing {
+  background: url(../../../assets/images/background1.jpg) no-repeat center
+    center fixed;
+  -webkit-background-size: contain;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+} */

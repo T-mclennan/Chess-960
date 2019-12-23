@@ -1,21 +1,16 @@
 import React, { Component } from "react";
 import {
   Button,
-  CardHeader,
-  CardFooter,
   CardBody,
-  CardTitle,
-  CardText,
   Form,
   FormGroup,
-  Label,
   Input,
   NavLink,
   Alert
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { login, setContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "../layout/css/AuthCard.css";
@@ -46,11 +41,6 @@ class LoginContent extends Component {
       } else {
         this.setState({ msg: null });
       }
-    }
-
-    //If authenticated, redirect to lobby:
-    if (this.props.isAuthenticated) {
-      this.setState({ redirect: true });
     }
   }
 
@@ -85,12 +75,6 @@ class LoginContent extends Component {
   };
 
   render() {
-    //Conditionally redirects to lobby:
-    if (this.state.redirect) {
-      this.setState({ redirect: false });
-      return <Redirect to="/lobby" />;
-    }
-
     return (
       <div>
         <CardBody>
@@ -140,11 +124,19 @@ class LoginContent extends Component {
           ) : null}
         </CardBody>
 
-        {/* Todo: Add links for forgot password, Regester */}
-        {/* <CardBody>
-          <Button color="link">forgot password?</Button>
-          <Button color="link">Register Now!</Button>
-        </CardBody> */}
+        {/* TODO: Style links for forgot password, Regester */}
+        {/* <span style={{ display: "inline-block" }}>
+          <Link
+            style={{ margin: "2rem" }}
+            href="#"
+            onClick={() => this.props.setContent("REGISTER")}
+          >
+            Register Here!
+          </Link>
+          <Link style={{ margin: "2rem" }} href="/password-recovery">
+            Forgot Password?
+          </Link>
+        </span> */}
       </div>
     );
   }

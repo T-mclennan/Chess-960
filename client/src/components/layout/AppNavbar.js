@@ -16,7 +16,9 @@ import Logout from "../auth/Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChessQueen } from "@fortawesome/free-solid-svg-icons";
+import { faChessQueen, faSkating } from "@fortawesome/free-solid-svg-icons";
+import history from "../../history";
+
 import "./css/Navbar.css";
 
 class AppNavbar extends Component {
@@ -28,12 +30,15 @@ class AppNavbar extends Component {
     auth: PropTypes.object.isRequired
   };
 
-  setRegister = () => {
-    this.props.setContent("REGISTER");
+  setRegister = async () => {
+    await this.props.setContent("REGISTER");
+    history.push("/");
+    console.log("register");
   };
 
-  setLogin = () => {
-    this.props.setContent("LOGIN");
+  setLogin = async () => {
+    await this.props.setContent("LOGIN");
+    history.push("/");
   };
 
   //class of mb-5 is margin bottom 5, moves everything else down 5 below the navbar
@@ -42,9 +47,12 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <span className="navbar-text mr-3">
-            <strong>{player ? `Welcome ${player.username}!` : ""}</strong>
-          </span>
+          <NavLink href="/about">About</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="https://github.com/T-mclennan/Chess-960">
+            Github
+          </NavLink>
         </NavItem>
         <NavItem>
           <Logout />
@@ -54,6 +62,14 @@ class AppNavbar extends Component {
 
     const guestLinks = (
       <Fragment>
+        <NavItem>
+          <NavLink href="/about">About</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="https://github.com/T-mclennan/Chess-960">
+            Github
+          </NavLink>
+        </NavItem>
         <NavItem>
           <NavLink onClick={this.setRegister}>Register</NavLink>
         </NavItem>
@@ -65,7 +81,7 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar style={navStyle} dark expand="sm" className="mb-5">
+        <Navbar style={navStyle} dark expand="sm">
           <Container>
             <NavbarBrand href="/">
               <h2>
@@ -81,14 +97,16 @@ class AppNavbar extends Component {
                 Chess 960
               </h2>
             </NavbarBrand>
+            {/* <Nav style={{ justifyContent: "center" }}>
+              <span className="navbar-text mx-3">
+                <strong style={{ fontSize: "1.3rem" }}>
+                  {player ? `Welcome ${player.username}!` : ""}
+                </strong>
+              </span>
+            </Nav> */}
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="https://github.com/T-mclennan/Chess-960">
-                    Github
-                  </NavLink>
-                </NavItem>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>

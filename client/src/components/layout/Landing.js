@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import AuthWindow from "../auth/AuthWindow";
-import "./css/Landing.css";
+import "../../../src/App.css";
 
 export class Landing extends Component {
   render() {
-    return <AuthWindow />;
+    return (
+      <div className="outsideApp">
+        <AuthWindow style={{ marginTop: "80px" }} />
+      </div>
+    );
   }
 }
 
