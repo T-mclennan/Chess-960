@@ -64,6 +64,8 @@ class LoginContent extends Component {
       password
     };
 
+    console.log("PLAYER:");
+    console.log(player);
     //Attempt to log in:
     this.props.login(player);
   };
@@ -162,11 +164,6 @@ const buttonStyle = {
   fontWeight: "bold"
   // borderColor: "black"
   // boxShadow: "0 19px 18px"
-};
-
-const headerStyle = {
-  display: "flex",
-  justifyContent: "center"
 };
 
 const mapStateToProps = state => ({

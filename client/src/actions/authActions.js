@@ -25,7 +25,6 @@ export const loadPlayer = () => (dispatch, getState) => {
         type: PLAYER_LOADED,
         payload: res.data
       });
-      console.log("UPDATE PLAYER WITH:");
       console.log(res.data);
       dispatch({
         type: UPDATE_PLAYER,
@@ -88,6 +87,8 @@ export const login = ({ username, password }) => dispatch => {
 
   //Request body:
   const body = JSON.stringify({ username, password });
+  console.log("PLAYER IS:");
+  console.log(body);
 
   axios
     .post("/api/auth", body, config)

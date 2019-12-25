@@ -12,15 +12,15 @@ const Player = require("../../models/players");
 // // @desc    Authenticates a player
 // // @access  Public
 router.post("/", (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   //   // Simple validation
-  if (!email || !password) {
+  if (!username || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
   //   // Check for existing player
-  Player.findOne({ email }).then(player => {
+  Player.findOne({ username }).then(player => {
     if (!player) return res.status(400).json({ msg: "Player does not exist" });
 
     //       // Validate password
