@@ -13,10 +13,10 @@
 }
 
 .main {
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
   flex: 7;
   border: 1px solid #cccccc;

@@ -7,8 +7,8 @@ export class MainDisplay extends Component {
   render() {
     return (
       <div className="main container">
-        <h2>Welcome to Chess 960!</h2>
-        <Button color="primary" size="lg">
+        <h2>Welcome {this.props.player}!</h2>
+        <Button color="primary" size="lg" style={{ marginLeft: "1rem" }}>
           Play Now!
         </Button>
       </div>

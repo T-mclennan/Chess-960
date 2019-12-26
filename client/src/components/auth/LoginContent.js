@@ -81,10 +81,7 @@ class LoginContent extends Component {
       <div>
         <CardBody>
           <Form onSubmit={this.onSubmit}>
-            <FormGroup
-              style={{ marginBottom: "0px" }}
-              // className="input_form"
-            >
+            <FormGroup style={{ marginBottom: "0px" }}>
               {/* <Label for="name">Username</Label> */}
               <Input
                 className="border border-info"
