@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Router, Route } from "react-router-dom";
 import { Redirect } from "react-router";
 import About from "./components/pages/About";
+import Settings from "./components/pages/Settings";
 import Landing from "./components/layout/Landing";
 import Lobby from "./components/layout/Lobby/Lobby";
 import Header from "./components/layout/Header";
@@ -31,6 +32,7 @@ class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path="/about" component={About} />
               <Route exact path="/lobby" component={Lobby} />
+              <Route exact path="/settings" component={Settings} />
             </div>
           </div>
         </Router>

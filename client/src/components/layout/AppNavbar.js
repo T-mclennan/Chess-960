@@ -55,6 +55,9 @@ class AppNavbar extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
+          <NavLink href="/settings">Settings</NavLink>
+        </NavItem>
+        <NavItem>
           <Logout />
         </NavItem>
       </Fragment>
