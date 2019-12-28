@@ -31,7 +31,8 @@
   align-items: center;
   color: #fff;
   /* text-align: center; */
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   background: #000000;
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
