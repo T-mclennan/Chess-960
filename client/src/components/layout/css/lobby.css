@@ -1,7 +1,7 @@
 .content {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 85vh;
   width: 100%;
   background: #0f2027;
   background: -webkit-linear-gradient(45deg, #0f2027, #203a43, #2c5364);
@@ -25,14 +25,24 @@
 
 .leftsidebar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  justify-content: flex-start;
+  align-items: center;
   color: #fff;
   /* text-align: center; */
-  /* padding: 10px; */
+  padding: 1rem;
   background: #000000;
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
   border: 1px solid #cccccc;
+  /* padding: 2rem; */
+}
+
+.icon {
+  /* flex: 1; */
+  justify-content: center;
+  margin: auto;
 }
 
 .rightsidebar {
