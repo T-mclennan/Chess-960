@@ -24,9 +24,11 @@
 }
 
 .leftsidebar {
+  display: flex;
+  flex-direction: row;
   color: #fff;
-  text-align: center;
-  padding: 10px;
+  /* text-align: center; */
+  /* padding: 10px; */
   background: #000000;
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
