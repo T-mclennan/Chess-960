@@ -15,8 +15,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router";
-import { register, setContent } from "../../actions/authActions";
+import { register, setAuthContent } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import history from "../../history";
 
@@ -93,7 +92,7 @@ class RegisterContent extends Component {
     if (this.props.isAuthenticated) {
       console.log("is authenticated");
       history.push("/lobby");
-      this.props.setContent("LOGIN");
+      this.props.setAuthContent("LOGIN");
     }
 
     return (
@@ -183,6 +182,8 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { register, clearErrors, setContent })(
-  RegisterContent
-);
+export default connect(mapStateToProps, {
+  register,
+  clearErrors,
+  setAuthContent
+})(RegisterContent);

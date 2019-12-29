@@ -29,7 +29,7 @@ const cardStyle = {
 };
 
 const mapStateToProps = state => ({
-  contentType: state.auth.contentType
+  contentType: state.auth.authContent
 });
 
 export default connect(mapStateToProps, {})(AuthWindow);

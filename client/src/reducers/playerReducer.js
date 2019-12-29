@@ -15,6 +15,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case RETRIEVE_PLAYER:
+      console.log("RETRIEVE PLAYRER:");
     case UPDATE_PLAYER:
       console.log("INSIDE REDUCER:");
       console.log(action.paylod);

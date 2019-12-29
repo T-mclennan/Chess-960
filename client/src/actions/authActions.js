@@ -11,7 +11,8 @@ import {
   LOGIN_FAIL,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
-  SET_CONTENT
+  SET_AUTH_CONTENT,
+  SET_MAIN_CONTENT
 } from "./authTypes";
 import { UPDATE_PLAYER } from "./playerTypes";
 
@@ -118,9 +119,17 @@ export const logout = () => {
 };
 
 //Set Content: Sets what content to show in the AuthCard:
-export const setContent = content => {
+export const setAuthContent = content => {
   return {
-    type: SET_CONTENT,
+    type: SET_AUTH_CONTENT,
+    payload: content
+  };
+};
+
+//Set Content: Sets what content to show in the AuthCard:
+export const setMainContent = content => {
+  return {
+    type: SET_MAIN_CONTENT,
     payload: content
   };
 };

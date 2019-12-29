@@ -7,7 +7,8 @@ import {
   LOGIN_FAIL,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
-  SET_CONTENT
+  SET_AUTH_CONTENT,
+  SET_MAIN_CONTENT
 } from "../actions/authTypes";
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
   isAuthenticated: null,
   isLoading: false,
   player: null,
-  contentType: "LOGIN"
+  authContent: "LOGIN",
+  mainContent: "DASHBOARD"
 };
 
 export default function(state = initialState, action) {
@@ -25,10 +27,15 @@ export default function(state = initialState, action) {
         ...state,
         isLoading: true
       };
-    case SET_CONTENT:
+    case SET_AUTH_CONTENT:
       return {
         ...state,
-        contentType: action.payload
+        authContent: action.payload
+      };
+    case SET_MAIN_CONTENT:
+      return {
+        ...state,
+        mainContent: action.payload
       };
     case PLAYER_LOADED:
       return {

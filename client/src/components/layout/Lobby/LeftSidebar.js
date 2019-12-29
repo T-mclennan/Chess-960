@@ -28,7 +28,7 @@ export class LeftSidebar extends Component {
             className="icon far fa-2x fa-in"
             size="2x"
           />
-          <div style={{ marginTop: "0.5rem" }}> Dashboard</div>
+          <div className="iconTitle"> Dashboard</div>
         </Button>
 
         <Button style={sidebarButton} onClick={{}}>
@@ -37,7 +37,7 @@ export class LeftSidebar extends Component {
             className="icon far fa-2x fa-in"
             size="2x"
           />
-          <div style={{ marginTop: "0.5rem" }}>Quickplay</div>
+          <div className="iconTitle">Quickplay</div>
         </Button>
 
         <Button style={sidebarButton} onClick={{}}>
@@ -46,7 +46,7 @@ export class LeftSidebar extends Component {
             className="icon far fa-2x fa-in"
             size="2x"
           />
-          <div style={{ marginTop: "0.5rem" }}>New Game</div>
+          <div className="iconTitle">New Game</div>
         </Button>
 
         <Button style={sidebarButton} onClick={{}}>
@@ -55,7 +55,7 @@ export class LeftSidebar extends Component {
             className="icon far fa-2x fa-in"
             size="2x"
           />
-          Find Game
+          <div className="iconTitle">Find Game</div>
         </Button>
 
         <Button style={sidebarButton} onClick={{}}>
@@ -64,7 +64,7 @@ export class LeftSidebar extends Component {
             className="icon far fa-2x fa-in"
             size="2x"
           />
-          Scoreboard
+          <div className="iconTitle">Scoreboard</div>
         </Button>
       </div>
     );

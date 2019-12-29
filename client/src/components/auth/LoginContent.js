@@ -10,8 +10,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Redirect, Link } from "react-router-dom";
-import { login, setContent } from "../../actions/authActions";
+import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import "../layout/css/AuthCard.css";
 import history from "../../history";
@@ -29,8 +28,7 @@ class LoginContent extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired,
-    setContent: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired
   };
 
   componentDidUpdate(prevProps) {
@@ -64,7 +62,7 @@ class LoginContent extends Component {
       password
     };
 
-    console.log("PLAYER:");
+    console.log("LoginContent:");
     console.log(player);
     //Attempt to log in:
     this.props.login(player);
@@ -73,7 +71,7 @@ class LoginContent extends Component {
   render() {
     //If authenticated, redirect to lobby:
     if (this.props.isAuthenticated) {
-      console.log("is authenticated");
+      console.log("is authenticated --");
       history.push("/lobby");
     }
 
@@ -168,6 +166,4 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { login, clearErrors, setContent })(
-  LoginContent
-);
+export default connect(mapStateToProps, { login, clearErrors })(LoginContent);

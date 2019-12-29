@@ -10,7 +10,7 @@ import {
   Container
 } from "reactstrap";
 import RegisterModal from "../auth/RegisterModal";
-import { setContent } from "../../actions/authActions";
+import { setAuthContent } from "../../actions/authActions";
 import LoginModal from "../auth/LoginModal";
 import Logout from "../auth/Logout";
 import { connect } from "react-redux";
@@ -31,13 +31,13 @@ class AppNavbar extends Component {
   };
 
   setRegister = async () => {
-    await this.props.setContent("REGISTER");
+    await this.props.setAuthContent("REGISTER");
     history.push("/");
     console.log("register");
   };
 
   setLogin = async () => {
-    await this.props.setContent("LOGIN");
+    await this.props.setAuthContent("LOGIN");
     history.push("/");
   };
 
@@ -136,5 +136,5 @@ const navStyle = {
 };
 
 export default connect(mapStateToProps, {
-  setContent
+  setAuthContent
 })(AppNavbar);

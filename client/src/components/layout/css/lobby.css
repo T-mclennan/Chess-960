@@ -19,7 +19,7 @@
   justify-content: center;
   align-items: flex-start;
   flex: 7;
-  border: 1px solid #cccccc;
+  border: 1px solid #585858;
   color: white;
 }
 
@@ -29,21 +29,26 @@
   /* align-items: flex-start; */
   justify-content: flex-start;
   align-items: center;
-  color: #fff;
+  /* color: #585858; */
   /* text-align: center; */
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  /* padding: 1rem; */
   background: #000000;
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
-  border: 1px solid #cccccc;
+  /* border: 1px solid #585858; */
   /* padding: 2rem; */
 }
 
 .icon {
   /* flex: 1; */
+  color: #707070;
   justify-content: center;
   margin: auto;
+}
+
+.iconTitle {
+  color: #707070;
+  margin-top: "0.5rem";
 }
 
 .rightsidebar {
@@ -53,5 +58,5 @@
   background: #152331;
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
-  border: 1px solid #cccccc;
+  /* border: 1px solid #585858; */
 }
