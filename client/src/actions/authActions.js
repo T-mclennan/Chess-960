@@ -92,12 +92,13 @@ export const login = ({ username, password }) => dispatch => {
 
   axios
     .post("/api/auth", body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+      dispatch(loadPlayer());
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")

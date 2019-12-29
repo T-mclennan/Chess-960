@@ -1,0 +1,52 @@
+/** src/Nav/UsersCard.css **/
+.card {
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.05);
+  max-width: 228px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+.card img {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+  padding: 15px 0;
+}
+.game-card__name {
+  font-weight: 400;
+  font-size: 16.5px;
+  line-height: 1.19;
+  letter-spacing: normal;
+  text-align: left;
+  color: #25292e;
+}
+.game-card__username {
+  font-size: 14px;
+  color: #707070;
+}
+.game-card__divider {
+  border: solid 0.5px #efefef;
+  width: 100%;
+  margin: 15px 0;
+}
+.game-card__stats {
+  display: flex;
+}
+.game-card__stats p {
+  font-size: 20px;
+}
+.game-card__stats div {
+  margin: 10px;
+  text-align: center;
+}
+.game-card__stats span {
+  color: #707070;
+  font-size: 12px;
+}
+
+/* https://scotch.io/tutorials/conditional-routing-with-react-router-v4 */
