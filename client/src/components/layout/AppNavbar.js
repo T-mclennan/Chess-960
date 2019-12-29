@@ -85,7 +85,7 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar style={navStyle} dark expand="sm">
-          <Container>
+          <Container fluid="true" className="navContainer">
             <NavbarBrand
               href={this.props.auth.isAuthenticated ? "/lobby" : "/"}
             >
@@ -96,7 +96,7 @@ class AppNavbar extends Component {
                     color: "white",
                     borderColor: "red",
                     borderWidth: "1px",
-                    marginRight: "0.5rem"
+                    marginRight: "0.7rem"
                   }}
                 />
                 Chess 960
@@ -129,7 +129,7 @@ const mapStateToProps = state => ({
 const navStyle = {
   color: "#fff",
   // textAlign: "center",
-  padding: "10px",
+  padding: "1rem 2.4rem 1rem 2.4rem",
   background: "#152331",
   background: "linear-gradient(45deg, #000000, #152331)"
   // border: "1px solid #cccccc"

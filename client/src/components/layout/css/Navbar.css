@@ -1,3 +1,18 @@
 .Fragment > li > a:hover {
   background-color: pink;
 }
+
+.navContainer {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.linkLabel {
+  color: red;
+}
+
+NavItem {
+  margin: 10rem;
+}
