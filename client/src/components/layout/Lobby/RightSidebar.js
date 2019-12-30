@@ -5,8 +5,17 @@ import "../css/lobby.css";
 
 export class RightSidebar extends Component {
   render() {
-    return <div className="rightsidebar"> </div>;
+    return (
+      <div className="rightsidebar">
+        <div style={playerBox}></div>
+      </div>
+    );
   }
 }
-
+const playerBox = {
+  margin: "1px",
+  width: "7rem",
+  // border: "1px solid #585858",
+  backgroundColor: "#707070"
+};
 export default RightSidebar;

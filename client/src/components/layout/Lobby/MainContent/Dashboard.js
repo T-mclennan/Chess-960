@@ -12,7 +12,7 @@ export class Dashboard extends Component {
           <Button
             color="primary"
             size="lg"
-            style={{ marginLeft: "1rem" }}
+            style={{ margin: "1rem" }}
             onClick={{}}
           >
             Play Now!

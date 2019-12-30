@@ -1,14 +1,28 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Dashboard from "./MainContent/Dashboard";
+import FindGame from "./MainContent/FindGame";
+import NewGame from "./MainContent/NewGame";
+import Standings from "./MainContent/Standings";
+import { Container } from "reactstrap";
 import "../css/lobby.css";
-import { Button } from "reactstrap";
 
 export class MainDisplay extends Component {
   render() {
-    return <Dashboard />;
+    const { contentType } = this.props;
+    return (
+      <Container className="mainContainer">
+        {contentType === "DASHBOARD" && <Dashboard />}
+        {contentType === "NEWGAME" && <NewGame />}
+        {contentType === "FINDGAME" && <FindGame />}
+        {contentType === "STANDINGS" && <Standings />}
+      </Container>
+    );
   }
 }
 
-export default connect()(MainDisplay);
+const mapStateToProps = state => ({
+  contentType: state.auth.mainContent
+});
+
+export default connect(mapStateToProps, {})(MainDisplay);

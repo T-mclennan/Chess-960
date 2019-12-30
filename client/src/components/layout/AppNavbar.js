@@ -33,7 +33,6 @@ class AppNavbar extends Component {
   setRegister = async () => {
     await this.props.setAuthContent("REGISTER");
     history.push("/");
-    console.log("register");
   };
 
   setLogin = async () => {
@@ -129,7 +128,7 @@ const mapStateToProps = state => ({
 const navStyle = {
   color: "#fff",
   // textAlign: "center",
-  padding: "1rem 2.4rem 1rem 2.4rem",
+  padding: "1rem 1.6rem",
   background: "#152331",
   background: "linear-gradient(45deg, #000000, #152331)"
   // border: "1px solid #cccccc"

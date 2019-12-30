@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { setMainContent } from "../../../actions/authActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChessQueen,
-  faSkating,
-  faExclamation,
   faListOl,
   faSearch,
   faChessBoard
@@ -14,15 +13,20 @@ import {
 
 import { faPlayCircle, faUser } from "@fortawesome/free-regular-svg-icons";
 import FontAwesome from "react-fontawesome";
-// import faStyles from "font-awesome/css/font-awesome.css";
 import "../css/lobby.css";
-// import "../../../src/App.css";
 
 export class LeftSidebar extends Component {
+  setContent = content => {
+    this.props.setMainContent(content);
+  };
+
   render() {
     return (
       <div className="leftsidebar">
-        <Button style={sidebarButton} onClick={{}}>
+        <Button
+          style={sidebarButton}
+          onClick={() => this.setContent("DASHBOARD")}
+        >
           <FontAwesomeIcon
             icon={faUser}
             className="icon far fa-2x fa-in"
@@ -40,7 +44,10 @@ export class LeftSidebar extends Component {
           <div className="iconTitle">Quickplay</div>
         </Button>
 
-        <Button style={sidebarButton} onClick={{}}>
+        <Button
+          style={sidebarButton}
+          onClick={() => this.setContent("NEWGAME")}
+        >
           <FontAwesomeIcon
             icon={faChessBoard}
             className="icon far fa-2x fa-in"
@@ -49,7 +56,10 @@ export class LeftSidebar extends Component {
           <div className="iconTitle">New Game</div>
         </Button>
 
-        <Button style={sidebarButton} onClick={{}}>
+        <Button
+          style={sidebarButton}
+          onClick={() => this.setContent("FINDGAME")}
+        >
           <FontAwesomeIcon
             icon={faSearch}
             className="icon far fa-2x fa-in"
@@ -58,7 +68,10 @@ export class LeftSidebar extends Component {
           <div className="iconTitle">Find Game</div>
         </Button>
 
-        <Button style={sidebarButton} onClick={{}}>
+        <Button
+          style={sidebarButton}
+          onClick={() => this.setContent("STANDINGS")}
+        >
           <FontAwesomeIcon
             icon={faListOl}
             className="icon far fa-2x fa-in"
@@ -72,6 +85,7 @@ export class LeftSidebar extends Component {
 }
 
 const sidebarButton = {
+  color: "#707070",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -83,4 +97,10 @@ const sidebarButton = {
   borderColor: "black"
 };
 
-export default LeftSidebar;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, {
+  setMainContent
+})(LeftSidebar);
