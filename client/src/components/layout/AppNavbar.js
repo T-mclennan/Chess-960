@@ -9,9 +9,7 @@ import {
   NavItem,
   Container
 } from "reactstrap";
-import RegisterModal from "../auth/RegisterModal";
 import { setAuthContent } from "../../actions/authActions";
-import LoginModal from "../auth/LoginModal";
 import Logout from "../auth/Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";

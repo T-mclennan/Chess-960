@@ -9,67 +9,38 @@ import axios from "axios";
 /*  TODO: document GameWindow component
 //  
 */
-class GameWindow extends Component {
+class Game extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      playerName: "",
-      gameID: "",
-      color: "",
-      fen: ""
-    };
   }
 
   //Adds name and fetches new game:
   addName = name => {
     // console.log(name)
     axios
-      .post("api/players/checkUsername", { username: name })
-      .then(player => {
-        // console.log(player)
-        axios
-          .post("/api/games/findGameForPlayer", { username: name })
-          .then(response => {
-            // console.log(response)
-            // console.log(response.data.gameID)
-            const { color, gameID, fen } = response.data;
-            const payload = {
-              color,
-              ID: gameID,
-              fen
-            };
-            // console.log('fen: '+response.data.fen)
-            this.props.initializeGame(payload);
-            const { _id, currentGames, rating } = player.data;
-            const player = {
-              username: name,
-              ID: _id,
-              games: currentGames,
-              rating
-            };
-            this.props.updatePlayer(player);
-
-            this.setState({
-              playerName: name
-              //  gameID: response.data.gameID,
-              //  color: response.data.color,
-              //  fen: response.data.fen
-            });
-          });
+      .post("/api/games/findGameForPlayer", { username: name })
+      .then(response => {
+        // console.log(response)
+        // console.log(response.data.gameID)
+        const { color, gameID, fen } = response.data;
+        const payload = {
+          color,
+          ID: gameID,
+          fen
+        };
+        // console.log('fen: '+response.data.fen)
+        this.props.initializeGame(payload);
       })
       .catch(e => console.log(e));
   };
 
   render() {
-    const { playerName, gameID, color, fen } = this.state;
-
     return (
       <div className="centered" style={containerStyle}>
         {!this.state.playerName ? (
           <NameInputForm setUsername={this.addName} />
         ) : (
-          <div>{ChessGame(playerName, gameID, color, fen)}</div>
+          <div>{ChessGame()}</div>
         )}
       </div>
     );
@@ -85,6 +56,4 @@ const mapStateToProps = state => ({
   color: state.game.color
 });
 
-export default connect(mapStateToProps, { updatePlayer, initializeGame })(
-  GameWindow
-);
+export default connect(mapStateToProps, { updatePlayer, initializeGame })(Game);
