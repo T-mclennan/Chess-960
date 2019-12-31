@@ -12,7 +12,7 @@
     - JWT and Local Storage are used for Authentication and player permissions
     - Redux is used for application level state management of Authentication, Player, Game, and Error data
     - Axios is used for server requests
-    - react-router-dom is used for routing
+    - React Router Dom is used for client-side routing
     - Socket.io is used as websocket for gameplay and player display in lobby
  
 # Authentication:
