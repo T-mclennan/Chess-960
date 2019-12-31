@@ -9,7 +9,7 @@ export class Standings extends Component {
       <div className="main container">
         <h3>Standings!</h3>
         <hr />
-        <Table style={TableStyle} bordered responsive dark striped hover>
+        <Table bordered responsive dark striped hover>
           <thead>
             <tr>
               <th>#</th>

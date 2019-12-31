@@ -54,6 +54,12 @@
   box-shadow: none !important;
 }
 
+.form-check {
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .icon {
   /* flex: 1; */
   /* color: #707070; */
@@ -74,6 +80,10 @@
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
   /* border: 1px solid #585858; */
+}
+
+.dropdown {
+  width: 20rem;
 }
 
 .playerBox {

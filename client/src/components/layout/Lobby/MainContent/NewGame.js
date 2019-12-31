@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../../css/lobby.css";
 import { connect } from "react-redux";
 import {
+  Col,
+  FormText,
   Button,
   CardHeader,
   CardFooter,
@@ -85,61 +87,55 @@ export class NewGame extends Component {
 
   render() {
     return (
-      <div className="main container">
-        <CardBody>
-          <Form onSubmit={this.onSubmit}>
-            <FormGroup style={{ marginBottom: "0px" }}>
-              {/* <Label for="username">Username</Label> */}
-              <Input
-                className="border border-info"
-                autoFocus={true}
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-                className="mb-3"
-                onChange={this.onChange}
-              />
+      <div className="main container" style={{ scrollBehavior: "auto" }}>
+        <h4>Please select from the following game options:</h4>
+        <Form style={{ marginTop: "1.5rem" }}>
+          <FormGroup className="dropdown">
+            <Label for="exampleSelect">Color</Label>
+            <Input type="select" name="select" id="exampleSelect">
+              <option>White</option>
+              <option>Black</option>
+            </Input>
+          </FormGroup>
 
-              {/* <Label for="password">Password</Label> */}
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                className="mb-3"
-                onChange={this.onChange}
-              />
+          <FormGroup>
+            <Label for="exampleSelect">Time</Label>
+            <Input type="select" name="select" id="exampleSelect">
+              <option>None</option>
+              <option>1</option>
+              <option>2</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+            </Input>
+          </FormGroup>
 
-              {/* <Label for="email">Email</Label> */}
-              <Input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="Email"
-                className="mb-3"
-                onChange={this.onChange}
-              />
+          <FormGroup>
+            <Label for="exampleSelect">Style</Label>
+            <Input type="select" name="select" id="exampleSelect">
+              <option>960</option>
+              <option>Standard</option>
+            </Input>
+          </FormGroup>
 
-              <Button style={buttonStyle} block>
-                <h5>Create Game</h5>
-              </Button>
-            </FormGroup>
-          </Form>
-          {this.state.msg ? (
-            <Alert
-              style={{
-                marginTop: "1rem",
-                marginBottom: "0px",
-                fontSize: "1rem",
-                textAlign: "center"
-              }}
-              color={"danger"}
-            >
-              {this.state.msg}
-            </Alert>
-          ) : null}
-        </CardBody>
+          <FormGroup>
+            <Label for="exampleSelect">Select</Label>
+            <Input type="select" name="select" id="exampleSelect">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Input>
+          </FormGroup>
+
+          {/* <FormGroup row></FormGroup> */}
+          <FormGroup style={buttonGroup} check row>
+            <Button style={buttonStyle} block>
+              Create Game
+            </Button>
+          </FormGroup>
+        </Form>
       </div>
     );
   }
@@ -156,6 +152,13 @@ const buttonStyle = {
   fontWeight: "bold",
   boxShadow: "0 1px 0.5px"
   // boxShadow: "0 19px 18px"
+};
+
+const buttonGroup = {
+  paddingLeft: "0px",
+  marginLeft: "0px",
+  marginRight: "0px",
+  marginTop: "2rem"
 };
 
 const mapStateToProps = state => ({
