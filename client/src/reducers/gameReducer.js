@@ -1,29 +1,31 @@
-import {GET_GAME,
-        UPDATE_GAME,
-        MAKE_MOVE,
-        START_GAME,
-        CHANGE_TURN,
-        JOIN_GAME,
-        INITIALIZE_GAME,
-        LOAD_GAME,
-        UPDATE_PLAYERS
-        } from '../actions/gameTypes'
+import {
+  GET_GAME,
+  GAME_LOADED,
+  GAME_LOADING,
+  UPDATE_GAME,
+  MAKE_MOVE,
+  START_GAME,
+  CHANGE_TURN,
+  JOIN_GAME,
+  INITIALIZE_GAME,
+  LOAD_GAME,
+  UPDATE_PLAYERS
+} from "../actions/gameTypes";
 
 const initialState = {
-    white: '',
-    black: '',
-    fen: '',
-    started: false,
-    history: [],
-    turn: 'white',
-    color: '',
-    gameID: '',
-
-}
-
+  white: "",
+  black: "",
+  fen: "",
+  started: false,
+  history: [],
+  turn: "white",
+  color: "",
+  gameID: "",
+  isLoading: false
+};
 
 export default function(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_GAME:
       return {
         ...state
@@ -32,6 +34,13 @@ export default function(state = initialState, action) {
     case JOIN_GAME:
       return {
         //TODO
+      };
+
+    case GAME_LOADING:
+    case GAME_LOADED:
+      return {
+        ...state,
+        isLoading: !this.isLoading
       };
 
     case UPDATE_GAME:
@@ -43,25 +52,28 @@ export default function(state = initialState, action) {
         started: action.payload.started,
         history: action.payload.history,
         turn: action.payload.turn,
-        gameID: action.payload._id,
+        gameID: action.payload._id
       };
 
     case START_GAME:
       return {
-        ...state,
+        ...state
       };
 
     case MAKE_MOVE:
       return {
         ...state,
         fen: action.payload.fen,
-        history:action.payload.history
+        history: action.payload.history
       };
-    
+
     case CHANGE_TURN:
-      let current = state.turn
-      if (current === 'white') { current = 'black'}
-      else {current = 'white'}
+      let current = state.turn;
+      if (current === "white") {
+        current = "black";
+      } else {
+        current = "white";
+      }
       return {
         ...state,
         turn: current
@@ -72,7 +84,7 @@ export default function(state = initialState, action) {
         ...state,
         color: action.payload.color,
         gameID: action.payload.ID,
-        fen: action.payload.fen,
+        fen: action.payload.fen
       };
 
     case LOAD_GAME:
@@ -85,7 +97,7 @@ export default function(state = initialState, action) {
         history: action.payload.history,
         turn: action.payload.turn,
         color: action.payload.color,
-        gameID: action.payload._id,
+        gameID: action.payload._id
       };
 
     case UPDATE_PLAYERS:
@@ -93,10 +105,10 @@ export default function(state = initialState, action) {
         ...state,
         white: action.payload.white,
         black: action.payload.black,
-        started: action.payload.started,
+        started: action.payload.started
       };
 
     default:
       return state;
   }
-} 
+}

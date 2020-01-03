@@ -5,27 +5,25 @@ import {
   Col,
   FormText,
   Button,
-  CardHeader,
-  CardFooter,
-  CardBody,
-  CardTitle,
-  CardText,
   Form,
   FormGroup,
   Label,
   Input,
-  NavLink,
   Alert
 } from "reactstrap";
 import PropTypes from "prop-types";
 import { clearErrors } from "../../../../actions/errorActions";
+import { createGame } from "../../../../actions/gameActions";
 import history from "../../../../history";
 
 export class NewGame extends Component {
   state = {
     color: "",
-    timed: "",
+    white: "",
+    black: "",
+    timer: "",
     style: "",
+    standings: "",
     msg: null
   };
 
@@ -72,17 +70,25 @@ export class NewGame extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { username, email, password } = this.state;
+    //Set player to appropriate color:
+    if (this.state.color === "White") {
+      this.setState({ white: this.props.player.username });
+    } else if (this.state.color === "Black") {
+      this.setState({ black: this.props.player.username });
+    } else console.log("Color selection error.");
+    const { white, black, timer, style, standings } = this.state;
 
-    //Create user object:
-    const newPlayer = {
-      username,
-      email,
-      password
+    //Create proto-game object:
+    const newGame = {
+      white,
+      black,
+      timer,
+      style,
+      standings
     };
 
-    //Attempt to register:
-    this.props.register(newPlayer);
+    //Attempt to create game:
+    this.props.createGame(newGame);
   };
 
   render() {
@@ -91,17 +97,17 @@ export class NewGame extends Component {
         <h4>Please select from the following game options:</h4>
         <Form style={{ marginTop: "1.5rem" }}>
           <FormGroup className="dropdown">
-            <Label for="exampleSelect">Color</Label>
-            <Input type="select" name="select" id="exampleSelect">
+            <Label for="color">Color</Label>
+            <Input type="select" name="color" id="color">
               <option>White</option>
               <option>Black</option>
             </Input>
           </FormGroup>
 
           <FormGroup>
-            <Label for="exampleSelect">Time</Label>
-            <Input type="select" name="select" id="exampleSelect">
-              <option>None</option>
+            <Label for="timer">Timer</Label>
+            <Input type="select" name="timer" id="timer">
+              <option>Unlimited</option>
               <option>1</option>
               <option>2</option>
               <option>5</option>
@@ -119,19 +125,16 @@ export class NewGame extends Component {
           </FormGroup>
 
           <FormGroup>
-            <Label for="exampleSelect">Select</Label>
+            <Label for="exampleSelect">Scoring</Label>
             <Input type="select" name="select" id="exampleSelect">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option>Unrated</option>
+              <option>Rated</option>
             </Input>
           </FormGroup>
 
           {/* <FormGroup row></FormGroup> */}
           <FormGroup style={buttonGroup} check row>
-            <Button style={buttonStyle} block>
+            <Button style={buttonStyle} onClick={{}} block>
               Create Game
             </Button>
           </FormGroup>
@@ -162,7 +165,7 @@ const buttonGroup = {
 };
 
 const mapStateToProps = state => ({
-  player: state.player.username
+  player: state.player
 });
 
-export default connect(mapStateToProps, {})(NewGame);
+export default connect(mapStateToProps, { createGame })(NewGame);
