@@ -4,9 +4,13 @@ const bcrypt = require("bcryptjs");
 const keys = require("../../config/keys");
 const jwt = require("jsonwebtoken");
 
-//TODO: ADD auth middleware
-//
-//
+// @route  GET api/player/addGameToList
+// @desc   Adds a game to players current game list:
+// @access private
+
+//TODO: addGameToList
+// takes in gameID
+// update games[] in player's profile
 
 //Player Model:
 const Player = require("../../models/players");

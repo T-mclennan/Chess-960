@@ -82,7 +82,7 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar style={navStyle} dark expand="sm">
-          <Container fluid="true" className="navContainer">
+          <Container className="navContainer">
             <NavbarBrand
               href={this.props.auth.isAuthenticated ? "/lobby" : "/"}
             >

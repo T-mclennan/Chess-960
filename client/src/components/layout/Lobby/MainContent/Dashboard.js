@@ -9,12 +9,7 @@ export class Dashboard extends Component {
         <h3>Dashboard Component for {this.props.player}!</h3>
         <h3>Click here to quickplay:</h3>
         <div>
-          <Button
-            color="primary"
-            size="lg"
-            style={{ margin: "1rem" }}
-            onClick={{}}
-          >
+          <Button color="primary" size="lg" style={{ margin: "1rem" }}>
             Play Now!
           </Button>
         </div>

@@ -115,7 +115,7 @@ router.post("/updateGame", auth, (req, res) => {
 //@desc   Create a game
 //@access private
 //Arguments: {style, white, black, timer, scoring}
-router.post("/", auth, (req, res) => {
+router.post("/", (req, res) => {
   const standard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   const newGame = new Game({
     fen: req.body.style === "960" ? board.generateBoard() : standard,

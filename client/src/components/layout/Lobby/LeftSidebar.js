@@ -35,7 +35,7 @@ export class LeftSidebar extends Component {
           <div className="iconTitle"> Dashboard</div>
         </Button>
 
-        <Button style={sidebarButton} onClick={{}}>
+        <Button style={sidebarButton}>
           <FontAwesomeIcon
             icon={faPlayCircle}
             className="icon far fa-2x fa-in"

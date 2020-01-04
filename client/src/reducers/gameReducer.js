@@ -37,10 +37,15 @@ export default function(state = initialState, action) {
       };
 
     case GAME_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      };
+
     case GAME_LOADED:
       return {
         ...state,
-        isLoading: !this.isLoading
+        isLoading: false
       };
 
     case UPDATE_GAME:

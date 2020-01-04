@@ -35,12 +35,10 @@ class Game extends Component {
   };
 
   render() {
+    //TODO: clean up render code for Game component:
     return (
       <div className="centered" style={containerStyle}>
-        {!this.state.playerName ? (
-          <NameInputForm setUsername={this.addName} />
-        ) : (
-          <div>{ChessGame()}</div>
+        <div>{ChessGame()}</div>
         )}
       </div>
     );

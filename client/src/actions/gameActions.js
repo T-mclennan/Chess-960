@@ -17,6 +17,8 @@ import {
   CHANGE_TURN
 } from "./gameTypes";
 
+import history from "../../src/history";
+
 export const getGame = () => {
   return {
     type: GET_GAME
@@ -38,10 +40,10 @@ export const initializeGame = partialGame => {
 };
 
 // Input: {white, black, timer, style, scoring} coming from NewGame.js form
-export const createGame = input => (dispatch, getState) => {
+export const createGame = input => dispatch => {
   dispatch({ type: GAME_LOADING });
   axios
-    .post(`api/game/:${input}`, tokenConfig(getState))
+    .post(`api/games`, input)
     .then(res => {
       dispatch({
         type: GAME_LOADED,
@@ -52,6 +54,9 @@ export const createGame = input => (dispatch, getState) => {
         type: UPDATE_GAME,
         payload: res.data
       });
+    })
+    .then(() => {
+      history.push("/game");
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

@@ -18,12 +18,10 @@ import history from "../../../../history";
 
 export class NewGame extends Component {
   state = {
-    color: "",
-    white: "",
-    black: "",
-    timer: "",
-    style: "",
-    standings: "",
+    color: "White",
+    timer: "Unlimited",
+    style: "960",
+    standings: "Unrated",
     msg: null
   };
 
@@ -69,44 +67,62 @@ export class NewGame extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    console.log("button clicked");
 
-    //Set player to appropriate color:
-    if (this.state.color === "White") {
-      this.setState({ white: this.props.player.username });
-    } else if (this.state.color === "Black") {
-      this.setState({ black: this.props.player.username });
-    } else console.log("Color selection error.");
-    const { white, black, timer, style, standings } = this.state;
+    const { timer, style, standings } = this.state;
 
     //Create proto-game object:
-    const newGame = {
-      white,
-      black,
+    let newGame = {
+      white: "",
+      black: "",
       timer,
       style,
       standings
     };
 
+    //Set player to appropriate color:
+    if (this.state.color === "White") {
+      newGame.white = this.props.player.username;
+    } else if (this.state.color === "Black") {
+      newGame.black = this.props.player.username;
+    } else console.log("Color selection error.");
+
+    console.log("Inside NEWGAME:");
+    console.log(newGame);
+
     //Attempt to create game:
     this.props.createGame(newGame);
+
+    // if (this.props.gameID) {
+    // }
   };
 
   render() {
     return (
       <div className="main container" style={{ scrollBehavior: "auto" }}>
         <h4>Please select from the following game options:</h4>
-        <Form style={{ marginTop: "1.5rem" }}>
+        <Form style={{ marginTop: "1.5rem" }} onSubmit={this.onSubmit}>
           <FormGroup className="dropdown">
             <Label for="color">Color</Label>
-            <Input type="select" name="color" id="color">
+            <Input
+              type="select"
+              name="color"
+              id="color"
+              onChange={this.onChange}
+            >
               <option>White</option>
               <option>Black</option>
             </Input>
-          </FormGroup>
+            {/* </FormGroup> */}
 
-          <FormGroup>
+            {/* <FormGroup> */}
             <Label for="timer">Timer</Label>
-            <Input type="select" name="timer" id="timer">
+            <Input
+              type="select"
+              name="timer"
+              id="timer"
+              onChange={this.onChange}
+            >
               <option>Unlimited</option>
               <option>1</option>
               <option>2</option>
@@ -114,31 +130,55 @@ export class NewGame extends Component {
               <option>10</option>
               <option>20</option>
             </Input>
-          </FormGroup>
+            {/* </FormGroup> */}
 
-          <FormGroup>
+            {/* <FormGroup> */}
             <Label for="exampleSelect">Style</Label>
-            <Input type="select" name="select" id="exampleSelect">
+            <Input
+              type="select"
+              name="style"
+              id="style"
+              onChange={this.onChange}
+            >
               <option>960</option>
               <option>Standard</option>
             </Input>
-          </FormGroup>
+            {/* </FormGroup> */}
 
-          <FormGroup>
+            {/* <FormGroup> */}
             <Label for="exampleSelect">Scoring</Label>
-            <Input type="select" name="select" id="exampleSelect">
+            <Input
+              type="select"
+              name="scoring"
+              id="scoring"
+              onChange={this.onChange}
+            >
               <option>Unrated</option>
               <option>Rated</option>
             </Input>
-          </FormGroup>
+            {/* </FormGroup> */}
 
-          {/* <FormGroup row></FormGroup> */}
-          <FormGroup style={buttonGroup} check row>
-            <Button style={buttonStyle} onClick={{}} block>
+            {/* <FormGroup row></FormGroup> */}
+            {/* <FormGroup style={buttonGroup} row> */}
+            <Button style={buttonStyle} block>
               Create Game
             </Button>
           </FormGroup>
         </Form>
+
+        {this.state.msg ? (
+          <Alert
+            style={{
+              marginTop: "1rem",
+              marginBottom: "0px",
+              fontSize: "1rem",
+              textAlign: "center"
+            }}
+            color={"danger"}
+          >
+            {this.state.msg}
+          </Alert>
+        ) : null}
       </div>
     );
   }
