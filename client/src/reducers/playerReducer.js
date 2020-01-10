@@ -1,5 +1,6 @@
 import {
   UPDATE_PLAYER,
+  UPDATE_GAME_LIST,
   SET_USERNAME,
   RETRIEVE_PLAYER
 } from "../actions/playerTypes";
@@ -15,10 +16,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case RETRIEVE_PLAYER:
-      console.log("RETRIEVE PLAYRER:");
     case UPDATE_PLAYER:
-      console.log("INSIDE REDUCER:");
-      console.log(action.paylod);
       return {
         ...state,
         // playerName: action.payload.username,
@@ -32,6 +30,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         playerName: action.payload.username
+      };
+
+    case UPDATE_GAME_LIST:
+      return {
+        ...state,
+        currentGames: action.payload
       };
 
     default:

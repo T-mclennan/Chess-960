@@ -4,18 +4,35 @@ const bcrypt = require("bcryptjs");
 const keys = require("../../config/keys");
 const jwt = require("jsonwebtoken");
 
-// @route  GET api/player/addGameToList
-// @desc   Adds a game to players current game list:
-// @access private
-
-//TODO: addGameToList
-// takes in gameID
-// update games[] in player's profile
-
 //Player Model:
 const Player = require("../../models/players");
 
-// @route  GET api/player
+// @route  GET api/players/addGameToList
+// @desc   Adds a game to players current game list:
+// @access public
+
+//TODO: addGameToList
+// input: { userID, gameID }
+// update games[] in player's profile
+router.post("/addGameToList", (req, res) => {
+  Player.findOne({ _id: req.body.userID })
+    .then(player => {
+      //pushes GameID into a new copy of gameList, updates player's currentGames:
+      let gameList = player.currentGames;
+      gameList.push(req.body.gameID);
+      Player.updateOne(
+        { _id: player._id },
+        { $set: { currentGames: gameList } }
+      )
+        .then(() => {
+          res.json(gameList);
+        })
+        .catch(e => console.log(e));
+    })
+    .catch(err => res.status(404).json({ success: false }));
+});
+
+// @route  GET api/players
 // @desc   Get a player by id:
 // @access private
 router.get("/", (req, res) => {

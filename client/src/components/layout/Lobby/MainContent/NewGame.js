@@ -89,12 +89,10 @@ export class NewGame extends Component {
 
     console.log("Inside NEWGAME:");
     console.log(newGame);
+    console.log(this.props.player._id);
 
     //Attempt to create game:
-    this.props.createGame(newGame);
-
-    // if (this.props.gameID) {
-    // }
+    this.props.createGame({ newGame, userID: this.props.player._id });
   };
 
   render() {

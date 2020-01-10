@@ -2,15 +2,10 @@ import axios from "axios";
 import { returnErrors } from "./errorActions";
 import { tokenConfig } from "./authActions";
 import {
-  CREATE_GAME,
-  DELETE_GAME,
   UPDATE_GAME,
   GAME_LOADING,
   GAME_LOADED,
-  START_GAME,
   GET_GAME,
-  LOAD_GAME,
-  JOIN_GAME,
   MAKE_MOVE,
   INITIALIZE_GAME,
   UPDATE_PLAYERS,
@@ -18,6 +13,7 @@ import {
 } from "./gameTypes";
 
 import history from "../../src/history";
+import { addGameToList } from "./playerActions";
 
 export const getGame = () => {
   return {
@@ -42,18 +38,24 @@ export const initializeGame = partialGame => {
 // Input: {white, black, timer, style, scoring} coming from NewGame.js form
 export const createGame = input => dispatch => {
   dispatch({ type: GAME_LOADING });
+  console.log("Inside CreateGAME");
+  console.log(input);
   axios
-    .post(`api/games`, input)
+    .post(`api/games`, input.newGame)
     .then(res => {
+      console.log("api/games response:");
+      console.log(res.data);
       dispatch({
         type: GAME_LOADED,
         payload: res.data
       });
-      console.log(res.data);
       dispatch({
         type: UPDATE_GAME,
         payload: res.data
       });
+      console.log("addGame payload:");
+      console.log({ userID: input.userID, gameID: res.data._id });
+      dispatch(addGameToList({ userID: input.userID, gameID: res.data._id }));
     })
     .then(() => {
       history.push("/game");
