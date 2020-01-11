@@ -24,7 +24,7 @@ export const setUsername = username => {
   };
 };
 
-//Login User:
+//Adds a new game to the player's list of currentGames:
 export const addGameToList = ({ userID, gameID }) => dispatch => {
   //Headers:
   const config = {
@@ -42,6 +42,35 @@ export const addGameToList = ({ userID, gameID }) => dispatch => {
     .post("api/players/addGameToList", body, config)
     .then(res => {
       console.log("inside api/player/addGameToList:");
+      console.log(res);
+      dispatch({
+        type: UPDATE_GAME_LIST,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+//Removes a game from the player's list of currentGames:
+export const removeGameFromList = ({ userID, gameID }) => dispatch => {
+  //Headers:
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  //Request body:
+  const body = JSON.stringify({ userID, gameID });
+  console.log(`Removing game ${gameID} from user ${userID}.`);
+  console.log(body);
+
+  axios
+    .post("api/players/removeGameFromList", body, config)
+    .then(res => {
+      console.log("inside api/player/removeGameFromList:");
       console.log(res);
       dispatch({
         type: UPDATE_GAME_LIST,

@@ -84,7 +84,9 @@ class HumanVsHuman extends Component {
         this.props.updateGame(res.data);
       })
       .then(() => this.logic.load(this.props.fen))
-      .then(() => this.joinGame())
+      .then(() => {
+        if (!this.props.started) this.joinGame();
+      })
       .catch(e => console.log(e));
   };
 
