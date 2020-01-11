@@ -1,17 +1,56 @@
 import React, { Component } from "react";
-import "../../css/lobby.css";
-import { Button } from "reactstrap";
+import "../../css/Dashboard.css";
+import GameCard from "./GameCard";
 import { connect } from "react-redux";
 export class Dashboard extends Component {
   render() {
     return (
-      <div className="main container">
-        <h3>Dashboard Component for {this.props.player}!</h3>
-        <h3>Click here to quickplay:</h3>
-        <div>
-          <Button color="primary" size="lg" style={{ margin: "1rem" }}>
-            Play Now!
-          </Button>
+      <div className="dashboard">
+        <div className="headerContent">
+          <h3>Current games for {this.props.player.username}: </h3>
+        </div>
+        <div className="gameList ">
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
+
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
+
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
+
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
+
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
+
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
+
+          <GameCard
+            white={this.props.player.username}
+            black={"Sammy"}
+            fen={this.props.game.fen}
+          />
         </div>
       </div>
     );
@@ -19,7 +58,8 @@ export class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  player: state.player.username
+  player: state.player,
+  game: state.game
 });
 
 export default connect(mapStateToProps, {})(Dashboard);
