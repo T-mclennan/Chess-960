@@ -14,6 +14,7 @@ import {
 } from "./gameTypes";
 
 import history from "../../src/history";
+import { setMainContent } from "../actions/authActions";
 import { addGameToList } from "./playerActions";
 
 export const getGame = () => {
@@ -29,12 +30,12 @@ export const updateGame = game => {
   };
 };
 
-export const initializeGame = partialGame => {
-  return {
-    type: INITIALIZE_GAME,
-    payload: partialGame
-  };
-};
+// export const initializeGame = partialGame => {
+//   return {
+//     type: INITIALIZE_GAME,
+//     payload: partialGame
+//   };
+// };
 
 // Input: {white, black, timer, style, scoring} coming from NewGame.js form
 export const createGame = input => dispatch => {
@@ -59,7 +60,8 @@ export const createGame = input => dispatch => {
       dispatch(addGameToList({ userID: input.userID, gameID: res.data._id }));
     })
     .then(() => {
-      history.push("/game");
+      // history.push("/game");
+      dispatch(setMainContent("GAME"));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

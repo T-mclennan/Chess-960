@@ -6,7 +6,6 @@ import About from "./components/pages/About";
 import Settings from "./components/pages/Settings";
 import Landing from "./components/layout/Landing";
 import Lobby from "./components/layout/Lobby/Lobby";
-import Game from "./components/Game";
 import Header from "./components/layout/Header";
 import AppNavbar from "./components/layout/AppNavbar";
 import { Provider } from "react-redux";
@@ -45,7 +44,6 @@ class App extends Component {
             )} */}
             <div className="display">
               <Route exact path="/" component={Landing} />
-              <Route exact path="/game" component={Game} />
               <Route exact path="/about" component={About} />
               <Route exact path="/lobby" component={Lobby} />
               <Route exact path="/settings" component={Settings} />

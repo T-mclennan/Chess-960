@@ -84,13 +84,13 @@ export default function(state = initialState, action) {
         turn: current
       };
 
-    case INITIALIZE_GAME:
-      return {
-        ...state,
-        color: action.payload.color,
-        gameID: action.payload.ID,
-        fen: action.payload.fen
-      };
+    // case INITIALIZE_GAME:
+    //   return {
+    //     ...state,
+    //     color: action.payload.color,
+    //     gameID: action.payload.ID,
+    //     fen: action.payload.fen
+    //   };
 
     case LOAD_GAME:
       return {
