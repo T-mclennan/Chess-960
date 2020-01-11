@@ -35,12 +35,24 @@
 }
 
 .card {
-  background-color: darkgrey !important;
+  /* background-color: darkgrey !important;
   margin: 0.5rem;
   flex: 0 20% !important;
   min-width: 13.5rem !important;
-  padding: 0.4rem !important;
-  /* flex: 0 1 calc(25% - 1em) !important; */
+  padding: 0.4rem !important; */
+  /* flex: 0 1 calc(25% - 1em) !important;  */
+}
+
+.playerTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
+  width: 100%;
+  /* justify-content: left; */
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .cardBody {
