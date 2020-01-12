@@ -7,7 +7,7 @@ export class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="headerContent">
-          <h3>Current games for {this.props.player.username}: </h3>
+          <h3>{this.props.player.username}'s current games: </h3>
         </div>
         <div className="gameList ">
           <GameCard

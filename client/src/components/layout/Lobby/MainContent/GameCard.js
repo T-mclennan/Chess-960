@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button, Card, CardText } from "reactstrap";
 import Chessboard from "chessboardjsx";
+import { connect } from "react-redux";
+import { setMainContent } from "../../../../actions/authActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +12,13 @@ class GameCard extends Component {
   render() {
     return (
       //   <a>
-      <Card body outline color="secondary" style={cardStyle}>
+      <Card
+        body
+        outline
+        color="secondary"
+        style={cardStyle}
+        onClick={() => this.props.setMainContent("GAME")}
+      >
         <div className="cardBody">
           <Chessboard position={this.props.fen} width={200} draggable={false} />
           <div className="playerTitle">
@@ -56,4 +64,10 @@ const cardStyle = {
   /* flex: 0 1 calc(25% - 1em) !important; */
 };
 
-export default GameCard;
+const mapStateToProps = state => ({
+  game: state.game
+});
+
+export default connect(mapStateToProps, {
+  setMainContent
+})(GameCard);
