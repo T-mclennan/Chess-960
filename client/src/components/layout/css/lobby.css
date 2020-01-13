@@ -95,7 +95,7 @@
 
 .gameContainer {
   display: flex;
-  padding: 0.7rem;
+  padding: 3.7rem;
   width: 100%;
   /* height: 100vh; */
   flex-direction: row;

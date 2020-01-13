@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  margin: 0 4rem !important;
   /* border: 1px solid #585858; */
   color: white;
   overflow-y: scroll;
@@ -16,6 +17,8 @@
   height: auto;
   width: 100%;
   justify-content: center;
+  border-width: 1px;
+  margin-bottom: 1.3rem;
 }
 
 .headerContent h3 {

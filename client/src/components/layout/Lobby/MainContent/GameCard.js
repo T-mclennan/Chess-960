@@ -60,7 +60,8 @@ const cardStyle = {
   margin: "0.6rem",
   flex: "0 22% ",
   minWidth: "13.5rem",
-  padding: "0.4rem"
+  padding: "0.4rem",
+  marginBottom: "2.5rem"
   /* flex: 0 1 calc(25% - 1em) !important; */
 };
 
