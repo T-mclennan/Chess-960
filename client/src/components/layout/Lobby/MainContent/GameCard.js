@@ -20,7 +20,12 @@ class GameCard extends Component {
         onClick={() => this.props.setMainContent("GAME")}
       >
         <div className="cardBody">
-          <Chessboard position={this.props.fen} width={200} draggable={false} />
+          <Chessboard
+            position={this.props.fen}
+            width={200}
+            draggable={false}
+            orientation={this.props.color}
+          />
           <div className="playerTitle">
             <div>
               <FontAwesomeIcon

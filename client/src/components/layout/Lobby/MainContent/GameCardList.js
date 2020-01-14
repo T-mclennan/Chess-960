@@ -15,6 +15,7 @@ class GameCardList extends Component {
               fen={data.fen}
               white={data.white}
               black={data.black}
+              color={data.color}
             />
           ))}
         </ul>

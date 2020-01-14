@@ -2,7 +2,7 @@
   padding: 0 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 a {

@@ -80,41 +80,44 @@ class AppNavbar extends Component {
     );
 
     return (
-      <div>
-        <Navbar style={navStyle} dark expand="sm">
-          <Container className="navContainer">
-            <NavbarBrand
-              href={this.props.auth.isAuthenticated ? "/lobby" : "/"}
-            >
-              <h2>
-                <FontAwesomeIcon
-                  icon={faChessQueen}
-                  style={{
-                    color: "white",
-                    borderColor: "red",
-                    borderWidth: "1px",
-                    marginRight: "0.7rem"
-                  }}
-                />
-                Chess 960
-              </h2>
-            </NavbarBrand>
-            {/* <Nav style={{ justifyContent: "center" }}>
-              <span className="navbar-text mx-3">
-                <strong style={{ fontSize: "1.3rem" }}>
-                  {player ? `Welcome ${player.username}!` : ""}
-                </strong>
-              </span>
-            </Nav> */}
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
-                {isAuthenticated ? authLinks : guestLinks}
-              </Nav>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </div>
+      // <div>
+
+      <Navbar style={navStyle} dark expand="sm">
+        <div className="navContainer" style={navContainer}>
+          <NavbarBrand href={this.props.auth.isAuthenticated ? "/lobby" : "/"}>
+            <h2>
+              <FontAwesomeIcon
+                icon={faChessQueen}
+                style={{
+                  color: "white",
+                  borderColor: "red",
+                  borderWidth: "1px",
+                  marginRight: "0.7rem"
+                }}
+              />
+              Chess 960
+            </h2>
+          </NavbarBrand>
+          {/* <Nav style={{ justifyContent: "center" }}>
+            <span className="navbar-text mx-3">
+              <strong style={{ fontSize: "1.3rem" }}>
+                {player ? `Welcome ${player.username}!` : ""}
+              </strong>
+            </span>
+          </Nav> */}
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse
+            isOpen={this.state.isOpen}
+            navbar
+            style={{ marginLeft: "38rem" }}
+          >
+            <Nav className="ml-auto" navbar>
+              {isAuthenticated ? authLinks : guestLinks}
+            </Nav>
+          </Collapse>
+        </div>
+      </Navbar>
+      // </div>
     );
   }
 }
@@ -130,6 +133,11 @@ const navStyle = {
   background: "#152331",
   background: "linear-gradient(45deg, #000000, #152331)"
   // border: "1px solid #cccccc"
+};
+
+const navContainer = {
+  marginRight: "0rem",
+  marginLeft: "0rem"
 };
 
 export default connect(mapStateToProps, {
