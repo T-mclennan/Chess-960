@@ -3,7 +3,7 @@ import { Button, Card, CardText } from "reactstrap";
 import Chessboard from "chessboardjsx";
 import { connect } from "react-redux";
 import { setMainContent } from "../../../../actions/authActions";
-import { loadGame } from "../../../../actions/gameActions";
+import { loadGame, loadColor } from "../../../../actions/gameActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -19,9 +19,10 @@ class GameCard extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  async handleClick() {
     // console.log(this.state.gameID);
-    this.props.loadGame(this.props.gameID);
+    await this.props.loadGame(this.props.gameID, this.props.player.username);
+    console.log("Game Loaded");
   }
 
   render() {
@@ -95,9 +96,12 @@ const cardStyle = {
 
 const mapStateToProps = state => ({
   // game: state.game
+  player: state.player
+  // game: state.game
 });
 
 export default connect(mapStateToProps, {
   setMainContent,
-  loadGame
+  loadGame,
+  loadColor
 })(GameCard);

@@ -70,7 +70,7 @@ export const createGame = input => dispatch => {
     });
 };
 
-export const loadGame = gameID => dispatch => {
+export const loadGame = (gameID, username) => dispatch => {
   axios
     .get(`/api/games/${gameID}`)
     .then(res => {
@@ -80,8 +80,11 @@ export const loadGame = gameID => dispatch => {
         type: LOAD_GAME,
         payload: res.data
       });
-      // console.log("LOAD GAME:");
-      // console.log(res.data);
+      console.log("Set Color:");
+      console.log(res.data.white);
+      console.log(username);
+
+      dispatch(loadColor(username, res.data.white, res.data.black));
     })
     .then(() => {
       dispatch(setMainContent("GAME"));
@@ -90,21 +93,21 @@ export const loadGame = gameID => dispatch => {
 };
 
 // Takes in a game -- loads color attribute:
-export const loadColor = (username, game) => dispatch => {
+export const loadColor = (username, white, black) => dispatch => {
   let color;
-  if (username === game.white) {
+  if (username === white) {
     color = "white";
-  } else if (username === game.black) {
+  } else if (username === black) {
     color = "black";
   } else {
-    return "no color found";
+    return "none";
   }
   console.log("LoadColor:");
   console.log(color);
   dispatch({
     type: LOAD_COLOR,
     payload: color
-  }).catch(e => console.log(e));
+  });
 };
 
 export const updatePlayers = playerInfo => {
