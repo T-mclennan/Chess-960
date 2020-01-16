@@ -9,6 +9,8 @@ import {
   MAKE_MOVE,
   JOIN_GAME,
   INITIALIZE_GAME,
+  LOAD_GAME,
+  LOAD_COLOR,
   UPDATE_PLAYERS,
   CHANGE_TURN
 } from "./gameTypes";
@@ -68,17 +70,42 @@ export const createGame = input => dispatch => {
     });
 };
 
-// export const loadGame = (game) => dispatch => {
-//   axios.get(`/api/games/${ID}`)
-//   .then((res) => {
-//     dispatch({
-//       type: LOAD_GAME,
-//       payload: game
-//     })
-//   console.log(res.data)
-//   })
-//   .catch(e => console.log(e));
-// }
+export const loadGame = gameID => dispatch => {
+  axios
+    .get(`/api/games/${gameID}`)
+    .then(res => {
+      console.log("LOAD GAME:");
+      console.log(res.data);
+      dispatch({
+        type: LOAD_GAME,
+        payload: res.data
+      });
+      // console.log("LOAD GAME:");
+      // console.log(res.data);
+    })
+    .then(() => {
+      dispatch(setMainContent("GAME"));
+    })
+    .catch(e => console.log(e));
+};
+
+// Takes in a game -- loads color attribute:
+export const loadColor = (username, game) => dispatch => {
+  let color;
+  if (username === game.white) {
+    color = "white";
+  } else if (username === game.black) {
+    color = "black";
+  } else {
+    return "no color found";
+  }
+  console.log("LoadColor:");
+  console.log(color);
+  dispatch({
+    type: LOAD_COLOR,
+    payload: color
+  }).catch(e => console.log(e));
+};
 
 export const updatePlayers = playerInfo => {
   return {

@@ -6,6 +6,7 @@ export const CHANGE_TURN = "CHANGE_TURN";
 export const JOIN_GAME = "JOIN_GAME";
 export const INITIALIZE_GAME = "INITIALIZE_GAME";
 export const LOAD_GAME = "LOAD_GAME";
+export const LOAD_COLOR = "LOAD_COLOR";
 export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
 export const GAME_LOADING = "GAME_LOADING";
 export const GAME_LOADED = "GAME_LOADED";

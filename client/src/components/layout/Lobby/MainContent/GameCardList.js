@@ -18,10 +18,8 @@ class GameCardList extends Component {
   // and call Promise.all. The resulting array of games is saved into local state for further processing:
   componentDidMount() {
     setTimeout(() => {
-      console.log("Comp Did Mount!");
-      console.log(this.props.player);
       this.generateGames();
-    }, 300);
+    }, 320);
   }
 
   generateGames = () => {
@@ -48,13 +46,14 @@ class GameCardList extends Component {
     return (
       <div className="gameList">
         {this.state.gameArray.map((game, index) => {
+          console.log(game.data);
           return (
             <GameCard
               key={index}
               white={game.data.white}
               black={game.data.black}
               fen={game.data.fen}
-              gameID={game.data.id}
+              gameID={game.data._id}
             />
           );
         })}
@@ -64,8 +63,8 @@ class GameCardList extends Component {
 }
 
 const mapStateToProps = state => ({
-  player: state.player,
-  game: state.game
+  player: state.player
+  // game: state.game
 });
 
 export default connect(mapStateToProps, {})(GameCardList);

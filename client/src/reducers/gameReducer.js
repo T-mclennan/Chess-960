@@ -9,6 +9,7 @@ import {
   JOIN_GAME,
   INITIALIZE_GAME,
   LOAD_GAME,
+  LOAD_COLOR,
   UPDATE_PLAYERS
 } from "../actions/gameTypes";
 
@@ -103,6 +104,12 @@ export default function(state = initialState, action) {
         turn: action.payload.turn,
         color: action.payload.color,
         gameID: action.payload._id
+      };
+
+    case LOAD_COLOR:
+      return {
+        ...state,
+        color: action.payload
       };
 
     case UPDATE_PLAYERS:
