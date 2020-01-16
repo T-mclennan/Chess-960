@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "../../css/Dashboard.css";
 import GameCard from "./GameCard";
+import GameCardList from "./GameCardList";
 import { connect } from "react-redux";
+import Axios from "axios";
 export class Dashboard extends Component {
   render() {
     return (
@@ -9,49 +11,10 @@ export class Dashboard extends Component {
         <div className="headerContent">
           <h3>{this.props.player.username}'s current games: </h3>
         </div>
-        <div className="gameList ">
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
+        {/* <div className="gameList "> */}
+        <GameCardList />
 
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
-
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
-
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
-
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
-
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
-
-          <GameCard
-            white={this.props.player.username}
-            black={"Sammy"}
-            fen={this.props.game.fen}
-          />
-        </div>
+        {/* </div> */}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chessboard from "chessboardjsx";
-import PlayerDetails from "./PlayerDetails";
+import PlayerDetails from "./layout/Lobby/GameComponents/WhiteDetails";
 import HumanVsHuman from "./HumanVsHuman";
 import { connect } from "react-redux";
 

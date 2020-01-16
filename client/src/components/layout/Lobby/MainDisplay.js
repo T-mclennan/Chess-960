@@ -4,7 +4,7 @@ import Dashboard from "./MainContent/Dashboard";
 import FindGame from "./MainContent/FindGame";
 import NewGame from "./MainContent/NewGame";
 import Standings from "./MainContent/Standings";
-import Game from "./MainContent/Game";
+import Game from "../Lobby/GameComponents/Game";
 import { Container } from "reactstrap";
 import "../css/lobby.css";
 

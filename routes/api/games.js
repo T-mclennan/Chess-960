@@ -21,7 +21,11 @@ router.get("/", (req, res) => {
 //@access public
 router.get("/:id", (req, res) => {
   Game.findById(req.params.id)
-    .then(game => res.json(game))
+    .then(game => {
+      console.log("GET GAME BY ID:");
+      console.log(game);
+      res.json(game);
+    })
     .catch(err => res.status(404).json({ success: false }));
 });
 

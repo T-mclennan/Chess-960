@@ -22,14 +22,6 @@ a {
   justify-content: space-between;
 }
 
-.playerDetails {
-  margin: 2rem;
-  width: 40rem;
-  text-align: center;
-  border: 1px;
-  border-color: whitesmoke;
-}
-
 .playerContent {
   margin-left: auto;
   margin-right: auto;
