@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "../../css/Dashboard.css";
-import GameCard from "./GameCard";
 import GameCardList from "./GameCardList";
 import { connect } from "react-redux";
-import Axios from "axios";
 export class Dashboard extends Component {
   render() {
     return (

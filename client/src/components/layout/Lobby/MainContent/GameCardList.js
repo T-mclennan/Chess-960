@@ -46,7 +46,7 @@ class GameCardList extends Component {
 
   render() {
     return (
-      <section id="gameList">
+      <div className="gameList">
         {this.state.gameArray.map((game, index) => {
           return (
             <GameCard
@@ -58,7 +58,7 @@ class GameCardList extends Component {
             />
           );
         })}
-      </section>
+      </div>
     );
   }
 }
