@@ -15,11 +15,11 @@ export class BlackDetails extends Component {
   }
 
   render() {
-    console.log("black details: game:");
-    console.log(this.props);
+    // console.log("black details: game:");
+    // console.log(this.props);
     const { borderColor } = this.state;
     const pawn = {
-      webkitFilter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`,
+      WebkitFilter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`,
       filter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`
     };
 
@@ -27,7 +27,7 @@ export class BlackDetails extends Component {
       <div className="playerDetails">
         <div className="clock"></div>
         <div className="peice">
-          <img class="cover" style={pawn} src={blackPawn} />
+          <img className="cover" style={pawn} src={blackPawn} />
         </div>
         <div className="infoBox">
           <h2>{this.props.player}</h2>

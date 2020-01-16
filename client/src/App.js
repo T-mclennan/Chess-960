@@ -21,7 +21,7 @@ import "./App.css";
 // const socket = io(port, { pingTimeout: 30000 });
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     store.dispatch(loadPlayer());
   }
 
@@ -32,16 +32,6 @@ class App extends Component {
           {/* <SocketContext.Provider value={socket}> */}
           <div className="App ">
             <AppNavbar />
-            {/* {store.getState().auth.isAuthenticated ? (
-              <div className="display">
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/lobby" component={Lobby} />
-                <Route exact path="/settings" component={Settings} />
-              </div>
-            ) : (
-              <Route path="/" component={Landing} />
-            )} */}
             <div className="display">
               <Route exact path="/" component={Landing} />
               <Route exact path="/about" component={About} />

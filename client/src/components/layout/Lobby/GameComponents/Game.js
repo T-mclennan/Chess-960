@@ -5,6 +5,8 @@ import "../../css/lobby.css";
 import { WhiteDetails } from "./WhiteDetails";
 import { BlackDetails } from "./BlackDetails";
 import { WhitePlayer } from "./WhitePlayer";
+import { WhiteDeets } from "./WhiteDeets";
+import Test from "./Test";
 
 export class Game extends Component {
   render() {
@@ -12,10 +14,10 @@ export class Game extends Component {
     console.log(this.props.game);
     return (
       <div className="gameContainer">
-        <WhitePlayer />
+        <Test />
         {/* <WhiteDetails player={this.props.game.white} /> */}
         <div className="gameWindow">{ChessGame()}</div>
-        <BlackDetails player={this.props.game.black} />
+        <BlackDetails />
       </div>
     );
   }

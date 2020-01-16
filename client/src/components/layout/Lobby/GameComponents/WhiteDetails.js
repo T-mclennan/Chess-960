@@ -15,8 +15,8 @@ export class WhiteDetails extends Component {
   // }
 
   render() {
-    // console.log("WHITE");
-    // console.log(this.props.game);
+    console.log("WHITE");
+    console.log(this.props.game);
     // const { borderColor } = this.state;
     const pawn = {
       //   webkitFilter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`,

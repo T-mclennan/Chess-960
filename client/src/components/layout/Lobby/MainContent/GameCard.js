@@ -25,10 +25,8 @@ class GameCard extends Component {
   }
 
   render() {
-    console.log("GameCard:");
-    console.log(this.props.gameID);
     return (
-      <a onClick={this.handleClick}>
+      <a className="cardWrapper" onClick={this.handleClick}>
         <Card
           body
           outline
@@ -44,15 +42,19 @@ class GameCard extends Component {
               orientation={this.props.color}
             />
             <div className="playerTitle">
-              <div>
+              <span>
                 <FontAwesomeIcon
                   icon={faCircle}
                   size="xs"
                   style={{ marginRight: "0.3rem" }}
                 />
-                {this.props.white}
-              </div>
-              <div>
+                {this.props.white ? (
+                  this.props.white
+                ) : (
+                  <span className="openStyling">Open</span>
+                )}
+              </span>
+              <span>
                 <FontAwesomeIcon
                   icon={faCircle}
                   size="xs"
@@ -62,8 +64,12 @@ class GameCard extends Component {
                     color: "black"
                   }}
                 />
-                {this.props.black}
-              </div>
+                {this.props.black ? (
+                  this.props.black
+                ) : (
+                  <span className="openStyling">Open</span>
+                )}
+              </span>
             </div>
           </div>
           {/* <CardTitle>Special Title Treatment</CardTitle> */}

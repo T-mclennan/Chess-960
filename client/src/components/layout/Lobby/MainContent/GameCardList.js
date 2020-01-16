@@ -17,15 +17,30 @@ class GameCardList extends Component {
   //In order to deal with asynchronous calls inside of map, we compose an array of Promises
   // and call Promise.all. The resulting array of games is saved into local state for further processing:
   componentDidMount() {
+    console.log("render MOUNT");
+    console.log(this.props.currentGames);
+    // this.setState({ gameArray: this.props.currentGames });
     setTimeout(() => {
       this.generateGames();
-    }, 320);
+    }, 1000);
+    console.log("gen");
+    console.log(this.props.currentGames);
+  }
+
+  // shouldComponentUpdate(nextProps) {
+  //   return nextProps.currentGames !== this.props.player.currentGames;
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("WillProps:");
+    console.log(this.props);
+    if (this.props.currentGames !== nextProps.currentGames) {
+      this.generateGames();
+    }
   }
 
   generateGames = () => {
     const { currentGames } = this.props.player;
-    console.log("Generate Games current games:");
-    console.log(currentGames);
     Promise.all(
       currentGames.map(gameID => {
         return axios
@@ -36,8 +51,6 @@ class GameCardList extends Component {
           .catch(e => console.error(e));
       })
     ).then(response => {
-      console.log("response");
-      console.log(response);
       this.setState({ gameArray: response });
     });
   };

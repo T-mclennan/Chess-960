@@ -51,7 +51,7 @@
   flex-direction: row;
   justify-content: space-around;
   margin-top: 0.3rem;
-  margin-left: 0.5rem;
+  margin: 0 0.5rem;
   width: 100%;
   /* justify-content: left; */
   font-weight: 500;
@@ -62,4 +62,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-width: 1px;
+}
+
+.openStyling {
+  /* -webkit-text-stroke: 1px rgb(95, 95, 95); */
+  -webkit-text-stroke: 1px #107c4f;
+  color: #169761;
+  /* text-shadow: 1px 1px 0 white, -1px -1px 0 #000, 1px -1px 0 #000
+  -1px 1px 0 #000, 1px 1px 0 #000; */
 }

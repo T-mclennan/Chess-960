@@ -26,13 +26,12 @@ export const loadPlayer = () => (dispatch, getState) => {
         type: PLAYER_LOADED,
         payload: res.data
       });
-      console.log("Load Player");
+      console.log("Loading Player");
       console.log(res.data);
       dispatch({
         type: UPDATE_PLAYER,
         payload: res.data
       });
-      console.log("Player Updated:");
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

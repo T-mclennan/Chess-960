@@ -262,8 +262,6 @@ HumanVsHuman.propTypes = {
   changeTurn: PropTypes.func.isRequired,
   black: PropTypes.string.isRequired,
   white: PropTypes.string.isRequired,
-  started: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   fen: PropTypes.string.isRequired,
   turn: PropTypes.string.isRequired,
   gameID: PropTypes.string.isRequired,
