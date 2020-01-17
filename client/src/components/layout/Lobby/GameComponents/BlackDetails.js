@@ -6,14 +6,6 @@ import blackPawn from "../../../../assets/images/bP.png";
 import { connect } from "react-redux";
 
 export class BlackDetails extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     borderColor: "silver"
-  //   };
-  // }
-
   render() {
     console.log("black details: game:");
     console.log(this.props.game);

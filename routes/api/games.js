@@ -65,6 +65,16 @@ router.post("/findGameForPlayer", auth, (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
+//@route  POST api/games/findAnOpenGame
+//@desc   Returns an open game if available, otherwise creates and returns new game:
+//@access private
+router.post("/findAnOpenGame", (req, res) => {
+  // console.log(req.body);
+  Game.findOne({ started: false })
+    .then(game => res.json(game))
+    .catch(err => res.status(404).json({ success: false }));
+});
+
 //@route  POST api/games/joinGame
 //@desc   Attempts to join a game designated by ID:
 //@access private

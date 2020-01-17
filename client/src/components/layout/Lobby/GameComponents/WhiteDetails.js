@@ -6,14 +6,6 @@ import whitePawn from "../../../../assets/images/wP.png";
 import { connect } from "react-redux";
 
 export class WhiteDetails extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     borderColor: "silver"
-  //   };
-  // }
-
   render() {
     console.log("WHITE");
     console.log(this.props.game);
