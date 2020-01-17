@@ -6,18 +6,19 @@ import blackPawn from "../../../../assets/images/bP.png";
 import { connect } from "react-redux";
 
 export class BlackDetails extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      borderColor: "silver"
-    };
-  }
+  //   this.state = {
+  //     borderColor: "silver"
+  //   };
+  // }
 
   render() {
-    // console.log("black details: game:");
-    // console.log(this.props);
-    const { borderColor } = this.state;
+    console.log("black details: game:");
+    console.log(this.props.game);
+    const { turn, color } = this.props.game;
+    const borderColor = color === turn ? "#ffd5d3" : "silver";
     const pawn = {
       WebkitFilter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`,
       filter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`
@@ -30,7 +31,14 @@ export class BlackDetails extends Component {
           <img className="cover" style={pawn} src={blackPawn} />
         </div>
         <div className="infoBox">
-          <h2>{this.props.player}</h2>
+          <h2>
+            {" "}
+            {this.props.game.black ? (
+              this.props.game.black
+            ) : (
+              <div className="emptyStyling">Waiting for opponent</div>
+            )}
+          </h2>
           <h3>{this.props.rating}</h3>
         </div>
         {/* <header>{this.props.name}</header> */}

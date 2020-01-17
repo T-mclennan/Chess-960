@@ -17,10 +17,11 @@ export class WhiteDetails extends Component {
   render() {
     console.log("WHITE");
     console.log(this.props.game);
-    // const { borderColor } = this.state;
+    const { turn, color } = this.props.game;
+    const borderColor = color === turn ? "#ffd5d3" : "silver";
     const pawn = {
-      //   webkitFilter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`,
-      //   filter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`
+      WebkitFilter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`,
+      filter: `drop-shadow(1px 1px 0 ${borderColor}) drop-shadow(-1px -1px 0 ${borderColor})`
     };
 
     return (
@@ -31,7 +32,13 @@ export class WhiteDetails extends Component {
           <img class="cover" style={pawn} src={whitePawn} />
         </div>
         <div className="infoBox">
-          <h2>{this.props.player}</h2>
+          <h2>
+            {this.props.game.white ? (
+              this.props.game.white
+            ) : (
+              <div className="emptyStyling">Waiting for opponent</div>
+            )}
+          </h2>
           <h3>{this.props.rating}</h3>
         </div>
         {/* <header>{this.props.name}</header> */}

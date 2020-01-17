@@ -21,7 +21,7 @@ class GameCard extends Component {
 
   async handleClick() {
     // console.log(this.state.gameID);
-    await this.props.loadGame(this.props.gameID, this.props.player.username);
+    await this.props.loadGame(this.props.gameID, this.props.username);
     console.log("Game Loaded");
   }
 
@@ -95,9 +95,7 @@ const cardStyle = {
 };
 
 const mapStateToProps = state => ({
-  // game: state.game
-  player: state.player
-  // game: state.game
+  // player: state.player
 });
 
 export default connect(mapStateToProps, {

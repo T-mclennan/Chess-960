@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ChessGame from "../../../ChessGame";
 import "../../css/lobby.css";
-import { WhiteDetails } from "./WhiteDetails";
-import { BlackDetails } from "./BlackDetails";
+import WhiteDetails from "./WhiteDetails";
+import BlackDetails from "./BlackDetails";
 import { WhitePlayer } from "./WhitePlayer";
 import { WhiteDeets } from "./WhiteDeets";
+import White from "./White";
 import Test from "./Test";
 
 export class Game extends Component {
@@ -14,7 +15,7 @@ export class Game extends Component {
     console.log(this.props.game);
     return (
       <div className="gameContainer">
-        <Test />
+        <WhiteDetails />
         {/* <WhiteDetails player={this.props.game.white} /> */}
         <div className="gameWindow">{ChessGame()}</div>
         <BlackDetails />

@@ -67,6 +67,7 @@ class GameCardList extends Component {
               black={game.data.black}
               fen={game.data.fen}
               gameID={game.data._id}
+              username={this.props.player.username}
             />
           );
         })}
