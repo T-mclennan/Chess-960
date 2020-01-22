@@ -15,7 +15,7 @@ import {
   CHANGE_TURN
 } from "./gameTypes";
 
-import history from "../../src/history";
+// import history from "../../src/history";
 import { setMainContent } from "../actions/authActions";
 import { addGameToList } from "./playerActions";
 
@@ -75,6 +75,29 @@ export const loadGame = (gameID, username) => dispatch => {
     .get(`/api/games/${gameID}`)
     .then(res => {
       console.log("LOAD GAME:");
+      console.log(res.data);
+      dispatch({
+        type: LOAD_GAME,
+        payload: res.data
+      });
+      console.log("Set Color:");
+      console.log(res.data.white);
+      console.log(username);
+
+      dispatch(loadColor(username, res.data.white, res.data.black));
+    })
+    .then(() => {
+      dispatch(setMainContent("GAME"));
+    })
+    .catch(e => console.log(e));
+};
+
+//Fetches and loads an open game:
+export const quickPlay = () => dispatch => {
+  axios
+    .get("/api/games/findAnOpenGame")
+    .then(res => {
+      console.log("Found an open game:");
       console.log(res.data);
       dispatch({
         type: LOAD_GAME,

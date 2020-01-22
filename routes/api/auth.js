@@ -51,13 +51,9 @@ router.post("/", (req, res) => {
 // // @desc    Get user data
 // // @access  Private
 router.get("/player", auth, (req, res) => {
-  console.log("api/auth/player: get");
-  console.log(req.player.id);
   Player.findById(req.player.id)
     .select("-password")
     .then(data => {
-      console.log("PLAYER:");
-      console.log(data);
       res.json(data);
     });
 });

@@ -1,5 +1,6 @@
-/* TODO: This will be a component for displaying player information:
- */
+/* TODO: This will be a component for displaying player information
+// for the black player:
+*/
 
 import React, { Component } from "react";
 import blackPawn from "../../../../assets/images/bP.png";
