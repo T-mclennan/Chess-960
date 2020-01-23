@@ -93,7 +93,7 @@ export const loadGame = (gameID, username) => dispatch => {
 };
 
 //Fetches and loads an open game:
-export const quickPlay = () => dispatch => {
+export const quickPlay = username => dispatch => {
   axios
     .get("/api/games/findAnOpenGame")
     .then(res => {
