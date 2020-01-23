@@ -39,7 +39,7 @@ class HumanVsHuman extends Component {
   componentDidMount() {
     this.logic = new Chess();
     console.log("Inside Game");
-    console.log(this.props.gameID);
+    console.log(this.props.game.gameID);
     this.loadGame();
 
     socket.on("newPlayer", data => {
@@ -256,31 +256,23 @@ class HumanVsHuman extends Component {
 }
 
 //Setting Prop Types for the Game component:
-HumanVsHuman.propTypes = {
-  updateGame: PropTypes.func.isRequired,
-  updatePlayers: PropTypes.func.isRequired,
-  makeMove: PropTypes.func.isRequired,
-  changeTurn: PropTypes.func.isRequired,
-  black: PropTypes.string.isRequired,
-  white: PropTypes.string.isRequired,
-  fen: PropTypes.string.isRequired,
-  turn: PropTypes.string.isRequired,
-  gameID: PropTypes.string.isRequired,
-  history: PropTypes.array.isRequired
-};
 
 const mapStateToProps = state =>
   // const {black, white} = state.game;
+  // ({
+  //   black: state.game.black,
+  //   white: state.game.white,
+  //   started: state.game.started,
+  //   name: state.player.playerName,
+  //   color: state.game.color,
+  //   gameID: state.game.gameID,
+  //   fen: state.game.fen,
+  //   history: state.game.history,
+  //   turn: state.game.turn
+  // });
   ({
-    black: state.game.black,
-    white: state.game.white,
-    started: state.game.started,
-    name: state.player.playerName,
-    color: state.game.color,
-    gameID: state.game.gameID,
-    fen: state.game.fen,
-    history: state.game.history,
-    turn: state.game.turn
+    game: state.game,
+    player: state.player
   });
 
 export default connect(mapStateToProps, {

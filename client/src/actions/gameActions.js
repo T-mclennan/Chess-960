@@ -74,15 +74,12 @@ export const loadGame = (gameID, username) => dispatch => {
   axios
     .get(`/api/games/${gameID}`)
     .then(res => {
-      console.log("LOAD GAME:");
+      console.log("LOADING GAME:");
       console.log(res.data);
       dispatch({
         type: LOAD_GAME,
         payload: res.data
       });
-      console.log("Set Color:");
-      console.log(res.data.white);
-      console.log(username);
 
       dispatch(loadColor(username, res.data.white, res.data.black));
     })
@@ -125,8 +122,6 @@ export const loadColor = (username, white, black) => dispatch => {
   } else {
     return "none";
   }
-  console.log("LoadColor:");
-  console.log(color);
   dispatch({
     type: LOAD_COLOR,
     payload: color

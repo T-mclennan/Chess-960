@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "production") {
 var io = require("socket.io").listen(server, { pingTimeout: 30000 });
 io.on("connection", function(socket) {
   socket.on("joined", data => {
-    console.log("player joined game: " + data.gameID);
+    console.log("player joined game: " + data);
     socket.broadcast.emit("newPlayer", data);
   });
 
