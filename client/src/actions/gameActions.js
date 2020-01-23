@@ -133,6 +133,18 @@ export const loadColor = (username, white, black) => dispatch => {
   });
 };
 
+export const findColor = (game, username) => {
+  const { black, white } = game.data;
+  let color = null;
+  if (black && black === username) {
+    color = "black";
+  }
+  if (white && white === username) {
+    color = "white";
+  }
+  return color;
+};
+
 export const updatePlayers = playerInfo => {
   return {
     type: UPDATE_PLAYERS,

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameCard from "./GameCard";
 import { connect } from "react-redux";
 import axios from "axios";
+import { findColor } from "../../../../actions/gameActions";
 import "../../css/Dashboard.css";
 
 //use state to generate the games:
@@ -59,7 +60,10 @@ class GameCardList extends Component {
     return (
       <div className="gameList">
         {this.state.gameArray.map((game, index) => {
+          console.log("GameList!");
           console.log(game.data);
+          const color = findColor(game, this.props.player.username);
+
           return (
             <GameCard
               key={index}
@@ -68,6 +72,7 @@ class GameCardList extends Component {
               fen={game.data.fen}
               gameID={game.data._id}
               username={this.props.player.username}
+              color={color}
             />
           );
         })}
