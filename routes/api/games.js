@@ -22,8 +22,6 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   Game.findById(req.params.id)
     .then(game => {
-      console.log("GET GAME BY ID:");
-      console.log(game);
       res.json(game);
     })
     .catch(err => res.status(404).json({ success: false }));

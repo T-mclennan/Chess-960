@@ -67,6 +67,23 @@ router.get("/", (req, res) => {
     });
 });
 
+// @route  GET api/players/all
+// @desc   Get all players in database
+// @access private
+router.get("/all", (req, res) => {
+  console.log("entered get all players");
+  Player.find()
+    .sort({ username: 1 })
+    .then(users => {
+      console.log("found:");
+      console.log(users);
+      res.json(users);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+});
+
 //@route  POST api/players
 //@desc   Register User
 //@access public
