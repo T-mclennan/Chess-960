@@ -38,6 +38,7 @@ class HumanVsHuman extends Component {
 
   componentDidMount() {
     this.logic = new Chess();
+    console.log("Inside Game");
     console.log(this.props.gameID);
     this.loadGame();
 

@@ -160,6 +160,7 @@
 .emptyStyling {
   /* -webkit-text-stroke: 1px rgb(95, 95, 95); */
   text-align: center;
+  font-size: 1.4rem;
   -webkit-text-stroke: 1px #838383;
   color: #ffd5d3;
   /* text-shadow: 1px 1px 0 white, -1px -1px 0 #000, 1px -1px 0 #000

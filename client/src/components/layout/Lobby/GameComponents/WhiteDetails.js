@@ -21,7 +21,7 @@ export class WhiteDetails extends Component {
         <div className="clock"></div>
         <div className="peice">
           {" "}
-          <img class="cover" style={pawn} src={whitePawn} />
+          <img className="cover" style={pawn} src={whitePawn} />
         </div>
         <div className="infoBox">
           <h2>
