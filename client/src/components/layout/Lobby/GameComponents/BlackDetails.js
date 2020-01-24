@@ -8,8 +8,6 @@ import { connect } from "react-redux";
 
 export class BlackDetails extends Component {
   render() {
-    console.log("black details: game:");
-    console.log(this.props.game);
     const { turn, color } = this.props.game;
     const borderColor = color === turn ? "#ffd5d3" : "silver";
     const pawn = {

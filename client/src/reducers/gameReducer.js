@@ -10,7 +10,8 @@ import {
   INITIALIZE_GAME,
   LOAD_GAME,
   LOAD_COLOR,
-  UPDATE_PLAYERS
+  UPDATE_PLAYERS,
+  SET_GAME_AS_STARTED
 } from "../actions/gameTypes";
 
 const initialState = {
@@ -61,9 +62,10 @@ export default function(state = initialState, action) {
         gameID: action.payload._id
       };
 
-    case START_GAME:
+    case SET_GAME_AS_STARTED:
       return {
-        ...state
+        ...state,
+        started: true
       };
 
     case MAKE_MOVE:

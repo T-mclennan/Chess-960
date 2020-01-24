@@ -1,18 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  CardHeader,
-  CardFooter,
-  CardBody,
-  CardTitle,
-  CardText,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from "reactstrap";
+import { Button, CardBody, Form, FormGroup, Input, Alert } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register, setAuthContent } from "../../actions/authActions";

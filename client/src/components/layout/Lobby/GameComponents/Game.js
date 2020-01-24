@@ -7,8 +7,6 @@ import "../../css/lobby.css";
 
 export class Game extends Component {
   render() {
-    console.log("TEST.JS");
-    console.log(this.props.game);
     return (
       <div className="gameContainer">
         <WhiteDetails />

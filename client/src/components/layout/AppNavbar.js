@@ -6,8 +6,7 @@ import {
   NavbarBrand,
   Nav,
   NavLink,
-  NavItem,
-  Container
+  NavItem
 } from "reactstrap";
 import { setAuthContent } from "../../actions/authActions";
 import Logout from "../auth/Logout";
@@ -39,7 +38,7 @@ class AppNavbar extends Component {
 
   //class of mb-5 is margin bottom 5, moves everything else down 5 below the navbar
   render() {
-    const { isAuthenticated, player } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
     const authLinks = (
       <Fragment>
         <NavItem>
@@ -129,7 +128,7 @@ const navStyle = {
   color: "#fff",
   // textAlign: "center",
   padding: "1rem 1.6rem",
-  background: "#152331",
+  // background: "#152331",
   background: "linear-gradient(45deg, #000000, #152331)"
   // border: "1px solid #cccccc"
 };

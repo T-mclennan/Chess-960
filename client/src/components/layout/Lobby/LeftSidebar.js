@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setMainContent } from "../../../actions/authActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,9 +9,7 @@ import {
   faChessBoard
   // faPlayCircle
 } from "@fortawesome/free-solid-svg-icons";
-
 import { faPlayCircle, faUser } from "@fortawesome/free-regular-svg-icons";
-import FontAwesome from "react-fontawesome";
 import "../css/lobby.css";
 
 export class LeftSidebar extends Component {

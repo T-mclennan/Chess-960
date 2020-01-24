@@ -9,6 +9,7 @@ import {
   MAKE_MOVE,
   JOIN_GAME,
   INITIALIZE_GAME,
+  SET_GAME_AS_STARTED,
   LOAD_GAME,
   LOAD_COLOR,
   UPDATE_PLAYERS,
@@ -144,6 +145,12 @@ export const updatePlayers = playerInfo => {
   return {
     type: UPDATE_PLAYERS,
     payload: playerInfo
+  };
+};
+
+export const setGameAsStarted = () => {
+  return {
+    type: SET_GAME_AS_STARTED
   };
 };
 

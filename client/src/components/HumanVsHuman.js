@@ -8,7 +8,8 @@ import {
   updateGame,
   updatePlayers,
   makeMove,
-  changeTurn
+  changeTurn,
+  setGameAsStarted
 } from "../actions/gameActions";
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
@@ -37,22 +38,26 @@ class HumanVsHuman extends Component {
   }
 
   componentDidMount() {
+    console.log("Inside Game Window");
+    console.log(this.props.game);
+    console.log(this.props.player);
     this.logic = new Chess();
-    console.log("Inside Game");
-    console.log(this.props.game.gameID);
-    this.loadGame();
+    // this.loadGame();
+    this.startGame();
 
     socket.on("newPlayer", data => {
+      console.log("received newplayer ping.");
       if (data.gameID === this.props.gameID) {
         this.props.updatePlayers({
-          white: data.whiteName,
-          black: data.blackName,
+          white: data.white,
+          black: data.black,
           started: data.started
         });
       }
     });
 
     socket.on("moveMade", data => {
+      console.log("received newmove ping");
       if (data.gameID === this.props.gameID) {
         console.log("move made by opponent");
         this.logic.move(data.newMove);
@@ -68,11 +73,13 @@ class HumanVsHuman extends Component {
 
   //TODO: Save game in players profile:
   joinGame = () => {
+    console.log("join game function:");
+    const { gameID, white, black, started } = this.props.game;
     socket.emit("joined", {
-      gameID: this.props.gameID,
-      whiteName: this.props.white,
-      blackName: this.props.black,
-      started: this.props.started
+      gameID,
+      white,
+      black,
+      started
     });
     // this.props.addGameToProfile(this.props.gameID)
   };
@@ -80,6 +87,7 @@ class HumanVsHuman extends Component {
   // loadGame : fetches the specified game, updates values in the redux store,
   //            sets the game logic to reflect the board state.
   loadGame = () => {
+    console.log("Load Game");
     Axios.get(`/api/games/${this.props.gameID}`)
       .then(res => {
         this.props.updateGame(res.data);
@@ -89,6 +97,18 @@ class HumanVsHuman extends Component {
         if (!this.props.started) this.joinGame();
       })
       .catch(e => console.log(e));
+  };
+
+  startGame = () => {
+    const { fen, white, black, started } = this.props.game;
+    console.log("Start Game");
+    console.log(fen);
+    this.logic.load(fen);
+
+    if (white && black && !started) {
+      this.setGameAsStarted();
+      this.joinGame();
+    }
   };
 
   // keep clicked square style and remove hint squares
@@ -279,5 +299,6 @@ export default connect(mapStateToProps, {
   updateGame,
   updatePlayers,
   makeMove,
-  changeTurn
+  changeTurn,
+  setGameAsStarted
 })(HumanVsHuman);

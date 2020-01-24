@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import "../css/lobby.css";
 import LeftSidebar from "./LeftSidebar";
 import MainDisplay from "./MainDisplay";

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Router, Route } from "react-router-dom";
-import { Redirect } from "react-router";
 import About from "./components/pages/About";
 import Settings from "./components/pages/Settings";
 import Landing from "./components/layout/Landing";
 import Lobby from "./components/layout/Lobby/Lobby";
-import Header from "./components/layout/Header";
 import AppNavbar from "./components/layout/AppNavbar";
 import { Provider } from "react-redux";
 import store from "./store";

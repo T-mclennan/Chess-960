@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, CardText } from "reactstrap";
+import { Card } from "reactstrap";
 import Chessboard from "chessboardjsx";
 import { connect } from "react-redux";
 import { setMainContent } from "../../../../actions/authActions";
