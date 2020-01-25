@@ -73,8 +73,24 @@ router.post("/findAnOpenGame", (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
+//@route  GET api/games/findAllOpenGames
+//@desc   Returns all open games.
+//@access private
+router.get("/findAllOpenGames", (req, res) => {
+  console.log("inside findGames:");
+  // console.log(req.body);
+  Game.find({ started: false })
+    .sort({ dateCreated: -1 })
+    .then(games => {
+      console.log(games);
+      res.json(games);
+    })
+    .catch(err => res.status(404).json({ success: false }));
+});
+
 //@route  POST api/games/joinGame
 //@desc   Attempts to join a game designated by ID:
+//Takes in {id, username}
 //@access private
 router.post("/joinGame", auth, (req, res) => {
   console.log(req.body);

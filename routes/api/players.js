@@ -75,8 +75,6 @@ router.get("/all", (req, res) => {
   Player.find()
     .sort({ username: 1 })
     .then(users => {
-      console.log("found:");
-      console.log(users);
       res.json(users);
     })
     .catch(e => {

@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import Chessboard from "chessboardjsx";
-import PlayerDetails from "./layout/Lobby/GameComponents/WhiteDetails";
 import HumanVsHuman from "./HumanVsHuman";
-import { connect } from "react-redux";
 
 export default function ChessGame() {
   return (

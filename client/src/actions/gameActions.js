@@ -129,6 +129,28 @@ export const loadColor = (username, white, black) => dispatch => {
   });
 };
 
+//Fetches and loads an open game:
+export const joinGame = username => dispatch => {
+  // axios
+  //   .get("/api/games/findAnOpenGame")
+  //   .then(res => {
+  //     console.log("Found an open game:");
+  //     console.log(res.data);
+  //     dispatch({
+  //       type: LOAD_GAME,
+  //       payload: res.data
+  //     });
+  //     console.log("Set Color:");
+  //     console.log(res.data.white);
+  //     console.log(username);
+  //     dispatch(loadColor(username, res.data.white, res.data.black));
+  //   })
+  //   .then(() => {
+  //     dispatch(setMainContent("GAME"));
+  //   })
+  //   .catch(e => console.log(e));
+};
+
 export const findColor = (game, username) => {
   const { black, white } = game.data;
   let color = null;
