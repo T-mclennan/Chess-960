@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { loadGame } from "../../../../actions/gameActions";
+import { joinGame } from "../../../../actions/gameActions";
+import { connect } from "react-redux";
 import "../../css/Dashboard.css";
 
 class TableEntry extends Component {
@@ -10,8 +11,9 @@ class TableEntry extends Component {
   }
 
   handleClick() {
-    console.log(this.props.game);
-    loadGame(this.props.game._id, this.props.username);
+    console.log("inside click");
+    console.log(this.props.game._id);
+    this.props.joinGame(this.props.game._id, this.props.username);
   }
 
   render() {
@@ -30,4 +32,8 @@ class TableEntry extends Component {
   }
 }
 
-export default TableEntry;
+const mapStateToProps = state => ({
+  player: state.player
+});
+
+export default connect(mapStateToProps, { joinGame })(TableEntry);

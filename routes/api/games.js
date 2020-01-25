@@ -92,29 +92,34 @@ router.get("/findAllOpenGames", (req, res) => {
 //@desc   Attempts to join a game designated by ID:
 //Takes in {id, username}
 //@access private
-router.post("/joinGame", auth, (req, res) => {
+router.post("/joinGame", (req, res) => {
+  console.log("inside of joinGame");
   console.log(req.body);
-  Game.findById(req.body.id).then(game => {
-    if (!game.white) {
-      game.white = req.body.username;
-    } else if (!game.black) {
-      game.black = req.body.username;
-    } else {
-      console.log("Game is full.");
-      return;
-    }
-    game.started = true;
-    Game.updateOne(
-      { _id: game._id },
-      { $set: { started: true, black: game.black, white: game.white } }
-    )
-      .then(game => {
-        console.log("JOIN GAME ROUTE");
-        console.log(game);
-        res.json(game);
-      })
-      .catch(e => console.log(e));
-  });
+  Game.findById(req.body.gameID)
+    .then(game => {
+      console.log(game);
+      if (!game.white) {
+        game.white = req.body.username;
+      } else if (!game.black) {
+        game.black = req.body.username;
+      } else {
+        console.log("Game is full.");
+        return;
+      }
+      game.started = true;
+      Game.updateOne(
+        { _id: game._id },
+        { $set: { black: game.black, white: game.white } }
+      )
+        .then(result => {
+          console.log("JOIN GAME ROUTE");
+          console.log(result);
+          console.log(game);
+          res.json(game);
+        })
+        .catch(e => console.log(e));
+    })
+    .catch(e => console.log(e));
 });
 
 //@route  POST api/games/updateGame

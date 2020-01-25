@@ -12,7 +12,12 @@ export class Dashboard extends Component {
           <h3>{this.props.player.username}'s current games: </h3>
         </div>
         {/* <div className="gameList "> */}
-        <GameCardList currentGames={this.props.player} />
+
+        {this.props.player.currentGames.length > 0 ? (
+          <GameCardList currentGames={this.props.player} />
+        ) : (
+          <div />
+        )}
 
         {/* </div> */}
       </div>

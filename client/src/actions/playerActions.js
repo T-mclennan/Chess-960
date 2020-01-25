@@ -25,7 +25,7 @@ export const setUsername = username => {
 };
 
 //Adds a new game to the player's list of currentGames:
-export const addGameToList = ({ userID, gameID }) => dispatch => {
+export const addGameToList = ({ username, gameID }) => dispatch => {
   //Headers:
   const config = {
     headers: {
@@ -34,8 +34,8 @@ export const addGameToList = ({ userID, gameID }) => dispatch => {
   };
 
   //Request body:
-  const body = JSON.stringify({ userID, gameID });
-  console.log(`Adding game ${gameID} to user ${userID}.`);
+  const body = JSON.stringify({ username, gameID });
+  console.log(`Adding game ${gameID} to user ${username}.`);
   console.log(body);
 
   axios
@@ -54,7 +54,7 @@ export const addGameToList = ({ userID, gameID }) => dispatch => {
 };
 
 //Removes a game from the player's list of currentGames:
-export const removeGameFromList = ({ userID, gameID }) => dispatch => {
+export const removeGameFromList = ({ username, gameID }) => dispatch => {
   //Headers:
   const config = {
     headers: {
@@ -63,8 +63,8 @@ export const removeGameFromList = ({ userID, gameID }) => dispatch => {
   };
 
   //Request body:
-  const body = JSON.stringify({ userID, gameID });
-  console.log(`Removing game ${gameID} from user ${userID}.`);
+  const body = JSON.stringify({ username, gameID });
+  console.log(`Removing game ${gameID} from user ${username}.`);
   console.log(body);
 
   axios

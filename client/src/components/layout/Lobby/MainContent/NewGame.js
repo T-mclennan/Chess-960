@@ -1,27 +1,16 @@
 import React, { Component } from "react";
 import "../../css/lobby.css";
 import { connect } from "react-redux";
-import {
-  Col,
-  FormText,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Alert
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import PropTypes from "prop-types";
-import { clearErrors } from "../../../../actions/errorActions";
 import { createGame } from "../../../../actions/gameActions";
-import history from "../../../../history";
 
 export class NewGame extends Component {
   state = {
     color: "White",
     timer: "Unlimited",
     style: "960",
-    standings: "Unrated",
+    scoring: "Unrated",
     msg: null
   };
 
@@ -54,13 +43,6 @@ export class NewGame extends Component {
     }, 8000);
   };
 
-  toggle = () => {
-    this.props.clearErrors();
-    this.setState({
-      redirect: !this.state.redirect
-    });
-  };
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -69,30 +51,30 @@ export class NewGame extends Component {
     e.preventDefault();
     console.log("button clicked");
 
-    const { timer, style, standings } = this.state;
-
+    const { timer, style, scoring } = this.state;
+    const { username } = this.props.player;
     //Create proto-game object:
     let newGame = {
       white: "",
       black: "",
       timer,
       style,
-      standings
+      scoring
     };
 
     //Set player to appropriate color:
     if (this.state.color === "White") {
-      newGame.white = this.props.player.username;
+      newGame.white = username;
     } else if (this.state.color === "Black") {
-      newGame.black = this.props.player.username;
+      newGame.black = username;
     } else console.log("Color selection error.");
 
     console.log("Inside NEWGAME:");
     console.log(newGame);
-    console.log(this.props.player._id);
+    console.log(username);
 
     //Attempt to create game:
-    this.props.createGame({ newGame, userID: this.props.player._id });
+    this.props.createGame({ newGame, username });
   };
 
   render() {

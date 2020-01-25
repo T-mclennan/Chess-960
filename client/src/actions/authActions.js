@@ -100,6 +100,7 @@ export const login = ({ username, password }) => dispatch => {
         payload: res.data
       });
       dispatch(loadPlayer());
+      dispatch(setMainContent("DASHBOARD"));
     })
     .catch(err => {
       dispatch(
@@ -112,6 +113,7 @@ export const login = ({ username, password }) => dispatch => {
 };
 
 //Logout User:
+
 export const logout = () => {
   history.push("/");
   return {

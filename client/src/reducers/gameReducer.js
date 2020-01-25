@@ -33,11 +33,6 @@ export default function(state = initialState, action) {
         ...state
       };
 
-    case JOIN_GAME:
-      return {
-        //TODO
-      };
-
     case GAME_LOADING:
       return {
         ...state,
@@ -96,6 +91,7 @@ export default function(state = initialState, action) {
     //   };
 
     case LOAD_GAME:
+    case JOIN_GAME:
       return {
         ...state,
         white: action.payload.white,

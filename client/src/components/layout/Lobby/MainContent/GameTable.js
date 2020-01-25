@@ -33,7 +33,6 @@ class GameTable extends Component {
 
   renderResultRows(data) {
     return data.map((game, index) => {
-      console.log(index);
       return (
         <TableEntry
           username={this.props.player.username}
@@ -51,8 +50,8 @@ class GameTable extends Component {
         <thead>
           <tr>
             <th>#</th>
-            <th>White</th>
             <th>Black</th>
+            <th>White</th>
             <th>Style</th>
             <th>Time</th>
           </tr>

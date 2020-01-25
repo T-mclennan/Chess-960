@@ -12,13 +12,13 @@ const Player = require("../../models/players");
 // @params { userID, gameID }
 // @access public
 router.post("/addGameToList", (req, res) => {
-  Player.findOne({ _id: req.body.userID })
+  Player.findOne({ username: req.body.username })
     .then(player => {
       //pushes GameID into a new copy of gameList, updates player's currentGames:
       let gameList = player.currentGames;
       gameList.push(req.body.gameID);
       Player.updateOne(
-        { _id: player._id },
+        { username: player.username },
         { $set: { currentGames: gameList } }
       )
         .then(() => {

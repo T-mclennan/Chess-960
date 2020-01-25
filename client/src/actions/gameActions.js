@@ -43,8 +43,6 @@ export const updateGame = game => {
 // Input: {white, black, timer, style, scoring} coming from NewGame.js form
 export const createGame = input => dispatch => {
   dispatch({ type: GAME_LOADING });
-  console.log("Inside CreateGAME");
-  console.log(input);
   axios
     .post(`api/games`, input.newGame)
     .then(res => {
@@ -59,8 +57,10 @@ export const createGame = input => dispatch => {
         payload: res.data
       });
       console.log("addGame payload:");
-      console.log({ userID: input.userID, gameID: res.data._id });
-      dispatch(addGameToList({ userID: input.userID, gameID: res.data._id }));
+      console.log({ username: input.username, gameID: res.data._id });
+      dispatch(
+        addGameToList({ username: input.username, gameID: res.data._id })
+      );
     })
     .then(() => {
       // history.push("/game");
@@ -129,26 +129,32 @@ export const loadColor = (username, white, black) => dispatch => {
   });
 };
 
-//Fetches and loads an open game:
-export const joinGame = username => dispatch => {
-  // axios
-  //   .get("/api/games/findAnOpenGame")
-  //   .then(res => {
-  //     console.log("Found an open game:");
-  //     console.log(res.data);
-  //     dispatch({
-  //       type: LOAD_GAME,
-  //       payload: res.data
-  //     });
-  //     console.log("Set Color:");
-  //     console.log(res.data.white);
-  //     console.log(username);
-  //     dispatch(loadColor(username, res.data.white, res.data.black));
-  //   })
-  //   .then(() => {
-  //     dispatch(setMainContent("GAME"));
-  //   })
-  //   .catch(e => console.log(e));
+//Adds player to an existing open game, loads the game:
+export const joinGame = (gameID, username) => dispatch => {
+  console.log("inside joinGame funtion");
+  axios
+    .post(`api/games/joinGame`, { gameID, username })
+    .then(res => {
+      console.log("JOINING GAME:");
+      console.log(res.data);
+      dispatch({
+        type: JOIN_GAME,
+        payload: res.data
+      });
+
+      dispatch(loadColor(username, res.data.white, res.data.black));
+      console.log("loaded color");
+      console.log("adding game to list");
+      console.log(username);
+      console.log(gameID);
+      dispatch(addGameToList({ username, gameID }));
+    })
+    .then(() => {
+      console.log("setting main content");
+      dispatch(setMainContent("GAME"));
+    })
+
+    .catch(e => console.log(e));
 };
 
 export const findColor = (game, username) => {
