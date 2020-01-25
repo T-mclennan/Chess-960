@@ -167,6 +167,15 @@
   -1px 1px 0 #000, 1px 1px 0 #000; */
 }
 
+.outer table th {
+  text-align: left;
+  top: 0;
+  position: sticky;
+  background-color: black;
+  border: 1px;
+  border-color: gray;
+}
+
 @media (max-width: 750px) {
   .rightsidebar {
     display: none;

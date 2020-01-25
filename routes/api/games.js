@@ -13,7 +13,7 @@ const Game = require("../../models/games");
 router.get("/", (req, res) => {
   Game.find()
     .sort()
-    .then(game => res.json(game));
+    .then(games => res.json(games));
 });
 
 //@route  Get api/games/:id

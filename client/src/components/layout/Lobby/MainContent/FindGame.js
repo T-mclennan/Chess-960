@@ -5,10 +5,10 @@ import "../../css/lobby.css";
 export class FindGame extends Component {
   render() {
     return (
-      <div className="main container">
-        <h3>Find Game!</h3>
-        <hr />
-        <GameTable />
+      <div className="main container outer">
+        <h3>Click on a game below to join:</h3>
+        {/* <hr /> */}
+        <GameTable className="gameTable" />
       </div>
 
       // const TOTAL_PER_PAGE = 10;

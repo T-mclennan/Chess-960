@@ -19,7 +19,7 @@ class TableEntry extends Component {
     return (
       // <a className="cardWrapper" onClick={this.handleClick}>
       <tr onClick={this.handleClick}>
-        <th scope="row">{index}</th>
+        <td scope="row">{index}</td>
         <td>{game.black ? game.black : "open"}</td>
         <td>{game.white ? game.white : "open"}</td>
         <td>960</td>

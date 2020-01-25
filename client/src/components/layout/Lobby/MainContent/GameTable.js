@@ -31,16 +31,15 @@ class GameTable extends Component {
       .catch(e => console.error(e));
   };
 
-  fetchSongDetails = () => {};
-
   renderResultRows(data) {
-    console.log("inside Results Row");
     return data.map((game, index) => {
+      console.log(index);
       return (
         <TableEntry
           username={this.props.player.username}
           game={game}
           key={index}
+          index={index}
         />
       );
     });
