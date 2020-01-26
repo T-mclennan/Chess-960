@@ -19,8 +19,7 @@ class RegisterContent extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired,
-    setContent: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired
   };
 
   // componentDidMount() {

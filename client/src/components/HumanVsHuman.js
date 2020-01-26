@@ -41,8 +41,9 @@ class HumanVsHuman extends Component {
     console.log("Inside Game Window");
     console.log(this.props.game);
     console.log(this.props.player);
-    this.logic = new Chess();
-    // this.loadGame();
+    this.logic = new Chess(this.props.game.fen);
+
+    this.loadGame();
     this.startGame();
 
     socket.on("newPlayer", data => {
@@ -88,11 +89,15 @@ class HumanVsHuman extends Component {
   //            sets the game logic to reflect the board state.
   loadGame = () => {
     console.log("Load Game");
-    Axios.get(`/api/games/${this.props.gameID}`)
+
+    Axios.get(`/api/games/${this.props.game.gameID}`)
       .then(res => {
+        console.log("update game:");
+        console.log(res);
+        console.log(this.props.game.fen);
         this.props.updateGame(res.data);
       })
-      .then(() => this.logic.load(this.props.fen))
+      .then(() => this.logic.load(this.props.game.fen))
       .then(() => {
         if (!this.props.started) this.joinGame();
       })
@@ -103,10 +108,10 @@ class HumanVsHuman extends Component {
     const { fen, white, black, started } = this.props.game;
     console.log("Start Game");
     console.log(fen);
-    this.logic.load(fen);
+    // this.logic.load(fen);
 
     if (white && black && !started) {
-      this.setGameAsStarted();
+      this.props.setGameAsStarted();
       this.joinGame();
     }
   };
@@ -257,7 +262,7 @@ class HumanVsHuman extends Component {
 
   render() {
     const { dropSquareStyle, squareStyles } = this.state;
-    const { fen, color, turn, started, whiteName, blackName } = this.props;
+    const { fen, color, turn, started, white, black } = this.props.game;
 
     return this.props.children({
       draggable: turn === color && started === true,
