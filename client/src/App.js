@@ -20,7 +20,7 @@ import "./App.css";
 
 class App extends Component {
   componentWillMount() {
-    store.dispatch(loadPlayer());
+    // store.dispatch(loadPlayer());
   }
 
   render() {
