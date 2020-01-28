@@ -12,7 +12,8 @@ import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
   SET_AUTH_CONTENT,
-  SET_MAIN_CONTENT
+  SET_MAIN_CONTENT,
+  UPDATE_USERLIST
 } from "./authTypes";
 import { UPDATE_PLAYER } from "./playerTypes";
 
@@ -121,7 +122,7 @@ export const logout = () => {
   };
 };
 
-//Set Content: Sets what content to show in the AuthCard:
+//Set Auth Content: Sets what content to show in the AuthCard:
 export const setAuthContent = content => {
   return {
     type: SET_AUTH_CONTENT,
@@ -129,11 +130,19 @@ export const setAuthContent = content => {
   };
 };
 
-//Set Content: Sets what content to show in the AuthCard:
+//Set Main Content: Sets what content to show in Lobby viewport:
 export const setMainContent = content => {
   return {
     type: SET_MAIN_CONTENT,
     payload: content
+  };
+};
+
+//Updates the current list of connected users in lobby:
+export const updateUserlist = users => {
+  return {
+    type: UPDATE_USERLIST,
+    payload: users
   };
 };
 

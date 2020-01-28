@@ -10,3 +10,4 @@ export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const SET_AUTH_CONTENT = "SET_AUTH_CONTENT";
 export const SET_MAIN_CONTENT = "SET_MAIN_CONTENT";
+export const UPDATE_USERLIST = "UPDATE_USERLIST";

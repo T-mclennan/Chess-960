@@ -35,8 +35,17 @@ if (process.env.NODE_ENV === "production") {
 //--------------------------------------------------------
 
 // initialize a new instance of socket.io by passing the HTTP server object
+var currentUsers = [];
 var io = require("socket.io").listen(server, { pingTimeout: 30000 });
-io.on("connection", function(socket) {
+io.on("connection", socket => {
+  socket.on("connectedUser", user => {
+    socket.name = user;
+    currentUsers.push(user);
+    io.broadcast.emit("updateUsers", currentUsers);
+    console.log(users + " has entered the lobby.");
+    console.log(currentUsers);
+  });
+
   socket.on("joined", data => {
     console.log("player joined game: ");
     console.log(data);
@@ -48,7 +57,13 @@ io.on("connection", function(socket) {
     console.log("move made");
   });
 
-  socket.on("disconnect", function() {
+  socket.on("disconnect", user => {
+    currentUsers = currentUsers.filter(name => {
+      return name !== user;
+    });
+    io.broadcast.emit("updateUsers", currentUsers);
+    console.log(user + " has left the lobby.");
+    console.log(currentUsers);
     socket.disconnect();
   });
 });

@@ -8,7 +8,8 @@ import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
   SET_AUTH_CONTENT,
-  SET_MAIN_CONTENT
+  SET_MAIN_CONTENT,
+  UPDATE_USERLIST
 } from "../actions/authTypes";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   isAuthenticated: null,
   isLoading: false,
   player: null,
+  userList: [],
   authContent: "LOGIN",
   mainContent: "DASHBOARD"
 };
@@ -53,6 +55,12 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         isLoading: false
       };
+    case UPDATE_USERLIST:
+      return {
+        ...state,
+        userList: action.payload
+      };
+
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
