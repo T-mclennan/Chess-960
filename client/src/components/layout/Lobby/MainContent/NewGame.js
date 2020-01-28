@@ -49,7 +49,6 @@ export class NewGame extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("button clicked");
 
     const { timer, style, scoring, color } = this.state;
     const { username } = this.props.player;
@@ -69,10 +68,6 @@ export class NewGame extends Component {
     } else if (color === "Black") {
       newGame.black = username;
     } else console.log("Color selection error.");
-
-    console.log("Inside NEWGAME:");
-    console.log(newGame);
-    console.log(username);
 
     //Attempt to create game:
     this.props.createGame({ newGame, username });

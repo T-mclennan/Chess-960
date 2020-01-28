@@ -31,7 +31,6 @@ router.get("/:id", (req, res) => {
 //@desc   Returns an open game if available, otherwise creates and returns new game:
 //@access private
 router.post("/findGameForPlayer", auth, (req, res) => {
-  console.log(req.body);
   Game.findOne({ started: false })
     .then(game => {
       //if a game is open, assign the player to as black and return the game:
@@ -136,9 +135,6 @@ router.post("/joinGame", (req, res) => {
         }
       )
         .then(result => {
-          console.log("JOIN GAME ROUTE");
-          console.log(result);
-          console.log(game);
           res.json(game);
         })
         .catch(e => console.log(e));
@@ -199,14 +195,20 @@ router.post("/updateGame", (req, res) => {
 //@access private
 //Arguments: {style, white, black, timer, scoring}
 router.post("/", (req, res) => {
+  const { black, white, style, timer } = req.body;
   const standard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+  const gameMinutes = timer === "Unlimited" ? null : Number(timer);
+  const gameSeconds = timer === "Unlimited" ? null : 0;
   const newGame = new Game({
     fen: req.body.style === "960" ? board.generateBoard() : standard,
-    white: req.body.white,
-    black: req.body.black,
-    history: "",
-    started: false,
-    turn: "white"
+    white,
+    black,
+    timer,
+    style,
+    wMin: gameMinutes,
+    bMin: gameMinutes,
+    wSec: gameSeconds,
+    bSec: gameSeconds
   });
   newGame.save().then(game => res.json(game));
 });

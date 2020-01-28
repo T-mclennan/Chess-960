@@ -24,8 +24,8 @@ class TableEntry extends Component {
         <td scope="row">{index}</td>
         <td>{game.black ? game.black : "open"}</td>
         <td>{game.white ? game.white : "open"}</td>
-        <td>960</td>
-        <td>No Time</td>
+        <td>{game.style}</td>
+        <td>{game.timer}</td>
       </tr>
       // </a>
     );

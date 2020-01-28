@@ -24,7 +24,7 @@ const GameSchema = new Schema({
 
   history: {
     type: Array,
-    required: false
+    default: []
   },
 
   started: {
@@ -35,6 +35,46 @@ const GameSchema = new Schema({
   turn: {
     type: String,
     default: "white"
+  },
+
+  ended: {
+    type: Boolean,
+    default: false
+  },
+
+  style: {
+    type: String,
+    default: "960"
+  },
+
+  wMin: {
+    type: Number,
+    default: null
+  },
+
+  wSec: {
+    type: Number,
+    default: null
+  },
+
+  bMin: {
+    type: Number,
+    default: null
+  },
+
+  bSec: {
+    type: Number,
+    default: null
+  },
+
+  timer: {
+    type: String,
+    default: ""
+  },
+
+  scoring: {
+    type: String,
+    default: ""
   }
 });
 

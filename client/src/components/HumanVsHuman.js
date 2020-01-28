@@ -88,29 +88,7 @@ class HumanVsHuman extends Component {
       black,
       started
     });
-    // this.props.addGameToProfile(this.props.gameID)
   };
-
-  // loadGame : fetches the specified game, updates values in the redux store,
-  //            sets the game logic to reflect the board state.
-  // loadGame = () => {
-  //   console.log("Load Game");
-
-  //   Axios.get(`/api/games/${this.props.game.gameID}`)
-  //     .then(async res => {
-  //       console.log("1 update state with game:");
-  //       console.log(res);
-  //       console.log(this.props.game.fen);
-  //       await this.props.updateGame(res.data);
-  //       await console.log("2 inside Load Game test:");
-  //       if (!this.props.started) {
-  //         console.log("3 game has not started");
-  //         this.joinGame();
-  //       }
-  //     })
-  //     .then(() => this.logic.load(this.props.game.fen))
-  //     .catch(e => console.log(e));
-  // };
 
   startGame = () => {
     const { fen, white, black, started } = this.props.game;
@@ -121,9 +99,6 @@ class HumanVsHuman extends Component {
     console.log(`black is: ${black}`);
     console.log(white && black);
     if (white && black && !started) {
-      // console.log(`white is: ${white}`);
-      // console.log(`black is: ${black}`);
-      // console.log(white && black);
       this.joinGame();
     }
   };
@@ -295,25 +270,10 @@ class HumanVsHuman extends Component {
   }
 }
 
-//Setting Prop Types for the Game component:
-
-const mapStateToProps = state =>
-  // const {black, white} = state.game;
-  // ({
-  //   black: state.game.black,
-  //   white: state.game.white,
-  //   started: state.game.started,
-  //   name: state.player.playerName,
-  //   color: state.game.color,
-  //   gameID: state.game.gameID,
-  //   fen: state.game.fen,
-  //   history: state.game.history,
-  //   turn: state.game.turn
-  // });
-  ({
-    game: state.game,
-    player: state.player
-  });
+const mapStateToProps = state => ({
+  game: state.game,
+  player: state.player
+});
 
 export default connect(mapStateToProps, {
   updateGame,

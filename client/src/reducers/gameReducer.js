@@ -23,6 +23,14 @@ const initialState = {
   turn: "white",
   color: "",
   gameID: "",
+  ended: false,
+  style: "",
+  time: "",
+  scoring: "",
+  bMin: null,
+  bSec: null,
+  wMin: null,
+  wSec: null,
   isLoading: false
 };
 
