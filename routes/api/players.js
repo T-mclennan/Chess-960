@@ -97,43 +97,45 @@ router.post("/", (req, res) => {
 
   //check for existing user:
   Player.findOne({ username }).then(player => {
-    if (player) return res.status(400).json({ msg: "User already exists" });
-  });
-
-  const newPlayer = new Player({
-    username,
-    email,
-    password,
-    rating: 1600
-  });
-
-  //create salt and hash:
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newPlayer.password, salt, (err, hash) => {
-      if (err) throw err;
-      newPlayer.password = hash;
-      newPlayer.save().then(player => {
-        jwt.sign(
-          { id: player.id },
-          keys.jwtSecret,
-          { expiresIn: 36000 },
-          (err, token) => {
-            if (err) throw err;
-            console.log("REGISTER TOKEN: ");
-            console.log(token);
-            res.json({
-              token,
-              player: {
-                id: player.id,
-                username: player.name,
-                email: player.email,
-                rating: player.rating
-              }
-            });
-          }
-        );
+    if (player) {
+      return res.status(400).json({ msg: "User already exists" });
+    } else {
+      const newPlayer = new Player({
+        username,
+        email,
+        password,
+        rating: 1600
       });
-    });
+
+      //create salt and hash:
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newPlayer.password, salt, (err, hash) => {
+          if (err) throw err;
+          newPlayer.password = hash;
+          newPlayer.save().then(player => {
+            jwt.sign(
+              { id: player.id },
+              keys.jwtSecret,
+              { expiresIn: 36000 },
+              (err, token) => {
+                if (err) throw err;
+                console.log("REGISTER TOKEN: ");
+                console.log(token);
+                res.json({
+                  token,
+                  player: {
+                    id: player.id,
+                    username: player.name,
+                    email: player.email,
+                    rating: player.rating
+                  }
+                });
+              }
+            );
+          });
+        });
+      });
+    }
   });
 });
 
