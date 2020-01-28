@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import About from "./components/pages/About";
 import Settings from "./components/pages/Settings";
 import Landing from "./components/layout/Landing";
@@ -9,7 +9,8 @@ import AppNavbar from "./components/layout/AppNavbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import history from "../src/history";
-import { loadPlayer } from "./actions/authActions";
+// import { loadPlayer } from "./actions/authActions";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import "./App.css";
 
 // import SocketContext from "./socket-context";
@@ -31,10 +32,13 @@ class App extends Component {
           <div className="App ">
             <AppNavbar />
             <div className="display">
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/lobby" component={Lobby} />
-              <Route exact path="/settings" component={Settings} />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <ProtectedRoute exact path="/about" component={About} />
+                <ProtectedRoute exact path="/lobby" component={Lobby} />
+                <ProtectedRoute exact path="/settings" component={Settings} />
+                <Route path="*" component={() => "404 page not found!"} />
+              </Switch>
             </div>
           </div>
           {/* </SocketContext.Provider> */}
