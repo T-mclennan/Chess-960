@@ -1,7 +1,7 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import Chess from "chess.js";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import Axios from "axios";
 import { connect } from "react-redux";
 import {
@@ -12,8 +12,8 @@ import {
   setGameAsStarted
 } from "../actions/gameActions";
 
-const port = process.env.PORT || "http://127.0.0.1:5000";
-const socket = io(port, { pingTimeout: 30000 });
+// const port = process.env.PORT || "http://127.0.0.1:5000";
+// const socket = io(port, { pingTimeout: 30000 });
 
 class HumanVsHuman extends Component {
   static propTypes = {
@@ -39,6 +39,7 @@ class HumanVsHuman extends Component {
 
   componentDidMount() {
     console.log("Game Comp Did Mount:");
+    const { socket } = this.props;
     this.logic = new Chess(this.props.game.fen);
 
     // this.loadGame();
@@ -81,7 +82,7 @@ class HumanVsHuman extends Component {
       .catch(e => console.log(e));
 
     const { started } = this.props.game;
-    socket.emit("joined", {
+    this.props.socket.emit("joined", {
       gameID,
       white,
       black,
@@ -161,6 +162,7 @@ class HumanVsHuman extends Component {
   };
 
   onDrop = ({ sourceSquare, targetSquare }) => {
+    const { socket } = this.props;
     // see if the move is legal
     let move = this.logic.move({
       from: sourceSquare,
@@ -229,7 +231,7 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
     else {
-      socket.emit("move", {
+      this.props.socket.emit("move", {
         move: move,
         fen: this.logic.fen(),
         gameID: this.props.game.gameIDgameID

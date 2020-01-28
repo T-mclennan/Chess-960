@@ -13,11 +13,11 @@ import history from "../src/history";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import "./App.css";
 
-// import SocketContext from "./socket-context";
-// import * as io from "socket.io-client";
+import SocketContext from "./socket-context";
+import * as io from "socket.io-client";
 
-// const port = process.env.PORT || "http://127.0.0.1:5000";
-// const socket = io(port, { pingTimeout: 30000 });
+const port = process.env.PORT || "http://127.0.0.1:5000";
+const socket = io(port, { pingTimeout: 30000 });
 
 class App extends Component {
   componentWillMount() {
@@ -28,20 +28,20 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          {/* <SocketContext.Provider value={socket}> */}
-          <div className="App ">
-            <AppNavbar />
-            <div className="display">
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <ProtectedRoute exact path="/about" component={About} />
-                <ProtectedRoute exact path="/lobby" component={Lobby} />
-                <ProtectedRoute exact path="/settings" component={Settings} />
-                <Route path="*" component={() => "404 page not found!"} />
-              </Switch>
+          <SocketContext.Provider value={socket}>
+            <div className="App ">
+              <AppNavbar />
+              <div className="display">
+                <Switch>
+                  <Route exact path="/" component={Landing} />
+                  <ProtectedRoute exact path="/about" component={About} />
+                  <ProtectedRoute exact path="/lobby" component={Lobby} />
+                  <ProtectedRoute exact path="/settings" component={Settings} />
+                  <Route path="*" component={() => "404 page not found!"} />
+                </Switch>
+              </div>
             </div>
-          </div>
-          {/* </SocketContext.Provider> */}
+          </SocketContext.Provider>
         </Router>
       </Provider>
     );
