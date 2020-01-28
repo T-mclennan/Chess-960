@@ -63,29 +63,51 @@ router.post("/findGameForPlayer", auth, (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
-//@route  POST api/games/findAnOpenGame
+//@route  get api/games/findAnOpenGame
 //@desc   Returns an open game if available, otherwise creates and returns new game:
 //@access private
-router.post("/findAnOpenGame", (req, res) => {
-  // console.log(req.body);
+router.get("/findAnOpenGame", (req, res) => {
+  console.log("inside /findeanopengame:");
   Game.findOne({ started: false })
-    .then(game => res.json(game))
+    .then(game => {
+      console.log(game);
+      res.json(game);
+    })
     .catch(err => res.status(404).json({ success: false }));
 });
 
 //@route  GET api/games/findAllOpenGames
 //@desc   Returns all open games.
 //@access private
-router.get("/findAllOpenGames", (req, res) => {
+router.get("/findOpenGames", (req, res) => {
   console.log("inside findGames:");
   // console.log(req.body);
-  Game.find({ started: false })
-    .sort({ dateCreated: -1 })
+  Game.find()
+    // { started: false }
+    // .sort({ dateCreated: -1 })
     .then(games => {
       console.log(games);
       res.json(games);
     })
     .catch(err => res.status(404).json({ success: false }));
+});
+
+//@route  GET api/games
+//@desc   Get all games
+//@access public
+router.get("/findOpenGames", (req, res) => {
+  Game.find()
+    .sort()
+    .then(games => res.json(games));
+});
+
+//@route  GET api/games
+//@desc   Get all games
+//@access public
+router.get("/", (req, res) => {
+  Game.find()
+    .sort()
+    .then(games => res.json(games));
 });
 
 //@route  POST api/games/joinGame

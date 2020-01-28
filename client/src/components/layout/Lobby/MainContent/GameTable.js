@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Table } from "reactstrap";
 import TableEntry from "./TableEntry";
-// import { joinGame } from "../../../../actions/gameActions";
 
 import "../../css/Dashboard.css";
 
@@ -22,11 +21,19 @@ class GameTable extends Component {
     this.generateGames();
   }
 
+  //Generates a list of open games, in which the player is not already present:
   generateGames = () => {
+    const { username } = this.props.player;
     axios
       .get("api/games/")
       .then(gameList => {
-        this.setState({ gameArray: gameList.data });
+        const games = gameList.data.filter(
+          game =>
+            game.started === false &&
+            game.white !== username &&
+            game.black !== username
+        );
+        this.setState({ gameArray: games });
       })
       .catch(e => console.error(e));
   };

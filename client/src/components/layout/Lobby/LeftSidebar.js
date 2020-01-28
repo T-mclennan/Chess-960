@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { connect } from "react-redux";
 import { setMainContent } from "../../../actions/authActions";
+import { quickPlay } from "../../../actions/gameActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faListOl,
@@ -32,7 +33,7 @@ export class LeftSidebar extends Component {
           <div className="iconTitle"> Dashboard</div>
         </Button>
 
-        <Button style={sidebarButton}>
+        <Button style={sidebarButton} onClick={() => this.props.quickPlay()}>
           <FontAwesomeIcon
             icon={faPlayCircle}
             className="icon far fa-2x fa-in"
@@ -99,5 +100,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  setMainContent
+  setMainContent,
+  quickPlay
 })(LeftSidebar);

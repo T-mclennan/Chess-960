@@ -91,6 +91,7 @@ export const loadGame = (gameID, username) => dispatch => {
 
 //Fetches and loads an open game:
 export const quickPlay = username => dispatch => {
+  console.log("inside QuickPlay");
   axios
     .get("/api/games/findAnOpenGame")
     .then(res => {
@@ -105,6 +106,7 @@ export const quickPlay = username => dispatch => {
       console.log(username);
 
       dispatch(loadColor(username, res.data.white, res.data.black));
+      dispatch(addGameToList({ username, gameID: res.data._id }));
     })
     .then(() => {
       dispatch(setMainContent("GAME"));
