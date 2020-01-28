@@ -109,7 +109,9 @@ router.post("/joinGame", (req, res) => {
       game.started = true;
       Game.updateOne(
         { _id: game._id },
-        { $set: { black: game.black, white: game.white } }
+        {
+          $set: { black: game.black, white: game.white }
+        }
       )
         .then(result => {
           console.log("JOIN GAME ROUTE");
@@ -122,10 +124,36 @@ router.post("/joinGame", (req, res) => {
     .catch(e => console.log(e));
 });
 
+//@route  POST api/games/joinGame
+//@desc   Attempts to join a game designated by ID:
+//Takes in {id, username}
+//@access private
+router.get("/startGame/:id", (req, res) => {
+  console.log("set game as started:");
+  Game.findById(req.params.id)
+    .then(game => {
+      console.log(game);
+
+      Game.updateOne(
+        { _id: game._id },
+        {
+          $set: { started: true }
+        }
+      )
+        .then(result => {
+          res.json(result);
+        })
+        .catch(e => console.log(e));
+    })
+    .catch(e => console.log(e));
+});
+
 //@route  POST api/games/updateGame
 //@desc   Updates the Fen, History, and Turn attributes of a game:
-//@access private
-router.post("/updateGame", auth, (req, res) => {
+//@access public
+router.post("/updateGame", (req, res) => {
+  console.log("inside UPdate Game:");
+  console.log(req.body);
   Game.updateOne(
     { _id: req.body._id },
     {

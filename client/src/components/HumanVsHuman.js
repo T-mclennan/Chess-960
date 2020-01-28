@@ -38,17 +38,15 @@ class HumanVsHuman extends Component {
   }
 
   componentDidMount() {
-    console.log("Inside Game Window");
-    console.log(this.props.game);
-    console.log(this.props.player);
+    console.log("Game Comp Did Mount:");
     this.logic = new Chess(this.props.game.fen);
 
-    this.loadGame();
+    // this.loadGame();
     this.startGame();
 
     socket.on("newPlayer", data => {
       console.log("received newplayer ping.");
-      if (data.gameID === this.props.gameID) {
+      if (data.gameID === this.props.game.gameID) {
         this.props.updatePlayers({
           white: data.white,
           black: data.black,
@@ -59,23 +57,30 @@ class HumanVsHuman extends Component {
 
     socket.on("moveMade", data => {
       console.log("received newmove ping");
-      if (data.gameID === this.props.gameID) {
-        console.log("move made by opponent");
+      console.log(data);
+      if (data.gameID === this.props.game.gameID) {
         this.logic.move(data.newMove);
         this.props.makeMove({
           fen: this.logic.fen(),
           history: this.logic.history({ verbose: true })
         });
-        this.props.changeTurn();
-        console.log(this.state);
+        // this.props.changeTurn();
       }
     });
   }
 
   //TODO: Save game in players profile:
   joinGame = () => {
-    console.log("join game function:");
-    const { gameID, white, black, started } = this.props.game;
+    this.setState({ started: true });
+    // this.props.setGameAsStarted();
+    const { gameID, white, black } = this.props.game;
+    Axios.get(`/api/games/startGame/${this.props.game.gameID}`)
+      .then(() => {
+        this.props.setGameAsStarted();
+      })
+      .catch(e => console.log(e));
+
+    const { started } = this.props.game;
     socket.emit("joined", {
       gameID,
       white,
@@ -87,31 +92,37 @@ class HumanVsHuman extends Component {
 
   // loadGame : fetches the specified game, updates values in the redux store,
   //            sets the game logic to reflect the board state.
-  loadGame = () => {
-    console.log("Load Game");
+  // loadGame = () => {
+  //   console.log("Load Game");
 
-    Axios.get(`/api/games/${this.props.game.gameID}`)
-      .then(res => {
-        console.log("update game:");
-        console.log(res);
-        console.log(this.props.game.fen);
-        this.props.updateGame(res.data);
-      })
-      .then(() => this.logic.load(this.props.game.fen))
-      .then(() => {
-        if (!this.props.started) this.joinGame();
-      })
-      .catch(e => console.log(e));
-  };
+  //   Axios.get(`/api/games/${this.props.game.gameID}`)
+  //     .then(async res => {
+  //       console.log("1 update state with game:");
+  //       console.log(res);
+  //       console.log(this.props.game.fen);
+  //       await this.props.updateGame(res.data);
+  //       await console.log("2 inside Load Game test:");
+  //       if (!this.props.started) {
+  //         console.log("3 game has not started");
+  //         this.joinGame();
+  //       }
+  //     })
+  //     .then(() => this.logic.load(this.props.game.fen))
+  //     .catch(e => console.log(e));
+  // };
 
   startGame = () => {
     const { fen, white, black, started } = this.props.game;
     console.log("Start Game");
     console.log(fen);
     // this.logic.load(fen);
-
+    console.log(`white is: ${white}`);
+    console.log(`black is: ${black}`);
+    console.log(white && black);
     if (white && black && !started) {
-      this.props.setGameAsStarted();
+      // console.log(`white is: ${white}`);
+      // console.log(`black is: ${black}`);
+      // console.log(white && black);
       this.joinGame();
     }
   };
@@ -160,15 +171,17 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
     console.log(this.logic.fen());
-    socket.emit("move", { newMove: move, gameID: this.props.gameID });
+    socket.emit("move", { newMove: move, gameID: this.props.game.gameID });
     this.setState(({ history, pieceSquare }) => ({
       squareStyles: this.squareStyling({ pieceSquare, history })
     }));
+
     this.props.makeMove({
+      _id: this.props.game.gameID,
+      turn: this.props.game.turn,
       fen: this.logic.fen(),
       history: this.logic.history({ verbose: true })
     });
-    this.props.changeTurn();
   };
 
   onMouseOverSquare = square => {
@@ -219,7 +232,7 @@ class HumanVsHuman extends Component {
       socket.emit("move", {
         move: move,
         fen: this.logic.fen(),
-        gameID: this.props.gameID
+        gameID: this.props.game.gameIDgameID
       });
     }
 

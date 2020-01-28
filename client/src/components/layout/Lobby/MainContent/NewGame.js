@@ -51,7 +51,7 @@ export class NewGame extends Component {
     e.preventDefault();
     console.log("button clicked");
 
-    const { timer, style, scoring } = this.state;
+    const { timer, style, scoring, color } = this.state;
     const { username } = this.props.player;
     //Create proto-game object:
     let newGame = {
@@ -59,13 +59,14 @@ export class NewGame extends Component {
       black: "",
       timer,
       style,
-      scoring
+      scoring,
+      color
     };
 
     //Set player to appropriate color:
-    if (this.state.color === "White") {
+    if (color === "White") {
       newGame.white = username;
-    } else if (this.state.color === "Black") {
+    } else if (color === "Black") {
       newGame.black = username;
     } else console.log("Color selection error.");
 
