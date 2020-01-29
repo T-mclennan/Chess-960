@@ -14,12 +14,7 @@ export class Lobby extends Component {
         <LeftSidebar />
         <MainDisplay player={this.props.player.username} />
         <SocketContext.Consumer>
-          {socket => (
-            <RightSidebar
-              socket={socket}
-              username={this.props.player.username}
-            />
-          )}
+          {socket => <RightSidebar socket={socket} />}
         </SocketContext.Consumer>
       </div>
     );

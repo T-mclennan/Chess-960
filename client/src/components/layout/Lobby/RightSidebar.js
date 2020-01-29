@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import "../css/lobby.css";
 // import "../../../src/App.css";
 
@@ -14,10 +15,31 @@ export class RightSidebar extends Component {
   }
 
   componentDidMount() {
-    this.getUsers();
     const { socket } = this.props;
-    this.props.socket.emit("sendUsername", "jason");
+    this.getUsers();
+    setTimeout(() => {
+      this.connectSocket();
+    }, 500);
+
+    socket.on("updateUsers", userList => {
+      console.log("received update Userlist ping.");
+      console.log(userList);
+    });
   }
+
+  connectSocket = () => {
+    const { socket } = this.props;
+    console.log("Right Sidebar:");
+    console.log(this.props);
+    if (this.props.player.username) {
+      socket.emit("sendUsername", this.props.player.username);
+    }
+
+    // socket.on("updateUsers", userList => {
+    //   console.log("received update Userlist ping.");
+    //   console.log(userList);
+    // });
+  };
 
   getUsers() {
     axios.get("/api/players/all").then(({ data }) => {
@@ -60,4 +82,9 @@ const playerBox = {
   // border: "1px solid #585858",
   // backgroundColor: "#707070"
 };
-export default RightSidebar;
+
+const mapStateToProps = state => ({
+  player: state.player
+});
+
+export default connect(mapStateToProps, {})(RightSidebar);

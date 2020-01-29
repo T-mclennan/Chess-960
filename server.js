@@ -43,7 +43,7 @@ io.on("connection", socket => {
     socket.username = username;
     console.log(socket.username);
     currentUsers.push(socket.username);
-    socket.broadcast.emit("updateUsers", currentUsers);
+    io.emit("updateUsers", currentUsers);
     console.log(username + " has entered the lobby.");
     console.log(currentUsers);
   });
@@ -63,7 +63,7 @@ io.on("connection", socket => {
     currentUsers = currentUsers.filter(name => {
       return name !== socket.username;
     });
-    socket.broadcast.emit("updateUsers", currentUsers);
+    io.emit("updateUsers", currentUsers);
     console.log(socket.username + " has left the lobby.");
     console.log(currentUsers);
     socket.disconnect();
