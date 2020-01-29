@@ -38,11 +38,13 @@ if (process.env.NODE_ENV === "production") {
 var currentUsers = [];
 var io = require("socket.io").listen(server, { pingTimeout: 30000 });
 io.on("connection", socket => {
-  socket.on("connectedUser", user => {
-    socket.name = user;
-    currentUsers.push(user);
-    io.broadcast.emit("updateUsers", currentUsers);
-    console.log(users + " has entered the lobby.");
+  socket.on("sendUsername", username => {
+    console.log("inside Send Username:");
+    socket.username = username;
+    console.log(socket.username);
+    currentUsers.push(socket.username);
+    socket.broadcast.emit("updateUsers", currentUsers);
+    console.log(username + " has entered the lobby.");
     console.log(currentUsers);
   });
 
@@ -57,12 +59,12 @@ io.on("connection", socket => {
     console.log("move made");
   });
 
-  socket.on("disconnect", user => {
+  socket.on("disconnect", () => {
     currentUsers = currentUsers.filter(name => {
-      return name !== user;
+      return name !== socket.username;
     });
-    io.broadcast.emit("updateUsers", currentUsers);
-    console.log(user + " has left the lobby.");
+    socket.broadcast.emit("updateUsers", currentUsers);
+    console.log(socket.username + " has left the lobby.");
     console.log(currentUsers);
     socket.disconnect();
   });

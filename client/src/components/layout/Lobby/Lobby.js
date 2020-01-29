@@ -4,6 +4,7 @@ import LeftSidebar from "./LeftSidebar";
 import MainDisplay from "./MainDisplay";
 import RightSidebar from "./RightSidebar";
 import { connect } from "react-redux";
+import SocketContext from "./../../../socket-context";
 // import "../../../src/App.css";
 
 export class Lobby extends Component {
@@ -12,7 +13,14 @@ export class Lobby extends Component {
       <div className="content">
         <LeftSidebar />
         <MainDisplay player={this.props.player.username} />
-        <RightSidebar />
+        <SocketContext.Consumer>
+          {socket => (
+            <RightSidebar
+              socket={socket}
+              username={this.props.player.username}
+            />
+          )}
+        </SocketContext.Consumer>
       </div>
     );
   }

@@ -15,6 +15,8 @@ export class RightSidebar extends Component {
 
   componentDidMount() {
     this.getUsers();
+    const { socket } = this.props;
+    this.props.socket.emit("sendUsername", "jason");
   }
 
   getUsers() {
