@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import { updateUserlist } from "../../../actions/authActions";
+import PlayerList from "./RightSidebar/PlayerList";
+import OnlinePlayerList from "./RightSidebar/OnlinePlayerList";
 import "../css/lobby.css";
+
 // import "../../../src/App.css";
 
 export class RightSidebar extends Component {
@@ -24,6 +28,8 @@ export class RightSidebar extends Component {
     socket.on("updateUsers", userList => {
       console.log("received update Userlist ping.");
       console.log(userList);
+      this.props.updateUserlist(userList);
+      this.setState({ onlineUsers: userList });
     });
   }
 
@@ -54,23 +60,9 @@ export class RightSidebar extends Component {
 
   render() {
     return (
-      <div className="rightsidebar">
-        <div style={playerBox}>
-          <div className="ui fluid container">
-            <ul
-              style={{
-                listStyleType: "circle",
-                lineHeight: "145%",
-
-                fontSize: "21px"
-              }}
-            >
-              {this.state.users.map((user, i) => (
-                <li key={i}>{user.username}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+      <div>
+        <OnlinePlayerList users={this.state.onlineUsers} />
+        <PlayerList users={this.state.users} />
       </div>
     );
   }
@@ -84,7 +76,8 @@ const playerBox = {
 };
 
 const mapStateToProps = state => ({
-  player: state.player
+  player: state.player,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(RightSidebar);
+export default connect(mapStateToProps, { updateUserlist })(RightSidebar);
