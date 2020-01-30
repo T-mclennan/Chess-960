@@ -39,9 +39,7 @@ var currentUsers = [];
 var io = require("socket.io").listen(server, { pingTimeout: 30000 });
 io.on("connection", socket => {
   socket.on("sendUsername", username => {
-    console.log("inside Send Username:");
     socket.username = username;
-    console.log(socket.username);
     currentUsers.push(socket.username);
     io.emit("updateUsers", currentUsers);
     console.log(username + " has entered the lobby.");

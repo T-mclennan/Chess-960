@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { updateUserlist } from "../../../actions/authActions";
 import PlayerList from "./RightSidebar/PlayerList";
 import OnlinePlayerList from "./RightSidebar/OnlinePlayerList";
-import "../css/lobby.css";
+import "../css/RightSidebar.css";
 
 // import "../../../src/App.css";
 
@@ -59,20 +59,28 @@ export class RightSidebar extends Component {
   }
 
   render() {
+    console.log("OnlineUsers:");
+    console.log(this.state.onlineUsers);
+    console.log("Users:");
+    console.log(this.state.users);
     return (
-      <div>
-        <OnlinePlayerList users={this.state.onlineUsers} />
-        <PlayerList users={this.state.users} />
+      // <div className="ui fluid container">
+      <div className="rightsidebar ">
+        <div style={playerBox}>
+          <OnlinePlayerList users={this.state.onlineUsers} />
+          <PlayerList
+            users={this.state.users}
+            onlineUsers={this.state.onlineUsers}
+          />
+        </div>
       </div>
     );
   }
 }
 const playerBox = {
-  margin: "1px",
-  width: "7rem",
-  padding: "0 1rem"
-  // border: "1px solid #585858",
-  // backgroundColor: "#707070"
+  // margin: "1px",
+  width: "7rem"
+  // padding: "0 1rem"
 };
 
 const mapStateToProps = state => ({

@@ -1,22 +1,14 @@
 import React from "react";
+import PlayerItem from "./PlayerItem";
+import "../../css/RightSidebar.css";
 
 export default function PlayerList(props) {
   return (
-    <div className={props.style}>
-      <div className="ui fluid container">
-        <ul
-          style={{
-            listStyleType: "circle",
-            lineHeight: "145%",
-
-            fontSize: "21px"
-          }}
-        >
-          {props.users.map((user, i) => (
-            <li key={i}>{user.username}</li>
-          ))}
-        </ul>
-      </div>
+    <div className="playerList">
+      {props.users.map((player, i) => (
+        //   <li key={i}>{player}</li>
+        <PlayerItem key={i} player={player.username} color="pink" />
+      ))}
     </div>
   );
 }
