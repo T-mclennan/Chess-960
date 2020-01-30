@@ -8,7 +8,7 @@ const AlertMessage = props => {
 
   return (
     <Alert color="info" isOpen={visible} toggle={onDismiss}>
-      I am an alert and I can be dismissed!
+      Alert!
     </Alert>
   );
 };

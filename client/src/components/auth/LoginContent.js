@@ -63,8 +63,6 @@ class LoginContent extends Component {
       password
     };
 
-    console.log("LoginContent:");
-    console.log(player);
     //Attempt to log in:
     this.props.login(player);
   };

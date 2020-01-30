@@ -57,7 +57,7 @@ export const createGame = input => dispatch => {
       });
       dispatch({
         type: LOAD_COLOR,
-        payload: input.newGame.color
+        payload: input.newGame.color.toLowerCase()
       });
       dispatch(
         addGameToList({ username: input.username, gameID: res.data._id })

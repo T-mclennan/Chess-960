@@ -9,6 +9,7 @@ const http = require("http");
 
 const app = express();
 const server = http.createServer(app);
+var currentUsers = [];
 
 // Bodyparser Middleware
 app.use(express.json());
@@ -35,7 +36,6 @@ if (process.env.NODE_ENV === "production") {
 //--------------------------------------------------------
 
 // initialize a new instance of socket.io by passing the HTTP server object
-var currentUsers = [];
 var io = require("socket.io").listen(server, { pingTimeout: 30000 });
 io.on("connection", socket => {
   socket.on("sendUsername", username => {

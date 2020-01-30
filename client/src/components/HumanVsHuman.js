@@ -43,11 +43,15 @@ class HumanVsHuman extends Component {
     this.logic = new Chess(this.props.game.fen);
 
     // this.loadGame();
-    this.startGame();
+    // this.startGame();
+    console.log(this.props.game);
+    this.joinGame();
 
     socket.on("newPlayer", data => {
       console.log("received newplayer ping.");
+      console.log(data);
       if (data.gameID === this.props.game.gameID) {
+        console.log("updating players:");
         this.props.updatePlayers({
           white: data.white,
           black: data.black,
@@ -72,16 +76,18 @@ class HumanVsHuman extends Component {
 
   //TODO: Save game in players profile:
   joinGame = () => {
-    this.setState({ started: true });
-    // this.props.setGameAsStarted();
-    const { gameID, white, black } = this.props.game;
-    Axios.get(`/api/games/startGame/${this.props.game.gameID}`)
-      .then(() => {
-        this.props.setGameAsStarted();
-      })
-      .catch(e => console.log(e));
+    const { gameID, white, black, started } = this.props.game;
 
-    const { started } = this.props.game;
+    if (white && black && !started) {
+      this.setState({ started: true });
+
+      Axios.get(`/api/games/startGame/${this.props.game.gameID}`)
+        .then(() => {
+          this.props.setGameAsStarted();
+        })
+        .catch(e => console.log(e));
+    }
+
     this.props.socket.emit("joined", {
       gameID,
       white,
