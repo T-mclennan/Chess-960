@@ -9,7 +9,6 @@ import AppNavbar from "./components/layout/AppNavbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import history from "../src/history";
-// import { loadPlayer } from "./actions/authActions";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { LoginRoute } from "./components/auth/LoginRoute";
 import "./App.css";
