@@ -11,6 +11,7 @@ import store from "./store";
 import history from "../src/history";
 // import { loadPlayer } from "./actions/authActions";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
+import { LoginRoute } from "./components/auth/LoginRoute";
 import "./App.css";
 
 import SocketContext from "./socket-context";
@@ -33,7 +34,7 @@ class App extends Component {
               <AppNavbar />
               <div className="display">
                 <Switch>
-                  <Route exact path="/" component={Landing} />
+                  <LoginRoute exact path="/" component={Landing} />
                   <ProtectedRoute exact path="/about" component={About} />
                   <ProtectedRoute exact path="/lobby" component={Lobby} />
                   <ProtectedRoute exact path="/settings" component={Settings} />

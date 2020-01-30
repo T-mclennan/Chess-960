@@ -21,7 +21,8 @@ class LoginContent extends Component {
     username: "",
     password: "",
     msg: null,
-    reidrect: false
+    reidrect: false,
+    isAuthenticated: false
   };
 
   static propTypes = {
@@ -70,10 +71,10 @@ class LoginContent extends Component {
 
   render() {
     //If authenticated, redirect to lobby:
-    if (this.props.isAuthenticated) {
-      console.log("is authenticated --");
-      history.push("/lobby");
-    }
+    // if (this.props.isAuthenticated) {
+    //   console.log("is authenticated --");
+    //   history.push("/lobby");
+    // }
 
     return (
       <div>

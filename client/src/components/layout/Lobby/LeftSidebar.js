@@ -8,7 +8,6 @@ import {
   faListOl,
   faSearch,
   faChessBoard
-  // faPlayCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { faPlayCircle, faUser } from "@fortawesome/free-regular-svg-icons";
 import "../css/lobby.css";
@@ -33,7 +32,10 @@ export class LeftSidebar extends Component {
           <div className="iconTitle"> Dashboard</div>
         </Button>
 
-        <Button style={sidebarButton} onClick={() => this.props.quickPlay()}>
+        <Button
+          style={sidebarButton}
+          onClick={() => this.props.quickPlay(this.props.player.username)}
+        >
           <FontAwesomeIcon
             icon={faPlayCircle}
             className="icon far fa-2x fa-in"
@@ -96,7 +98,8 @@ const sidebarButton = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  player: state.player
 });
 
 export default connect(mapStateToProps, {

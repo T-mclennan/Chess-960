@@ -5,8 +5,6 @@ import "../../css/RightSidebar.css";
 export default function PlayerList(props) {
   const { onlineUsers, users } = props;
   const players = users.filter(user => !onlineUsers.includes(user.username));
-  console.log("Players:");
-  console.log(players);
   return (
     <div className="playerList">
       {players.map((player, i) => (

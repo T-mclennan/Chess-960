@@ -5,6 +5,7 @@ import FindGame from "./MainContent/FindGame";
 import NewGame from "./MainContent/NewGame";
 import Standings from "./MainContent/Standings";
 import Game from "../Lobby/GameComponents/Game";
+import About from "../../pages/About";
 import { Container } from "reactstrap";
 import "../css/lobby.css";
 
@@ -18,6 +19,7 @@ export class MainDisplay extends Component {
         {contentType === "FINDGAME" && <FindGame />}
         {contentType === "STANDINGS" && <Standings />}
         {contentType === "GAME" && <Game />}
+        {contentType === "ABOUT" && <About />}
       </Container>
     );
   }

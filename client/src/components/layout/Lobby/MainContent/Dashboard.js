@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { setMainContent } from "../../../../actions/authActions";
 import GameCardList from "./GameCardList";
 import { connect } from "react-redux";
 import "../../css/Dashboard.css";
@@ -15,8 +16,14 @@ export class Dashboard extends Component {
         </div>
         {/* <div className="gameList "> */}
 
-        {this.props.player.currentGames.length > 0 ? (
-          <GameCardList currentGames={this.props.player} />
+        {/* {this.props.player.currentGames.length > 0 ? ( */}
+        {this.props.player.username ? (
+          this.props.player.currentGames.length > 0 ? (
+            <GameCardList currentGames={this.props.player} />
+          ) : (
+            // this.props.setMainContent("ABOUT")
+            <div>hi</div>
+          )
         ) : (
           <FontAwesomeIcon
             icon={faSpinner}
@@ -27,8 +34,9 @@ export class Dashboard extends Component {
               color: "white"
             }}
           />
-          //  <i class="fas fa-spinner fa-pulse"></i>
-        )}
+        )
+        //  <i class="fas fa-spinner fa-pulse"></i>
+        }
 
         {/* </div> */}
       </div>
@@ -41,4 +49,4 @@ const mapStateToProps = state => ({
   game: state.game
 });
 
-export default connect(mapStateToProps, {})(Dashboard);
+export default connect(mapStateToProps, { setMainContent })(Dashboard);

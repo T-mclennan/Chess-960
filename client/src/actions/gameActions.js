@@ -92,24 +92,29 @@ export const loadGame = (gameID, username) => dispatch => {
 //Fetches and loads an open game:
 export const quickPlay = username => dispatch => {
   console.log("inside QuickPlay");
+  console.log(username);
+  // axios
+  //   .get("/api/games/findOpenGames")
+  //   .then(res => {
+  //     console.log("Found open games:");
+  //     console.log(res.data);
+  //     const gameList = res.data.filter(game => {
+  //       return game.username !== username;
+  //     });
   axios
-    .get("/api/games/findAnOpenGame")
-    .then(res => {
-      console.log("Found an open game:");
-      console.log(res.data);
-      dispatch({
-        type: LOAD_GAME,
-        payload: res.data
-      });
-      console.log("Set Color:");
-      console.log(res.data.white);
-      console.log(username);
-
-      dispatch(loadColor(username, res.data.white, res.data.black));
-      dispatch(addGameToList({ username, gameID: res.data._id }));
-    })
-    .then(() => {
-      dispatch(setMainContent("GAME"));
+    .get("api/games/")
+    .then(gameList => {
+      const games = gameList.data.filter(
+        game =>
+          game.started === false &&
+          game.white !== username &&
+          game.black !== username
+      );
+      const foundGame = games[0];
+      console.log(games);
+      console.log("Found Game!!");
+      console.log(foundGame);
+      dispatch(joinGame(foundGame._id, username));
     })
     .catch(e => console.log(e));
 };
