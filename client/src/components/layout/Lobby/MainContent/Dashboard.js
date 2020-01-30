@@ -1,8 +1,10 @@
 // Dashboard is serves as the main viewport for the user when the are logged in:
 import React, { Component } from "react";
-import "../../css/Dashboard.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import GameCardList from "./GameCardList";
 import { connect } from "react-redux";
+import "../../css/Dashboard.css";
 
 export class Dashboard extends Component {
   render() {
@@ -16,7 +18,16 @@ export class Dashboard extends Component {
         {this.props.player.currentGames.length > 0 ? (
           <GameCardList currentGames={this.props.player} />
         ) : (
-          <div />
+          <FontAwesomeIcon
+            icon={faSpinner}
+            spin
+            size="xs"
+            style={{
+              fontSize: "4rem",
+              color: "white"
+            }}
+          />
+          //  <i class="fas fa-spinner fa-pulse"></i>
         )}
 
         {/* </div> */}

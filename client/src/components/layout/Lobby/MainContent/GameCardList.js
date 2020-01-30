@@ -18,15 +18,7 @@ class GameCardList extends Component {
   //In order to deal with asynchronous calls inside of map, we compose an array of Promises
   // and call Promise.all. The resulting array of games is saved into local state for further processing:
   componentDidMount() {
-    setTimeout(() => {
-      this.generateGames();
-    }, 1000);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.currentGames !== nextProps.currentGames) {
-      this.generateGames();
-    }
+    this.generateGames();
   }
 
   generateGames = () => {
