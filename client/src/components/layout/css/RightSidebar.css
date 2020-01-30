@@ -12,7 +12,9 @@
 }
 
 .playerList {
-  width: 100%;
+  color: gray;
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .onlinePlayerList {
@@ -29,6 +31,7 @@
   display: flex;
   align-content: center;
   align-items: center;
+  margin: 0.1rem 1rem;
 }
 
 .playerName {

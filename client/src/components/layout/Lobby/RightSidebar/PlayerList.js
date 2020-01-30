@@ -3,11 +3,14 @@ import PlayerItem from "./PlayerItem";
 import "../../css/RightSidebar.css";
 
 export default function PlayerList(props) {
+  const { onlineUsers, users } = props;
+  const players = users.filter(user => !onlineUsers.includes(user.username));
+  console.log("Players:");
+  console.log(players);
   return (
     <div className="playerList">
-      {props.users.map((player, i) => (
-        //   <li key={i}>{player}</li>
-        <PlayerItem key={i} player={player.username} color="pink" />
+      {players.map((player, i) => (
+        <PlayerItem key={i} player={player.username} color="gray" />
       ))}
     </div>
   );

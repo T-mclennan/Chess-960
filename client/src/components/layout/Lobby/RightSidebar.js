@@ -59,10 +59,6 @@ export class RightSidebar extends Component {
   }
 
   render() {
-    console.log("OnlineUsers:");
-    console.log(this.state.onlineUsers);
-    console.log("Users:");
-    console.log(this.state.users);
     return (
       // <div className="ui fluid container">
       <div className="rightsidebar ">
