@@ -38,8 +38,7 @@ class GameCardList extends Component {
   };
 
   render() {
-    const styling =
-      this.state.gameArray.length > 3 ? '"flexStart"' : '"center"';
+    let styling = this.state.gameArray.length > 3 ? '"flexStart"' : '"center"';
     console.log("GAME LIST STYLING:");
     console.log(styling);
     return (

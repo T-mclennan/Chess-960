@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChessQueen } from "@fortawesome/free-solid-svg-icons";
+import SocketContext from "../../socket-context";
 import history from "../../history";
 import "./css/Navbar.css";
 
@@ -53,7 +54,9 @@ class AppNavbar extends Component {
           <NavLink href="/settings">Settings</NavLink>
         </NavItem>
         <NavItem>
-          <Logout />
+          <SocketContext.Consumer>
+            {socket => <Logout socket={socket} />}
+          </SocketContext.Consumer>
         </NavItem>
       </Fragment>
     );

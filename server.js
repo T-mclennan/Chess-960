@@ -57,6 +57,16 @@ io.on("connection", socket => {
     console.log("move made");
   });
 
+  socket.on("logout", () => {
+    currentUsers = currentUsers.filter(name => {
+      return name !== socket.username;
+    });
+    io.emit("updateUsers", currentUsers);
+    console.log(socket.username + " has logged out.");
+    console.log(currentUsers);
+    socket.disconnect();
+  });
+
   socket.on("disconnect", () => {
     currentUsers = currentUsers.filter(name => {
       return name !== socket.username;
