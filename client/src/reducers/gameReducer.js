@@ -27,10 +27,8 @@ const initialState = {
   style: "",
   time: "",
   scoring: "",
-  bMin: null,
-  bSec: null,
-  wMin: null,
-  wSec: null,
+  wTime: null,
+  bTime: null,
   isLoading: false
 };
 
@@ -75,7 +73,9 @@ export default function(state = initialState, action) {
       return {
         ...state,
         fen: action.payload.fen,
-        history: action.payload.history
+        history: action.payload.history,
+        wTime: action.payload.wTime,
+        bTime: action.payload.bTime
       };
 
     case CHANGE_TURN:

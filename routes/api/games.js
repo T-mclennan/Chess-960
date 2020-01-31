@@ -100,15 +100,6 @@ router.get("/findOpenGames", (req, res) => {
     .then(games => res.json(games));
 });
 
-//@route  GET api/games
-//@desc   Get all games
-//@access public
-router.get("/", (req, res) => {
-  Game.find()
-    .sort()
-    .then(games => res.json(games));
-});
-
 //@route  POST api/games/joinGame
 //@desc   Attempts to join a game designated by ID:
 //Takes in {id, username}
@@ -167,23 +158,67 @@ router.get("/startGame/:id", (req, res) => {
 });
 
 //@route  POST api/games/updateGame
-//@desc   Updates the Fen, History, and Turn attributes of a game:
+//@desc   Updates the attributes of a game:
 //@access public
 router.post("/updateGame", (req, res) => {
-  console.log("inside UPdate Game:");
+  const {
+    fen,
+    white,
+    black,
+    history,
+    turn,
+    started,
+    ended,
+    wTime,
+    bTime
+  } = req.body;
+  console.log("inside Update Game:");
   console.log(req.body);
   Game.updateOne(
     { _id: req.body._id },
     {
       $set: {
-        fen: req.body.fen,
-        history: req.body.history,
-        turn: req.body.turn
+        fen,
+        white,
+        black,
+        history,
+        turn,
+        started,
+        ended,
+        wTime,
+        bTime
       }
     }
   )
     .then(updatedGame => {
       console.log("updated game: " + updatedGame);
+      // console.log('added '+game.black+ ' to '+game._id)
+      res.json("update of " + req.body._id + " successful");
+    })
+    .catch(e => console.log(e));
+});
+
+//@route  POST api/games/updateGame
+//@desc   Updates the attributes of a game:
+//@access public
+router.post("/moveMade", (req, res) => {
+  const { fen, history, turn, wTime, bTime } = req.body;
+  console.log("Move Made: turn is now..");
+  console.log(req.body.gameID);
+  Game.updateOne(
+    { _id: req.body.gameID },
+    {
+      $set: {
+        fen,
+        history,
+        turn,
+        wTime,
+        bTime
+      }
+    }
+  )
+    .then(updatedGame => {
+      console.log(updatedGame);
       // console.log('added '+game.black+ ' to '+game._id)
       res.json("update of " + req.body._id + " successful");
     })
@@ -197,18 +232,16 @@ router.post("/updateGame", (req, res) => {
 router.post("/", (req, res) => {
   const { black, white, style, timer } = req.body;
   const standard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-  const gameMinutes = timer === "Unlimited" ? null : Number(timer);
-  const gameSeconds = timer === "Unlimited" ? null : 0;
+  const wTime = timer === "Unlimited" ? null : Number(timer) * 60;
+  const bTime = timer === "Unlimited" ? null : Number(timer) * 60;
   const newGame = new Game({
     fen: req.body.style === "960" ? board.generateBoard() : standard,
     white,
     black,
     timer,
     style,
-    wMin: gameMinutes,
-    bMin: gameMinutes,
-    wSec: gameSeconds,
-    bSec: gameSeconds
+    wTime,
+    bTime
   });
   newGame.save().then(game => res.json(game));
 });

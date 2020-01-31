@@ -47,22 +47,12 @@ const GameSchema = new Schema({
     default: "960"
   },
 
-  wMin: {
+  wTime: {
     type: Number,
     default: null
   },
 
-  wSec: {
-    type: Number,
-    default: null
-  },
-
-  bMin: {
-    type: Number,
-    default: null
-  },
-
-  bSec: {
+  bTime: {
     type: Number,
     default: null
   },
