@@ -36,7 +36,8 @@ class HumanVsHuman extends Component {
       square: "",
       fen: "",
       wTime: "",
-      bTime: ""
+      bTime: "",
+      status: ""
     };
   }
 
@@ -82,16 +83,34 @@ class HumanVsHuman extends Component {
   }
 
   loadToState = () => {
-    const { fen, wMin, wSec, bMin, bSec } = this.props.game;
-
+    const { fen, wTime, bTime } = this.props.game;
     this.setState({
       fen,
-      wMin,
-      wSec,
-      bMin,
-      bSec
+      wTime,
+      bTime
     });
     console.log("state set");
+  };
+
+  checkGameStatus = () => {
+    //Checks for checkmate, check, draw
+
+    // checkmate?
+    if (this.logic.in_checkmate() === true) {
+      this.setState({ status: "checkmate" });
+      console.log("Game Over, Checkmate!!");
+    }
+
+    // draw?
+    else if (this.logic.in_draw() === true) {
+      this.setState({ status: "draw" });
+      console.log("Game Over, Draw!!");
+
+      // check?
+    } else if (this.logic.in_check() === true) {
+      this.setState({ status: "check" });
+      console.log("Game Over, Draw!!");
+    }
   };
 
   findNextTurn = () => {
@@ -280,7 +299,7 @@ class HumanVsHuman extends Component {
 
   render() {
     const { dropSquareStyle, squareStyles, fen } = this.state;
-    const { color, turn, started, white, black } = this.props.game;
+    const { color, turn, started } = this.props.game;
 
     return this.props.children({
       draggable: turn === color && started === true,

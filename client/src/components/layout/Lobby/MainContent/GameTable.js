@@ -51,6 +51,11 @@ class GameTable extends Component {
     });
   }
 
+  //TODO:
+  // Move title into this render
+  // Make a conditional to check if game list is loaded, add a spinner animation in the meantime
+  // After loaded check to see games are present, if none are present say that and hide the table.
+
   render() {
     return (
       <Table bordered responsive dark striped hover>

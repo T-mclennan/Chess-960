@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import GameCard from "./GameCard";
 import { connect } from "react-redux";
 import axios from "axios";
-import { findColor } from "../../../../actions/gameActions";
-import "../../css/Dashboard.css";
+import { findColor } from "../../../../../actions/gameActions";
+import "../../../css/Dashboard.css";
 
 //use state to generate the games:
 

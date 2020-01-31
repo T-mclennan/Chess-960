@@ -89,6 +89,7 @@ class RegisterContent extends Component {
               {/* <Label for="username">Username</Label> */}
               <Input
                 className="border border-info"
+                maxLength={8}
                 autoFocus={true}
                 type="text"
                 name="username"
@@ -105,6 +106,7 @@ class RegisterContent extends Component {
                 id="password"
                 placeholder="Password"
                 className="mb-3"
+                maxLength={20}
                 onChange={this.onChange}
               />
 
@@ -115,6 +117,7 @@ class RegisterContent extends Component {
                 id="email"
                 placeholder="Email"
                 className="mb-3"
+                maxLength={20}
                 onChange={this.onChange}
               />
 

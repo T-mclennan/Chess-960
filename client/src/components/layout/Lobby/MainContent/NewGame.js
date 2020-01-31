@@ -77,8 +77,8 @@ export class NewGame extends Component {
     return (
       <div className="main container" style={{ scrollBehavior: "auto" }}>
         <h4>Please select from the following game options:</h4>
-        <Form style={{ marginTop: "1.5rem" }} onSubmit={this.onSubmit}>
-          <FormGroup className="dropdown">
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup style={{ marginTop: "1.8rem" }} className="dropdown">
             <Label for="color">Color</Label>
             <Input
               type="select"

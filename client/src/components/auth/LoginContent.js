@@ -82,6 +82,7 @@ class LoginContent extends Component {
               {/* <Label for="name">Username</Label> */}
               <Input
                 className="border border-info"
+                maxLength={8}
                 autoFocus={true}
                 type="text"
                 name="username"
@@ -98,6 +99,7 @@ class LoginContent extends Component {
                 id="password"
                 placeholder="Password"
                 className="mb-3"
+                maxLength={20}
                 onChange={this.onChange}
               />
               <Button style={buttonStyle} block>

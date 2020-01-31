@@ -9,4 +9,5 @@ export const LOAD_COLOR = "LOAD_COLOR";
 export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
 export const GAME_LOADING = "GAME_LOADING";
 export const GAME_LOADED = "GAME_LOADED";
+export const GAME_OVER = "GAME_OVER";
 export const SET_GAME_AS_STARTED = "SET_GAME_AS_STARTED";

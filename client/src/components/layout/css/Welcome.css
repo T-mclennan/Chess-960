@@ -1,0 +1,40 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0.5rem 3.8rem 0.5rem 4.8rem !important;
+  /* background-color: #0f2028; */
+}
+
+.welcome h1 {
+  font-size: 3.3rem;
+  text-align: center;
+  -webkit-text-stroke: 1px rgb(95, 95, 95);
+  -webkit-text-stroke: 1px white;
+  /* font-size: 72px; */
+  background: -webkit-linear-gradient(
+    135deg,
+    /* rgb(163, 224, 241), */ rgb(213, 172, 238),
+    rgb(163, 224, 241)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 1px 1px 2 blue, -1px -1px 0 blue, 1px -1px 0 blue -1px 1px 0 blue,
+    1px 1px 0 blue;
+}
+
+.welcome p {
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.welcome ul {
+  font-size: 1.4rem;
+  margin-left: 2.5rem;
+}
+
+.welcome ul li {
+  margin: 1rem;
+}

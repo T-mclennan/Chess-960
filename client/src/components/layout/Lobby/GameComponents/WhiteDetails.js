@@ -6,6 +6,18 @@ import whitePawn from "../../../../assets/images/wP.png";
 import { connect } from "react-redux";
 
 export class WhiteDetails extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      rating: ""
+    };
+  }
+
+  componentDidMount() {
+    //TODO: Fetch Rating of white player from database, set into state
+    //      Copy over to BlackDetails component
+  }
   render() {
     const { turn, color } = this.props.game;
     const borderColor = color === turn ? "#ffd5d3" : "silver";
@@ -29,7 +41,7 @@ export class WhiteDetails extends Component {
               <div className="emptyStyling">Waiting for opponent</div>
             )}
           </h2>
-          <h3>{this.props.rating}</h3>
+          <h3>{this.state.rating}</h3>
         </div>
         {/* <header>{this.props.name}</header> */}
       </div>

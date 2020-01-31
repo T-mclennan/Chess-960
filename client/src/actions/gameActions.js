@@ -8,12 +8,12 @@ import {
   GET_GAME,
   MAKE_MOVE,
   JOIN_GAME,
-  INITIALIZE_GAME,
   SET_GAME_AS_STARTED,
   LOAD_GAME,
   LOAD_COLOR,
   UPDATE_PLAYERS,
-  CHANGE_TURN
+  CHANGE_TURN,
+  GAME_OVER
 } from "./gameTypes";
 
 // import history from "../../src/history";
@@ -80,7 +80,6 @@ export const loadGame = (gameID, username) => dispatch => {
         type: LOAD_GAME,
         payload: res.data
       });
-
       dispatch(loadColor(username, res.data.white, res.data.black));
     })
     .then(() => {
@@ -114,7 +113,19 @@ export const quickPlay = username => dispatch => {
       console.log(games);
       console.log("Found Game!!");
       console.log(foundGame);
-      dispatch(joinGame(foundGame._id, username));
+      if (foundGame) {
+        dispatch(joinGame(foundGame._id, username));
+      } else {
+        const newGame = {
+          white: username,
+          black: "",
+          timer: "Unlimited",
+          style: "960",
+          scoring: "Unrated",
+          color: "white"
+        };
+        dispatch(createGame({ newGame, username }));
+      }
     })
     .catch(e => console.log(e));
 };
@@ -188,6 +199,20 @@ export const makeMove = game => async dispatch => {
     .then(() => {
       dispatch({
         type: MAKE_MOVE,
+        payload: game
+      });
+    })
+    .catch(e => console.log(e));
+};
+
+export const gameOver = game => async dispatch => {
+  // await dispatch(changeTurn());
+  console.log("GAME OVER");
+  console.log(game);
+  Axios.post(`api/games/gameOver`, game)
+    .then(() => {
+      dispatch({
+        type: GAME_OVER,
         payload: game
       });
     })

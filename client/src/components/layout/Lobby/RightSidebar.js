@@ -75,7 +75,7 @@ export class RightSidebar extends Component {
 }
 const playerBox = {
   // margin: "1px",
-  width: "7rem"
+  minWidth: "7rem"
   // padding: "0 1rem"
 };
 

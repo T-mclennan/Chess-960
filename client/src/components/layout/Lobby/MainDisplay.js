@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Dashboard from "./MainContent/Dashboard";
+import Dashboard from "./MainContent/Dashboard/Dashboard";
 import FindGame from "./MainContent/FindGame";
 import NewGame from "./MainContent/NewGame";
 import Standings from "./MainContent/Standings";

@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Card } from "reactstrap";
 import Chessboard from "chessboardjsx";
 import { connect } from "react-redux";
-import { setMainContent } from "../../../../actions/authActions";
-import { loadGame, loadColor } from "../../../../actions/gameActions";
+import { setMainContent } from "../../../../../actions/authActions";
+import { loadGame, loadColor } from "../../../../../actions/gameActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import "../../css/Dashboard.css";
+import "../../../css/Dashboard.css";
 
 class GameCard extends Component {
   constructor() {

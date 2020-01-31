@@ -3,8 +3,10 @@
   flex-direction: column;
   color: #fff;
   text-align: center;
-  padding: 10px;
-  background: #152331;
+  /* padding: 10px; */
+  padding: 1.5rem 1rem 1rem 1rem;
+  /* background: #152331; */
+  background: #121e2b;
   /* background: linear-gradient(45deg, #000000, #152331); */
   flex: 1;
   width: 100%;

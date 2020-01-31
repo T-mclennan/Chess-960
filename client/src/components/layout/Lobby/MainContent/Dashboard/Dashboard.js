@@ -2,27 +2,28 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { setMainContent } from "../../../../actions/authActions";
+import { setMainContent } from "../../../../../actions/authActions";
+import Welcome from "./Welcome";
 import GameCardList from "./GameCardList";
 import { connect } from "react-redux";
-import "../../css/Dashboard.css";
+import "../../../css/Dashboard.css";
 
 export class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <div className="headerContent">
-          <h3>{this.props.player.username}'s current games: </h3>
-        </div>
+        <div className="headerContent"></div>
         {/* <div className="gameList "> */}
 
-        {/* {this.props.player.currentGames.length > 0 ? ( */}
         {this.props.player.username ? (
           this.props.player.currentGames.length > 0 ? (
+            // <div>
+            //<h3>{this.props.player.username}'s current games: </h3>
             <GameCardList currentGames={this.props.player} />
           ) : (
+            // </div>
             // this.props.setMainContent("ABOUT")
-            <div>hi</div>
+            <Welcome username={this.props.player.username} />
           )
         ) : (
           <FontAwesomeIcon
@@ -45,8 +46,7 @@ export class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  player: state.player,
-  game: state.game
+  player: state.player
 });
 
 export default connect(mapStateToProps, { setMainContent })(Dashboard);
