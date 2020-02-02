@@ -5,10 +5,14 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 0 0.2rem !important;
+  /* margin: 1rem 0.2rem !important; */
   /* border: 1px solid #585858; */
   color: white;
   overflow-y: scroll;
+}
+
+.dashHeader {
+  margin: 1.4rem 0 1.2rem 0;
 }
 
 .headerContent {

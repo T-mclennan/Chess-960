@@ -12,17 +12,12 @@ export class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <div className="headerContent"></div>
         {/* <div className="gameList "> */}
 
         {this.props.player.username ? (
           this.props.player.currentGames.length > 0 ? (
-            // <div>
-            //<h3>{this.props.player.username}'s current games: </h3>
             <GameCardList currentGames={this.props.player} />
           ) : (
-            // </div>
-            // this.props.setMainContent("ABOUT")
             <Welcome username={this.props.player.username} />
           )
         ) : (
@@ -32,7 +27,8 @@ export class Dashboard extends Component {
             size="xs"
             style={{
               fontSize: "4rem",
-              color: "white"
+              color: "white",
+              marginTop: "3rem"
             }}
           />
         )

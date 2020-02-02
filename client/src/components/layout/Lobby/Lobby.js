@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/lobby.css";
 import LeftSidebar from "./LeftSidebar";
 import MainDisplay from "./MainDisplay";
-import RightSidebar from "./RightSidebar";
+import RightSidebar from "./RightSidebar/RightSidebar";
 import { connect } from "react-redux";
 import SocketContext from "./../../../socket-context";
 // import "../../../src/App.css";

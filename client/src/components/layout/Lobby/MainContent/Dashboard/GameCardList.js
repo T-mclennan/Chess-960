@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import GameCard from "./GameCard";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -47,15 +47,20 @@ class GameCardList extends Component {
           const color = findColor(game, this.props.player.username);
 
           return (
-            <GameCard
-              key={index}
-              white={game.data.white}
-              black={game.data.black}
-              fen={game.data.fen}
-              gameID={game.data._id}
-              username={this.props.player.username}
-              color={color}
-            />
+            <div className="dashboard">
+              <div className="dashHeader">
+                <h3>{this.props.player.username}'s current games: </h3>
+              </div>
+              <GameCard
+                key={index}
+                white={game.data.white}
+                black={game.data.black}
+                fen={game.data.fen}
+                gameID={game.data._id}
+                username={this.props.player.username}
+                color={color}
+              />
+            </div>
           );
         })}
       </div>

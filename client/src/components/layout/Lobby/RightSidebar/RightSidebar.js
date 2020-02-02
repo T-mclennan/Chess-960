@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { updateUserlist } from "../../../actions/authActions";
-import PlayerList from "./RightSidebar/PlayerList";
-import OnlinePlayerList from "./RightSidebar/OnlinePlayerList";
-import "../css/RightSidebar.css";
+import { updateUserlist } from "../../../../actions/authActions";
+import PlayerList from "./PlayerList";
+import OnlinePlayerList from "./OnlinePlayerList";
+import "../../css/RightSidebar.css";
 
 // import "../../../src/App.css";
 
@@ -40,11 +40,6 @@ export class RightSidebar extends Component {
     if (this.props.player.username) {
       socket.emit("sendUsername", this.props.player.username);
     }
-
-    // socket.on("updateUsers", userList => {
-    //   console.log("received update Userlist ping.");
-    //   console.log(userList);
-    // });
   };
 
   getUsers() {
