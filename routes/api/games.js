@@ -217,10 +217,29 @@ router.post("/moveMade", (req, res) => {
       }
     }
   )
+    .then(() => {
+      // console.log('added '+game.black+ ' to '+game._id)
+      res.json("update of " + req.body.gameID + " successful");
+    })
+    .catch(e => console.log(e));
+});
+
+//@route  POST api/games/gameOver
+//@desc   Updates the attributes of a game:
+//@access public
+router.post("/gameOver", (req, res) => {
+  const { gameID } = req.body;
+  console.log(`marking game ${gameID} as over`);
+  Game.updateOne(
+    { _id: gameID },
+    {
+      $set: {
+        ended: true
+      }
+    }
+  )
     .then(updatedGame => {
       console.log(updatedGame);
-      // console.log('added '+game.black+ ' to '+game._id)
-      res.json("update of " + req.body._id + " successful");
     })
     .catch(e => console.log(e));
 });

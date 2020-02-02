@@ -9,7 +9,9 @@ import {
   updatePlayers,
   makeMove,
   changeTurn,
-  setGameAsStarted
+  setGameAsStarted,
+  setModalMessage,
+  setModal
 } from "../actions/gameActions";
 
 // const port = process.env.PORT || "http://127.0.0.1:5000";
@@ -34,6 +36,7 @@ class HumanVsHuman extends Component {
       pieceSquare: "",
       // currently clicked square:
       square: "",
+      //Game Data:
       fen: "",
       wTime: "",
       bTime: "",
@@ -42,20 +45,14 @@ class HumanVsHuman extends Component {
   }
 
   componentDidMount() {
-    console.log("Game Comp Did Mount:");
     const { socket } = this.props;
     this.logic = new Chess(this.props.game.fen);
-
-    console.log(this.props.game);
+    this.checkGameStatus();
     this.loadToState();
-    console.log(this.state);
     this.joinGame();
 
     socket.on("newPlayer", data => {
-      console.log("received newplayer ping.");
-      console.log(data);
       if (data.gameID === this.props.game.gameID) {
-        console.log("updating players:");
         this.props.updatePlayers({
           white: data.white,
           black: data.black,
@@ -78,6 +75,7 @@ class HumanVsHuman extends Component {
           bTime: this.state.bTime,
           turn: this.findNextTurn()
         });
+        this.checkGameStatus();
       }
     });
   }
@@ -89,27 +87,33 @@ class HumanVsHuman extends Component {
       wTime,
       bTime
     });
-    console.log("state set");
   };
 
   checkGameStatus = () => {
-    //Checks for checkmate, check, draw
+    //Checks for checkmate, check, in_draw
 
     // checkmate?
     if (this.logic.in_checkmate() === true) {
+      console.log("checkmate!");
       this.setState({ status: "checkmate" });
-      console.log("Game Over, Checkmate!!");
+      this.props.setModalMessage(
+        `Checkmate! ${this.props.turn} wins the match!`
+      );
+      this.props.setModal(true);
     }
 
     // draw?
     else if (this.logic.in_draw() === true) {
+      console.log("draw!");
       this.setState({ status: "draw" });
-      console.log("Game Over, Draw!!");
+
+      this.props.setModalMessage(`Stalemate! This match ended in a tie.`);
+      this.props.setModal(true);
 
       // check?
     } else if (this.logic.in_check() === true) {
       this.setState({ status: "check" });
-      console.log("Game Over, Draw!!");
+      console.log("Check!");
     }
   };
 
@@ -119,7 +123,6 @@ class HumanVsHuman extends Component {
     return nextTurn;
   };
 
-  //TODO: Save game in players profile:
   joinGame = () => {
     const { gameID, white, black, started } = this.props.game;
 
@@ -133,7 +136,6 @@ class HumanVsHuman extends Component {
         .catch(e => console.log(e));
     }
 
-    console.log("joinGame()");
     this.props.socket.emit("joined", {
       gameID,
       white,
@@ -186,6 +188,7 @@ class HumanVsHuman extends Component {
 
     // illegal move
     if (move === null) return;
+    this.checkGameStatus();
     console.log(this.logic.fen());
     socket.emit("move", { newMove: move, gameID: this.props.game.gameID });
     this.setState(({ history, pieceSquare }) => ({
@@ -248,6 +251,7 @@ class HumanVsHuman extends Component {
     // illegal move
     if (move === null) return;
     else {
+      this.checkGameStatus();
       this.setState({ fen: this.logic.fen() });
       this.props.makeMove({
         gameID: this.props.game.gameID,
@@ -281,17 +285,18 @@ class HumanVsHuman extends Component {
     const sourceSquare = history.length && history[history.length - 1].from;
     const targetSquare = history.length && history[history.length - 1].to;
 
+    console.log("SQUARE STYLING");
     return {
-      // #00d0ff
-      [pieceSquare]: { backgroundColor: "" },
+      // #00d0ff   #f7bfbe
+      [pieceSquare]: { backgroundColor: "red" },
       ...(history.length && {
         [sourceSquare]: {
-          backgroundColor: ""
+          backgroundColor: "red"
         }
       }),
       ...(history.length && {
         [targetSquare]: {
-          backgroundColor: ""
+          backgroundColor: "red"
         }
       })
     };
@@ -299,10 +304,10 @@ class HumanVsHuman extends Component {
 
   render() {
     const { dropSquareStyle, squareStyles, fen } = this.state;
-    const { color, turn, started } = this.props.game;
+    const { color, turn, started, ended } = this.props.game;
 
     return this.props.children({
-      draggable: turn === color && started === true,
+      draggable: turn === color && started && !ended,
       orientation: color,
       squareStyles,
       position: fen,
@@ -327,5 +332,7 @@ export default connect(mapStateToProps, {
   updatePlayers,
   makeMove,
   changeTurn,
-  setGameAsStarted
+  setGameAsStarted,
+  setModalMessage,
+  setModal
 })(HumanVsHuman);

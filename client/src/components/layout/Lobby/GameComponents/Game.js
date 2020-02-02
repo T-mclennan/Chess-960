@@ -1,17 +1,37 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import ChessGame from "../../../ChessGame";
 import WhiteDetails from "./WhiteDetails";
 import BlackDetails from "./BlackDetails";
+import StatusModal from "./StatusModal";
+import { connect } from "react-redux";
 import "../../css/lobby.css";
 
 export class Game extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     modal: false,
+  //     modalMessage: ""
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   const { modal, modalMessage } = this.props.game;
+  //   this.setState({ modal: modal, modalMessage: modalMessage });
+  //   console.log("Game Component:");
+  //   console.log(this.props);
+  // }
+
   render() {
     return (
       <div className="gameContainer">
         <WhiteDetails />
         <div className="gameWindow">{ChessGame()}</div>
         <BlackDetails />
+        <StatusModal
+        // modal={this.state.modal}
+        // message={this.state.modalMessage}
+        />
       </div>
     );
   }

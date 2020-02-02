@@ -7,11 +7,13 @@ import {
   START_GAME,
   CHANGE_TURN,
   JOIN_GAME,
-  INITIALIZE_GAME,
+  SET_MODAL,
+  SET_MODAL_MESSAGE,
   LOAD_GAME,
   LOAD_COLOR,
   UPDATE_PLAYERS,
-  SET_GAME_AS_STARTED
+  SET_GAME_AS_STARTED,
+  GAME_OVER
 } from "../actions/gameTypes";
 
 const initialState = {
@@ -29,6 +31,8 @@ const initialState = {
   scoring: "",
   wTime: null,
   bTime: null,
+  modal: false,
+  modalMessage: "",
   isLoading: false
 };
 
@@ -67,6 +71,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         started: true
+      };
+
+    case SET_MODAL:
+      return {
+        ...state,
+        modal: action.payload
+      };
+
+    case SET_MODAL_MESSAGE:
+      return {
+        ...state,
+        modalMessage: action.payload
       };
 
     case MAKE_MOVE:
@@ -117,6 +133,13 @@ export default function(state = initialState, action) {
         black: action.payload.black,
         started: action.payload.started
       };
+
+    case GAME_OVER: {
+      return {
+        ...state,
+        ended: true
+      };
+    }
 
     default:
       return state;

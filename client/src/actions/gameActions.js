@@ -13,7 +13,9 @@ import {
   LOAD_COLOR,
   UPDATE_PLAYERS,
   CHANGE_TURN,
-  GAME_OVER
+  GAME_OVER,
+  SET_MODAL_MESSAGE,
+  SET_MODAL
 } from "./gameTypes";
 
 // import history from "../../src/history";
@@ -34,12 +36,19 @@ export const updateGame = game => {
   };
 };
 
-// export const initializeGame = partialGame => {
-//   return {
-//     type: INITIALIZE_GAME,
-//     payload: partialGame
-//   };
-// };
+export const setModalMessage = message => {
+  return {
+    type: SET_MODAL_MESSAGE,
+    payload: message
+  };
+};
+
+export const setModal = modal => {
+  return {
+    type: SET_MODAL,
+    payload: modal
+  };
+};
 
 // Input: {white, black, timer, style, scoring, color} coming from NewGame.js form
 export const createGame = input => dispatch => {
@@ -146,6 +155,13 @@ export const loadColor = (username, white, black) => dispatch => {
   });
 };
 
+export const gameOver = gameID => dispatch => {
+  axios.post(`/api/games/gameOver`, gameID).catch(e => console.log(e));
+  dispatch({
+    type: GAME_OVER
+  });
+};
+
 //Adds player to an existing open game, loads the game:
 export const joinGame = (gameID, username) => dispatch => {
   axios
@@ -168,12 +184,9 @@ export const joinGame = (gameID, username) => dispatch => {
 
 export const findColor = (game, username) => {
   const { black, white } = game.data;
-  let color = null;
+  let color = white;
   if (black && black === username) {
     color = "black";
-  }
-  if (white && white === username) {
-    color = "white";
   }
   return color;
 };
@@ -205,19 +218,18 @@ export const makeMove = game => async dispatch => {
     .catch(e => console.log(e));
 };
 
-export const gameOver = game => async dispatch => {
-  // await dispatch(changeTurn());
-  console.log("GAME OVER");
-  console.log(game);
-  Axios.post(`api/games/gameOver`, game)
-    .then(() => {
-      dispatch({
-        type: GAME_OVER,
-        payload: game
-      });
-    })
-    .catch(e => console.log(e));
-};
+// export const gameOver = game => async dispatch => {
+//   console.log("GAME OVER");
+//   console.log(game);
+//   Axios.post(`api/games/gameOver`, game)
+//     .then(() => {
+//       dispatch({
+//         type: GAME_OVER,
+//         payload: game
+//       });
+//     })
+//     .catch(e => console.log(e));
+// };
 
 export const changeTurn = () => {
   console.log("CHANGED TURN");

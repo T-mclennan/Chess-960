@@ -11,3 +11,5 @@ export const GAME_LOADING = "GAME_LOADING";
 export const GAME_LOADED = "GAME_LOADED";
 export const GAME_OVER = "GAME_OVER";
 export const SET_GAME_AS_STARTED = "SET_GAME_AS_STARTED";
+export const SET_MODAL = "SET_MODAL";
+export const SET_MODAL_MESSAGE = "SET_MODAL_MESSAGE";
