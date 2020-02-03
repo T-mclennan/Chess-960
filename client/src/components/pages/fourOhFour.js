@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEmpire } from "@fortawesome/free-brands-svg-icons";
+import chessPicture from "../../assets/images/puzzle_2x.png";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEmpire } from "@fortawesome/free-brands-svg-icons";
 export class FourOhFour extends Component {
   render() {
     return (
       <Container style={pageStyle}>
-        <h1>Oh snap! The page you're looking for doesn't exist!</h1>
+        <h2 style={{ margin: "1.7rem" }}>Oh snap! That page doesn't exist!</h2>
 
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faEmpire}
           spin
           size="large"
@@ -17,22 +18,24 @@ export class FourOhFour extends Component {
             color: "#B4D5FA",
             marginTop: "5rem"
           }}
-        />
+        /> */}
+        <div className="picture">
+          <img
+            className="cover"
+            src={chessPicture}
+            style={{ width: "20rem" }}
+          />
+        </div>
       </Container>
     );
   }
 }
 
-{
-  /* <i class="fab fa-empire"></i> */
-}
-
 const pageStyle = {
   dislay: "flex",
   flexDirection: "column",
-  justifyContent: "space-around",
+  justifyContent: "space-between",
   alignItems: "center",
-  margin: "2rem",
   color: "white"
 };
 
