@@ -15,7 +15,7 @@ import "./App.css";
 
 import SocketContext from "./socket-context";
 import * as io from "socket.io-client";
-import { FourOhFour } from "./components/pages/FourOhFour";
+import FourOhFour from "./components/pages/FourOhFour";
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port, { pingTimeout: 30000 });
@@ -47,7 +47,7 @@ class App extends Component {
                   <ProtectedRoute exact path="/about" component={About} />
                   <ProtectedRoute exact path="/lobby" component={Lobby} />
                   <ProtectedRoute exact path="/settings" component={Settings} />
-                  <Route path="*" component={FourOhFour} />
+                  {/* <Route path="*" component={FourOhFour} /> */}
                 </Switch>
               </div>
             </div>
