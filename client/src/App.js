@@ -15,7 +15,7 @@ import "./App.css";
 
 import SocketContext from "./socket-context";
 import * as io from "socket.io-client";
-import FourOhFour from "./components/pages/FourOhFour";
+// import FourOhFour from "./components/pages/FourOhFour";
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port, { pingTimeout: 30000 });
@@ -26,7 +26,6 @@ socket.on("disconnect", reason => {
     // the disconnection was initiated by the server, you need to reconnect manually
     socket.connect();
   }
-  // else the socket will automatically try to reconnect
 });
 
 class App extends Component {
