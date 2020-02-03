@@ -20,6 +20,15 @@ import FourOhFour from "./components/pages/FourOhFour";
 const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io(port, { pingTimeout: 30000 });
 
+socket.on("disconnect", reason => {
+  if (reason === "io server disconnect") {
+    console.log("disconnect in APP");
+    // the disconnection was initiated by the server, you need to reconnect manually
+    socket.connect();
+  }
+  // else the socket will automatically try to reconnect
+});
+
 class App extends Component {
   componentWillMount() {
     // store.dispatch(loadPlayer());

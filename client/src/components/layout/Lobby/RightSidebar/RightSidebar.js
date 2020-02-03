@@ -37,7 +37,7 @@ export class RightSidebar extends Component {
     const { socket } = this.props;
     console.log("Right Sidebar:");
     console.log(this.props);
-    if (this.props.player.username) {
+    if (socket && this.props.player.username) {
       socket.emit("sendUsername", this.props.player.username);
     }
   };
