@@ -281,6 +281,11 @@ class HumanVsHuman extends Component {
       squareStyles: { [square]: { backgroundColor: "deepPink" } }
     });
 
+  onCheck = square =>
+    this.setState({
+      squareStyles: { [square]: { backgroundColor: "deepPink" } }
+    });
+
   squareStyling = ({ pieceSquare, history }) => {
     const sourceSquare = history.length && history[history.length - 1].from;
     const targetSquare = history.length && history[history.length - 1].to;
