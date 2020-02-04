@@ -206,8 +206,8 @@ export const setGameAsStarted = () => {
 
 export const makeMove = game => async dispatch => {
   await dispatch(changeTurn());
-  console.log("MAKING MOVE");
-  console.log(game);
+  // console.log("MAKING MOVE");
+  // console.log(game);
   Axios.post(`api/games/moveMade`, game)
     .then(() => {
       dispatch({

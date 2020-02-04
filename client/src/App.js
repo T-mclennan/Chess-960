@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Router, Route, Switch } from "react-router-dom";
-import About from "./components/pages/About";
+import { Router, Switch } from "react-router-dom";
+import About from "./components/pages/about";
 import Settings from "./components/pages/Settings";
 import Landing from "./components/layout/Landing";
 import Lobby from "./components/layout/Lobby/Lobby";
@@ -15,11 +15,11 @@ import "./App.css";
 
 import SocketContext from "./socket-context";
 import * as io from "socket.io-client";
-// import FourOhFour from "./components/pages/FourOhFour";
+import FourOhFour from "./components/pages/fourohfour";
 
 const port = process.env.PORT || "http://127.0.0.1:5000";
-// const socket = io(port, { pingTimeout: 30000 });
-const socket = io();
+const socket = io(port, { pingTimeout: 30000 });
+// const socket = io();
 
 socket.on("disconnect", reason => {
   if (reason === "io server disconnect") {
@@ -47,7 +47,7 @@ class App extends Component {
                   <ProtectedRoute exact path="/about" component={About} />
                   <ProtectedRoute exact path="/lobby" component={Lobby} />
                   <ProtectedRoute exact path="/settings" component={Settings} />
-                  <Route path="*" component={FourOhFour} />
+                  {/* <Route path="*" component={FourOhFour} /> */}
                 </Switch>
               </div>
             </div>
