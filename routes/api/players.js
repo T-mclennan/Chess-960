@@ -98,6 +98,8 @@ router.post("/", (req, res) => {
   //check for existing user:
   Player.findOne({ username })
     .then(player => {
+      console.log("INSIDE findeOne:");
+      console.log(player);
       if (player) {
         return res.status(400).json({ msg: "User already exists" });
       } else {
