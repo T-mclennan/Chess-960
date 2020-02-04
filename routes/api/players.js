@@ -115,27 +115,30 @@ router.post("/", (req, res) => {
           bcrypt.hash(newPlayer.password, salt, (err, hash) => {
             if (err) throw err;
             newPlayer.password = hash;
-            newPlayer.save().then(player => {
-              jwt.sign(
-                { id: player.id },
-                keys.jwtSecret,
-                { expiresIn: 36000 },
-                (err, token) => {
-                  if (err) throw err;
-                  console.log("REGISTER TOKEN: ");
-                  console.log(token);
-                  res.json({
-                    token,
-                    player: {
-                      id: player.id,
-                      username: player.name,
-                      email: player.email,
-                      rating: player.rating
-                    }
-                  });
-                }
-              );
-            });
+            newPlayer
+              .save()
+              .then(player => {
+                jwt.sign(
+                  { id: player.id },
+                  keys.jwtSecret,
+                  { expiresIn: 36000 },
+                  (err, token) => {
+                    if (err) throw err;
+                    console.log("REGISTER TOKEN: ");
+                    console.log(token);
+                    res.json({
+                      token,
+                      player: {
+                        id: player.id,
+                        username: player.name,
+                        email: player.email,
+                        rating: player.rating
+                      }
+                    });
+                  }
+                );
+              })
+              .catch(e => console.log(e));
           });
         });
       }
