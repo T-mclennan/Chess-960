@@ -12,8 +12,8 @@ class StatusModal extends React.Component {
   }
 
   componentDidMount() {
-    console.log("modal:");
-    console.log(this.props.game);
+    // console.log("modal:");
+    // console.log(this.props.game);
 
     this.setState({
       modal: this.props.game.modal,
@@ -23,15 +23,15 @@ class StatusModal extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.game !== prevProps.game) {
-      console.log("modal update:");
-      console.log(this.props.game);
+      // console.log("modal update:");
+      // console.log(this.props.game);
 
       this.setState({
         modal: this.props.game.modal,
         message: this.props.game.modalMessage
       });
     }
-    console.log(this.state.message);
+    // console.log(this.state.message);
   }
 
   toggle = () => {

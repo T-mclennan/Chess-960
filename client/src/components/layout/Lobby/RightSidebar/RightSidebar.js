@@ -26,8 +26,8 @@ export class RightSidebar extends Component {
     }, 500);
 
     socket.on("updateUsers", userList => {
-      console.log("received update Userlist ping.");
-      console.log(userList);
+      // console.log("received update Userlist ping.");
+      // console.log(userList);
       this.props.updateUserlist(userList);
       this.setState({ onlineUsers: userList });
     });
@@ -35,8 +35,8 @@ export class RightSidebar extends Component {
 
   connectSocket = () => {
     const { socket } = this.props;
-    console.log("Right Sidebar:");
-    console.log(this.props);
+    // console.log("Right Sidebar:");
+    // console.log(this.props);
     if (socket && this.props.player.username) {
       socket.emit("sendUsername", this.props.player.username);
     }
@@ -44,8 +44,8 @@ export class RightSidebar extends Component {
 
   getUsers() {
     axios.get("/api/players/all").then(({ data }) => {
-      console.log("GET USERS");
-      console.log(data);
+      // console.log("GET USERS");
+      // console.log(data);
 
       this.setState({
         users: data

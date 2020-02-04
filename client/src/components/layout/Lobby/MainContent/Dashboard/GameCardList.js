@@ -39,18 +39,21 @@ class GameCardList extends Component {
 
   render() {
     let styling = this.state.gameArray.length > 3 ? '"flexStart"' : '"center"';
-    console.log("GAME LIST STYLING:");
-    console.log(styling);
+    // console.log("GAME LIST STYLING:");
+    // console.log(styling);
     return (
-      <div className="gameList" style={{ justifyContent: styling }}>
-        {this.state.gameArray.map((game, index) => {
-          const color = findColor(game, this.props.player.username);
+      // <div className="dashHeader">
+      <div className="dashHeader">
+        <h3 style={{ margin: "0.9rem", textAlign: "center" }}>
+          {this.props.player.username}'s current games:{" "}
+        </h3>
 
-          return (
-            <div className="dashboard">
-              <div className="dashHeader">
-                <h3>{this.props.player.username}'s current games: </h3>
-              </div>
+        <div className="gameList" style={{ justifyContent: styling }}>
+          {this.state.gameArray.map((game, index) => {
+            const color = findColor(game, this.props.player.username);
+
+            return (
+              // <div className="dashboard">
               <GameCard
                 key={index}
                 white={game.data.white}
@@ -60,9 +63,10 @@ class GameCardList extends Component {
                 username={this.props.player.username}
                 color={color}
               />
-            </div>
-          );
-        })}
+              // </div>
+            );
+          })}
+        </div>
       </div>
     );
   }

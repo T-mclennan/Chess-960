@@ -118,7 +118,7 @@ router.post("/joinGame", (req, res) => {
         console.log("Game is full.");
         return;
       }
-      game.started = true;
+      // game.started = true;
       Game.updateOne(
         { _id: game._id },
         {
@@ -139,10 +139,10 @@ router.post("/joinGame", (req, res) => {
 //@access private
 router.get("/startGame/:id", (req, res) => {
   console.log("set game as started:");
+  console.log(req.params.id);
   Game.findById(req.params.id)
     .then(game => {
       console.log(game);
-
       Game.updateOne(
         { _id: game._id },
         {

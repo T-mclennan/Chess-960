@@ -52,6 +52,7 @@ class HumanVsHuman extends Component {
     this.joinGame();
 
     socket.on("newPlayer", data => {
+      console.log("new player has joined:");
       if (data.gameID === this.props.game.gameID) {
         this.props.updatePlayers({
           white: data.white,
@@ -124,24 +125,34 @@ class HumanVsHuman extends Component {
   };
 
   joinGame = () => {
+    console.log("Join Game");
     const { gameID, white, black, started } = this.props.game;
-
+    console.log(started);
     if (white && black && !started) {
+      console.log(`2 players, game ${gameID} will start`);
       // this.setState({ started: true });
 
-      Axios.get(`/api/games/startGame/${this.props.game.gameID}`)
+      Axios.get(`/api/games/startGame/${gameID}`)
         .then(() => {
           this.props.setGameAsStarted();
+          console.log("joinGame: game to set to started!");
         })
         .catch(e => console.log(e));
+
+      this.props.socket.emit("joined", {
+        gameID,
+        white,
+        black,
+        started: true
+      });
     }
 
-    this.props.socket.emit("joined", {
-      gameID,
-      white,
-      black,
-      started
-    });
+    // this.props.socket.emit("joined", {
+    //   gameID,
+    //   white,
+    //   black,
+    //   started
+    // });
   };
 
   // keep clicked square style and remove hint squares
@@ -290,7 +301,7 @@ class HumanVsHuman extends Component {
     const sourceSquare = history.length && history[history.length - 1].from;
     const targetSquare = history.length && history[history.length - 1].to;
 
-    console.log("SQUARE STYLING");
+    // console.log("SQUARE STYLING");
     return {
       // #00d0ff   #f7bfbe
       [pieceSquare]: { backgroundColor: "red" },

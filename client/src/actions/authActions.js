@@ -27,8 +27,6 @@ export const loadPlayer = () => (dispatch, getState) => {
         type: PLAYER_LOADED,
         payload: res.data
       });
-      console.log("Loading Player");
-      console.log(res.data);
       dispatch({
         type: UPDATE_PLAYER,
         payload: res.data
@@ -58,8 +56,6 @@ export const register = newUser => dispatch => {
   axios
     .post("/api/players", body, config)
     .then(res => {
-      console.log("api/players: post");
-      console.log(res.data);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -90,8 +86,6 @@ export const login = ({ username, password }) => dispatch => {
 
   //Request body:
   const body = JSON.stringify({ username, password });
-  console.log("PLAYER IS:");
-  console.log(body);
 
   axios
     .post("/api/auth", body, config)

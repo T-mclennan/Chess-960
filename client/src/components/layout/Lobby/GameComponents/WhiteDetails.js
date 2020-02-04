@@ -41,7 +41,8 @@ export class WhiteDetails extends Component {
               <div className="emptyStyling">Waiting for opponent</div>
             )}
           </h2>
-          <h3>{this.state.rating}</h3>
+          {/* <h3>{this.props.rating}</h3> */}
+          {this.props.game.white ? <h5>1600</h5> : <div />}
         </div>
         {/* <header>{this.props.name}</header> */}
       </div>
