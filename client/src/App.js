@@ -47,7 +47,7 @@ class App extends Component {
                   <ProtectedRoute exact path="/about" component={About} />
                   <ProtectedRoute exact path="/lobby" component={Lobby} />
                   <ProtectedRoute exact path="/settings" component={Settings} />
-                  {/* <Route path="*" component={FourOhFour} /> */}
+                  <Route path="*" component={FourOhFour} />
                 </Switch>
               </div>
             </div>
