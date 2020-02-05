@@ -118,10 +118,10 @@ export const quickPlay = username => dispatch => {
           game.white !== username &&
           game.black !== username
       );
+      games.reverse();
       const foundGame = games[0];
-      console.log(games);
-      console.log("Found Game!!");
-      console.log(foundGame);
+      // console.log("Found Game!!");
+      // console.log(foundGame);
       if (foundGame) {
         dispatch(joinGame(foundGame._id, username));
       } else {

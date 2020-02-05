@@ -17,7 +17,6 @@ import SocketContext from "./socket-context";
 import * as io from "socket.io-client";
 import FourOhFour from "./components/layout/fourohfour";
 
-const port = process.env.PORT || "http://127.0.0.1:5000";
 const socket = io();
 // const socket = io();
 
