@@ -15,7 +15,8 @@ import "./App.css";
 
 import SocketContext from "./socket-context";
 import * as io from "socket.io-client";
-import FourOhFour from "./components/layout/fourohfour";
+// import FourOhFour from "./components/layout/fourohfour";
+import FourOFour from "./components/pages/FourOFour";
 
 const socket = io();
 // const socket = io();
@@ -46,7 +47,7 @@ class App extends Component {
                   <ProtectedRoute exact path="/about" component={About} />
                   <ProtectedRoute exact path="/lobby" component={Lobby} />
                   <ProtectedRoute exact path="/settings" component={Settings} />
-                  <Route path="*" component={FourOhFour} />
+                  <Route path="*" component={FourOFour} />
                 </Switch>
               </div>
             </div>
