@@ -1,4 +1,6 @@
-# Chess-960: A random twist on the classic game. 
+# [Chess-960](https://chess-960.herokuapp.com/): A random twist on the classic game. 
+
+See project [here](https://chess-960.herokuapp.com/)
  
 # Tools and Architecture: 
  This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
