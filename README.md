@@ -7,7 +7,7 @@ See project [here](https://chess-960.herokuapp.com/)
  
     Backend:
     - Node.js and express are used for server logic and route handling 
-    - Mongoose and MongoDB for storage (atlas) 
+    - MongoDB atlas used with Mongoose for storage
     
     Frontend:
     - Components are created with React, Reactstrap and CSS 
