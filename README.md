@@ -18,8 +18,8 @@ See project [here](https://chess-960.herokuapp.com/)
     - Socket.io is used as websocket for gameplay and player display in lobby
  
     Game Tools:
-    -[Chess.js](https://github.com/jhlywa/chess.js) is used for move validation
-    -[Chessboard.jsx](https://github.com/willb335/chessboardjsx) is used for the game board
+    - [Chess.js](https://github.com/jhlywa/chess.js/) is used for move validation
+    - [Chessboard.jsx](https://github.com/willb335/chessboardjsx/) is used for the game board
     
     
    
