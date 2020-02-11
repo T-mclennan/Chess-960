@@ -5,25 +5,21 @@ See project [here](https://chess-960.herokuapp.com/)
 # Tools and Architecture: 
  This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
  
-    Backend:
+  Backend:
     - Node.js and express are used for server logic and route handling 
     - MongoDB atlas used with Mongoose for storage
     
-    Frontend:
+  Frontend:
     - Components are created with React, Reactstrap and CSS 
     - JWT and Local Storage are used for Authentication and player permissions
     - Redux is used for application level state management of Authentication, Player, Game, and Error data
     - Axios is used for server requests
     - React Router Dom is used for client-side routing
     - Socket.io is used as websocket for gameplay and player display in lobby
- 
-    Game Tools:
-    - [here](https://chess-960.herokuapp.com/)
+   
+   Game Tools:
     - [Chess.js](https://github.com/jhlywa/chess.js/) is used for move validation
     - [Chessboard.jsx](https://github.com/willb335/chessboardjsx/) is used for the game board
-    
-    
-   
  
 # Authentication:
 
