@@ -1,4 +1,4 @@
-# [Chess-960](https://chess-960.herokuapp.com/): A random twist on the classic game. 
+# Chess-960: A random twist on the classic game of chess. 
 
 See project [here](https://chess-960.herokuapp.com/)
  
@@ -27,11 +27,15 @@ See project [here](https://chess-960.herokuapp.com/)
   Navbar has page links and settings
   Left sidebar has game options: Dashboard, Quickplay, Findgame, Standings
   Right sidebar has player list, with green for currently logged in players
+  
+  <img width="1280" alt="Game" src="https://user-images.githubusercontent.com/43154475/74298052-7f09b180-4cfd-11ea-9155-c3e02eb56dec.png">
 
 # Gameplay:
   When a player attempts a move the action is sent to chess.js for validation, is rendered on the board, 
   and then broadcast to our server with socket.io so it can be relayed to the other players. If the move is invalid a 
   snapback is sent to the board. 
+  
+  <img width="1280" alt="Lobby" src="https://user-images.githubusercontent.com/43154475/74298059-84ff9280-4cfd-11ea-93d2-6a30c6739d99.png">
 
 # Inspiration:
   Chess 960 is a variation of Fischer random, where the back row of pieces is randomized to encourage improvised play.
