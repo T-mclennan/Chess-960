@@ -22,29 +22,33 @@ See project [here](https://chess-960.herokuapp.com/)
     - [Chessboard.jsx](https://github.com/willb335/chessboardjsx/) is used for the game board
       
 # Authentication:
-  Whena player logs in a JSON webtoken is created for the session and is stored in local storage of the browser. 
-  When a player logs out this is cleared. This gives the player the ability to maintain a session and not have to log 
-  in every visit, unless they explicitly log out. This feature is currently disabled so that players can open multiple tabs
-  and play themselves, as a demonstration of the app.
+    Whena player logs in a JSON webtoken is created for the session and is stored in local storage of the browser. 
+    When a player logs out this is cleared. This gives the player the ability to maintain a session and not have to log 
+    in every visit, unless they explicitly log out. This feature is currently disabled so that players can open multiple tabs
+    and play themselves, as a demonstration of the app.
  
 
 # Lobby: 
 
-  Left sidebar has game options: Dashboard, Quickplay, Findgame, Standings
-  Right sidebar has player list, with green for currently logged in players
+    Left sidebar has game options: Dashboard, Quickplay, Findgame, Standings
+    Right sidebar has player list, with green for currently logged in players
   
   <img width="1280" alt="Lobby" src="https://user-images.githubusercontent.com/43154475/74298059-84ff9280-4cfd-11ea-93d2-6a30c6739d99.png">
    
-  Dashboard: If the player has no games pending, the Dashboard welcomes the player and provides information.
-             Otherwise the dashboard has a listing of current games to re-open.
+# Dashboard: 
+     If the player has no games pending, the Dashboard welcomes the player and provides information.
+     Otherwise the dashboard has a listing of current games to re-open.
              
-  Quickplay: Joins the most recently created open game.
-             If none is available it will create and open a default game.
+# Quickplay:
+     Joins the most recently created open game.
+     If none is available it will create and open a default game.
              
-  Findgame: Displays a table listing of all the open games that are possible to join
-            Clicking on a listing will join and open that game. 
+# Findgame: 
+     Displays a table listing of all the open games that are possible to join
+     Clicking on a listing will join and open that game. 
             
-  Standings: Displays a table listing of the top 10 player standings. 
+# Standings: 
+     Displays a table listing of the top 10 player standings. 
              
   
    Future releases will add interactivity for the list of players on the right side: the ability to click a players name and
