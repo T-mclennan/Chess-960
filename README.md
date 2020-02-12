@@ -3,21 +3,21 @@
 ## See project [here](https://chess-960.herokuapp.com/)
  
 - ## Tools and Architecture: 
- This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
+    This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
  
 ##### Backend:
-  * Node.js and express are used for server logic and route handling 
-  - MongoDB atlas used with Mongoose for storage
+    - Node.js and express are used for server logic and route handling 
+    - MongoDB atlas used with Mongoose for storage
     
 ##### Frontend:
-   * Components are created with React, Reactstrap and CSS 
+    - Components are created with React, Reactstrap and CSS 
     - JWT and Local Storage are used for Authentication and player permissions
     - Redux is used for application level state management of Authentication, Player, Game, and Error data
     - Axios is used for server requests
     - React Router Dom is used for client-side routing
     - Socket.io is used as websocket for gameplay and player display in lobby
    
-   Game Tools: 
+#### Game Tools: 
     - [Chess.js](https://github.com/jhlywa/chess.js/) is used for move validation
     - [Chessboard.jsx](https://github.com/willb335/chessboardjsx/) is used for the game board
       
@@ -43,11 +43,11 @@
    Joins the most recently created open game.
    If none is available it will create and open a default game.
              
-## Findgame: 
+- ## Findgame: 
      Displays a table listing of all the open games that are possible to join
      Clicking on a listing will join and open that game. 
             
-## Standings: 
+- ## Standings: 
      Displays a table listing of the top 10 player standings. 
              
   
@@ -55,7 +55,7 @@
    challenge them, or open a chat modal. 
   
   
-## Gameplay:
+- ## Gameplay:
    When any game event happens such as a player joining, a move being made, etc. the information is bundled and sent to the
    server, which broadcasts it to other players in the game. Many events also coincide with dispatching a redux action to save
    the game state into the store as well as an API call to save the information in the servers database. 
@@ -69,7 +69,7 @@
    Future development of the game will include the addition of a scoring algorithm for rated games, the implementation of a
    time clock, and the addition of castling. (Not currently supported by our chess engine for 960)
    
- # Inspiration:
+ - ## Inspiration:
   Chess 960 is a variation of Fischer random, where the back row of pieces is randomized to encourage improvised play.
   However, because true randomization would lead to many board positions that are far out of balance, the board is 
   constructed according to the following conditions:
