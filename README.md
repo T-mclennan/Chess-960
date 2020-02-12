@@ -5,11 +5,11 @@
 ### Tools and Architecture: 
  This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
  
-Backend:
-   - Node.js and express are used for server logic and route handling 
-   - MongoDB atlas used with Mongoose for storage
+#### Backend:
+    - Node.js and express are used for server logic and route handling 
+    - MongoDB atlas used with Mongoose for storage
     
-    Frontend:
+   Frontend:
     - Components are created with React, Reactstrap and CSS 
     - JWT and Local Storage are used for Authentication and player permissions
     - Redux is used for application level state management of Authentication, Player, Game, and Error data
