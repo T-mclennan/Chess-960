@@ -72,7 +72,7 @@
    time clock, and the addition of castling. (Not currently supported by our chess engine for 960)
    
  - ## Inspiration:
-    Chess 960 is a variation of Fischer random, where the back row of pieces is randomized to encourage improvised play.
+    Chess 960 is a variation of [Fischer Random](https://en.wikipedia.org/wiki/Fischer_random_chess), where the back row of pieces is randomized to encourage improvised play.
     However, because true randomization would lead to many board positions that are far out of balance, the board is 
     constructed according to the following conditions:
 
