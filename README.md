@@ -76,7 +76,7 @@
     However, because true randomization would lead to many board positions that are far out of balance, the board is 
     constructed according to the following conditions:
 
-       - Both players have identical configurations at the start of the game. 
+    - Both players have identical configurations at the start of the game. 
     - Each player is first given a black and white bishop in random position.
     - The queen is placed in one of the remaining 6 squares.
     - The black and white knight are played randomly in the remaining 5 and 4 squares.
