@@ -33,7 +33,7 @@ See project [here](https://chess-960.herokuapp.com/)
   Left sidebar has game options: Dashboard, Quickplay, Findgame, Standings
   Right sidebar has player list, with green for currently logged in players
   
-               <img width="1280" alt="Lobby" src="https://user-images.githubusercontent.com/43154475/74298059-84ff9280-4cfd-11ea-93d2-6a30c6739d99.png">
+  <img width="1280" alt="Lobby" src="https://user-images.githubusercontent.com/43154475/74298059-84ff9280-4cfd-11ea-93d2-6a30c6739d99.png">
    
   Dashboard: If the player has no games pending, the Dashboard welcomes the player and provides information.
              Otherwise the dashboard has a listing of current games to re-open.
@@ -56,7 +56,7 @@ See project [here](https://chess-960.herokuapp.com/)
    server, which broadcasts it to other players in the game. Many events also coincide with dispatching a redux action to save
    the game state into the store as well as an API call to save the information in the servers database. 
    
-      <img width="1280" alt="Game" src="https://user-images.githubusercontent.com/43154475/74298052-7f09b180-4cfd-11ea-9155-c3e02eb56dec.png">
+   <img width="1280" alt="Game" src="https://user-images.githubusercontent.com/43154475/74298052-7f09b180-4cfd-11ea-9155-c3e02eb56dec.png">
    
    The game status is checked during the initial load, as well as after each move. Possible status could show a player in
    check or checkmate, a stalemate position, draw from three-fold repetition. If the game is over a modal will pop up 
