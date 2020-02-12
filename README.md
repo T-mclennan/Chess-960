@@ -1,6 +1,6 @@
-# Chess-960: A random twist on classic chess. 
+# Chess-960: A random twist on classic chess.                See project [here](https://chess-960.herokuapp.com/)
 
- ### See project [here](https://chess-960.herokuapp.com/)
+### See project [here](https://chess-960.herokuapp.com/)
  
 ### Tools and Architecture: 
  This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
@@ -10,8 +10,8 @@
    - MongoDB atlas used with Mongoose for storage
     
 ##### Frontend:
-   - Components are created with React, Reactstrap and CSS 
-   - JWT and Local Storage are used for Authentication and player permissions
+   * Components are created with React, Reactstrap and CSS 
+    - JWT and Local Storage are used for Authentication and player permissions
     - Redux is used for application level state management of Authentication, Player, Game, and Error data
     - Axios is used for server requests
     - React Router Dom is used for client-side routing
