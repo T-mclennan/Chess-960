@@ -1,6 +1,6 @@
 # Chess-960: A random twist on classic chess. 
 
-### See project [here](https://chess-960.herokuapp.com/)
+  ### Explore project [here](https://chess-960.herokuapp.com/)
  
  ---
  
@@ -72,11 +72,11 @@
    time clock, and the addition of castling. (Not currently supported by our chess engine for 960)
    
  - ## Inspiration:
-  Chess 960 is a variation of Fischer random, where the back row of pieces is randomized to encourage improvised play.
-  However, because true randomization would lead to many board positions that are far out of balance, the board is 
-  constructed according to the following conditions:
+    Chess 960 is a variation of Fischer random, where the back row of pieces is randomized to encourage improvised play.
+    However, because true randomization would lead to many board positions that are far out of balance, the board is 
+    constructed according to the following conditions:
 
-    - Both players have identical configurations at the start of the game. 
+       - Both players have identical configurations at the start of the game. 
     - Each player is first given a black and white bishop in random position.
     - The queen is placed in one of the remaining 6 squares.
     - The black and white knight are played randomly in the remaining 5 and 4 squares.
