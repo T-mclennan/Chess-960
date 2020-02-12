@@ -5,8 +5,8 @@
 ### Tools and Architecture: 
  This project was chosen to give practice with MERN stack, socket.io, authentication, and deplyoment on Heroku.
  
-#### Backend:
-    - Node.js and express are used for server logic and route handling 
+##### * Backend:
+     Node.js and express are used for server logic and route handling 
     - MongoDB atlas used with Mongoose for storage
     
    Frontend:
