@@ -1,6 +1,6 @@
 # Chess-960: A random twist on classic chess. 
 
-  ### Explore project [here](https://chess-960.herokuapp.com/)
+  ### Explore project [here](https://chess-960.herokuapp.com/) (**Currently under construction**)
  
  ---
  
