@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
 import {
   Collapse,
   Navbar,
@@ -6,35 +6,35 @@ import {
   NavbarBrand,
   Nav,
   NavLink,
-  NavItem
-} from "reactstrap";
-import { setAuthContent } from "../../actions/authActions";
-import Logout from "../auth/Logout";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChessQueen } from "@fortawesome/free-solid-svg-icons";
-import SocketContext from "../../socket-context";
-import history from "../../history";
-import "./css/Navbar.css";
+  NavItem,
+} from 'reactstrap';
+import { setAuthContent } from '../../actions/authActions';
+import Logout from '../auth/Logout';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChessQueen } from '@fortawesome/free-solid-svg-icons';
+import SocketContext from '../../socket-context';
+import history from '../../history';
+import './css/Navbar.css';
 
 class AppNavbar extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
   };
 
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
   };
 
   setRegister = async () => {
-    await this.props.setAuthContent("REGISTER");
-    history.push("/");
+    await this.props.setAuthContent('REGISTER');
+    history.push('/');
   };
 
   setLogin = async () => {
-    await this.props.setAuthContent("LOGIN");
-    history.push("/");
+    await this.props.setAuthContent('LOGIN');
+    history.push('/');
   };
 
   //class of mb-5 is margin bottom 5, moves everything else down 5 below the navbar
@@ -43,15 +43,15 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <NavLink href="/about">About</NavLink>
+          <NavLink href='/about'>About</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="https://github.com/T-mclennan/Chess-960">
+          <NavLink href='https://github.com/T-mclennan/Chess-960'>
             Github
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="/settings">Settings</NavLink>
+          <NavLink href='/settings'>Settings</NavLink>
         </NavItem>
         <NavItem>
           <SocketContext.Consumer>
@@ -64,10 +64,10 @@ class AppNavbar extends Component {
     const guestLinks = (
       <Fragment>
         <NavItem>
-          <NavLink href="/about">About</NavLink>
+          <NavLink href='/about'>About</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="https://github.com/T-mclennan/Chess-960">
+          <NavLink href='https://github.com/T-mclennan/Chess-960'>
             Github
           </NavLink>
         </NavItem>
@@ -83,17 +83,17 @@ class AppNavbar extends Component {
     return (
       // <div>
 
-      <Navbar style={navStyle} dark expand="sm">
-        <div className="navContainer" style={navContainer}>
-          <NavbarBrand href={this.props.auth.isAuthenticated ? "/lobby" : "/"}>
+      <Navbar style={navStyle} dark expand='sm'>
+        <div className='navContainer' style={navContainer}>
+          <NavbarBrand href={this.props.auth.isAuthenticated ? '/lobby' : '/'}>
             <h2>
               <FontAwesomeIcon
                 icon={faChessQueen}
                 style={{
-                  color: "white",
-                  borderColor: "red",
-                  borderWidth: "1px",
-                  marginRight: "0.7rem"
+                  color: 'white',
+                  borderColor: 'red',
+                  borderWidth: '1px',
+                  marginRight: '0.7rem',
                 }}
               />
               Chess 960
@@ -110,9 +110,9 @@ class AppNavbar extends Component {
           <Collapse
             isOpen={this.state.isOpen}
             navbar
-            style={{ marginLeft: "38rem" }}
+            style={{ marginLeft: '38rem' }}
           >
-            <Nav className="ml-auto" navbar>
+            <Nav className='ml-auto' navbar>
               {isAuthenticated ? authLinks : guestLinks}
             </Nav>
           </Collapse>
@@ -124,23 +124,23 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 const navStyle = {
-  color: "#fff",
+  color: '#fff',
   // textAlign: "center",
-  padding: "1rem 1.6rem",
+  padding: '1rem 1.6rem',
   // background: "#152331",
-  background: "linear-gradient(45deg, #000000, #152331)"
+  background: 'linear-gradient(45deg, #000000, #152331)',
   // border: "1px solid #cccccc"
 };
 
 const navContainer = {
-  marginRight: "0rem",
-  marginLeft: "0rem"
+  marginRight: '0rem',
+  marginLeft: '0rem',
 };
 
 export default connect(mapStateToProps, {
-  setAuthContent
+  setAuthContent,
 })(AppNavbar);
