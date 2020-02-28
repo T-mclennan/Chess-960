@@ -67,7 +67,10 @@ class AppNavbar extends Component {
           <NavLink href='/about'>About</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href='https://github.com/T-mclennan/Chess-960'>
+          <NavLink
+            href='https://github.com/T-mclennan/Chess-960'
+            target='_blank'
+          >
             Github
           </NavLink>
         </NavItem>
