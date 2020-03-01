@@ -1,37 +1,31 @@
-import React, { Component } from "react";
-import { Button, CardBody, Form, FormGroup, Input, Alert } from "reactstrap";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { register, setAuthContent } from "../../actions/authActions";
-import { clearErrors } from "../../actions/errorActions";
-import history from "../../history";
+import React, { Component } from 'react';
+import { Button, CardBody, Form, FormGroup, Input, Alert } from 'reactstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { register, setAuthContent } from '../../actions/authActions';
+import { clearErrors } from '../../actions/errorActions';
+import history from '../../history';
 
 class RegisterContent extends Component {
   state = {
     redirect: false,
-    username: "",
-    email: "",
-    password: "",
-    msg: null
+    username: '',
+    email: '',
+    password: '',
+    msg: null,
   };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
   };
-
-  // componentDidMount() {
-  //   if (this.props.msg) {
-  //     this.fadeMessage();
-  //   }
-  // }
 
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
-      if (error.id === "REGISTER_FAIL") {
+      if (error.id === 'REGISTER_FAIL') {
         this.setState({ msg: error.msg.msg });
         this.fadeMessage();
       } else {
@@ -49,7 +43,7 @@ class RegisterContent extends Component {
   toggle = () => {
     this.props.clearErrors();
     this.setState({
-      redirect: !this.state.redirect
+      redirect: !this.state.redirect,
     });
   };
 
@@ -66,7 +60,7 @@ class RegisterContent extends Component {
     const newPlayer = {
       username,
       email,
-      password
+      password,
     };
 
     //Attempt to register:
@@ -76,47 +70,47 @@ class RegisterContent extends Component {
   render() {
     //If authenticated, redirect to lobby:
     if (this.props.isAuthenticated) {
-      console.log("is authenticated");
-      history.push("/lobby");
-      this.props.setAuthContent("LOGIN");
+      console.log('is authenticated');
+      history.push('/lobby');
+      this.props.setAuthContent('LOGIN');
     }
 
     return (
       <div>
         <CardBody>
           <Form onSubmit={this.onSubmit}>
-            <FormGroup style={{ marginBottom: "0px" }}>
+            <FormGroup style={{ marginBottom: '0px' }}>
               {/* <Label for="username">Username</Label> */}
               <Input
-                className="border border-info"
+                className='border border-info'
                 maxLength={8}
                 autoFocus={true}
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-                className="mb-3"
+                type='text'
+                name='username'
+                id='username'
+                placeholder='Username'
+                className='mb-3'
                 onChange={this.onChange}
               />
 
               {/* <Label for="password">Password</Label> */}
               <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                className="mb-3"
+                type='password'
+                name='password'
+                id='password'
+                placeholder='Password'
+                className='mb-3'
                 maxLength={20}
                 onChange={this.onChange}
               />
 
               {/* <Label for="email">Email</Label> */}
               <Input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="Email"
-                className="mb-3"
+                type='text'
+                name='email'
+                id='email'
+                placeholder='Email'
+                className='mb-3'
                 maxLength={20}
                 onChange={this.onChange}
               />
@@ -129,12 +123,12 @@ class RegisterContent extends Component {
           {this.state.msg ? (
             <Alert
               style={{
-                marginTop: "1rem",
-                marginBottom: "0px",
-                fontSize: "1rem",
-                textAlign: "center"
+                marginTop: '1rem',
+                marginBottom: '0px',
+                fontSize: '1rem',
+                textAlign: 'center',
               }}
-              color={"danger"}
+              color={'danger'}
             >
               {this.state.msg}
             </Alert>
@@ -146,33 +140,26 @@ class RegisterContent extends Component {
 }
 
 const buttonStyle = {
-  // marginTop: "2rem",
-
-  //deep:
-  // background: "#43C6AC",
-  // background: "-webkit-linear-gradient(45deg, #191654, #43C6AC)",
-  // background: "linear-gradient(45deg, #191654, #43C6AC)",
-
   //metalic:
-  background: "#0F2027",
-  background: "-webkit-linear-gradient(45deg, #0F2027 , #203A43,#2C5364)",
-  background: "linear-gradient(45deg,  #203A43, #0F2027,#2C5364)",
-  padding: "0.5rem",
-  marginTop: "1.5rem",
-  fontSize: "1.3rem",
-  borderWidth: "2px",
-  fontWeight: "bold",
-  boxShadow: "0 1px 0.5px"
+  background: '#0F2027',
+  background: '-webkit-linear-gradient(45deg, #0F2027 , #203A43,#2C5364)',
+  background: 'linear-gradient(45deg,  #203A43, #0F2027,#2C5364)',
+  padding: '0.5rem',
+  marginTop: '1.5rem',
+  fontSize: '1.3rem',
+  borderWidth: '2px',
+  fontWeight: 'bold',
+  boxShadow: '0 1px 0.5px',
   // boxShadow: "0 19px 18px"
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
+  error: state.error,
 });
 
 export default connect(mapStateToProps, {
   register,
   clearErrors,
-  setAuthContent
+  setAuthContent,
 })(RegisterContent);

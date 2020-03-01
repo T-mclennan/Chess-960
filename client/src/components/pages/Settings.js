@@ -1,10 +1,20 @@
-import React, { Component } from "react";
-import "../layout/css/inApp.css";
+import React from 'react';
+import { Container } from 'reactstrap';
 
-export class Settings extends Component {
-  render() {
-    return <div>Settings!</div>;
-  }
+export default function Settings() {
+  return (
+    <Container style={pageStyle}>
+      <h2 style={{ margin: '1.7rem' }}>Currently under development!</h2>
+
+      <span>The settings page will be added soon</span>
+    </Container>
+  );
 }
 
-export default Settings;
+const pageStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  color: 'white',
+};

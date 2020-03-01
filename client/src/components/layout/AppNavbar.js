@@ -8,7 +8,7 @@ import {
   NavLink,
   NavItem,
 } from 'reactstrap';
-import { setAuthContent } from '../../actions/authActions';
+import { setAuthContent, setMainContent } from '../../actions/authActions';
 import Logout from '../auth/Logout';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -37,13 +37,21 @@ class AppNavbar extends Component {
     history.push('/');
   };
 
+  setAboutPage = () => {
+    this.props.setMainContent('ABOUT');
+  };
+
+  setSettingsPage = () => {
+    this.props.setMainContent('SETTINGS');
+  };
+
   //class of mb-5 is margin bottom 5, moves everything else down 5 below the navbar
   render() {
     const { isAuthenticated } = this.props.auth;
     const authLinks = (
       <Fragment>
         <NavItem>
-          <NavLink href='/about'>About</NavLink>
+          <NavLink onClick={this.setAboutPage}>About</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href='https://github.com/T-mclennan/Chess-960'>
@@ -51,7 +59,7 @@ class AppNavbar extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href='/settings'>Settings</NavLink>
+          <NavLink onClick={this.setSettingsPage}>Settings</NavLink>
         </NavItem>
         <NavItem>
           <SocketContext.Consumer>
@@ -146,4 +154,5 @@ const navContainer = {
 
 export default connect(mapStateToProps, {
   setAuthContent,
+  setMainContent,
 })(AppNavbar);
