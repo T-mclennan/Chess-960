@@ -36,7 +36,10 @@ if (process.env.NODE_ENV === 'production') {
 //--------------------------------------------------------
 
 // initialize a new instance of socket.io by passing the HTTP server object
-var io = require('socket.io').listen(server, { pingTimeout: 30000 });
+var io = require('socket.io').listen(server, {
+  pingTimeout: 30000,
+  transports: ['polling'],
+});
 io.on('connection', socket => {
   socket.on('sendUsername', username => {
     socket.username = username;
@@ -72,7 +75,7 @@ io.on('connection', socket => {
       return name !== socket.username;
     });
     io.emit('updateUsers', currentUsers);
-    console.log(socket.username + ' has left the lobby.');
+    console.log(socket.username + ' has disconnected.');
     console.log(currentUsers);
     socket.disconnect();
   });

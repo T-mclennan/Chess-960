@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 function Header() {
@@ -18,27 +18,15 @@ function Header() {
   );
 }
 
-// const headerStyle = {
-//   background: '#333',
-//   color: '#fff',
-//   textAlign: 'center',
-//   padding: '10px',
-// }
-
-// const linkStyle = {
-//   color: "white",
-//   textDecoration: 'none',
-// }
-
 const headerStyle = {
-  color: "#fff",
-  textAlign: "center",
-  padding: "10px",
-  background: "#152331",
+  color: '#fff',
+  textAlign: 'center',
+  padding: '10px',
+  background: '#152331',
   /* fallback for old browsers */
-  background: "-webkit-linear-gradient(45deg, #000000, #152331)",
+  background: '-webkit-linear-gradient(45deg, #000000, #152331)',
   /* Chrome 10-25, Safari 5.1-6 */
-  background: "linear-gradient(45deg, #000000, #152331)"
+  background: 'linear-gradient(45deg, #000000, #152331)',
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 };
 export default Header;

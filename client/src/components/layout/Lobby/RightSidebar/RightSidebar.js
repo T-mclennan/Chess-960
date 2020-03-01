@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { connect } from "react-redux";
-import { updateUserlist } from "../../../../actions/authActions";
-import PlayerList from "./PlayerList";
-import OnlinePlayerList from "./OnlinePlayerList";
-import "../../css/RightSidebar.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { updateUserlist } from '../../../../actions/authActions';
+import PlayerList from './PlayerList';
+import OnlinePlayerList from './OnlinePlayerList';
+import '../../css/RightSidebar.css';
 
 // import "../../../src/App.css";
 
@@ -14,7 +14,8 @@ export class RightSidebar extends Component {
 
     this.state = {
       users: [],
-      onlineUsers: []
+      onlineUsers: [],
+      isMounted: true,
     };
   }
 
@@ -25,12 +26,18 @@ export class RightSidebar extends Component {
       this.connectSocket();
     }, 500);
 
-    socket.on("updateUsers", userList => {
+    socket.on('updateUsers', userList => {
       // console.log("received update Userlist ping.");
       // console.log(userList);
-      this.props.updateUserlist(userList);
-      this.setState({ onlineUsers: userList });
+      if (this.state.isMounted) {
+        this.props.updateUserlist(userList);
+        this.setState({ onlineUsers: userList });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   connectSocket = () => {
@@ -38,17 +45,17 @@ export class RightSidebar extends Component {
     // console.log("Right Sidebar:");
     // console.log(this.props);
     if (socket && this.props.player.username) {
-      socket.emit("sendUsername", this.props.player.username);
+      socket.emit('sendUsername', this.props.player.username);
     }
   };
 
   getUsers() {
-    axios.get("/api/players/all").then(({ data }) => {
+    axios.get('/api/players/all').then(({ data }) => {
       // console.log("GET USERS");
       // console.log(data);
 
       this.setState({
-        users: data
+        users: data,
       });
     });
   }
@@ -56,7 +63,7 @@ export class RightSidebar extends Component {
   render() {
     return (
       // <div className="ui fluid container">
-      <div className="rightsidebar ">
+      <div className='rightsidebar '>
         <div style={playerBox}>
           <OnlinePlayerList users={this.state.onlineUsers} />
           <PlayerList
@@ -69,14 +76,12 @@ export class RightSidebar extends Component {
   }
 }
 const playerBox = {
-  // margin: "1px",
-  minWidth: "7rem"
-  // padding: "0 1rem"
+  minWidth: '7rem',
 };
 
 const mapStateToProps = state => ({
   player: state.player,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { updateUserlist })(RightSidebar);
