@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import { Table } from "reactstrap";
-import TableEntry from "./TableEntry";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { Table } from 'reactstrap';
+import TableEntry from './TableEntry';
 
-import "../../css/Dashboard.css";
+import '../../css/Dashboard.css';
 
 class GameTable extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      gameArray: []
+      gameArray: [],
     };
   }
 
@@ -25,7 +25,7 @@ class GameTable extends Component {
   generateGames = () => {
     const { username } = this.props.player;
     axios
-      .get("api/games/")
+      .get('api/games/')
       .then(gameList => {
         const games = gameList.data.filter(
           game =>
@@ -50,11 +50,6 @@ class GameTable extends Component {
       );
     });
   }
-
-  //TODO:
-  // Move title into this render
-  // Make a conditional to check if game list is loaded, add a spinner animation in the meantime
-  // After loaded check to see games are present, if none are present say that and hide the table.
 
   render() {
     return (
@@ -83,7 +78,7 @@ class GameTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  player: state.player
+  player: state.player,
 });
 
 export default connect(mapStateToProps, {})(GameTable);

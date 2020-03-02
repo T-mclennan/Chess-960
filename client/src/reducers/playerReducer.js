@@ -2,15 +2,16 @@ import {
   UPDATE_PLAYER,
   UPDATE_GAME_LIST,
   SET_USERNAME,
-  RETRIEVE_PLAYER
-} from "../actions/playerTypes";
+  RETRIEVE_PLAYER,
+  CLEAR_PLAYER,
+} from '../actions/playerTypes';
 
 const initialState = {
-  username: "",
-  _id: "",
-  rating: "",
+  username: '',
+  _id: '',
+  rating: '',
   currentGames: [],
-  email: ""
+  email: '',
 };
 
 export default function(state = initialState, action) {
@@ -19,24 +20,23 @@ export default function(state = initialState, action) {
     case UPDATE_PLAYER:
       return {
         ...state,
-        // playerName: action.payload.username,
-        // playerID: action.payload.id,
-        // rating: action.payload.rating,
-        // currentGames: action.payload.games
-        ...action.payload
+        ...action.payload,
       };
 
     case SET_USERNAME:
       return {
         ...state,
-        playerName: action.payload.username
+        playerName: action.payload.username,
       };
 
     case UPDATE_GAME_LIST:
       return {
         ...state,
-        currentGames: action.payload
+        currentGames: action.payload,
       };
+
+    case CLEAR_PLAYER:
+      return initialState;
 
     default:
       return state;

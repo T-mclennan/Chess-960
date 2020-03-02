@@ -1,6 +1,6 @@
-import axios from "axios";
-import { returnErrors } from "./errorActions";
-import history from "../history";
+import axios from 'axios';
+import { returnErrors } from './errorActions';
+import history from '../history';
 
 import {
   PLAYER_LOADED,
@@ -13,29 +13,31 @@ import {
   REGISTER_SUCCESS,
   SET_AUTH_CONTENT,
   SET_MAIN_CONTENT,
-  UPDATE_USERLIST
-} from "./authTypes";
-import { UPDATE_PLAYER } from "./playerTypes";
+  UPDATE_USERLIST,
+  CLEAR_AUTH,
+} from './authTypes';
+import { UPDATE_PLAYER, CLEAR_PLAYER } from './playerTypes';
+import { CLEAR_GAME } from './gameTypes';
 
 // Check token and load user:
 export const loadPlayer = () => (dispatch, getState) => {
   dispatch({ type: PLAYER_LOADING });
   axios
-    .get("api/auth/player", tokenConfig(getState))
+    .get('api/auth/player', tokenConfig(getState))
     .then(res => {
       dispatch({
         type: PLAYER_LOADED,
-        payload: res.data
+        payload: res.data,
       });
       dispatch({
         type: UPDATE_PLAYER,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
-        type: AUTH_ERROR
+        type: AUTH_ERROR,
       });
     });
 };
@@ -46,33 +48,45 @@ export const register = newUser => dispatch => {
   //Headers:
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      'Content-Type': 'application/json',
+    },
   };
 
   //Request body:
   const body = JSON.stringify(newUser);
 
   axios
-    .post("/api/players", body, config)
+    .post('/api/players', body, config)
     .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data
+        payload: res.data,
         //payload: res.data.player
       });
       dispatch(loadPlayer());
     })
     .catch(err => {
-      console.log("ERROR!");
+      console.log('ERROR!');
       console.log(err);
       dispatch(
-        returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+        returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
       );
       dispatch({
-        type: REGISTER_FAIL
+        type: REGISTER_FAIL,
       });
     });
+};
+
+export const clearState = () => dispatch => {
+  dispatch({
+    type: CLEAR_AUTH,
+  });
+  dispatch({
+    type: CLEAR_PLAYER,
+  });
+  dispatch({
+    type: CLEAR_GAME,
+  });
 };
 
 //Login User:
@@ -80,29 +94,29 @@ export const login = ({ username, password }) => dispatch => {
   //Headers:
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      'Content-Type': 'application/json',
+    },
   };
 
   //Request body:
   const body = JSON.stringify({ username, password });
 
   axios
-    .post("/api/auth", body, config)
+    .post('/api/auth', body, config)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
       dispatch(loadPlayer());
-      dispatch(setMainContent("DASHBOARD"));
+      dispatch(setMainContent('DASHBOARD'));
     })
     .catch(err => {
       dispatch(
-        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+        returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
       );
       dispatch({
-        type: LOGIN_FAIL
+        type: LOGIN_FAIL,
       });
     });
 };
@@ -110,9 +124,9 @@ export const login = ({ username, password }) => dispatch => {
 //Logout User:
 
 export const logout = () => {
-  history.push("/");
+  history.push('/');
   return {
-    type: LOGOUT_SUCCESS
+    type: LOGOUT_SUCCESS,
   };
 };
 
@@ -120,7 +134,7 @@ export const logout = () => {
 export const setAuthContent = content => {
   return {
     type: SET_AUTH_CONTENT,
-    payload: content
+    payload: content,
   };
 };
 
@@ -128,7 +142,7 @@ export const setAuthContent = content => {
 export const setMainContent = content => {
   return {
     type: SET_MAIN_CONTENT,
-    payload: content
+    payload: content,
   };
 };
 
@@ -136,7 +150,7 @@ export const setMainContent = content => {
 export const updateUserlist = users => {
   return {
     type: UPDATE_USERLIST,
-    payload: users
+    payload: users,
   };
 };
 
@@ -148,13 +162,13 @@ export const tokenConfig = getState => {
   //Set Header:
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      'Content-Type': 'application/json',
+    },
   };
 
   //Add token to header:
   if (token) {
-    config.headers["x-auth-token"] = token;
+    config.headers['x-auth-token'] = token;
   }
   return config;
 };
