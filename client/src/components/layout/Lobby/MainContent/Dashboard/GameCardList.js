@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react";
-import GameCard from "./GameCard";
-import { connect } from "react-redux";
-import axios from "axios";
-import { findColor } from "../../../../../actions/gameActions";
-import "../../../css/Dashboard.css";
+import React, { Component } from 'react';
+import GameCard from './GameCard';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { findColor } from '../../../../../actions/gameActions';
+import '../../../css/Dashboard.css';
 
 //use state to generate the games:
 
@@ -11,7 +11,7 @@ class GameCardList extends Component {
   constructor() {
     super();
     this.state = {
-      gameArray: []
+      gameArray: [],
     };
   }
 
@@ -43,12 +43,12 @@ class GameCardList extends Component {
     // console.log(styling);
     return (
       // <div className="dashHeader">
-      <div className="dashHeader">
-        <h3 style={{ margin: "0.9rem", textAlign: "center" }}>
-          {this.props.player.username}'s current games:{" "}
+      <div className='dashHeader'>
+        <h3 style={{ margin: '0.9rem', textAlign: 'center' }}>
+          {this.props.player.username}'s current games:{' '}
         </h3>
 
-        <div className="gameList" style={{ justifyContent: styling }}>
+        <div className='gameList' style={{ justifyContent: styling }}>
           {this.state.gameArray.map((game, index) => {
             const color = findColor(game, this.props.player.username);
 
@@ -73,7 +73,7 @@ class GameCardList extends Component {
 }
 
 const mapStateToProps = state => ({
-  player: state.player
+  player: state.player,
   // game: state.game
 });
 

@@ -12,6 +12,7 @@ export class FourOhFour extends Component {
             className='cover'
             src={chessPicture}
             style={{ width: '20rem' }}
+            alt='404'
           />
         </div>
       </Container>
