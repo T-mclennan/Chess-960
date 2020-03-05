@@ -53,7 +53,7 @@ class GameTable extends Component {
 
   render() {
     return (
-      <Table bordered responsive dark striped hover>
+      <Table className='findGameTable' bordered responsive dark striped hover>
         <thead>
           <tr>
             <th>#</th>

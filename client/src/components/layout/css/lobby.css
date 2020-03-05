@@ -112,25 +112,40 @@
   margin: auto;
 }
 
-.standings.table-striped > thead > tr > th {
+.findGameTable {
+  margin-top: 2rem;
+}
+
+.table-striped > thead > tr > th {
   background-color: rgb(2, 20, 29);
   text-align: center;
   border-color: rgb(144, 183, 196);
 }
 
-.standings.table-striped > tbody > tr:nth-child(odd) > td,
-.standings.table-striped > tbody > tr:nth-child(odd) > th {
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
   /* background-color: #294566; */
   background-color: rgb(13, 59, 78);
   text-align: center;
   border-color: rgb(144, 183, 196);
 }
 
-.standings.table-striped > tbody > tr:nth-child(even) > td,
-.standings.table-striped > tbody > tr:nth-child(even) > th {
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
   background-color: rgb(61, 115, 136);
   text-align: center;
   border-color: rgb(144, 183, 196);
+}
+
+/* .table-striped > tbody > tr:hover {
+  background-color: rgb(136, 61, 107);
+  text-align: center;
+  border-color: rgb(144, 183, 196);
+} */
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: rgb(187, 116, 126);
 }
 
 .playerDetails {

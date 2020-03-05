@@ -5,9 +5,9 @@ import '../../css/lobby.css';
 export class FindGame extends Component {
   render() {
     return (
-      <div className='main container outer'>
+      <div className='main container'>
         <h2>Click on a game below to join:</h2>
-        <GameTable className='gameTable' />
+        <GameTable />
       </div>
     );
   }
