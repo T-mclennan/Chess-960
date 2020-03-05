@@ -112,6 +112,27 @@
   margin: auto;
 }
 
+.standings.table-striped > thead > tr > th {
+  background-color: rgb(2, 20, 29);
+  text-align: center;
+  border-color: rgb(144, 183, 196);
+}
+
+.standings.table-striped > tbody > tr:nth-child(odd) > td,
+.standings.table-striped > tbody > tr:nth-child(odd) > th {
+  /* background-color: #294566; */
+  background-color: rgb(13, 59, 78);
+  text-align: center;
+  border-color: rgb(144, 183, 196);
+}
+
+.standings.table-striped > tbody > tr:nth-child(even) > td,
+.standings.table-striped > tbody > tr:nth-child(even) > th {
+  background-color: rgb(61, 115, 136);
+  text-align: center;
+  border-color: rgb(144, 183, 196);
+}
+
 .playerDetails {
   display: flex;
   justify-content: center;
@@ -119,8 +140,6 @@
   flex: 1;
   width: 100%;
   height: 100%;
-  border-color: darkmagenta !important;
-  border-width: 1rem !important;
   margin: auto;
   padding: 0.5rem 1.6rem;
 }

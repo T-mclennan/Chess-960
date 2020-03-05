@@ -33,6 +33,7 @@ export class Standings extends Component {
   renderResultRows(data) {
     return data.map((player, index) => {
       console.log(player);
+      index++;
       return (
         <tr>
           <td scope='row'>{index}</td>
@@ -45,15 +46,20 @@ export class Standings extends Component {
 
   render() {
     return (
-      <div className='main container'>
-        <h2>Standings:</h2>
+      <div className='main container' style={standingsContainer}>
+        <h2>Top Players:</h2>
         <hr />
-        <Table bordered responsive dark striped hover>
+        <Table className='standings' bordered responsive dark striped>
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Rating</th>
+            <tr
+              style={{
+                backgroundColor: 'black',
+                textAlign: 'center',
+              }}
+            >
+              <th style={{ width: '4rem' }}>#</th>
+              <th style={{ width: '15rem' }}>Username</th>
+              <th style={{ width: '15rem' }}>Rating</th>
             </tr>
           </thead>
           <tbody>
@@ -70,6 +76,10 @@ export class Standings extends Component {
     );
   }
 }
+
+const standingsContainer = {
+  padding: '1.5rem 5rem',
+};
 
 const mapStateToProps = state => ({
   player: state.player.username,
