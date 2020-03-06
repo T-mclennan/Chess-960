@@ -90,7 +90,7 @@ router.get('/getTopPlayers', (req, res) => {
   console.log('GET api/players/getTopPlayers');
   Player.find()
     .sort({ rating: -1 })
-    .limit(10)
+    .limit(8)
     .then(players => {
       console.log(players);
       res.json(players);
