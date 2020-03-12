@@ -19,3 +19,15 @@ a:active {
   outline: none !important;
   box-shadow: none !important;
 }
+
+.navbar {
+  color: #fff;
+  padding: 1rem 1.6rem;
+  background: linear-gradient(45deg, #000000, #152331);
+}
+
+@media (max-width: 750px) {
+  .navbar {
+    background: #000000;
+  }
+}

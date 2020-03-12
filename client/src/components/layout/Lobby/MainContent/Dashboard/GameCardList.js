@@ -39,8 +39,6 @@ class GameCardList extends Component {
 
   render() {
     let styling = this.state.gameArray.length > 3 ? '"flexStart"' : '"center"';
-    // console.log("GAME LIST STYLING:");
-    // console.log(styling);
     return (
       // <div className="dashHeader">
       <div className='dashHeader'>

@@ -16,7 +16,7 @@ a {
 }
 
 .container {
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;

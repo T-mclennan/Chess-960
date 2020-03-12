@@ -5,8 +5,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* margin: 1rem 0.2rem !important; */
-  /* border: 1px solid #585858; */
   color: white;
   overflow-y: scroll;
 }
@@ -16,12 +14,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
-  /* margin: 1.4rem 0 1.2rem 0; */
 }
 
 .dashHeader h3 {
   text-align: center;
-  /* margin: 1.4rem 0 1.2rem 0 !important; */
 }
 
 .headerContent {
@@ -32,7 +28,6 @@
   justify-content: center;
   border-width: 1px;
   margin-bottom: 1.3rem;
-  /* text-shadow: rgb(255, 14, 249) -1px 1px 0px; */
 }
 
 .headerContent h3 {
@@ -48,15 +43,6 @@
   justify-content: center;
   align-items: flex-start;
   /* overflow-y: scroll; */
-}
-
-.card {
-  /* background-color: darkgrey !important;
-  margin: 0.5rem;
-  flex: 0 20% !important;
-  min-width: 13.5rem !important;
-  padding: 0.4rem !important; */
-  /* flex: 0 1 calc(25% - 1em) !important;  */
 }
 
 .playerTitle {
@@ -78,10 +64,33 @@
   border-width: 1px;
 }
 
+a.cardWrapper .card {
+  background-color: rgb(127, 129, 131);
+  margin: 0.6rem;
+  flex: 0 22%;
+  min-width: 13.5rem;
+  padding: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+a.cardWrapper .card:hover {
+  background-color: rgb(89, 98, 107);
+  cursor: auto;
+  color: rgb(241, 241, 241);
+}
+
 .openStyling {
   /* -webkit-text-stroke: 1px rgb(95, 95, 95); */
-  -webkit-text-stroke: 1px #107c4f;
-  color: #169761;
+  -webkit-text-stroke: 1px #0c6842;
+  color: #14a065;
+  /* text-shadow: 1px 1px 0 white, -1px -1px 0 #000, 1px -1px 0 #000
+  -1px 1px 0 #000, 1px 1px 0 #000; */
+}
+
+a.cardWrapper .card:hover .openStyling {
+  /* -webkit-text-stroke: 1px rgb(95, 95, 95); */
+  -webkit-text-stroke: 1px #11915b;
+  color: #29be80;
   /* text-shadow: 1px 1px 0 white, -1px -1px 0 #000, 1px -1px 0 #000
   -1px 1px 0 #000, 1px 1px 0 #000; */
 }

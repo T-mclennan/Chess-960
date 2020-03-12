@@ -1,7 +1,8 @@
 .content {
   display: flex;
   flex-direction: row;
-  height: 85vh;
+  height: 87vh;
+  /* height: 90vh; */
   width: 100%;
   background: #0f2027;
   background: -webkit-linear-gradient(45deg, #0f2027, #203a43, #2c5364);
