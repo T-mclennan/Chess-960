@@ -84,7 +84,21 @@
   background-color: #707070 !important;
 }
 
+.gameWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.gameButtonBar {
+  width: 100%;
+  height: 100%;
+  background-color: firebrick;
+}
+
 .gameContainer {
+  margin: 0.5rem 0;
   display: flex;
   /* padding: 3.7rem; */
   width: 100%;
@@ -126,12 +140,6 @@
   text-align: center;
   border-color: rgb(144, 183, 196);
 }
-
-/* .table-striped > tbody > tr:hover {
-  background-color: rgb(136, 61, 107);
-  text-align: center;
-  border-color: rgb(144, 183, 196);
-} */
 
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {

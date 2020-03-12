@@ -64,8 +64,10 @@
 
 a.cardWrapper .card {
   /* background-color: rgb(127, 129, 131); */
-  background-color: rgb(61, 115, 136);
+  /* background-color: rgb(61, 115, 136);
+  border-color: rgb(144, 183, 196); */
   border-color: rgb(144, 183, 196);
+  background-color: rgb(13, 59, 78) !important;
   margin: 0.6rem;
   flex: 0 22%;
   min-width: 13.5rem;
@@ -78,8 +80,10 @@ a.cardWrapper .card:hover {
   cursor: auto;
   color: rgb(241, 241, 241);
 
+  /* border-color: rgb(144, 183, 196);
+  background-color: rgb(13, 59, 78) !important; */
+  background-color: rgb(61, 115, 136) !important;
   border-color: rgb(144, 183, 196);
-  background-color: rgb(13, 59, 78) !important;
   /* background-color: rgb(61, 115, 136); */
 }
 
