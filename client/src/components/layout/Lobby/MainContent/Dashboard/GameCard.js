@@ -30,7 +30,7 @@ class GameCard extends Component {
       <a className='cardWrapper' onClick={this.handleClick}>
         <Card
           body
-          outline
+          // outline
           color='secondary'
           className='gameCard'
           // onClick={() => this.props.setMainContent("GAME")}

@@ -42,7 +42,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  /* overflow-y: scroll; */
 }
 
 .playerTitle {
@@ -52,7 +51,6 @@
   margin-top: 0.3rem;
   margin: 0 0.5rem;
   width: 100%;
-  /* justify-content: left; */
   font-weight: 500;
   font-size: 1.2rem;
 }
@@ -61,11 +59,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-width: 1px;
+  /* border-width: 1px; */
 }
 
 a.cardWrapper .card {
-  background-color: rgb(127, 129, 131);
+  /* background-color: rgb(127, 129, 131); */
+  background-color: rgb(61, 115, 136);
+  border-color: rgb(144, 183, 196);
   margin: 0.6rem;
   flex: 0 22%;
   min-width: 13.5rem;
@@ -74,23 +74,21 @@ a.cardWrapper .card {
 }
 
 a.cardWrapper .card:hover {
-  background-color: rgb(89, 98, 107);
+  /* background-color: rgb(89, 98, 107); */
   cursor: auto;
   color: rgb(241, 241, 241);
+
+  border-color: rgb(144, 183, 196);
+  background-color: rgb(13, 59, 78) !important;
+  /* background-color: rgb(61, 115, 136); */
 }
 
 .openStyling {
-  /* -webkit-text-stroke: 1px rgb(95, 95, 95); */
-  -webkit-text-stroke: 1px #0c6842;
-  color: #14a065;
-  /* text-shadow: 1px 1px 0 white, -1px -1px 0 #000, 1px -1px 0 #000
-  -1px 1px 0 #000, 1px 1px 0 #000; */
+  -webkit-text-stroke: 1px #37a778;
+  color: #81dab4;
 }
 
 a.cardWrapper .card:hover .openStyling {
-  /* -webkit-text-stroke: 1px rgb(95, 95, 95); */
   -webkit-text-stroke: 1px #11915b;
   color: #29be80;
-  /* text-shadow: 1px 1px 0 white, -1px -1px 0 #000, 1px -1px 0 #000
-  -1px 1px 0 #000, 1px 1px 0 #000; */
 }
