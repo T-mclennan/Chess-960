@@ -37,6 +37,7 @@ class GameCard extends Component {
         >
           <div className='cardBody'>
             <Chessboard
+              className='miniatureBoard'
               position={this.props.fen}
               width={200}
               draggable={false}

@@ -96,3 +96,9 @@ a.cardWrapper .card:hover .openStyling {
   -webkit-text-stroke: 1px #11915b;
   color: #29be80;
 }
+
+@media (max-width: 750px) {
+  a.cardWrapper .card .cardBody .miniatureBoard {
+    display: none;
+  }
+}
