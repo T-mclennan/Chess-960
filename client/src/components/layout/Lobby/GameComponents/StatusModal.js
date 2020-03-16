@@ -1,13 +1,13 @@
-import React from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
-import { connect } from "react-redux";
+import React from 'react';
+import { Modal, ModalHeader } from 'reactstrap';
+import { connect } from 'react-redux';
 
 class StatusModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      message: ""
+      message: '',
     };
   }
 
@@ -17,7 +17,7 @@ class StatusModal extends React.Component {
 
     this.setState({
       modal: this.props.game.modal,
-      message: this.props.game.modalMessage
+      message: this.props.game.modalMessage,
     });
   }
 
@@ -28,7 +28,7 @@ class StatusModal extends React.Component {
 
       this.setState({
         modal: this.props.game.modal,
-        message: this.props.game.modalMessage
+        message: this.props.game.modalMessage,
       });
     }
     // console.log(this.state.message);
@@ -36,13 +36,13 @@ class StatusModal extends React.Component {
 
   toggle = () => {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
     });
   };
 
   render() {
     return (
-      <div className="statusModal">
+      <div className='statusModal'>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -65,7 +65,7 @@ class StatusModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  game: state.game
+  game: state.game,
 });
 
 export default connect(mapStateToProps, {})(StatusModal);
