@@ -36,7 +36,7 @@ export class Standings extends Component {
       index++;
       return (
         <tr>
-          <td scope='row'>{index}</td>
+          <th scope='row'>{index}</th>
           <td>{player.username}</td>
           <td>{player.rating}</td>
         </tr>
