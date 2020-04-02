@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Table } from 'reactstrap';
@@ -11,6 +11,7 @@ class GameTable extends Component {
     super(props);
 
     this.state = {
+      loaded: false,
       gameArray: [],
     };
   }
@@ -33,7 +34,7 @@ class GameTable extends Component {
             game.white !== username &&
             game.black !== username
         );
-        this.setState({ gameArray: games });
+        this.setState({ gameArray: games, loaded: true });
       })
       .catch(e => console.error(e));
   };
@@ -53,26 +54,47 @@ class GameTable extends Component {
 
   render() {
     return (
-      <Table className='findGameTable' bordered responsive dark striped hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Black</th>
-            <th>White</th>
-            <th>Style</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.gameArray.length > 0 ? (
-            this.renderResultRows(this.state.gameArray)
-          ) : (
-            <tr>
-              <th>empty</th>
-            </tr>
-          )}
-        </tbody>
-      </Table>
+      <div>
+        {this.state.gameArray.length > 0 ? (
+          <div>
+            <h2>Click on a game below to join:</h2>
+            <Table
+              className='findGameTable'
+              bordered
+              responsive
+              dark
+              striped
+              hover
+            >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Black</th>
+                  <th>White</th>
+                  <th>Style</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.gameArray.length > 0 ? (
+                  this.renderResultRows(this.state.gameArray)
+                ) : (
+                  <tr>
+                    <th>empty</th>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            <h2>Oops! There are currently no games available to join. </h2>
+            <h3 style={{ marginTop: '2rem' }}>
+              To make one, click 'Quickstart' or 'New Game' on the left sidebar!
+            </h3>
+          </div>
+        )}
+      </div>
     );
   }
 }

@@ -1,6 +1,6 @@
-import axios from "axios";
-import { returnErrors } from "./errorActions";
-import { tokenConfig } from "./authActions";
+import axios from 'axios';
+import { returnErrors } from './errorActions';
+// import { tokenConfig } from "./authActions";
 import {
   UPDATE_GAME,
   GAME_LOADING,
@@ -15,38 +15,38 @@ import {
   CHANGE_TURN,
   GAME_OVER,
   SET_MODAL_MESSAGE,
-  SET_MODAL
-} from "./gameTypes";
+  SET_MODAL,
+} from './gameTypes';
 
 // import history from "../../src/history";
-import { setMainContent } from "../actions/authActions";
-import { addGameToList } from "./playerActions";
-import Axios from "axios";
+import { setMainContent } from '../actions/authActions';
+import { addGameToList } from './playerActions';
+import Axios from 'axios';
 
 export const getGame = () => {
   return {
-    type: GET_GAME
+    type: GET_GAME,
   };
 };
 
 export const updateGame = game => {
   return {
     type: UPDATE_GAME,
-    payload: game
+    payload: game,
   };
 };
 
 export const setModalMessage = message => {
   return {
     type: SET_MODAL_MESSAGE,
-    payload: message
+    payload: message,
   };
 };
 
 export const setModal = modal => {
   return {
     type: SET_MODAL,
-    payload: modal
+    payload: modal,
   };
 };
 
@@ -58,15 +58,15 @@ export const createGame = input => dispatch => {
     .then(res => {
       dispatch({
         type: GAME_LOADED,
-        payload: res.data
+        payload: res.data,
       });
       dispatch({
         type: UPDATE_GAME,
-        payload: res.data
+        payload: res.data,
       });
       dispatch({
         type: LOAD_COLOR,
-        payload: input.newGame.color.toLowerCase()
+        payload: input.newGame.color.toLowerCase(),
       });
       dispatch(
         addGameToList({ username: input.username, gameID: res.data._id })
@@ -74,7 +74,7 @@ export const createGame = input => dispatch => {
     })
     .then(() => {
       // history.push("/game");
-      dispatch(setMainContent("GAME"));
+      dispatch(setMainContent('GAME'));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -87,19 +87,19 @@ export const loadGame = (gameID, username) => dispatch => {
     .then(res => {
       dispatch({
         type: LOAD_GAME,
-        payload: res.data
+        payload: res.data,
       });
       dispatch(loadColor(username, res.data.white, res.data.black));
     })
     .then(() => {
-      dispatch(setMainContent("GAME"));
+      dispatch(setMainContent('GAME'));
     })
     .catch(e => console.log(e));
 };
 
 //Fetches and loads an open game:
 export const quickPlay = username => dispatch => {
-  console.log("inside QuickPlay");
+  console.log('inside QuickPlay');
   console.log(username);
   // axios
   //   .get("/api/games/findOpenGames")
@@ -110,7 +110,7 @@ export const quickPlay = username => dispatch => {
   //       return game.username !== username;
   //     });
   axios
-    .get("api/games/")
+    .get('api/games/')
     .then(gameList => {
       const games = gameList.data.filter(
         game =>
@@ -127,11 +127,11 @@ export const quickPlay = username => dispatch => {
       } else {
         const newGame = {
           white: username,
-          black: "",
-          timer: "Unlimited",
-          style: "960",
-          scoring: "Unrated",
-          color: "white"
+          black: '',
+          timer: 'Unlimited',
+          style: '960',
+          scoring: 'Unrated',
+          color: 'white',
         };
         dispatch(createGame({ newGame, username }));
       }
@@ -143,22 +143,22 @@ export const quickPlay = username => dispatch => {
 export const loadColor = (username, white, black) => dispatch => {
   let color;
   if (username === white) {
-    color = "white";
+    color = 'white';
   } else if (username === black) {
-    color = "black";
+    color = 'black';
   } else {
-    return "none";
+    return 'none';
   }
   dispatch({
     type: LOAD_COLOR,
-    payload: color
+    payload: color,
   });
 };
 
 export const gameOver = gameID => dispatch => {
   axios.post(`/api/games/gameOver`, gameID).catch(e => console.log(e));
   dispatch({
-    type: GAME_OVER
+    type: GAME_OVER,
   });
 };
 
@@ -169,14 +169,14 @@ export const joinGame = (gameID, username) => dispatch => {
     .then(res => {
       dispatch({
         type: JOIN_GAME,
-        payload: res.data
+        payload: res.data,
       });
 
       dispatch(loadColor(username, res.data.white, res.data.black));
       dispatch(addGameToList({ username, gameID }));
     })
     .then(() => {
-      dispatch(setMainContent("GAME"));
+      dispatch(setMainContent('GAME'));
     })
 
     .catch(e => console.log(e));
@@ -186,7 +186,7 @@ export const findColor = (game, username) => {
   const { black, white } = game.data;
   let color = white;
   if (black && black === username) {
-    color = "black";
+    color = 'black';
   }
   return color;
 };
@@ -194,25 +194,23 @@ export const findColor = (game, username) => {
 export const updatePlayers = playerInfo => {
   return {
     type: UPDATE_PLAYERS,
-    payload: playerInfo
+    payload: playerInfo,
   };
 };
 
 export const setGameAsStarted = () => {
   return {
-    type: SET_GAME_AS_STARTED
+    type: SET_GAME_AS_STARTED,
   };
 };
 
 export const makeMove = game => async dispatch => {
   await dispatch(changeTurn());
-  // console.log("MAKING MOVE");
-  // console.log(game);
   Axios.post(`api/games/moveMade`, game)
     .then(() => {
       dispatch({
         type: MAKE_MOVE,
-        payload: game
+        payload: game,
       });
     })
     .catch(e => console.log(e));
@@ -232,8 +230,8 @@ export const makeMove = game => async dispatch => {
 // };
 
 export const changeTurn = () => {
-  console.log("CHANGED TURN");
+  console.log('CHANGED TURN');
   return {
-    type: CHANGE_TURN
+    type: CHANGE_TURN,
   };
 };

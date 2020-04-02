@@ -11,15 +11,13 @@ class TableEntry extends Component {
   }
 
   handleClick() {
-    console.log('inside click');
-    console.log(this.props.game._id);
-    this.props.joinGame(this.props.game._id, this.props.username);
+    const { joinGame, game, username } = this.props;
+    joinGame(game._id, username);
   }
 
   render() {
     const { game, index } = this.props;
     return (
-      // <a className="cardWrapper" onClick={this.handleClick}>
       <tr onClick={this.handleClick}>
         <th scope='row'>{index}</th>
         <td>{game.black ? game.black : 'open'}</td>
@@ -27,7 +25,6 @@ class TableEntry extends Component {
         <td>{game.style}</td>
         <td>{game.timer}</td>
       </tr>
-      // </a>
     );
   }
 }

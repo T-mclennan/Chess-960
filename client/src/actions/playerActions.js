@@ -1,7 +1,7 @@
 import { UPDATE_PLAYER, SET_USERNAME, UPDATE_GAME_LIST } from "./playerTypes";
 
 import axios from "axios";
-import { tokenConfig } from "./authActions";
+// import { tokenConfig } from "./authActions";
 
 export const updatePlayer = player => {
   return {

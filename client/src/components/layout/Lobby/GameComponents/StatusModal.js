@@ -12,8 +12,6 @@ class StatusModal extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("modal:");
-    // console.log(this.props.game);
 
     this.setState({
       modal: this.props.game.modal,
@@ -23,8 +21,6 @@ class StatusModal extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.game !== prevProps.game) {
-      // console.log("modal update:");
-      // console.log(this.props.game);
 
       this.setState({
         modal: this.props.game.modal,
@@ -49,15 +45,6 @@ class StatusModal extends React.Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>{this.state.message}</ModalHeader>
-          {/* <ModalBody>{this.state.message}</ModalBody> */}
-          {/* <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Do Something
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
-              Cancel
-            </Button>
-          </ModalFooter> */}
         </Modal>
       </div>
     );

@@ -11,7 +11,6 @@ const app = express();
 const server = http.createServer(app);
 var currentUsers = [];
 
-// Bodyparser Middleware
 app.use(express.json());
 
 //routes:

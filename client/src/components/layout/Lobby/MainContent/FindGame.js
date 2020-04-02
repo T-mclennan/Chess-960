@@ -6,7 +6,6 @@ export class FindGame extends Component {
   render() {
     return (
       <div className='main container'>
-        <h2>Click on a game below to join:</h2>
         <GameTable />
       </div>
     );
