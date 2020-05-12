@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Table } from 'reactstrap';
@@ -27,16 +27,16 @@ class GameTable extends Component {
     const { username } = this.props.player;
     axios
       .get('api/games/')
-      .then(gameList => {
+      .then((gameList) => {
         const games = gameList.data.filter(
-          game =>
+          (game) =>
             game.started === false &&
             game.white !== username &&
             game.black !== username
         );
         this.setState({ gameArray: games, loaded: true });
       })
-      .catch(e => console.error(e));
+      .catch((e) => console.error(e));
   };
 
   renderResultRows(data) {
@@ -99,7 +99,7 @@ class GameTable extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   player: state.player,
 });
 
