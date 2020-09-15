@@ -18,7 +18,7 @@ import * as io from 'socket.io-client';
 
 const socket = io();
 
-socket.on('disconnect', reason => {
+socket.on('disconnect', (reason) => {
   if (reason === 'io server disconnect') {
     console.log('disconnect in APP');
     // the disconnection was initiated by the server, you need to reconnect manually

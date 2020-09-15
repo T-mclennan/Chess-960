@@ -6,8 +6,6 @@ import PlayerList from './PlayerList';
 import OnlinePlayerList from './OnlinePlayerList';
 import '../../css/RightSidebar.css';
 
-// import "../../../src/App.css";
-
 export class RightSidebar extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +24,7 @@ export class RightSidebar extends Component {
       this.connectSocket();
     }, 500);
 
-    socket.on('updateUsers', userList => {
+    socket.on('updateUsers', (userList) => {
       // console.log("received update Userlist ping.");
       // console.log(userList);
       if (this.state.isMounted) {
@@ -42,8 +40,6 @@ export class RightSidebar extends Component {
 
   connectSocket = () => {
     const { socket } = this.props;
-    // console.log("Right Sidebar:");
-    // console.log(this.props);
     if (socket && this.props.player.username) {
       socket.emit('sendUsername', this.props.player.username);
     }
@@ -77,9 +73,10 @@ export class RightSidebar extends Component {
 }
 const playerBox = {
   minWidth: '7rem',
+  overflow: 'hidden',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   player: state.player,
   auth: state.auth,
 });
