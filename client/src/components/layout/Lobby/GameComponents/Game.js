@@ -34,7 +34,7 @@ export class Game extends Component {
           // message={this.state.modalMessage}
           />
         </div>
-        <div className='gameButtonBar'></div>
+        {/* <div className='gameButtonBar'></div> */}
       </div>
     );
   }
